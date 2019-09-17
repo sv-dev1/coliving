@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
-
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './backend/layouts/header/header.component';
@@ -16,6 +14,9 @@ import { FooterComponent } from './backend/layouts/footer/footer.component';
 import { DashboardComponent } from './backend/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BookingComponent } from './backend/booking/booking.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CreateBillComponent } from './backend/create-bill/create-bill.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { RegisterComponent } from './register/register.component';
     FooterComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookingComponent,
+    ContactUsComponent,
+    CreateBillComponent
   ],
   imports: [
     BrowserModule,

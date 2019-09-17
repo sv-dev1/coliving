@@ -17,7 +17,6 @@ import 'rxjs/add/observable/throw';
 export class DataService {
 	base_url : string = "";
 	constructor( private http : HttpClient,
-		         
 		) {
 		this.base_url = environment.base_url;
 	}
