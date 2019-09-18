@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   errorsArr:any = []; 
   returnUrl: string;
   res:any = [];
+  
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -40,24 +41,24 @@ export class LoginComponent implements OnInit {
   }
   get f() { return this.loginForm.controls; }
 
-  login(form){ 
+  login(form) { 
     console.log('test');
     this.submitted = true;
     if (this.loginForm.invalid) {
       console.log('dasd');
       return;
-    }else{
+    } else {
       console.log('Invalid'); 
       const input_data = { 
         "username" : form.username,
         "password" : form.password, 		
       }
       //console.log(input_data);
-      this.data_service.login(input_data).subscribe(response =>{
+      this.data_service.login(input_data).subscribe((response:any) =>{
         console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
         
         this.res = JSON.stringify(response, undefined, 2); 
-        sessionStorage.setItem("auth_token", this.res.token);
+        sessionStorage.setItem("auth_token", response.token);
         this.toastr.successToastr('You are logged in successfully!', 'Hello,');
         this.router.navigate(['/dashboard']);  
         this.isError = false;
