@@ -42,4 +42,21 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
+	getUserData(){ 
+	    let token; 
+	    if(sessionStorage.getItem("auth_token")!=undefined){
+	     token = sessionStorage.getItem("auth_token"); 
+	    }
+	    console.log('token',token);
+	    let headers = new HttpHeaders();
+	    headers = headers.set('Authorization', token);
+	    return this.http.get(this.base_url+'user/profile',{ headers: headers })
+		.map((response:Response)=>{
+            console.log('login response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+   }
 }

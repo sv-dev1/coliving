@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
+import { DataService } from '../../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
@@ -8,16 +10,26 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
- session_key : boolean = false;
+
+  session_key : boolean = false;
+  msg = ''; 
+  isError : boolean = false;
+  isSuccess : boolean = false;
+  errorsArr:any = []; 
+  newArray : any = [];
+  profileData : any = [];
+
   constructor(
          private router: Router,
-         public toastr: ToastrManager
+         public toastr: ToastrManager,
+         private data_service : DataService,
   	) { }
 
   ngOnInit() {
   	  if(sessionStorage.getItem("auth_token") != undefined){
-	  	this.session_key = true;
-	  } 
+	  	    this.session_key = true;
+	   } 
+    this.getUserData();
   }
 
   systemLogout($event){ 
@@ -28,5 +40,17 @@ export class HeaderComponent implements OnInit {
   		this.router.navigate(['']);
   	}
   }
+  getUserData() {
 
+     this.data_service.getUserData().subscribe((response:any) =>{   
+        this.newArray = this.newArray.concat(response.users[0]);
+        this.profileData = this.newArray;
+        //this.router.navigate(['/dashboard']);  
+        this.isError = false;    
+      }, error =>{ 
+        this.isError = true; 
+        this.errorsArr = error.error;
+      })
+
+  }
 }

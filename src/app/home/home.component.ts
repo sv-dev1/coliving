@@ -8,17 +8,18 @@ import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular
 })
 export class HomeComponent implements OnInit {
 
-   subscribeForm: FormGroup;
-
+  subscribeForm: FormGroup;
+  session_key:boolean=false;
   constructor(
-     private formBuilder:FormBuilder
-  ) {
-       this.subscribeForm = this.formBuilder.group({
-	     
+    private formBuilder:FormBuilder
+    ) {
+    this.subscribeForm = this.formBuilder.group({
+
     });
-   }
-
-  ngOnInit() {
   }
-
+  ngOnInit() {
+    if(sessionStorage.getItem("auth_token") != undefined){
+      this.session_key = true;
+    } 
+  }
 }
