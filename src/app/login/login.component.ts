@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
         "password" : form.password, 		
       }
       //console.log(input_data);
-      this.data_service.login(input_data).subscribe(response =>{
+      this.data_service.login(input_data).subscribe((response:any) =>{
         console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
-        
+        console.log('token after login', response.token);
         this.res = JSON.stringify(response, undefined, 2); 
-        sessionStorage.setItem("auth_token", this.res.token);
+        sessionStorage.setItem("auth_token", response.token);
         this.toastr.successToastr('You are logged in successfully!', 'Hello,');
         this.router.navigate(['/dashboard']);  
         this.isError = false;

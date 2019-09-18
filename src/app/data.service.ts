@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import { Router } from '@angular/router';
-
 import { map, catchError } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject'; 
 import { Observable } from 'rxjs/Observable';
@@ -41,4 +40,93 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
+	createBill(formData){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+    		token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'createBills',formData,httpOptions)
+		.map((response:Response)=>{
+            console.log('createBills response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
+	getTeam(){ 
+	    let token; 
+	    if(sessionStorage.getItem("auth_token")!=undefined){
+	     token = sessionStorage.getItem("auth_token"); 
+	    }
+	    let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+	    return this.http.get(this.base_url+'getTeam',{ headers: headers })
+		.map((response:Response)=>{
+         //   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+    }
+	getTeamUsers(postArr){ 
+			let token; 
+			if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+			}
+			let headers = new HttpHeaders();
+			headers = headers.set('Authorization', token);
+			headers.set('Content-Type', null);
+			headers.set('Accept', "multipart/form-data");
+			const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
+
+			return this.http.post(this.base_url+'team/users',postArr,httpOptions)
+			.map((response:Response)=>{
+				console.log('TeamUser response',response);
+				return response;
+			})
+			.catch((error:Error) => {
+				console.log('error',error);
+				return Observable.throw(error);
+			})
+	}
+	createTeam(formData){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'createTeam',formData,httpOptions)
+		.map((response:Response)=>{
+			console.log('createTeam response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
+	getUsers(){ 
+	    let token; 
+	    if(sessionStorage.getItem("auth_token")!=undefined){
+	     token = sessionStorage.getItem("auth_token"); 
+	    }
+	    let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+	    return this.http.get(this.base_url+'users',{ headers: headers })
+		.map((response:Response)=>{
+         //   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+    }
+
+
 }

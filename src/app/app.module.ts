@@ -17,6 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { BookingComponent } from './backend/booking/booking.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CreateBillComponent } from './backend/create-bill/create-bill.component';
+import { TeamGroupComponent } from './backend/team-group/team-group.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CreateBillComponent } from './backend/create-bill/create-bill.component
     RegisterComponent,
     BookingComponent,
     ContactUsComponent,
-    CreateBillComponent
+    CreateBillComponent,
+    TeamGroupComponent
   ],
   imports: [
     BrowserModule,
