@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
-
+import { DatePipe } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
+import { SplitBillComponent } from './backend/split-bill/split-bill.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { HouseChoresComponent } from './backend/house-chores/house-chores.compon
     RegisterComponent,
     ContactUsComponent,
     HouseChoresComponent,
+    SplitBillComponent,
     
   ],
   imports: [
@@ -40,9 +43,10 @@ import { HouseChoresComponent } from './backend/house-chores/house-chores.compon
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
