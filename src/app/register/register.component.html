@@ -45,28 +45,27 @@
 									<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
-											 <div class="form-icon"><i class="mdi mdi-account"></i></div>
                                                     <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
                                                     </div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-											 <div class="form-icon"><i class="mdi mdi-account"></i></div>
+											 
                                                     <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
                                                     </div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="User Name" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
-											 <div class="form-icon"><i class="mdi mdi-account"></i></div>
+											
                                                     <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.userName.errors.required">Full Name is required.</span>
                                                     </div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="email" class="form-control" placeholder="Email Address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-											   <div class="form-icon"><i class="mdi mdi-email-outline"></i></div>
+											  
                                                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
 														<span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
 														<span class="for-sub-name" *ngIf="f.email.errors.email">Email must be a valid</span>
@@ -78,7 +77,7 @@
 										</div>
 										<div class="form-group form-parts">
 											<input type="password"  placeholder="Password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-											 <div class="form-icon"><i class="mdi mdi-key"></i></div>
+											
                                                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.password.errors.required"> Password is required.</span>
                                                     </div> 
@@ -88,7 +87,7 @@
 										</div>
 										<div class="form-group form-parts">
 											<input type="password"  placeholder="Confirm Password" class="form-control" formControlName="confPassword" [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }">
-											   <div class="form-icon"><i class="mdi mdi-key"></i></div>
+											   
                                                     <div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
                                                     </div> 

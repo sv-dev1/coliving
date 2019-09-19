@@ -15,7 +15,7 @@
 						<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#completed-booking">Team</a>
 						</li>
-						<li class="nav-item1"><div class="add-btn-top pl-2 mt-1"><button type="button" class="close" data-toggle="modal" data-target="#exampleModal" onclick="openAddTaskModal()"><span aria-hidden="true">+</span></button> </div>
+						<li class="nav-item1"><div class="add-btn-top pl-2 mt-1"><button type="button" class="close" data-toggle="modal" data-target="#exampleModal"><span aria-hidden="true">+</span></button> </div>
 						</li>
 						
 					</ul>
@@ -95,40 +95,18 @@
 							<div class="team-member">
 								<div class="team-heading"><h2>Assigned To</h2>
 								</div>
-								<div class="custom_member">
+								<div class="custom_member" *ngFor="let team of allTeam,index as i">
 									<ul>
 										<li><div class="inner_member">
 											<div class="member-img">
-												<span>1.</span>
+												<span>{{i+1}}.</span>
 												<img src="assets/images/user.png">
 											</div>
-											<div class="member-text">Alexandre Dergatcheff</div>										  
+											<div class="member-text">{{team?.name}}</div>										  
 										</div></li>
 									</ul>
 								</div>
-								<div class="custom_member">
-									<ul>
-										<li><div class="inner_member">
-											<div class="member-img">
-												<span>2.</span>
-												<img src="assets/images/user.png">
-											</div>
-											<div class="member-text">Krzysztof Modliński</div>											  
-										</div></li>
-
-									</ul>
-								</div>
-								<div class="custom_member">
-									<ul>
-										<li><div class="inner_member">
-											<div class="member-img">
-												<span>3.</span>
-												<img src="assets/images/user.png">
-											</div>
-											<div class="member-text">Sunny</div>					  
-										</div></li>
-									</ul>
-								</div>
+							
 							</div>
 						</div>
 					</div>
@@ -219,7 +197,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="blue-bx kid-bx text-center p-3">
 									<h6 class="mb-3">POOL</h6>
 									<img class="img-fluid" src="assets/images/pool-background.png" width="100">
@@ -227,7 +205,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="pink-bx kid-bx text-center p-3">
 									<h6 class="mb-3">BASEMENT</h6>
 									<img class="img-fluid" src="assets/images/basement-background.png" width="80">
@@ -235,7 +213,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="orange-bx kid-bx text-center p-3">
 									<h6 class="mb-3">LAWN/GARDEN</h6>
 									<img class="img-fluid" src="assets/images/lawn-background.png" width="100">
@@ -243,7 +221,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="blue-bx kid-bx text-center p-3">
 									<h6 class="mb-3">GARAGE</h6>
 									<img class="img-fluid" src="assets/images/garage-background.png" width="100">
@@ -251,7 +229,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="pink-bx kid-bx text-center p-3">
 									<h6 class="mb-3">ATTIC</h6>
 									<img class="img-fluid" src="assets/images/attic-background.png" width="80">
@@ -274,7 +252,7 @@
 							</a>
 						</div>
 						<div class="col-md-6 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="blue-bx kid-bx text-center p-3">
 									<h6 class="mb-3">BOILER</h6>
 									<img class="img-fluid" src="assets/images/boiler-background.png" width="100">
@@ -282,7 +260,7 @@
 							</a>
 						</div>							 
 						<div class="col-md-6 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="orange-bx kid-bx text-center p-3">
 									<h6 class="mb-3">FURNACE</h6>
 									<img class="img-fluid" src="assets/images/furnace-background.png" width="100">
@@ -290,7 +268,7 @@
 							</a>
 						</div>
 						<div class="col-md-6 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="blue-bx kid-bx text-center p-3">
 									<h6 class="mb-3">WATER HEATER</h6>
 									<img class="img-fluid" src="assets/images/waterheater-background.png" width="100">
@@ -313,7 +291,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="blue-bx kid-bx text-center p-3">
 									<h6 class="mb-3">CLEAN</h6>
 									<img class="img-fluid" src="assets/images/clean-background.png" width="100">
@@ -321,7 +299,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="green-bx kid-bx text-center p-3">
 									<h6 class="mb-3">GREEN</h6>
 									<img class="img-fluid" src="assets/images/green-background.png" width="80">
@@ -329,7 +307,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="orange-bx kid-bx text-center p-3">
 									<h6 class="mb-3">HEALTHY</h6>
 									<img class="img-fluid" src="assets/images/healthy-background.png" width="100">
@@ -337,7 +315,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="pink-bx kid-bx text-center p-3">
 									<h6 class="mb-3">HANDY</h6>
 									<img class="img-fluid" src="assets/images/handy-background.png" width="100">
@@ -345,7 +323,7 @@
 							</a>
 						</div>
 						<div class="col-md-4 mb-3">
-							<a class="text-decoration-none" href="">
+							<a class="text-decoration-none" href="javascript:void(0)">
 								<div class="lgreen-bx kid-bx text-center p-3">
 									<h6 class="mb-3">CREATIVE</h6>
 									<img class="img-fluid" src="assets/images/creative-background.png" width="80">
@@ -378,88 +356,88 @@
 					</button>
 				</div>
 				<form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
-				<div class="modal-body custm_modal">
-					<div class="form-group">
-						<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<button type="button" class="btn btn-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i> How Long?</button>
-						</div>
-						<div class="col-md-6">
-							<button type="button" class="btn btn-secondary"><i class="fa fa-star" aria-hidden="true"></i>0 pts</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="assign_name">
-								<a href="#"><i class="fa fa-users" aria-hidden="true"></i>Assign</a>
-								<div class="assign_user">
-									<div class="assign-user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="assign-user-text">Alexandre</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="date_due">
-								<a href=""><i class="fa fa-calendar" aria-hidden="true"></i>   <input type="text" class="form-check-input" value="" placeholder="Due date"></a>
-								<a href=""><i class="fa fa-repeat" aria-hidden="true"></i>Frequency</a>
-							</div>
-						</div>
-					</div>
-					<div class="row photo_sec">
-						<div class="photo-upload col-md-2">
-							<a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i>
-							Photo</a>
-						</div>
-						<div class="camera col-md-5">
-							<button> <i class="fa fa-camera" aria-hidden="true"></i>
-							Camera</button>
-						</div>
-						<div class="library col-md-5">
-							<button><i class="fa fa-file-image-o" aria-hidden="true"></i>Library</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="category_name row">
-								<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Category:Communal</a>
-								<div class="category_user col-md-2">
-									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="category_user-text">Communal</div>
-								</div>
-								<div class="category_user col-md-2">
-									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="category_user-text">Battroom</div>
-								</div>
-								<div class="category_user col-md-2">
-									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="category_user-text">Bedroom</div>
-								</div>
-								<div class="category_user col-md-2">
-									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="category_user-text">Kitchen</div>
-								</div>
-								<div class="category_user col-md-2">
-									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
-									<div class="category_user-text">Add</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="Notes row">
-								<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Notes</a>
-							</div>
-						</div>
-					</div>
-                  <button type="submit" class="btn btn-orange">Add Task</button>
-				</div>
+					<div class="modal-body custm_modal">
+						<div class="form-group">
 
-			</form>
+							<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
+							<div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
+								<span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
+							</div>
+						</div>
+
+						<div class="row">    
+							<div class="col-md-12">
+								<div class="assign_name">
+									<a href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i>Assign To</a>
+									<select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
+										<option value="" disabled>Please select one option</option>
+										<option *ngFor="let users of allUsers" value="{{users?.userId}}">
+											{{users?.firstName}} {{users?.lastName}}
+										</option>
+									</select>
+									<div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
+								<span class="for-sub-name" *ngIf="f.assignTo.errors.required">Assign user to this task.</span>
+							</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">    
+							<div class="col-md-12">
+								<div class="assign_name">
+									<a href="javascript:void(0)"><i class="fa fa-calendar" aria-hidden="true"></i>Due Date</a>
+									<input type="text"
+									placeholder="Datepicker"
+									class="form-control"
+									bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" (change)="transform($event)">
+								 <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
+								  <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
+							  </div>
+								</div>
+							</div>
+						</div>
+						<div class="row">    
+							<div class="col-md-12">
+								<div class="assign_name">
+									<a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i>Category:Communal</a>
+									<select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+										<option value="" disabled>Please select one option</option>
+										<option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
+											{{categories?.name}} 
+										</option>
+									</select>
+									 <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+								  <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
+							  </div>
+								</div>
+							</div>
+						</div> 
+					    <div class="row">    
+							<div class="col-md-12">
+								<div class="assign_name">
+									<a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>Upload Photo</a>
+									  <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)">
+									  <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+									  <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+								        <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
+							        </div>
+								</div>
+							</div>
+						</div> 
+					    <div class="row">
+								<div class="col-md-12">
+									<div class="assign_name">
+										<a href="javascript:void(0)"><i class="fa fa-notes" aria-hidden="true"></i>Notes</a>
+										<textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
+										<div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
+								          <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
+							            </div>
+									</div>
+								</div>
+						</div>
+						<button type="submit" class="btn btn-orange">Add Task</button>
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>

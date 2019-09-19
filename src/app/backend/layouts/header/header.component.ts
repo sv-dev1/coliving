@@ -28,8 +28,10 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   	  if(sessionStorage.getItem("auth_token") != undefined){
 	  	    this.session_key = true;
-	   } 
-    this.getUserData();
+	    } else if(sessionStorage.getItem("auth_token") == undefined){
+           this.router.navigate(['/']);  
+      } 
+    this.getUserData();  
   }
 
   systemLogout($event){ 
@@ -41,7 +43,6 @@ export class HeaderComponent implements OnInit {
   	}
   }
   getUserData() {
-
      this.data_service.getUserData().subscribe((response:any) =>{   
         this.newArray = this.newArray.concat(response.users[0]);
         this.profileData = this.newArray;

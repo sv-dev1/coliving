@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
+import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'contact-us', component: ContactUsComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'house-chores', component: HouseChoresComponent },
+  { path: 'house-chores', component: HouseChoresComponent, canActivate: [AuthGuard] },
+  { path: 'split-bill', component: SplitBillComponent, canActivate: [AuthGuard] },
+
 
   {path: '**', redirectTo: '/'},
 ];
