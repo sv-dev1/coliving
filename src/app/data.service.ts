@@ -40,13 +40,13 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
-	createBill(formData){
+	createBill(input_data){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
     		token = sessionStorage.getItem("auth_token"); 
 		} 
 		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
-		return this.http.post(this.base_url+'createBills',formData,httpOptions)
+		return this.http.post(this.base_url+'createBills',input_data,httpOptions)
 		.map((response:Response)=>{
             console.log('createBills response',response);
 			return response;
@@ -83,7 +83,6 @@ export class DataService {
 			headers.set('Content-Type', null);
 			headers.set('Accept', "multipart/form-data");
 			const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
-
 			return this.http.post(this.base_url+'team/users',postArr,httpOptions)
 			.map((response:Response)=>{
 				console.log('TeamUser response',response);
@@ -129,4 +128,4 @@ export class DataService {
     }
 
 
-}
+   }

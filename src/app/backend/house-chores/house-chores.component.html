@@ -1,0 +1,466 @@
+<section class="wrapper work-panel">
+	<app-header></app-header>
+	<app-sidebar></app-sidebar>
+	<div class="work-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-tabs custom-tabs">
+						<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" href="#active-booking">All</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#create-event">Calender</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" href="#completed-booking">Team</a>
+						</li>
+						<li class="nav-item1"><div class="add-btn-top pl-2 mt-1"><button type="button" class="close" data-toggle="modal" data-target="#exampleModal" onclick="openAddTaskModal()"><span aria-hidden="true">+</span></button> </div>
+						</li>
+						
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane fade active show" id="active-booking">
+							<div class="custm_to-do mb-4">
+								<div class="to-do_heading"><h2>To-do</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">6</span>
+								</button></div>
+								<div class="to_do_list">
+									<ul class="list-group">
+										<li class="list-group-item active-user">Clean drawers <span class="badge badge-primary badge-pill"></span></li>
+										<li class="list-group-item active-user">Clean outside of bin <span class="badge badge-primary badge-pill"></span></li>
+										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
+										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
+										<li class="list-group-item active-user">Clean toilet <span class="badge badge-primary badge-pill"></span></li>
+										<li class="list-group-item active-user">Fold towels <span class="badge badge-primary badge-pill"></span></li>
+									</ul>
+								</div>
+							</div>
+							<div class="custm_to-do mb-4">
+								<div class="to-do_heading"><h2>Complete</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">2</span>
+								</button></div>
+								<div class="to_do_list">
+									<ul class="list-group">
+										<li class="list-group-item active-user">Clean drawers
+											<span class="badge badge-primary badge-pill"></span>
+										</li>
+										<li class="list-group-item active-user">Clean outside of bin
+											<span class="badge badge-primary badge-pill"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="custm_to-do mb-4">
+								<div class="to-do_heading"><h2>Suggestions</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">5</span>
+								</button></div>
+								<div class="to_do_list">
+									<ul class="list-group">
+										<li class="list-group-item active-plus">
+											Clean outside of fridge
+											<span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</li>
+										<li class="list-group-item active-plus">
+											Tidy desk
+											<span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</li>
+										<li class="list-group-item active-plus">
+											Clean drawers
+											<span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</li>
+										<li class="list-group-item active-plus">
+											Fold towels
+											<span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</li>
+										<li class="list-group-item active-plus">
+											Clean drawers
+											<span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+						</div>
+						<div class="tab-pane fade" id="create-event">
+							<div class="calendar-wrapper custm_calender">
+								<button id="btnPrev" type="button">Prev</button>
+								<button id="btnNext" type="button">Next</button>
+
+								<div id="divCal"></div>
+							</div>
+						</div>
+						<div class="tab-pane fade custm_plus" id="completed-booking">
+							<div class="team-member">
+								<div class="team-heading"><h2>Assigned To</h2>
+								</div>
+								<div class="custom_member">
+									<ul>
+										<li><div class="inner_member">
+											<div class="member-img">
+												<span>1.</span>
+												<img src="assets/images/user.png">
+											</div>
+											<div class="member-text">Alexandre Dergatcheff</div>										  
+										</div></li>
+									</ul>
+								</div>
+								<div class="custom_member">
+									<ul>
+										<li><div class="inner_member">
+											<div class="member-img">
+												<span>2.</span>
+												<img src="assets/images/user.png">
+											</div>
+											<div class="member-text">Krzysztof Modliński</div>											  
+										</div></li>
+
+									</ul>
+								</div>
+								<div class="custom_member">
+									<ul>
+										<li><div class="inner_member">
+											<div class="member-img">
+												<span>3.</span>
+												<img src="assets/images/user.png">
+											</div>
+											<div class="member-text">Sunny</div>					  
+										</div></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="onload-popup">
+	<div class="modal" role="dialog" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isWelcomeModal ? 'block' : 'none'" *ngIf="isWelcomeModal"  aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header-center p-3 " id="isWelcomeBlock" *ngIf="isWelcomeBlock">
+					<button type="button" class="close" (click)="close_welcome()">
+						<span aria-hidden="true">x</span>
+					</button>
+					<div class="text-center">
+						<h5 class="text">WELCOME TO</h5>
+						<h2 class="mt-3"><span class="baby-blue">Coliv</span>ing</h2>
+
+					</div>
+
+				</div>
+
+				<div class="modal-header-center p-3" id="BrightNestBlock" *ngIf="isBrightNestBlock" >
+					<button type="button" class="close" (click)="close_welcome()">
+						<span aria-hidden="true">x</span>
+					</button>
+					<div class="text-center">
+						<h5 class="text">BRIGHTNEST</h5>
+						<h2 class="mt-3"><span class="baby-blue">home</span>quiz</h2>
+					</div>
+				</div>
+
+				<div class="progress-blue" *ngIf="isProgressBlue">
+					<div class="progress-25"></div>
+				</div>
+
+				<div class="modal-body p-0">
+					<div class="lock-bg-blue" *ngIf="islockbgblue">
+						<p class="graph">Take our 60 second Home Quiz to<br> unlock custom tips</p>
+					</div>
+					<div class="p-5" id="House1st" *ngIf="isHouse1st">
+						<div class="house-text text-center">
+							<h3>Which of these do you have in your house?</h3>
+							<p>(Please select all that apply)</p>
+						</div>
+						<div class="row mt-2">
+							<div class="col-md-4">
+								<a class="text-decoration-none" href="javascript:void(0)" id="KidBlock" (click) ="openNextTabModal('1')">
+									<div class="kid-bx text-center p-3">
+										<h6 class="mb-3">Kids</h6>
+										<img class="img-fluid" src="assets/images/kids-background.png" width="100">
+									</div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('2')">
+									<div class="kid-bx text-center p-3">
+										<h6 class="mb-3">Pets</h6>
+										<img class="img-fluid" src="assets/images/pets-background.png" width="100">
+									</div>
+								</a>
+							</div>
+							<div class="col-md-4">
+								<a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('3')">
+									<div class="kid-bx text-center p-3">
+										<h6 class="mb-3">Neither</h6>
+										<img class="img-fluid" src="assets/images/neither-background.png" width="80">
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>														
+				</div>				  
+				<div class="homequiz-section p-5" id="HomeQuizStep1" *ngIf="isHomeQuizStep == '1'">
+					<div class="house-text text-center">
+						<h3>What else do you take care of?</h3>
+						<p>(Please select all that apply)</p>
+					</div>
+					<div class="row mt-2">
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
+								<div class="orange-bx kid-bx text-center p-3">
+									<h6 class="mb-3">EXTERIOR</h6>
+									<img class="img-fluid" src="assets/images/exterior-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="blue-bx kid-bx text-center p-3">
+									<h6 class="mb-3">POOL</h6>
+									<img class="img-fluid" src="assets/images/pool-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="pink-bx kid-bx text-center p-3">
+									<h6 class="mb-3">BASEMENT</h6>
+									<img class="img-fluid" src="assets/images/basement-background.png" width="80">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="orange-bx kid-bx text-center p-3">
+									<h6 class="mb-3">LAWN/GARDEN</h6>
+									<img class="img-fluid" src="assets/images/lawn-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="blue-bx kid-bx text-center p-3">
+									<h6 class="mb-3">GARAGE</h6>
+									<img class="img-fluid" src="assets/images/garage-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="pink-bx kid-bx text-center p-3">
+									<h6 class="mb-3">ATTIC</h6>
+									<img class="img-fluid" src="assets/images/attic-background.png" width="80">
+								</div>
+							</a>
+						</div>
+					</div>						
+				</div>
+				<div class="homequiz-section p-5" id="HomeQuizStep2" *ngIf="isHomeQuizStep == '2'">
+					<div class="house-text text-center">
+						<h3>Does your home have a...?</h3>					
+					</div>
+					<div class="row mt-2">
+						<div class="col-md-6 mb-3">
+							<a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
+								<div class="orange-bx kid-bx text-center p-3">
+									<h6 class="mb-3">A/C</h6>
+									<img class="img-fluid" src="assets/images/ac-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="blue-bx kid-bx text-center p-3">
+									<h6 class="mb-3">BOILER</h6>
+									<img class="img-fluid" src="assets/images/boiler-background.png" width="100">
+								</div>
+							</a>
+						</div>							 
+						<div class="col-md-6 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="orange-bx kid-bx text-center p-3">
+									<h6 class="mb-3">FURNACE</h6>
+									<img class="img-fluid" src="assets/images/furnace-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-6 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="blue-bx kid-bx text-center p-3">
+									<h6 class="mb-3">WATER HEATER</h6>
+									<img class="img-fluid" src="assets/images/waterheater-background.png" width="100">
+								</div>
+							</a>
+						</div>							 
+					</div>						
+				</div>
+				<div class="homequiz-section p-5" id="HomeQuizStep3" *ngIf="isHomeQuizStep == '3'">
+					<div class="house-text text-center">
+						<h3>What kind of tips do you want for<br> your home?</h3>						
+					</div>
+					<div class="row mt-2">
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
+								<div class="yellow-bx kid-bx text-center p-3">
+									<h6 class="mb-3">SAVVY</h6>
+									<img class="img-fluid" src="assets/images/savvy-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="blue-bx kid-bx text-center p-3">
+									<h6 class="mb-3">CLEAN</h6>
+									<img class="img-fluid" src="assets/images/clean-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="green-bx kid-bx text-center p-3">
+									<h6 class="mb-3">GREEN</h6>
+									<img class="img-fluid" src="assets/images/green-background.png" width="80">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="orange-bx kid-bx text-center p-3">
+									<h6 class="mb-3">HEALTHY</h6>
+									<img class="img-fluid" src="assets/images/healthy-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="pink-bx kid-bx text-center p-3">
+									<h6 class="mb-3">HANDY</h6>
+									<img class="img-fluid" src="assets/images/handy-background.png" width="100">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-4 mb-3">
+							<a class="text-decoration-none" href="">
+								<div class="lgreen-bx kid-bx text-center p-3">
+									<h6 class="mb-3">CREATIVE</h6>
+									<img class="img-fluid" src="assets/images/creative-background.png" width="80">
+								</div>
+							</a>
+						</div>
+					</div>						
+				</div>
+				<div class="next-btn" id="NextStep" *ngIf="isNextStep">
+					<button type="button" class="btn btn-secondary" (click)="onNextStepClick('1')">Next</button>
+				</div>
+				<div class="next-btn"  id="NextStep1" *ngIf="isNextStep1">
+					<button type="button" class="btn btn-secondary" (click)="onNextStepClick('2')">Next</button>
+				</div>				  
+				<div class="next-btn"  id="NextStep2" *ngIf="isNextStep2" >
+					<button type="button" class="btn btn-secondary" (click)="onNextStepClick('3')">Next</button>
+				</div>				  
+			</div>			
+		</div>
+	</div>
+</div>
+<div class="modal-dialog-img" >
+	<div class="modal modal-open fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'display':display}">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add task</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
+				<div class="modal-body custm_modal">
+					<div class="form-group">
+						<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<button type="button" class="btn btn-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i> How Long?</button>
+						</div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-secondary"><i class="fa fa-star" aria-hidden="true"></i>0 pts</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="assign_name">
+								<a href="#"><i class="fa fa-users" aria-hidden="true"></i>Assign</a>
+								<div class="assign_user">
+									<div class="assign-user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="assign-user-text">Alexandre</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="date_due">
+								<a href=""><i class="fa fa-calendar" aria-hidden="true"></i>   <input type="text" class="form-check-input" value="" placeholder="Due date"></a>
+								<a href=""><i class="fa fa-repeat" aria-hidden="true"></i>Frequency</a>
+							</div>
+						</div>
+					</div>
+					<div class="row photo_sec">
+						<div class="photo-upload col-md-2">
+							<a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i>
+							Photo</a>
+						</div>
+						<div class="camera col-md-5">
+							<button> <i class="fa fa-camera" aria-hidden="true"></i>
+							Camera</button>
+						</div>
+						<div class="library col-md-5">
+							<button><i class="fa fa-file-image-o" aria-hidden="true"></i>Library</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="category_name row">
+								<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Category:Communal</a>
+								<div class="category_user col-md-2">
+									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="category_user-text">Communal</div>
+								</div>
+								<div class="category_user col-md-2">
+									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="category_user-text">Battroom</div>
+								</div>
+								<div class="category_user col-md-2">
+									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="category_user-text">Bedroom</div>
+								</div>
+								<div class="category_user col-md-2">
+									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="category_user-text">Kitchen</div>
+								</div>
+								<div class="category_user col-md-2">
+									<div class="category_user-img"><i class="fa fa-user" aria-hidden="true"></i></div>
+									<div class="category_user-text">Add</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="Notes row">
+								<a href="#"><i class="fa fa-pencil" aria-hidden="true"></i>Notes</a>
+							</div>
+						</div>
+					</div>
+                  <button type="submit" class="btn btn-orange">Add Task</button>
+				</div>
+
+			</form>
+			</div>
+		</div>
+	</div>
+</div>

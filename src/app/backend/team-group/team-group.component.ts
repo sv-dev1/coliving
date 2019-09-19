@@ -54,27 +54,24 @@ export class TeamGroupComponent implements OnInit {
 
 addUser(id){
    this.usersId.push(id);
-   console.log(this.usersId);
 }
   TeamSubmit(){
     let data=this.createTeamForm.value;
     this.submitted = true; 
-      if (this.createTeamForm.invalid) {
+    if (this.createTeamForm.invalid) {
       return;
-      }else{ 
+    }
+    else{ 
       const input_data = { 
-        "name" : data.name, 
-        "userId" : data.users,
+       "name" : data.name, 
+        "userId" : this.usersId,
       } 
-      console.log(input_data); 
-      let resArr :any;
       this.data_service.createTeam(input_data).subscribe((response: any) =>{
-       console.log(response);
-        this.createTeamForm.reset();
-     // this.presentAlert(response.message);
-      },error =>{console.log(error)}) 
-      //console.log(JSON.stringify(resArr, undefined, 2));
-      }     
-}
+          this.toastr.successToastr('Team Created Successfully.', 'Success!');
+          this.createTeamForm.reset();
+      },
+      error =>{console.log(error)}) 
+    }     
+  }
 
 }

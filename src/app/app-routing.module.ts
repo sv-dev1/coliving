@@ -6,9 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './backend/booking/booking.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CreateBillComponent } from './backend/create-bill/create-bill.component';
 import { TeamGroupComponent } from './backend/team-group/team-group.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,9 +18,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent },
-  { path: 'contact-us', component: ContactUsComponent },
   { path: 'create-bill', component: CreateBillComponent },
   { path: 'team-group', component: TeamGroupComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'house-chores', component: HouseChoresComponent },
 
   {path: '**', redirectTo: '/'},
  

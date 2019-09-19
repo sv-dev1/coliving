@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   errorsArr:any = []; 
   returnUrl: string;
   res:any = [];
+  
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -40,13 +41,13 @@ export class LoginComponent implements OnInit {
   }
   get f() { return this.loginForm.controls; }
 
-  login(form){ 
+  login(form) { 
     console.log('test');
     this.submitted = true;
     if (this.loginForm.invalid) {
       console.log('dasd');
       return;
-    }else{
+    } else {
       console.log('Invalid'); 
       const input_data = { 
         "username" : form.username,

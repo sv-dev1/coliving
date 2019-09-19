@@ -15,9 +15,13 @@ import { DashboardComponent } from './backend/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BookingComponent } from './backend/booking/booking.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CreateBillComponent } from './backend/create-bill/create-bill.component';
 import { TeamGroupComponent } from './backend/team-group/team-group.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { TeamGroupComponent } from './backend/team-group/team-group.component';
     BookingComponent,
     ContactUsComponent,
     CreateBillComponent,
-    TeamGroupComponent
+    TeamGroupComponent,
+    HouseChoresComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -41,9 +47,11 @@ import { TeamGroupComponent } from './backend/team-group/team-group.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AngularMultiSelectModule,
+    BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

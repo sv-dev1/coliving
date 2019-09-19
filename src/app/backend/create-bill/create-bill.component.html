@@ -22,9 +22,17 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="team">Choose Team to Assign:</label>
-                                                <select multiple="true" class="form-control" id="team" name="team"  formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" (change)="onTeamSelection($event.target.value)">
+                                                <angular2-multiselect [data]="dropdownList" 
+                                                            [settings]="dropdownSettings" 
+                                                            (onSelect)="onItemSelect($event)" 
+                                                            (onDeSelect)="OnItemDeSelect($event)"
+                                                            (onSelectAll)="onSelectAll($event)"
+                                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                                            formControlName="team">
+                                            </angular2-multiselect>
+                                                <!-- <select multiple="true" class="form-control" id="team" name="team"  formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" (change)="onTeamSelection($event.target.value)">
                                                     <option *ngFor="let team of teamData" value="{{team.id}}">{{team.name}}</option>
-                                                </select>
+                                                </select> -->
                                             </div>
                                         </div>
                                         
@@ -38,70 +46,40 @@
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="amount">Amount:</label>
-                                                <input type="text" class="form-control" id="amount"  formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                                                <input type="number" class="form-control" id="amount"  formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
                                             </div>
                                         </div>
                                         
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="date">Date:</label>
-                                                <input type="text" class="form-control" id="date"  formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+                                                <input type="text" class="form-control" id="date"  formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" bsDatepicker>
                                             </div>
                                         </div>
                                         
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
-                                                <label for="paidBy">Paid By:</label>
-                                                <select class="form-control" id="paidBy"  formControlName="paidBy" [ngClass]="{ 'is-invalid': submitted && f.paidBy.errors }">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
+                                                <label for="assign_to">Assign To:</label>
+                                                <angular2-multiselect [data]="userdropdownList" 
+                                                            [settings]="userdropdownSettings" 
+                                                            (onSelect)="onUserItemSelect($event)" 
+                                                            (onDeSelect)="OnUserItemDeSelect($event)"
+                                                            (onSelectAll)="onUserSelectAll($event)"
+                                                            (onDeSelectAll)="onUserDeSelectAll($event)"
+                                                            formControlName="assign_to">
+                                                </angular2-multiselect>
+                                                
                                             </div>
                                         </div>
                                         
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="bill">Upload Bill:</label>
-                                                <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }">
+                                                <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
                                             </div>
                                         </div>
                                         
-                                        <div class="col-12 col-sm-12">
-                                            <div class="">
-                                                <label for="email">Assign To:</label>
-                                            </div>
-                                            <div class="form-group form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> All
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Alex Decosta
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Vicky Kaushal
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Mavi Tejpreet
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Saloni
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Preeti
-                                                </label>
-                                                
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox"> Sanjay
-                                                </label>
-                                            </div>
-                                        </div>
+                                       
                                         
                                         <div class="col-12 col-sm-12 text-center">
                                             <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
@@ -112,9 +90,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
             </div>
         </div>
 </section>
