@@ -11,6 +11,7 @@ import { TeamGroupComponent } from './backend/team-group/team-group.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
+import { MyAccountComponent } from './backend/my-account/my-account.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,9 +22,10 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent },
   { path: 'create-bill', component: CreateBillComponent, canActivate: [AuthGuard] },
   { path: 'team-group', component: TeamGroupComponent, canActivate: [AuthGuard] },
-  { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
+  { path: 'contact-us', component: ContactUsComponent},
   { path: 'house-chores', component: HouseChoresComponent, canActivate: [AuthGuard] },
   { path: 'split-bill', component: SplitBillComponent, canActivate: [AuthGuard] },
+  { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
 
 
   {path: '**', redirectTo: '/'},

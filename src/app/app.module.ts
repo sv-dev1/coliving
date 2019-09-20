@@ -24,6 +24,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
+import { MyAccountComponent } from './backend/my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
     TeamGroupComponent,
     HouseChoresComponent,
     SplitBillComponent,
+    MyAccountComponent,
     
   ],
   imports: [

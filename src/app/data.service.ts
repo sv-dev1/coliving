@@ -150,6 +150,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+
 	getTask(){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -163,6 +164,6 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			return Observable.throw(error);});
-	}
 	
+		}
 }

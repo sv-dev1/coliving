@@ -1,0 +1,104 @@
+<section class="wrapper work-panel">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+        <div class="work-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcrumb custom-breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">My Account</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-header">My Account</div>
+                            <div class="card-body">
+                                <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">First Name:</label>
+                                                 <input type="text" id="firstName" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        
+                                       <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Last Name:</label>
+                                                 <input type="text" id="lastName" class="form-control" placeholder="First Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Phone Number:</label>
+                                                 <input type="text" id="phoneNumber" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" >
+                                                  <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.required">Phone Number is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                         <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Address:</label>
+                                                 <input type="text" id="address" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
+                                                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.address.errors.required">Phone Number is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        
+                                       <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Postal Code:</label>
+                                                 <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }">
+                                                   <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
+                                                    </div>
+                                                    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        
+                                          <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Country:</label>
+                                                 <input type="text" id="country" class="form-control" placeholder="Country" formControlName="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                                                   <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.country.errors.required">Country Name is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="bill">Upload Image:</label>
+                                                <input type="file" class="form-control-file border"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
+                                                <img [src]="image_url" height="200" *ngIf="image_url !='' && image_url !=null"> <br/>
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        <input type="hidden" formControlName="file">
+                                        <div class="col-12 col-sm-12 text-center">
+                                            <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
