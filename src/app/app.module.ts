@@ -23,6 +23,7 @@ import { HouseChoresComponent } from './backend/house-chores/house-chores.compon
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MyAccountComponent } from './backend/my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     TeamGroupComponent,
     HouseChoresComponent,
     SplitBillComponent,
+    MyAccountComponent,
     
   ],
   imports: [

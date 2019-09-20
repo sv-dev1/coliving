@@ -1282,7 +1282,27 @@ ul.for-login-tabs li a:hover{
     margin: 0px;
 }
 
+/* sagar 20-sep-2019*/
 
+.card-body button.btn.btn-orange-sm {
+    font-size: 11px;
+    border-radius: 0;
+    letter-spacing: 2.1px;
+    font-weight: 500;
+}
+.parts button.btn.btn-orange-sm {
+    border-radius: 0;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+.popCustomBody { 
+    height: 100%;
+    overflow: hidden;
+} 
+.popCustomHtml {
+    height: 100%;
+}
+/* sagar end */
 
 
 
