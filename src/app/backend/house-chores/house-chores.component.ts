@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener} from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
@@ -6,6 +6,11 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
+import { FullCalendarComponent } from '@fullcalendar/angular';
+import { EventInput } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGrigPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 
 @Component({
 	selector: 'app-house-chores',
@@ -14,8 +19,15 @@ import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
 })
 
 export class HouseChoresComponent implements OnInit {
+//@ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
 
-	isSuccess = false;
+  calendarVisible = true;
+  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+  calendarWeekends = true;
+  calendarEvents: EventInput[] = [
+    { title: '', start: "" }
+	];
+		isSuccess = false;
 	isLoading = false;
 	display='none';
 	isWelcomeModal : boolean = false;
@@ -31,7 +43,7 @@ export class HouseChoresComponent implements OnInit {
 	isHomeQuizStep : any;
 	isNextStep1:boolean= false;
 	isNextStep2:boolean= false;
-
+	todayDate:boolean=false;
 	addTaskForm: FormGroup;
 	submitted = false;
 	allUsersArray: any = [];
@@ -45,6 +57,8 @@ export class HouseChoresComponent implements OnInit {
 	url :any  = []; 
 	allTeamArray: any = [];
     allTeam: any = [];
+	allTaskArray: any = [];
+	allTask: any = [];
 
 	constructor(
 			private formBuilder:FormBuilder,	
@@ -74,14 +88,12 @@ export class HouseChoresComponent implements OnInit {
 		this.isProgressBlue =false;
 
 		this.getUsers();
-		this.getCategories();
+		this.getCategorie();
 		this.getTeams();
-		 const html = document.getElementsByTagName('html')[0];
-         html.classList.add('popCustomHtml');
-		 const body = document.getElementsByTagName('body')[0];
-         body.classList.add('popCustomBody');
+		this.getTask();
 	}
 	@HostListener('document:keypress', ['$event'])
+
 	handleKeyboardEvent(event: KeyboardEvent) {
 
 		this.key = event.keyCode;
@@ -134,7 +146,7 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-	getCategories() {
+	getCategorie() {
 		this.data_service.getCategories().subscribe((response:any) =>{   
 			this.allCategoriesArray = this.allCategoriesArray.concat(response.categories);
 			this.allCategories = this.allCategoriesArray;
@@ -145,8 +157,8 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-    getTeams() {
-		this.data_service.getTeams().subscribe((response:any) =>{   
+  getTeams() {
+		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
 			console.log('allTeam',this.allTeam);
@@ -214,6 +226,37 @@ export class HouseChoresComponent implements OnInit {
 			});   
 		}
 	}
+  getTask() {
+		this.data_service.getTask().subscribe((response:any) =>{   
+			response.tasks.forEach(element => {
+				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
+				this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+					title: element.task_name,
+					start: element.due_date,
+				})
+			});
+			console.log(this.calendarEvents);
+//		console.log(this.allTask);
+		//	 this.allTaskArray = this.allTaskArray.concat(response.Task);
+			// this.allTask = this.allTaskArray;
+			// console.log('allTask',this.allTask);
+			this.isError = false;    
+		}, error =>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		})
+	}
+	
+	handleDateClick(arg) {
+    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+        title: 'New Event',
+        start: arg.date,
+        allDay: arg.allDay
+      })
+    }
+	}
+
 } 
 
 

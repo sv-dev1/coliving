@@ -14,12 +14,15 @@ export class HomeComponent implements OnInit {
     private formBuilder:FormBuilder
     ) {
     this.subscribeForm = this.formBuilder.group({
-
+           
     });
   }
   ngOnInit() {
     if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = true;
     } 
+  }
+  subscribe(value) {
+
   }
 }

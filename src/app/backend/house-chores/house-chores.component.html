@@ -85,8 +85,24 @@
 						</div>
 						<div class="tab-pane fade" id="create-event">
 							<div class="calendar-wrapper custm_calender">
-								<button id="btnPrev" type="button">Prev</button>
-								<button id="btnNext" type="button">Next</button>
+									
+								<div class='app-calendar'>
+									<full-calendar
+										defaultView="timeGridWeek"
+										[header]="{
+											left: 'prev,next today',
+											center: 'title',
+											right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+										}"
+										[plugins]="calendarPlugins"
+										[weekends]="calendarWeekends"
+										[events]="calendarEvents"
+										(dateClick)="handleDateClick($event)"
+									></full-calendar>
+								</div>
+
+								<!-- <button id="btnPrev" type="button">Prev</button>
+								<button id="btnNext" type="button">Next</button> -->
 
 								<div id="divCal"></div>
 							</div>
@@ -121,7 +137,7 @@
 			<div class="modal-content">
 				<div class="modal-header-center p-3 " id="isWelcomeBlock" *ngIf="isWelcomeBlock">
 					<button type="button" class="close" (click)="close_welcome()">
-						<span aria-hidden="true">x</span>
+						<span aria-hidden="true" style="color:black;">x</span>
 					</button>
 					<div class="text-center">
 						<h5 class="text">WELCOME TO</h5>
@@ -388,7 +404,7 @@
 									<input type="text"
 									placeholder="Datepicker"
 									class="form-control"
-									bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" (change)="transform($event)">
+									bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
 								 <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
 								  <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
 							  </div>
