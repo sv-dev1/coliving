@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
+ 
   getUserData(){ 
    
     let token; 

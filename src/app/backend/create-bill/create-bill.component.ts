@@ -16,7 +16,7 @@ import { environment } from '../../../environments/environment';
 })
 export class CreateBillComponent implements OnInit {
   createBillForm: FormGroup;
-  submitted = false; 
+  submitted : boolean = false; 
   isError : boolean = false;
   isSuccess : boolean = false;
   errorsArr:any = []; 
@@ -42,12 +42,12 @@ export class CreateBillComponent implements OnInit {
     private http : HttpClient,
   ) { 
     this.createBillForm = this.formBuilder.group({
-      team: [[], Validators.required], 
-      title: [''],
-      amount: [''],
-      date: [''],
-      bill: [''],
-      assign_to:[[]]
+      team: ['', Validators.required], 
+      title: ['', Validators.required],
+      amount: ['', Validators.required],
+      date:['', Validators.required],
+      bill:['', Validators.required],
+      assign_to:['', Validators.required]
     });
     this.base_url = environment.base_url;
 
@@ -64,19 +64,21 @@ export class CreateBillComponent implements OnInit {
 		 this.fileData = event.target.files[0].name;   
 	} 
   createBill(){
-      let data=this.createBillForm.value;
-     // console.log(data.team);
-      data.team.forEach(element => {
-          this.teamName.push(element.id);
-      });
-      data.assign_to.forEach(element => {
-        this.assignUser.push(element.id);
-       });
+    console.log(this.createBillForm.value);
       this.submitted = true;
         if (this.createBillForm.invalid) {
+          console.log("error");
           return;
         }
         else{
+          let data=this.createBillForm.value;
+          // console.log(data.team);
+            data.team.forEach(element => {
+                this.teamName.push(element.id);
+            });
+            data.assign_to.forEach(element => {
+              this.assignUser.push(element.id);
+            });
             const input_data = {
               "team" : data.team,
               "title" : data.title,      
@@ -92,8 +94,6 @@ export class CreateBillComponent implements OnInit {
             formData.append('amount', input_data.amount);
             formData.append('date', input_data.date);
             formData.append('userId', this.assignUser);   
-            console.log(formData);
-
             let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
             token = sessionStorage.getItem("auth_token"); 
@@ -102,6 +102,8 @@ export class CreateBillComponent implements OnInit {
             this.http.post(this.base_url+'createBills', formData, httpOptions).subscribe(response => {
                 console.log(response); 
                 this.toastr.successToastr('Bill Created Successfully.', 'Success!');
+                this.submitted=false;
+                this.createBillForm.reset();
               },error=>{ 
                 console.log("ERROR");
                 console.log(error.error);
@@ -136,13 +138,8 @@ export class CreateBillComponent implements OnInit {
   onTeamSelection() { 
     let list: string[] = [];
     let tmp = [];
-    console.log(this.selectedItems);
     this.selectedItems.forEach(element => {
-      console.log(element);
-      element.forEach(obj => {
-        console.log(obj);
-        list.push(obj.id);
-      });
+      list.push(element.id);
     });
     let postArr = {'teamId': list};
     this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
@@ -187,4 +184,15 @@ export class CreateBillComponent implements OnInit {
     this.userselectedItems.push(items);
     console.log(this.userselectedItems);
   } 
+  onUserItemSelect(item:any){
+      this.userselectedItems.push(item);
+      console.log(this.userselectedItems);
+  }
+  OnUserItemDeSelect(item:any){
+    console.log(this.userselectedItems);
+  }
+  onUserDeSelectAll(items: any){
+      console.log(items);
+  }
+ 
 }

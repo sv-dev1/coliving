@@ -85,8 +85,24 @@
 						</div>
 						<div class="tab-pane fade" id="create-event">
 							<div class="calendar-wrapper custm_calender">
-								<button id="btnPrev" type="button">Prev</button>
-								<button id="btnNext" type="button">Next</button>
+									
+								<div class='app-calendar'>
+									<full-calendar
+										defaultView="timeGridWeek"
+										[header]="{
+											left: 'prev,next today',
+											center: 'title',
+											right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+										}"
+										[plugins]="calendarPlugins"
+										[weekends]="calendarWeekends"
+										[events]="calendarEvents"
+										(dateClick)="handleDateClick($event)"
+									></full-calendar>
+								</div>
+
+								<!-- <button id="btnPrev" type="button">Prev</button>
+								<button id="btnNext" type="button">Next</button> -->
 
 								<div id="divCal"></div>
 							</div>

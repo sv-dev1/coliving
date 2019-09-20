@@ -23,6 +23,7 @@ import { HouseChoresComponent } from './backend/house-chores/house-chores.compon
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { MyAccountComponent } from './backend/my-account/my-account.component';
 
 @NgModule({
@@ -53,7 +54,8 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AngularMultiSelectModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    FullCalendarModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
