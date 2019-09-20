@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
   { path: 'house-chores', component: HouseChoresComponent, canActivate: [AuthGuard] },
   { path: 'split-bill', component: SplitBillComponent, canActivate: [AuthGuard] },
-  { path: ' my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
+  { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
 
 
   {path: '**', redirectTo: '/'},
