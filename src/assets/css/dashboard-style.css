@@ -1236,6 +1236,7 @@ ul.requirement-list li:before{
     color: #fff;
     letter-spacing: 0.7px;
     border-radius: 0;
+    margin: 10px;
 }
 
 .btn-colored:hover {
@@ -2464,17 +2465,13 @@ h5#exampleModalLabel {
     background: #ed502d;
 }
 
-.team-part-2 {
-    display: none;
-}
+
 
 .team-creation {
     padding: 50px 0;
 }
 
-#team-member {
-    display: none;
-}
+
 
 
 

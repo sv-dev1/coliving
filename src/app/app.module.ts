@@ -7,7 +7,6 @@ import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
 import { DatePipe } from '@angular/common';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './backend/layouts/header/header.component';
@@ -16,8 +15,12 @@ import { FooterComponent } from './backend/layouts/footer/footer.component';
 import { DashboardComponent } from './backend/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { BookingComponent } from './backend/booking/booking.component';
+import { CreateBillComponent } from './backend/create-bill/create-bill.component';
+import { TeamGroupComponent } from './backend/team-group/team-group.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -31,7 +34,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
+    BookingComponent,
     ContactUsComponent,
+    CreateBillComponent,
+    TeamGroupComponent,
     HouseChoresComponent,
     SplitBillComponent,
     
@@ -44,6 +50,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    AngularMultiSelectModule,
     BsDatepickerModule.forRoot()
   ],
   providers: [DatePipe],

@@ -1,0 +1,373 @@
+<section class="wrapper work-panel">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="work-block">
+        <div class="team-part-1" *ngIf="!showCreate">
+            <div class="create-team">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hdg-box">
+                                <h1 class="hdg-main">Create a team is just a step away</h1>
+                                <p class="sb-hdg">Here are the steps below to create a team.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- <ul class="space-list">
+                                <li>
+                                    <a href="" data-toggle="modal" data-target="#exampleModal">
+                                        <span class="step-number">1</span>
+                                        <p>Choose Team Name</p>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="" data-toggle="modal" data-target="#MembersModal">
+                                        <span class="step-number">2</span>
+                                        <p>Add Members</p>
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a href="#">
+                                        <span class="step-number">3</span>
+                                        <p>Submit</p>
+                                    </a>
+                                </li>
+                            </ul> -->
+                            
+                            <div class="progress-bar__circles">
+                                <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
+                                    <span class="number">1</span>
+                                    <span class="progress-bar__circle__label">Choose Team Name</span>
+                                </div>
+                                <div class="progress-bar__bar progress-bar__bar--completed"></div>
+                                <div class="progress-bar__circle" data-toggle="modal" data-target="#MembersModal">
+                                    <span class="number">2</span>
+                                    <span class="progress-bar__circle__label">Add Members</span>
+                                </div>
+                                <div class="progress-bar__bar"></div>
+                                <div class="progress-bar__circle progress-bar__circle--selected">
+                                    <span class="number">3</span>
+                                    <span class="progress-bar__circle__label">Submit</span>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="col-12">
+                            <div class="btn-center">
+                                <button type="button" class="btn btn-colored" id="create-team-btn" (click)="createTeam()">Create New Team</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-list">
+                <div class="container dashboard-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hdg-box">
+                                <h1 class="hdg-main">Team list</h1>
+                                <p class="sb-hdg">Below are the list of top group near you.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered team-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Group Name</th>
+                                            <th>Location</th>
+                                            <th>Privacy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <td>Patiala House</td>
+                                            <td>Mohali</td>
+                                            <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12">
+                            <div class="btn-center">
+                                <button type="button" class="btn btn-colored">View More Teams</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-team">
+                <div class="container-fluid dashboard-container1">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hdg-box">
+                                <h1 class="hdg-main">My Team & Groups</h1>
+                                <p class="sb-hdg">Lorem ipsum, or lipsum as it is sometimes known</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-sec">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="group-block" data-toggle="modal" data-target="#group-info">
+                                    
+                                    <img src="assets/images/buy2-property.jpeg">
+                                    <div class="group-hover"><h6>Share Details</h6></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="group-block" data-toggle="modal" data-target="#group-info">
+                                    
+                                    <img src="assets/images/article1.jpeg">
+                                    <div class="group-hover"><h6>Room Services</h6></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="group-block" data-toggle="modal" data-target="#group-info">
+                                    
+                                    <img src="assets/images/homepage-friends.jpg">
+                                    <div class="group-hover"><h6>Room Pleace</h6></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="group-block" data-toggle="modal" data-target="#group-info">
+                                    
+                                    <img src="assets/images/buy-property.jpeg">
+                                    <div class="group-hover"><h6>Room Contact</h6></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="btn-center">
+                                <button type="button" class="btn btn-colored">View ALL</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="model-inside-text">
+                        <!-- Modal -->
+                        <div class="modal fade" id="group-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">My Group</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="group-member">
+                                    <div class="media">
+                                    <img class="mr-3" src="assets/images/avatar.png">
+                                        <div class="media-body">
+                                            <h6 class="mt-0">Member 1<span><i class="fas fa-pencil-alt"></i></span></h6>
+                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-member">
+                                    <div class="media">
+                                    <img class="mr-3" src="assets/images/avatar.png">
+                                        <div class="media-body">
+                                            <h6 class="mt-0">Member 2<span><i class="fas fa-pencil-alt"></i></span></h6>
+                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group-member">
+                                    <div class="media">
+                                    <img class="mr-3" src="assets/images/avatar.png">
+                                        <div class="media-body">
+                                            <h6 class="mt-0">Member 3<span><i class="fas fa-pencil-alt"></i></span></h6>
+                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-colored">Update</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+            <!----- Chat Block HTML ------>
+            
+                <section class="chat-block">
+                    <div class="container-fluid chat-container">
+                        <div class="row chat-row">
+                             <div class="wrap-chat-block">
+                                <section class="left">
+                                        <div class="profile">
+                                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1089577/user.jpg">
+                                                <div class="icons">
+                                                        <i class="fa fa-commenting fa-lg"></i>
+                                                        <i class="fa fa-bars fa-lg"></i>
+                                                </div>
+                                        </div>
+                                        <div class="wrap-search">
+                                                <div class="search">
+                                                        <i class="fa fa-search fa" aria-hidden="true"></i>
+                                                        <input type="text" class="input-search" placeholder="Suchen oder neuen Chat beginnen">
+                                                </div>
+                                        </div>
+                                        <div class="contact-list"></div>
+                                </section>
+
+                                    <section class="right">
+                                            <div class="chat-head">
+                                                    <img alt="profilepicture">
+                                                    <div class="chat-name">
+                                                            <h1 class="font-name"></h1>
+                                                            <p class="font-online"></p>
+                                                    </div>
+                                                    <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                                                    <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
+                                                    <i class="fa fa-bars fa-lg" aria-hidden="true" id="show-contact-information"></i>
+                                                    <i class="fa fa-times fa-lg" aria-hidden="true" id="close-contact-information"></i>
+                                            </div>
+                                            <div class="wrap-chat">
+                                                    <div class="chat"></div>
+                                                    <div class="information"></div>
+                                            </div>
+                                            <div class="wrap-message">
+                                                    <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
+                                                    <div class="message">
+                                                            <input type="text" class="input-message" placeholder="Schreibe eine Nachricht">
+                                                    </div>
+                                                    <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
+                                            </div>
+                                    </section>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            
+            <!----- End Chat html  ------>
+        </div>
+        
+        <div class="team-part-2" *ngIf="showCreate">
+            <div class="team-creation">
+                <div class="container dashboard-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hdg-box">
+                                <h1 class="hdg-main">team creation</h1>
+                                <p class="sb-hdg">Here are the steps below to create a team.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <form [formGroup]="createTeamForm" (ngSubmit)="TeamSubmit()">
+                    <div class="row" id="team-name">
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">Choose your Team Name</div>
+                                <div class="card-body">
+                                        <div class="row" style="justify-content: center; text-align: center;">
+                                            <div class="col-12 col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="name">Enter Your Team Name:</label>
+                                                    <input type="text" class="form-control" id="name" placeholder="Team Name" formControlName="name">
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12 text-center">
+                                                <button type="button" class="btn btn-colored" id="team-name-button">Continue</button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row" id="team-member">
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">Choose Team Member</div>
+                                <div class="card-body">
+                                        <div class="row" style="justify-content: center;">
+                                            <div class="col-12 col-sm-6">
+                                                <ul class="list-group team-list-block">
+                                                    <li class="list-group-item" *ngFor="let user of users">
+                                                       <div class="team-block-top">
+                                                          <figure>
+                                                             <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="rounded-circle" width="45" height="45">
+                                                          </figure>
+                                                          <div class="team-name">
+                                                             <h5 class="size">{{user.firstName}}{{user.lastName}}</h5>
+                                                          </div>
+                                                          <div class="admin-btn"><a (click)="addUser(user.userId)">+ Add</a></div>
+                                                       </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <div class="col-12 col-sm-12 text-center mt-3">
+                                                <button type="button" class="btn btn-colored" (click)="reset()">Back</button>
+                                                <button type="submit" class="btn btn-colored">Submit</button>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
