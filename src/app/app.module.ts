@@ -20,6 +20,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MyAccountComponent } from './backend/my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ContactUsComponent,
     HouseChoresComponent,
     SplitBillComponent,
+    MyAccountComponent,
     
   ],
   imports: [
