@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'booking', component: BookingComponent },
   { path: 'create-bill', component: CreateBillComponent, canActivate: [AuthGuard] },
   { path: 'team-group', component: TeamGroupComponent, canActivate: [AuthGuard] },
-  { path: 'contact-us', component: ContactUsComponent, canActivate: [AuthGuard] },
+  { path: 'contact-us', component: ContactUsComponent},
   { path: 'house-chores', component: HouseChoresComponent, canActivate: [AuthGuard] },
   { path: 'split-bill', component: SplitBillComponent, canActivate: [AuthGuard] },
   { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
