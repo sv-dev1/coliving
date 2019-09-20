@@ -22,22 +22,18 @@ export class DataService {
 	register(input_data){
 		return this.http.post(this.base_url+'register',input_data)
 		.map((response:Response)=>{
-			console.log('register response',response);
 			return response;
 		})
 		.catch((error:Error) => {
-			console.log(error);
 			return Observable.throw(error);
 		});
 	}
 	login(input_data){
 		return this.http.post(this.base_url+'login',input_data)
 		.map((response:Response)=>{
-            console.log('login response',response);
 			return response;
 		})
 		.catch((error:Error) => {
-			console.log('error',error);
 			return Observable.throw(error);});
 	}
 	createBill(input_data){
@@ -108,6 +104,20 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
+	getUserData(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'user/profile',{ headers: headers })
+		.map((response:Response)=>{			
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
 	getUsers(){ 
 	    let token; 
 	    if(sessionStorage.getItem("auth_token")!=undefined){
@@ -126,6 +136,19 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
     }
-
-
-   }
+	getCategories(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'categories',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	
+}

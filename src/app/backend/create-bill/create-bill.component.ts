@@ -138,6 +138,7 @@ export class CreateBillComponent implements OnInit {
     let tmp = [];
     console.log(this.selectedItems);
     this.selectedItems.forEach(element => {
+      console.log(element);
       element.forEach(obj => {
         console.log(obj);
         list.push(obj.id);

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
+import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './backend/layouts/header/header.component';
@@ -20,8 +21,8 @@ import { TeamGroupComponent } from './backend/team-group/team-group.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {DatePipe} from '@angular/common';
     CreateBillComponent,
     TeamGroupComponent,
     HouseChoresComponent,
+    SplitBillComponent,
     
   ],
   imports: [
