@@ -150,5 +150,19 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+	getTask(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'tasks',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
 	
 }

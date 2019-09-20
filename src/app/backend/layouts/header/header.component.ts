@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
   }
   getUserData() {
 
-     this.data_service.getUserData().subscribe((response:any) =>{   
+     this.data_service.getUsers().subscribe((response:any) =>{   
         this.newArray = this.newArray.concat(response.users[0]);
         this.profileData = this.newArray;
         //this.router.navigate(['/dashboard']);  
