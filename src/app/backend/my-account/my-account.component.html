@@ -85,7 +85,7 @@
                                                 <label for="bill">Upload Image:</label>
                                                 <input type="file" class="form-control-file border"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
                                                 <img [src]="image_url" height="200" *ngIf="image_url !='' && image_url !=null"> <br/>
-                                                <img [src]="url" height="200" *ngIf="url !='' && url !=null"> <br/>
+                                                
                                                 
                                             </div>
                                         </div>

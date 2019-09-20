@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confPassword: ['', [Validators.required, Validators.minLength(8)]],
+      phoneNumber:['', [Validators.required, Validators.minLength(8),Validators.maxLength(15)]],
       agree: ['false', Validators.requiredTrue],
     });
   }
@@ -56,6 +57,8 @@ export class RegisterComponent implements OnInit {
         "email" : form.email,
         "password" : form.password,
         "password2" : form.confPassword,
+        "phoneNo": form.phoneNumber,
+        "used_code":form.used_code,
         "roleId" :4    
 
       }

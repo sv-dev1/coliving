@@ -9,8 +9,7 @@
 									<a class="for-login-logo" routerLink="/">
 										<img src="assets/images/Logo-colive.png" />
 									</a>
-									<p class="des">Login using social media to get quick access</p>
-									
+									<p class="des">Login using social media to get quick access</p>									
 									<div class="row social-buttons">
 										<div class="col-4 col-md-12">
 											<a href="#" class="btn btn-social btn-facebook">
@@ -84,7 +83,8 @@
                                                       <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                                         <span class="for-sub-name" *ngIf="f.password.errors.minlength">Your password must be at least 8 characters.</span>
                                                     </div>
-										</div>
+										    </div>
+										
 										<div class="form-group form-parts">
 											<input type="password"  placeholder="Confirm Password" class="form-control" formControlName="confPassword" [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }">
 											   
@@ -98,6 +98,23 @@
                                                       <div *ngIf="isError == true" >
                                                         <span class="for-sub-name">{{errorsArr?.password2}}</span>
                                                     </div>
+										</div>
+										<div class="form-group form-parts">
+											<input type="text"  placeholder="Phone Number" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
+											
+                                                    <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.required"> Phone Number is required.</span>
+                                                    </div> 
+                                                      <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.minlength">Phone Number must be at least 8 characters.</span>
+                                                    </div>
+                                                     <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.maxlength">Phone Number must be at least 15 characters.</span>
+                                                    </div>
+										</div>
+										<div class="form-group form-parts">
+											<input type="text" class="form-control" placeholder="Referral Code (optional)" formControlName="used_code">
+											
 										</div>
 										<div class="form-group">
 											<div class="form-check">
