@@ -133,7 +133,7 @@ Cal.prototype.showMonth = function(y, m) {
   html += '</table>';
 
   // Write HTML to the div
-  document.getElementById(this.divId).innerHTML = html;
+  //document.getElementById(this.divId).innerHTML = html;
 };
 
 // On Load of the window

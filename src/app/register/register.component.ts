@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
-import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
+import {  Router } from '@angular/router';
+import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 

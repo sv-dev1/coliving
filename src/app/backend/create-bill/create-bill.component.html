@@ -1,0 +1,95 @@
+<section class="wrapper work-panel">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+        <div class="work-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="breadcrumb custom-breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Create Bill</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-3">
+                            <div class="card-header">Create Bill</div>
+                            <div class="card-body">
+                                <form [formGroup]="createBillForm" (ngSubmit)="createBill()">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Choose Team to Assign:</label>
+                                                <angular2-multiselect [data]="dropdownList" 
+                                                            [settings]="dropdownSettings" 
+                                                            (onSelect)="onItemSelect($event)" 
+                                                            (onDeSelect)="OnItemDeSelect($event)"
+                                                            (onSelectAll)="onSelectAll($event)"
+                                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                                            formControlName="team">
+                                            </angular2-multiselect>
+                                                <!-- <select multiple="true" class="form-control" id="team" name="team"  formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" (change)="onTeamSelection($event.target.value)">
+                                                    <option *ngFor="let team of teamData" value="{{team.id}}">{{team.name}}</option>
+                                                </select> -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="title">Title:</label>
+                                                <input type="text" class="form-control" id="title"  formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                            </div>
+                                        </div>
+                                            
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="amount">Amount:</label>
+                                                <input type="number" class="form-control" id="amount"  formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="date">Date:</label>
+                                                <input type="text" class="form-control" id="date"  formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" bsDatepicker>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="assign_to">Assign To:</label>
+                                                <angular2-multiselect [data]="userdropdownList" 
+                                                            [settings]="userdropdownSettings" 
+                                                            (onSelect)="onUserItemSelect($event)" 
+                                                            (onDeSelect)="OnUserItemDeSelect($event)"
+                                                            (onSelectAll)="onUserSelectAll($event)"
+                                                            (onDeSelectAll)="onUserDeSelectAll($event)"
+                                                            formControlName="assign_to">
+                                                </angular2-multiselect>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="bill">Upload Bill:</label>
+                                                <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
+                                            </div>
+                                        </div>
+                                        
+                                       
+                                        
+                                        <div class="col-12 col-sm-12 text-center">
+                                            <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

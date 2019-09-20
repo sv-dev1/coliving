@@ -1,38 +1,44 @@
 <div class="sidebar">
 	<div class="side-logo">
-		<a class="logo-link" routerLink="/">
+		<a class="logo-link" href="">
 			<img src="assets/images/Logo-colive.png">
 		</a>
 	</div>
-	
 	<ul class="nav">
-		<li class="active">
-			<a routerLink="/dashboard">
+		<li routerLinkActive="active">
+			<a routerLink="/dashboard" routerLinkActive="active-link">
 				<i class="fas fa-tachometer-alt"></i>
 				<p>Dashboard</p>
 			</a>
 		</li>
-	  
 		<li>
-			<a routerLink="/dashboard">
+			<a>
 				<i class="far fa-money-bill-alt"></i>
 				<p>house expenses</p>
 			</a>
 		</li>
-	  
+		<li routerLinkActive="active">
+			<a routerLink="/house-chores" routerLinkActive="active-link">
+				<p>house expenses</p>
+			</a>
+		</li>
 		<li>
 			<a routerLink="/split-bill">
 				<i class="fas fa-broom"></i>
 				<p>Split Bill</p>
 			</a>
 		</li>
-		
-		<li>
-			<a routerLink="/house-chores">
+		<li routerLinkActive="active">
+			<a routerLink="/booking"  routerLinkActive="active-link">
 				<i class="far fa-calendar-alt"></i>
-				<p>house chores</p>
+				<p>Booking</p>
 			</a>
 		</li>
-	  
+		<li routerLinkActive="active">
+			<a routerLink="/team-group"  routerLinkActive="active-link">
+				<i class="far fa-calendar-alt"></i>
+				<p>Team Group</p>
+			</a>
+		</li>
 	</ul>
 </div>
