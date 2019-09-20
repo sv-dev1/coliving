@@ -105,7 +105,8 @@ export class MyAccountComponent implements OnInit {
 		this.submitted = true;  
 		if (this.updateProfileForm.invalid) {
 			return;
-		}else{  
+		} else {  
+
 			const input_data = { 
 				"first_name" : form.firstName, 
 				"last_name" : form.lastName,

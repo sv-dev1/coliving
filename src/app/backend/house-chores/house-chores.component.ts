@@ -76,6 +76,10 @@ export class HouseChoresComponent implements OnInit {
 		this.getUsers();
 		this.getCategories();
 		this.getTeams();
+		 const html = document.getElementsByTagName('html')[0];
+         html.classList.add('popCustomHtml');
+		 const body = document.getElementsByTagName('body')[0];
+         body.classList.add('popCustomBody');
 	}
 	@HostListener('document:keypress', ['$event'])
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -88,6 +92,10 @@ export class HouseChoresComponent implements OnInit {
 	}
 	close_welcome(){
 		this.isWelcomeModal = false;
+		const html = document.getElementsByTagName('html')[0];
+		html.classList.remove('popCustomHtml');
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.remove('popCustomBody');
 	}
 	openNextTabModal(id) {
 
