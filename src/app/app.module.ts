@@ -25,6 +25,8 @@ import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { MyAccountComponent } from './backend/my-account/my-account.component';
+import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
+import { SettingsComponent } from './backend/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
     HouseChoresComponent,
     SplitBillComponent,
     MyAccountComponent,
+    RefferalCodeComponent,
+    SettingsComponent,
     
   ],
   imports: [

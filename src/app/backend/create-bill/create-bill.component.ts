@@ -64,7 +64,7 @@ export class CreateBillComponent implements OnInit {
 		 this.fileData = event.target.files[0].name;   
 	} 
   createBill(){
-    console.log(this.createBillForm.value);
+    console.log('fgfggg',this.createBillForm.value);
       this.submitted = true;
         if (this.createBillForm.invalid) {
           console.log("error");
