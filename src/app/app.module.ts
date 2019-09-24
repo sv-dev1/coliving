@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
@@ -25,7 +25,7 @@ import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { MyAccountComponent } from './backend/my-account/my-account.component';
-
+import { ErrorInterceptor } from './helpers/error.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +57,10 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
     BsDatepickerModule.forRoot(),
     FullCalendarModule
   ],
-  providers: [DatePipe],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+      DatePipe
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

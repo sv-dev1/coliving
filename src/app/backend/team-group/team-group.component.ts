@@ -20,6 +20,10 @@ export class TeamGroupComponent implements OnInit {
   teamData: any;
   users: any;
   usersId:any = []; 
+  IsContinue : boolean = false;
+  Isrequired : boolean = false;
+  selectedButton = {}
+  hide : boolean = true;
 
   constructor(
     private formBuilder:FormBuilder,	
@@ -28,11 +32,10 @@ export class TeamGroupComponent implements OnInit {
     public toastr: ToastrManager
   ) { 
     this.createTeamForm = this.formBuilder.group({
-      name:[''],
+      name:['', Validators.required],
     });
   }
   ngOnInit() {
-    this.getUsers();
   }
 
   createTeam(){
@@ -42,7 +45,6 @@ export class TeamGroupComponent implements OnInit {
   getUsers(){
     this.data_service.getUsers().subscribe((response:any) =>{  
       this.users=response.users;
-      
   }, error =>{
       this.isError = true;   
       window.scrollTo(0, 0);
@@ -50,21 +52,40 @@ export class TeamGroupComponent implements OnInit {
     this.toastr.errorToastr(this.errorsArr, 'Error!');
     console.log(JSON.stringify(this.errorsArr, undefined, 2))
   })
-}
+  }
 
-addUser(id){
-   this.usersId.push(id);
-}
+  addUser(id){
+    this.usersId.push(id);
+    this.selectedButton[id]= !this.selectedButton[id];
+  }
+
+  continue(){
+    if (this.createTeamForm.invalid) {
+      this.Isrequired=true;
+      return;
+    }
+    this.hide=false;
+    this.IsContinue =true;
+    this.getUsers();
+  }
+
+  back(){
+    this.hide=true;
+    this.IsContinue=false;
+    this.createTeamForm.reset();
+  }
+
   TeamSubmit(){
     let data=this.createTeamForm.value;
     this.submitted = true; 
     if (this.createTeamForm.invalid) {
+      this.Isrequired=true;
       return;
     }
     else{ 
       const input_data = { 
        "name" : data.name, 
-        "userId" : this.usersId,
+       "userId" : this.usersId,
       } 
       this.data_service.createTeam(input_data).subscribe((response: any) =>{
           this.toastr.successToastr('Team Created Successfully.', 'Success!');

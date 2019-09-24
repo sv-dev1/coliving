@@ -310,7 +310,7 @@
                         </div>
                     </div>
                     <form [formGroup]="createTeamForm" (ngSubmit)="TeamSubmit()">
-                    <div class="row" id="team-name">
+                    <div class="row" id="team-name" *ngIf="hide">
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">Choose your Team Name</div>
@@ -320,11 +320,11 @@
                                                 <div class="form-group">
                                                     <label for="name">Enter Your Team Name:</label>
                                                     <input type="text" class="form-control" id="name" placeholder="Team Name" formControlName="name">
+                                                        <div *ngIf="Isrequired" class="teamError-msg">Name is required</div>
                                                 </div>
                                             </div>
-                                            
                                             <div class="col-12 col-sm-12 text-center">
-                                                <button type="button" class="btn btn-colored" id="team-name-button">Continue</button>
+                                                <button type="button" class="btn btn-colored" id="team-name-button" (click)="continue()">Continue</button>
                                             </div>
                                         </div>
                                 </div>
@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     
-                    <div class="row" id="team-member">
+                    <div class="row" id="team-member" *ngIf="IsContinue">
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">Choose Team Member</div>
@@ -348,14 +348,17 @@
                                                           <div class="team-name">
                                                              <h5 class="size">{{user.firstName}}{{user.lastName}}</h5>
                                                           </div>
-                                                          <div class="admin-btn"><a (click)="addUser(user.userId)">+ Add</a></div>
+                                                          <div class="admin-btn"><a (click)="addUser(user.userId)"> {{selectedButton[user.userId] ? 'Added' : '+ Add'}}
+                                                        </a></div>
+
+
                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
                                             
                                             <div class="col-12 col-sm-12 text-center mt-3">
-                                                <button type="button" class="btn btn-colored">Back</button>
+                                                <button type="button" class="btn btn-colored" (click)="back()">Back</button>
                                                 <button type="submit" class="btn btn-colored">Submit</button>
                                             </div>
                                         </div>

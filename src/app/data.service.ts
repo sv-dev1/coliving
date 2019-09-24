@@ -165,5 +165,6 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	
-		}
+	}
+
 }

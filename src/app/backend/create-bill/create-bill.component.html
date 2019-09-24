@@ -30,14 +30,11 @@
                                                             (onDeSelectAll)="onDeSelectAll($event)"
                                                             formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }">
                                             </angular2-multiselect>
-                                                <!-- <select multiple="true" class="form-control" id="team" name="team"  formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }" (change)="onTeamSelection($event.target.value)">
-                                                    <option *ngFor="let team of teamData" value="{{team.id}}">{{team.name}}</option>
-                                                </select> -->
-                                                
+                                               
+
                                             </div>
-                                            <div *ngIf="submitted && f.team.errors" class="invalid-feedback">
-                                                <div *ngIf="f.team.errors.required">Choose Team to Assign</div>
-                                             </div>
+                                            <div *ngIf="teamEmpty"  class="error-msg">            Please select Team Name.
+                                            </div>
                                         </div>
                                         
                                         <div class="col-12 col-sm-6">
@@ -81,10 +78,11 @@
                                                             (onDeSelectAll)="onUserDeSelectAll($event)"
                                                             formControlName="assign_to" [ngClass]="{ 'is-invalid': submitted && f.assign_to.errors }">
                                                 </angular2-multiselect>
-                                                <div *ngIf="submitted && f.assign_to.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.assign_to.errors.required">assign_to is required</div>
-                                                 </div>
+                                                
                                             </div>
+                                            <div *ngIf="userEmpty"  class="error-msg">            Please select Users to assign.
+                                            </div>
+
                                         </div>
                                         
                                         <div class="col-12 col-sm-6">
@@ -111,3 +109,4 @@
             </div>
         </div>
 </section>
+

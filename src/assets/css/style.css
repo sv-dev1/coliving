@@ -563,9 +563,9 @@ ul.location-list li .list-inner .over-content p{
 	justify-content: center;
 }
 
-.follow-us ul li{
-	/* flex-grow:1; */
-}
+/* .follow-us ul li{
+	 flex-grow:1; 
+} */
 
 .follow-us .social-icon{
 	/* padding:25px 10px; */
@@ -581,9 +581,9 @@ ul.location-list li .list-inner .over-content p{
 	font-size:16px;
 }
 
-.follow-us .social-icon:hover i{
-	/* color:#ed502d; */
-}
+/* .follow-us .social-icon:hover i{
+	color:#ed502d;
+} */
 
 .hdg-small {
     color: #0d1432;
@@ -1305,9 +1305,20 @@ ul.for-login-tabs li a:hover{
 /* sagar end */
 
 
-
-
-
+.error-msg {
+    width: 100%;
+    margin-top: -0.75rem;
+    font-size: 80%;
+    color: #dc3545;
+ }
+  
+ .teamError-msg {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+ }
+  
 
 
 
