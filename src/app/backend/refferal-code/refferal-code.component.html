@@ -1,0 +1,39 @@
+<section class="wrapper work-panel">
+	<app-header></app-header>
+	<app-sidebar></app-sidebar>
+
+	<div class="work-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="breadcrumb custom-breadcrumb">
+						<li class="breadcrumb-item"><a routerLink='/dashboard'>Home</a></li>
+						<li class="breadcrumb-item active">Refer A Friend</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-3">
+						<div class="card-header">Refer A Friend</div>
+						<div class="card-body">
+                          <form [formGroup]="referralCodeForm">
+							<div class="row">
+								<div class="col-12 col-sm-12">
+									<div class="form-group">
+										<label for="title">Referral Link</label>
+										<input type="text" class="form-control" formControlName="referralCode" readonly #referralCode>
+									</div>
+								</div>
+							</div>
+							<div class="col-12 col-sm-12 text-center">
+								<button type="bitton" (click)="copyMessage(referralCode)" class="btn btn-orange-sm" >Click to copy</button>
+							</div>
+						</form>
+						</div>
+					</div>
+				</div> 
+			</div>
+		</div>
+	</div>
+</section>

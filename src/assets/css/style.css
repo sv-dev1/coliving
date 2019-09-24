@@ -1302,6 +1302,9 @@ ul.for-login-tabs li a:hover{
 .popCustomHtml {
     height: 100%;
 }
+.onload-popup .modal {
+    overflow: auto !important;
+}
 /* sagar end */
 
 

@@ -12,6 +12,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { HouseChoresComponent } from './backend/house-chores/house-chores.component';
 import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { MyAccountComponent } from './backend/my-account/my-account.component';
+import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
+import { SettingsComponent } from './backend/settings/settings.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -26,11 +28,11 @@ const routes: Routes = [
   { path: 'house-chores', component: HouseChoresComponent, canActivate: [AuthGuard] },
   { path: 'split-bill', component: SplitBillComponent, canActivate: [AuthGuard] },
   { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
-
+  { path: 'refer-a-friend', component: RefferalCodeComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 
   {path: '**', redirectTo: '/'},
  
-
 ];
 
 @NgModule({

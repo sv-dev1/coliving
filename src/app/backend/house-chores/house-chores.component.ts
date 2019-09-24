@@ -19,15 +19,15 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 })
 
 export class HouseChoresComponent implements OnInit {
-//@ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
+	//@ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
 
-  calendarVisible = true;
-  calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
-  calendarWeekends = true;
-  calendarEvents: EventInput[] = [
-    { title: '', start: "" }
+	calendarVisible = true;
+	calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
+	calendarWeekends = true;
+	calendarEvents: EventInput[] = [
+	{ title: '', start: "" }
 	];
-		isSuccess = false;
+	isSuccess = false;
 	isLoading = false;
 	display='none';
 	isWelcomeModal : boolean = false;
@@ -56,19 +56,20 @@ export class HouseChoresComponent implements OnInit {
 	fileData:any;
 	url :any  = []; 
 	allTeamArray: any = [];
-    allTeam: any = [];
+	allTeam: any = [];
 	allTaskArray: any = [];
 	allTask: any = [];
 	pending_length : any = [];
 	complete_length : any = [];
+	minimumDate = new Date();
 
 	constructor(
-			private formBuilder:FormBuilder,	
-			private router: Router,
-			private data_service : DataService,
-			public toastr: ToastrManager,
-			private http : HttpClient,
-			private datePipe: DatePipe
+		private formBuilder:FormBuilder,	
+		private router: Router,
+		private data_service : DataService,
+		public toastr: ToastrManager,
+		private http : HttpClient,
+		private datePipe: DatePipe
 		) { 
 		this.addTaskForm = this.formBuilder.group({
 			taskName: ['', Validators.required],
@@ -94,6 +95,11 @@ export class HouseChoresComponent implements OnInit {
 		this.getTeams();
 		this.getTask();
 		this.allTaskListing();
+		const html = document.getElementsByTagName('html')[0];
+		html.classList.add('popCustomHtml');
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.add('popCustomBody');
+		
 	}
 	@HostListener('document:keypress', ['$event'])
 
@@ -160,7 +166,7 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-  getTeams() {
+	getTeams() {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
@@ -175,20 +181,20 @@ export class HouseChoresComponent implements OnInit {
 		return this.addTaskForm.controls; 
 	}
 	onSelectFile(event) {
-		 this.fileData = event.target.files[0];
-		  this.preview();
-	    }
+		this.fileData = event.target.files[0];
+		this.preview();
+	}
 	preview() {
-	    var mimeType = this.fileData.type;
-	    if (mimeType.match(/image\/*/) == null) {
-	      return;
-	    }
-	    var reader = new FileReader();      
-	    reader.readAsDataURL(this.fileData); 
-	    reader.onload = (_event) => { 
-	      this.url = reader.result; 
-	    }
-     }
+		var mimeType = this.fileData.type;
+		if (mimeType.match(/image\/*/) == null) {
+			return;
+		}
+		var reader = new FileReader();      
+		reader.readAsDataURL(this.fileData); 
+		reader.onload = (_event) => { 
+			this.url = reader.result; 
+		}
+	}
 	addTask(form){
 		//console.log('ffsdf ',form);
 		this.submitted = true;  
@@ -217,19 +223,19 @@ export class HouseChoresComponent implements OnInit {
 			if(sessionStorage.getItem("auth_token")!=undefined){
 				token = sessionStorage.getItem("auth_token"); 
 			}
-			  const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-			  this.http.post(this.base_url+'createTask', formData, httpOptions).subscribe((response:any) => {
-			 //console.log('response response',response); 
-		      this.toastr.successToastr('Task added successfully.', 'Success!');
-	          this.addTaskForm.reset();
-	          this.isError = false;
-	          this.isSuccess = true;  	
+			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+			this.http.post(this.base_url+'createTask', formData, httpOptions).subscribe((response:any) => {
+				//console.log('response response',response); 
+				this.toastr.successToastr('Task added successfully.', 'Success!');
+				this.addTaskForm.reset();
+				this.isError = false;
+				this.isSuccess = true;  	
 			},error=>{ 
 				this.toastr.errorToastr(error.error, 'Error!');
 			});   
 		}
 	}
-  getTask() {
+	getTask() {
 		this.data_service.getTask().subscribe((response:any) =>{   
 			response.tasks.forEach(element => {
 				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
@@ -239,8 +245,8 @@ export class HouseChoresComponent implements OnInit {
 				})
 			});
 			//console.log(this.calendarEvents);
-		//		console.log(this.allTask);
-		//	 this.allTaskArray = this.allTaskArray.concat(response.Task);
+			//		console.log(this.allTask);
+			//	 this.allTaskArray = this.allTaskArray.concat(response.Task);
 			// this.allTask = this.allTaskArray;
 			// console.log('allTask',this.allTask);
 			this.isError = false;    
@@ -250,33 +256,36 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	handleDateClick(arg) {
-    if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-      this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
-        title: 'New Event',
-        start: arg.date,
-        allDay: arg.allDay
-      })
-    }
-  	}
-    allTaskListing() {
+		if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+			this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+				title: 'New Event',
+				start: arg.date,
+				allDay: arg.allDay
+			})
+		}
+	}
+	allTaskListing() {
 		this.data_service.getTask().subscribe((response:any) =>{   
-		this.allTaskArray = this.allTaskArray.concat(response.tasks);
-		this.allTask = this.allTaskArray;
-		//console.log('All Task',this.allTask);
-		this.allTask.forEach(obj =>{
-			if(obj.status == 'PENDING'){
-				this.pending_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
-			} else if(obj.status == 'COMPLETE'){
-				this.complete_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
-			}
-		})
-		this.isError = false;    
+			this.allTaskArray = this.allTaskArray.concat(response.tasks);
+			this.allTask = this.allTaskArray;
+			//console.log('All Task',this.allTask);
+			this.allTask.forEach(obj =>{
+				if(obj.status == 'PENDING'){
+					this.pending_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
+				} else if(obj.status == 'COMPLETE'){
+					this.complete_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
+				}
+			})
+			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
+	}
+    openChatWindow(string) {
+       console.log('string',string);
+
     }
- 
 } 
 
 
