@@ -24,32 +24,27 @@
 						<div class="tab-pane fade active show" id="active-booking">
 							<div class="custm_to-do mb-4">
 								<div class="to-do_heading"><h2>To-do</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">6</span>
+									<span aria-hidden="true">{{ pending_length ? pending_length.length : '0' }}
+									</span>
 								</button></div>
 								<div class="to_do_list">
-									<ul class="list-group">
-										<li class="list-group-item active-user">Clean drawers <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean outside of bin <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean toilet <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Fold towels <span class="badge badge-primary badge-pill"></span></li>
+									<ul class="list-group" *ngFor="let task of pending_length,index as i">
+										<li class="list-group-item active-user">{{task.task_name}}<span class="badge badge-primary badge-pill"></span>
+								    </li>
 									</ul>
 								</div>
 							</div>
 							<div class="custm_to-do mb-4">
 								<div class="to-do_heading"><h2>Complete</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">2</span>
+									<span aria-hidden="true">{{complete_length ? complete_length.length : '0' }}</span>
 								</button></div>
 								<div class="to_do_list">
-									<ul class="list-group">
-										<li class="list-group-item active-user">Clean drawers
-											<span class="badge badge-primary badge-pill"></span>
-										</li>
-										<li class="list-group-item active-user">Clean outside of bin
-											<span class="badge badge-primary badge-pill"></span>
-										</li>
+									<ul class="list-group" *ngFor="let task of complete_length,index as i">
+										<li class="list-group-item active-user">{{task.task_name}}
+										<span class="badge badge-primary badge-pill"></span>
+										</li>										
 									</ul>
+
 								</div>
 							</div>
 							<div class="custm_to-do mb-4">

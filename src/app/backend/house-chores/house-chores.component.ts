@@ -59,6 +59,8 @@ export class HouseChoresComponent implements OnInit {
     allTeam: any = [];
 	allTaskArray: any = [];
 	allTask: any = [];
+	pending_length : any = [];
+	complete_length : any = [];
 
 	constructor(
 			private formBuilder:FormBuilder,	
@@ -91,6 +93,7 @@ export class HouseChoresComponent implements OnInit {
 		this.getCategorie();
 		this.getTeams();
 		this.getTask();
+		this.allTaskListing();
 	}
 	@HostListener('document:keypress', ['$event'])
 
@@ -161,7 +164,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
-			console.log('allTeam',this.allTeam);
+			//console.log('allTeam',this.allTeam);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -187,7 +190,7 @@ export class HouseChoresComponent implements OnInit {
 	    }
      }
 	addTask(form){
-		console.log('ffsdf ',form);
+		//console.log('ffsdf ',form);
 		this.submitted = true;  
 		if (this.addTaskForm.invalid) {
 			return;
@@ -209,7 +212,7 @@ export class HouseChoresComponent implements OnInit {
 			formData.append('category_id', input_data.category);
 			formData.append('notes', input_data.notes);   
 
-			console.log('form data',formData);
+			//console.log('form data',formData);
 			let token; 
 			if(sessionStorage.getItem("auth_token")!=undefined){
 				token = sessionStorage.getItem("auth_token"); 
@@ -235,8 +238,8 @@ export class HouseChoresComponent implements OnInit {
 					start: element.due_date,
 				})
 			});
-			console.log(this.calendarEvents);
-//		console.log(this.allTask);
+			//console.log(this.calendarEvents);
+		//		console.log(this.allTask);
 		//	 this.allTaskArray = this.allTaskArray.concat(response.Task);
 			// this.allTask = this.allTaskArray;
 			// console.log('allTask',this.allTask);
@@ -246,7 +249,6 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-	
 	handleDateClick(arg) {
     if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
       this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
@@ -255,8 +257,26 @@ export class HouseChoresComponent implements OnInit {
         allDay: arg.allDay
       })
     }
-	}
-
+  	}
+    allTaskListing() {
+		this.data_service.getTask().subscribe((response:any) =>{   
+		this.allTaskArray = this.allTaskArray.concat(response.tasks);
+		this.allTask = this.allTaskArray;
+		//console.log('All Task',this.allTask);
+		this.allTask.forEach(obj =>{
+			if(obj.status == 'PENDING'){
+				this.pending_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
+			} else if(obj.status == 'COMPLETE'){
+				this.complete_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
+			}
+		})
+		this.isError = false;    
+		}, error =>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		})
+    }
+ 
 } 
 
 
