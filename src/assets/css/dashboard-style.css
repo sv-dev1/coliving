@@ -2326,12 +2326,13 @@ h5.size {
 }
 .admin-btn a, .remove-btn a {
     background: #09f;
-    color: #fff;
+    color: #fff !important;
     display: inline-block;
     padding: 4px 15px;
     border-radius: 100px;
     font-size: 12px;
     font-weight: 500;
+    cursor: pointer;
 }
 .admin-btn a{ background: #09f;}
 .remove-btn a { background: #ed502d;   

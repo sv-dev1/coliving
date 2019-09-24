@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   systemLogout($event){ 
+    console.log($event);
   	if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = false;
       sessionStorage.removeItem("auth_token");

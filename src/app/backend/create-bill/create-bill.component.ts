@@ -32,7 +32,9 @@ export class CreateBillComponent implements OnInit {
   base_url : string = "";
   teamName: any = [];
   assignUser: any=[];
-
+  teamEmpty:boolean=false;
+  userEmpty:boolean=false;
+  selectEmpty:boolean=false;
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -62,12 +64,20 @@ export class CreateBillComponent implements OnInit {
   }
   onSelectFile(event) {
 		 this.fileData = event.target.files[0].name;   
-	} 
+  } 
+ 
   createBill(){
-    console.log('fgfggg',this.createBillForm.value);
+    console.log(this.createBillForm.value);
+      if(this.createBillForm.value['team']=="")
+      {
+        this.teamEmpty=true;
+      }
+      if(this.createBillForm.value['assign_to']=="")
+      {
+        this.userEmpty=true;
+      }
       this.submitted = true;
         if (this.createBillForm.invalid) {
-          console.log("error");
           return;
         }
         else{
@@ -119,6 +129,7 @@ export class CreateBillComponent implements OnInit {
             tmp.push({ id: this.teamData[i].teamId, itemName: this.teamData[i].name });
           }
           this.dropdownList = tmp;
+          
           this.dropdownSettings = { 
              singleSelection: false, 
              text:"Select Team",
@@ -139,7 +150,9 @@ export class CreateBillComponent implements OnInit {
     let list: string[] = [];
     let tmp = [];
     this.selectedItems.forEach(element => {
-      list.push(element.id);
+      element.forEach(obj => {
+        list.push(obj.id);
+      });
     });
     let postArr = {'teamId': list};
     this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
@@ -174,6 +187,7 @@ export class CreateBillComponent implements OnInit {
   }
   onSelectAll(items: any){
     this.selectedItems.push(items);
+   // console.log(this.selectedItems);
     this.onTeamSelection();
   }
   onDeSelectAll(items: any){
