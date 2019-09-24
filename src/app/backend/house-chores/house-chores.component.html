@@ -24,32 +24,27 @@
 						<div class="tab-pane fade active show" id="active-booking">
 							<div class="custm_to-do mb-4">
 								<div class="to-do_heading"><h2>To-do</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">6</span>
+									<span aria-hidden="true">{{ pending_length ? pending_length.length : '0' }}
+									</span>
 								</button></div>
 								<div class="to_do_list">
-									<ul class="list-group">
-										<li class="list-group-item active-user">Clean drawers <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean outside of bin <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean pots and pans <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Clean toilet <span class="badge badge-primary badge-pill"></span></li>
-										<li class="list-group-item active-user">Fold towels <span class="badge badge-primary badge-pill"></span></li>
+									<ul class="list-group" *ngFor="let task of pending_length,index as i">
+										<li class="list-group-item active-user">{{task.task_name}}<span class="badge badge-primary badge-pill"></span>
+								    </li>
 									</ul>
 								</div>
 							</div>
 							<div class="custm_to-do mb-4">
 								<div class="to-do_heading"><h2>Complete</h2><button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">2</span>
+									<span aria-hidden="true">{{complete_length ? complete_length.length : '0' }}</span>
 								</button></div>
 								<div class="to_do_list">
-									<ul class="list-group">
-										<li class="list-group-item active-user">Clean drawers
-											<span class="badge badge-primary badge-pill"></span>
-										</li>
-										<li class="list-group-item active-user">Clean outside of bin
-											<span class="badge badge-primary badge-pill"></span>
-										</li>
+									<ul class="list-group" *ngFor="let task of complete_length,index as i">
+										<li class="list-group-item active-user">{{task.task_name}}
+										<span class="badge badge-primary badge-pill"></span>
+										</li>										
 									</ul>
+
 								</div>
 							</div>
 							<div class="custm_to-do mb-4">
@@ -137,7 +132,7 @@
 			<div class="modal-content">
 				<div class="modal-header-center p-3 " id="isWelcomeBlock" *ngIf="isWelcomeBlock">
 					<button type="button" class="close" (click)="close_welcome()">
-						<span aria-hidden="true">x</span>
+						<span aria-hidden="true" style="color:black;">x</span>
 					</button>
 					<div class="text-center">
 						<h5 class="text">WELCOME TO</h5>
@@ -404,7 +399,7 @@
 									<input type="text"
 									placeholder="Datepicker"
 									class="form-control"
-									bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" (change)="transform($event)">
+									bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
 								 <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
 								  <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
 							  </div>
