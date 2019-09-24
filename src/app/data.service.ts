@@ -39,12 +39,12 @@ export class DataService {
 	createBill(input_data){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
-    		token = sessionStorage.getItem("auth_token"); 
+			token = sessionStorage.getItem("auth_token"); 
 		} 
 		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
 		return this.http.post(this.base_url+'createBills',input_data,httpOptions)
 		.map((response:Response)=>{
-            console.log('createBills response',response);
+			console.log('createBills response',response);
 			return response;
 		})
 		.catch((error:Error) => {
@@ -52,42 +52,42 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 	getTeam(){ 
-	    let token; 
-	    if(sessionStorage.getItem("auth_token")!=undefined){
-	     token = sessionStorage.getItem("auth_token"); 
-	    }
-	    let headers = new HttpHeaders();
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		headers.set('Content-Type', null);
 		headers.set('Accept', "multipart/form-data");
-	    return this.http.get(this.base_url+'getTeam',{ headers: headers })
+		return this.http.get(this.base_url+'getTeam',{ headers: headers })
 		.map((response:Response)=>{
-         //   console.log('team response',response);
+			//   console.log('team response',response);
 			return response;
 		})
 		.catch((error:Error) => {
 			console.log('error',error);
 			return Observable.throw(error);});
-    }
+	}
 	getTeamUsers(postArr){ 
-			let token; 
-			if(sessionStorage.getItem("auth_token")!=undefined){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
-			}
-			let headers = new HttpHeaders();
-			headers = headers.set('Authorization', token);
-			headers.set('Content-Type', null);
-			headers.set('Accept', "multipart/form-data");
-			const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
-			return this.http.post(this.base_url+'team/users',postArr,httpOptions)
-			.map((response:Response)=>{
-				console.log('TeamUser response',response);
-				return response;
-			})
-			.catch((error:Error) => {
-				console.log('error',error);
-				return Observable.throw(error);
-			})
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
+		return this.http.post(this.base_url+'team/users',postArr,httpOptions)
+		.map((response:Response)=>{
+			console.log('TeamUser response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);
+		})
 	}
 	createTeam(formData){
 		let token; 
@@ -119,23 +119,23 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 	getUsers(){ 
-	    let token; 
-	    if(sessionStorage.getItem("auth_token")!=undefined){
-	     token = sessionStorage.getItem("auth_token"); 
-	    }
-	    let headers = new HttpHeaders();
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		headers.set('Content-Type', null);
 		headers.set('Accept', "multipart/form-data");
-	    return this.http.get(this.base_url+'users',{ headers: headers })
+		return this.http.get(this.base_url+'users',{ headers: headers })
 		.map((response:Response)=>{
-         //   console.log('team response',response);
+			//   console.log('team response',response);
 			return response;
 		})
 		.catch((error:Error) => {
 			console.log('error',error);
 			return Observable.throw(error);});
-    }
+	}
 	getCategories(){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -167,4 +167,5 @@ export class DataService {
 	
 	}
 
+	
 }

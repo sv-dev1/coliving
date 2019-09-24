@@ -636,6 +636,7 @@ ul.custom-tabs li.nav-item a.active{
     font-weight: normal;
 	outline:none;
 	font-size: 14px;
+    color:black;
 }
 .custm_add_modal .add-task-image img {
     max-width: 100%;

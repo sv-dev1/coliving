@@ -26,6 +26,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FullCalendarModule } from '@fullcalendar/angular'; // for FullCalendar!
 import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
+import { SettingsComponent } from './backend/settings/settings.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     HouseChoresComponent,
     SplitBillComponent,
     MyAccountComponent,
+    RefferalCodeComponent,
+    SettingsComponent,
     
   ],
   imports: [

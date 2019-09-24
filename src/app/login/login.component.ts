@@ -42,21 +42,21 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   login(form) { 
-    console.log('test');
+    //console.log('test');
     this.submitted = true;
     if (this.loginForm.invalid) {
       console.log('dasd');
       return;
     } else {
-      console.log('Invalid'); 
+      //console.log('Invalid'); 
       const input_data = { 
         "username" : form.username,
         "password" : form.password, 		
       }
       //console.log(input_data);
       this.data_service.login(input_data).subscribe((response:any) =>{
-        console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
-        console.log('token after login', response.token);
+       // console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
+      //  console.log('token after login', response.token);
         this.res = JSON.stringify(response, undefined, 2); 
         sessionStorage.setItem("auth_token", response.token);
         this.toastr.successToastr('You are logged in successfully!', 'Hello,');
@@ -64,11 +64,11 @@ export class LoginComponent implements OnInit {
         this.isError = false;
         
       }, error =>{ 
-        console.log('errrror');
+        //console.log('errrror');
         this.isError = true; 
         this.errorsArr = error.error.username;
         this.toastr.errorToastr('Invalid Credentials','Error');
-        console.log(JSON.stringify(this.errorsArr, undefined, 2))
+        //console.log(JSON.stringify(this.errorsArr, undefined, 2))
       })
     }
   } 
