@@ -70,6 +70,7 @@ import { LoaderInterceptor } from './helpers/loader.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
       DatePipe,ChatService
     ],
   bootstrap: [AppComponent]
