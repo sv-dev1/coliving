@@ -44,99 +44,98 @@
 									<form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
-                                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
-                                                    </div>
+											<div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
+											</div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-											 
-                                                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
-                                                    </div>
+
+											<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
+											</div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="User Name" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
 											
-                                                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.userName.errors.required">User Name is required.</span>
-                                                    </div>
+											<div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.userName.errors.required">User Name is required.</span>
+											</div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="email" class="form-control" placeholder="Email Address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-											  
-                                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-														<span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
-														<span class="for-sub-name" *ngIf="f.email.errors.email">Email must be a valid</span>
-													</div>
-                                                    <div *ngIf="isError == true" >
-                                                        <span class="for-sub-name">{{errorsArr?.email}}</span>
-                                                    </div>
-									
+
+											<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+												<span class="for-sub-name" *ngIf="f.email.errors.email">Email must be a valid</span>
+											</div>
+											<div *ngIf="isError == true" >
+												<span class="for-sub-name">{{errorsArr?.email}}</span>
+											</div>
+
 										</div>
 										<div class="form-group form-parts">
 											<input type="password"  placeholder="Password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
 											
-                                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.password.errors.required"> Password is required.</span>
-                                                    </div> 
-                                                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.password.errors.minlength">Your password must be at least 8 characters.</span>
-                                                    </div>
-										    </div>
+											<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.password.errors.required"> Password is required.</span>
+											</div> 
+											<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.password.errors.minlength">Your password must be at least 8 characters.</span>
+											</div>
+										</div>
 										
 										<div class="form-group form-parts">
 											<input type="password"  placeholder="Confirm Password" class="form-control" formControlName="confPassword" [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }">
-											   
-                                                    <div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
-                                                    </div> 
 
-                                                    <div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.confPassword.errors.minlength">Your password must be at least 8 characters.</span>
-                                                    </div> 
-                                                      <div *ngIf="isError == true" >
-                                                        <span class="for-sub-name">{{errorsArr?.password2}}</span>
-                                                    </div>
+											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
+											</div> 
+
+											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.confPassword.errors.minlength">Your password must be at least 8 characters.</span>
+											</div> 
+											<div *ngIf="isError == true" >
+												<span class="for-sub-name">{{errorsArr?.password2}}</span>
+											</div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text"  placeholder="Phone Number" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }">
 											
-                                                    <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.required"> Phone Number is required.</span>
-                                                    </div> 
-                                                      <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.minlength">Phone Number must be at least 8 characters.</span>
-                                                    </div>
-                                                     <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-                                                        <span class="for-sub-name" *ngIf="f.phoneNumber.errors.maxlength">Phone Number must be at least 15 characters.</span>
-                                                    </div>
+											<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.phoneNumber.errors.required"> Phone Number is required.</span>
+											</div> 
+											<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.phoneNumber.errors.minlength">Phone Number must be at least 8 characters.</span>
+											</div>
+											<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.phoneNumber.errors.maxlength">Phone Number must be at least 15 characters.</span>
+											</div>
 										</div>
 										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="Referral Code (optional)" formControlName="referralCode">
-											
 										</div>
 										<div class="form-group">
 											<div class="form-check">
 												<label class="form-check-label agree">
-													<input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required> I agree to the <a href="">privacy policy</a> and <a href="">terms of service.</a>
+													<input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> I agree to the <a href="">privacy policy</a> and <a href="">terms of service.</a>
 													<div *ngIf="submitted && f.agree.errors" class="invalid-feedback">
-                                                    <div *ngIf="submitted && f.agree.errors.required || f.agree == undefined" class="for-sub-name"><span class="for-sub-name"> This check is required.</span></div>
-                                                    </div>
-								                   <div *ngIf="fagree" style=" text-align: left;color: red;"> <span class="for-sub-name"> This field is required.</span>
-                                                 </div>
-												</label>
-												 
-											</div>
+														<span class="for-sub-name" id="cust" *ngIf="submitted && f.agree.errors.required || f.agree == undefined" class="for-sub-name"> This check is required.</span>
+													</div>
+													
+
+											</label>
+
 										</div>
-										<button type="submit" class="btn btn-orange">Sign Up</button>
-									</form>
-								</div>
-								
+									</div>
+									<button type="submit" class="btn btn-orange">Sign Up</button>
+								</form>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>

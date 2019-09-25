@@ -11,7 +11,6 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
-import { ChatService } from '../../chat.service';
 
 @Component({
 	selector: 'app-house-chores',
@@ -66,8 +65,7 @@ export class HouseChoresComponent implements OnInit {
 	message: string;
 	messages: any = [];
 	teamName:string;
-	isOpen:boolean=false;
-
+    today:any;
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -75,7 +73,7 @@ export class HouseChoresComponent implements OnInit {
 		public toastr: ToastrManager,
 		private http : HttpClient,
 		private datePipe: DatePipe,
-		private chatService: ChatService
+		
 		) { 
 		this.addTaskForm = this.formBuilder.group({
 			taskName: ['', Validators.required],
@@ -84,9 +82,9 @@ export class HouseChoresComponent implements OnInit {
 			category: ['', Validators.required],
 			image: ['', Validators.required],
 			notes: ['', Validators.required],
-
 		});
 		this.base_url = environment.base_url;
+		this.today = new Date();
 		
 	}
 	ngOnInit() {
@@ -106,11 +104,8 @@ export class HouseChoresComponent implements OnInit {
 		html.classList.add('popCustomHtml');
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.add('popCustomBody');
-		this.chatService
-		.getMessages()
-		.subscribe((message: string) => {
-			this.messages.push(message);
-		});
+		
+		
 		
 	}
 	@HostListener('document:keypress', ['$event'])
@@ -239,9 +234,12 @@ export class HouseChoresComponent implements OnInit {
 			this.http.post(this.base_url+'createTask', formData, httpOptions).subscribe((response:any) => {
 				//console.log('response response',response); 
 				this.toastr.successToastr('Task added successfully.', 'Success!');
-				this.addTaskForm.reset();
+				
 				this.isError = false;
-				this.isSuccess = true;  	
+				this.isSuccess = true; 
+				this.submitted = false;   	
+				this.addTaskForm.reset();
+				this.url ='';
 			},error=>{ 
 				this.toastr.errorToastr(error.error, 'Error!');
 			});   
@@ -294,21 +292,7 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-	openChatWindow(string) {
-		console.log('string',string);
 
-	}
-	sendMessage() {
-		this.chatService.sendMessage(this.message);
-		this.message = '';
-	}
-	openForm(string) {
-       this.isOpen=true;
-       this.teamName =string;
-	}
-	closeForm() {
-	   this.display='none';
-	}
 } 
 
 

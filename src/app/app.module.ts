@@ -31,6 +31,7 @@ import { SettingsComponent } from './backend/settings/settings.component';
 import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { LoaderInterceptor } from './helpers/loader.interceptor';
     BsDatepickerModule.forRoot(),
     FullCalendarModule,
     NgxUiLoaderModule,
+    NgbModule
 
   ],
   providers: [

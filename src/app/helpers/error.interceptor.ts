@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                    // console.log(strung.substring(1,strung.length-1));
 
                     if(err.status == 401){
-                        this.toastr.errorToastr('Error 401:Session Expired');
+                        this.toastr.errorToastr('Session Expired');
                         this.router.navigate(['/login']);
                         this.toastr.errorToastr('You must login first!');
                     }
@@ -46,9 +46,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if(err.status == 503){
                         this.toastr.errorToastr('Service Unavailable');
                     }
-                    else{
-                        this.toastr.errorToastr(strung.substring(1,strung.length-1));
-                    }   
+                      
             }
                 return of(err);
             }));

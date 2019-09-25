@@ -18,6 +18,7 @@
 						</li>
 						<li class="nav-item1"><div class="add-btn-top pl-2 mt-1"><button type="button" class="close" data-toggle="modal" data-target="#exampleModal"><span aria-hidden="true">+</span></button> </div>
 						</li> 
+	
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -108,7 +109,7 @@
 									</div>
 									<div class="custom_member" *ngFor="let team of allTeam,index as i">
 									<ul>
-										<li (click)="openForm(team?.name)">
+										<li (click)="openChatWindow(team?.name)">
 											<div class="inner_member">
 												<div class="member-img">
 													<span>{{i+1}}.</span>
@@ -401,7 +402,7 @@
 										<input type="text"
 										placeholder="Datepicker"
 										class="form-control"
-										bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
+										bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
 										<div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
 											<span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
 										</div>
@@ -447,7 +448,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-orange">Add Task</button>
+							<button type="submit" class="btn btn-orange" >Add Task</button>
 						</div>
 
 					</form>
@@ -456,15 +457,5 @@
 		</div>
 	</div>
 
-<div class="chat-popup" id="myForm">
-  <form action="/action_page.php" class="form-container" [style.display]="isOpen ? 'block' : 'none'">
-    <h1>Chat {{teamName}}</h1>
 
-    <label for="msg"><b>Message</b></label>
-    <textarea placeholder="Type message.." name="msg" required></textarea>
-
-    <button type="submit" class="btn">Send</button>
-    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-  </form>
-</div>
 	
