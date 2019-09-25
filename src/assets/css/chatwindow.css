@@ -1,102 +1,68 @@
-/*******************************
-* MODAL AS LEFT/RIGHT SIDEBAR
-* Add "left" or "right" in modal parent div, after class="modal".
-* Get free snippets on bootpen.com
-*******************************/
-	.modal.left .modal-dialog,
-	.modal.right .modal-dialog {
-		position: fixed;
-		margin: auto;
-		width: 320px;
-		height: 100%;
-		-webkit-transform: translate3d(0%, 0, 0);
-		    -ms-transform: translate3d(0%, 0, 0);
-		     -o-transform: translate3d(0%, 0, 0);
-		        transform: translate3d(0%, 0, 0);
-	}
-	
-	.modal.left .modal-content,
-	.modal.right .modal-content {
-		height: 100%;
-		overflow-y: auto;
-	}
-	
-	.modal.left .modal-body,
-	.modal.right .modal-body {
-		padding: 15px 15px 80px;
-	}
-
-/*Left*/
-	.modal.left.fade .modal-dialog{
-		left: -320px;
-		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-		        transition: opacity 0.3s linear, left 0.3s ease-out;
-	}
-	
-	.modal.left.fade.in .modal-dialog{
-		left: 0;
-	}
-        
-/*Right*/
-	.modal.right.fade .modal-dialog {
-		right: -320px;
-		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-		        transition: opacity 0.3s linear, right 0.3s ease-out;
-	}
-	
-	.modal.right.fade.in .modal-dialog {
-		right: 0;
-	}
-
-/* ----- MODAL STYLE ----- */
-	.modal-content {
-		border-radius: 0;
-		border: none;
-	}
-
-	.modal-header {
-		border-bottom-color: #EEEEEE;
-		background-color: #FAFAFA;
-	}
-
-/* ----- v CAN BE DELETED v ----- */
-body {
-	background-color: #78909C;
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
 }
 
-.demo {
-	padding-top: 60px;
-	padding-bottom: 110px;
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
 }
 
-.btn-demo {
-	margin: 15px;
-	padding: 10px 15px;
-	border-radius: 0;
-	font-size: 16px;
-	background-color: #FFFFFF;
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
 }
 
-.btn-demo:focus {
-	outline: 0;
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
 }
 
-.demo-footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	padding: 15px;
-	background-color: #212121;
-	text-align: center;
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
 }
 
-.demo-footer > a {
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 16px;
-	color: #fff;
+/* Set a style for the submit/send button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
 }

@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
       //console.log(input_data);
       this.data_service.login(input_data).subscribe((response:any) =>{
        // console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
-      //  console.log('token after login', response.token);
+        //console.log('token after login', response);
         this.res = JSON.stringify(response, undefined, 2); 
         sessionStorage.setItem("auth_token", response.token);
         this.toastr.successToastr('You are logged in successfully!', 'Hello,');
@@ -64,9 +64,9 @@ export class LoginComponent implements OnInit {
         this.isError = false;
         
       }, error =>{ 
-        //console.log('errrror');
+        console.log('errrror',error);
         this.isError = true; 
-        this.errorsArr = error.error.username;
+        //this.errorsArr = error.error.username;
         this.toastr.errorToastr('Invalid Credentials','Error');
         //console.log(JSON.stringify(this.errorsArr, undefined, 2))
       })

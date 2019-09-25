@@ -1321,7 +1321,14 @@ ul.for-login-tabs li a:hover{
     font-size: 80%;
     color: #dc3545;
  }
-  
+ .form-content .invalid-feedback {
+    text-align: left;
+    font-size: 12px;
+}
+#scrollUsers {
+    overflow-y: auto;
+    height: 500px;
+}
 
 
 

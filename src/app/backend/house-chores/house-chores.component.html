@@ -17,8 +17,8 @@
 							<a class="nav-link" data-toggle="tab" href="#completed-booking">Team</a>
 						</li>
 						<li class="nav-item1"><div class="add-btn-top pl-2 mt-1"><button type="button" class="close" data-toggle="modal" data-target="#exampleModal"><span aria-hidden="true">+</span></button> </div>
-						</li>
-						
+						</li> 
+	
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
@@ -402,7 +402,7 @@
 										<input type="text"
 										placeholder="Datepicker"
 										class="form-control"
-										bsDatepicker formControlName="dueDate" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
+										bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
 										<div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
 											<span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
 										</div>
@@ -448,7 +448,7 @@
 									</div>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-orange">Add Task</button>
+							<button type="submit" class="btn btn-orange" >Add Task</button>
 						</div>
 
 					</form>

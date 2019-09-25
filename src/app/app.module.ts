@@ -28,8 +28,11 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
 import { SettingsComponent } from './backend/settings/settings.component';
+import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -64,12 +67,13 @@ import { LoaderInterceptor } from './helpers/loader.interceptor';
     BsDatepickerModule.forRoot(),
     FullCalendarModule,
     NgxUiLoaderModule,
+    NgbModule
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-      DatePipe
+      DatePipe,ChatService
     ],
   bootstrap: [AppComponent]
 })
