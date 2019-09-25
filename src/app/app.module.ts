@@ -28,6 +28,8 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
 import { SettingsComponent } from './backend/settings/settings.component';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
+import { LoaderInterceptor } from './helpers/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -60,10 +62,13 @@ import { SettingsComponent } from './backend/settings/settings.component';
     ToastrModule.forRoot(),
     AngularMultiSelectModule,
     BsDatepickerModule.forRoot(),
-    FullCalendarModule
+    FullCalendarModule,
+    NgxUiLoaderModule,
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
       DatePipe
     ],
   bootstrap: [AppComponent]
