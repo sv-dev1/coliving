@@ -28,6 +28,8 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
 import { SettingsComponent } from './backend/settings/settings.component';
+import { ChatService } from './chat.service';
+
 
 @NgModule({
   declarations: [
@@ -64,7 +66,7 @@ import { SettingsComponent } from './backend/settings/settings.component';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-      DatePipe
+      DatePipe,ChatService
     ],
   bootstrap: [AppComponent]
 })

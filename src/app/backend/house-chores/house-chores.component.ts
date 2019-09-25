@@ -11,6 +11,7 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+import { ChatService } from '../../chat.service';
 
 @Component({
 	selector: 'app-house-chores',
@@ -62,6 +63,10 @@ export class HouseChoresComponent implements OnInit {
 	pending_length : any = [];
 	complete_length : any = [];
 	minimumDate = new Date();
+	message: string;
+	messages: any = [];
+	teamName:string;
+	isOpen:boolean=false;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -69,7 +74,8 @@ export class HouseChoresComponent implements OnInit {
 		private data_service : DataService,
 		public toastr: ToastrManager,
 		private http : HttpClient,
-		private datePipe: DatePipe
+		private datePipe: DatePipe,
+		private chatService: ChatService
 		) { 
 		this.addTaskForm = this.formBuilder.group({
 			taskName: ['', Validators.required],
@@ -81,6 +87,7 @@ export class HouseChoresComponent implements OnInit {
 
 		});
 		this.base_url = environment.base_url;
+		
 	}
 	ngOnInit() {
 		this.isWelcomeModal = true;  
@@ -99,6 +106,11 @@ export class HouseChoresComponent implements OnInit {
 		html.classList.add('popCustomHtml');
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.add('popCustomBody');
+		this.chatService
+		.getMessages()
+		.subscribe((message: string) => {
+			this.messages.push(message);
+		});
 		
 	}
 	@HostListener('document:keypress', ['$event'])
@@ -282,10 +294,21 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-    openChatWindow(string) {
-       console.log('string',string);
+	openChatWindow(string) {
+		console.log('string',string);
 
-    }
+	}
+	sendMessage() {
+		this.chatService.sendMessage(this.message);
+		this.message = '';
+	}
+	openForm(string) {
+       this.isOpen=true;
+       this.teamName =string;
+	}
+	closeForm() {
+	   this.display='none';
+	}
 } 
 
 
