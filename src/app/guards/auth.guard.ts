@@ -3,6 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Navi
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
+import { ToastrManager } from 'ng6-toastr-notifications';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +13,7 @@ export class AuthGuard implements CanActivate {
       private router: Router,
       private route :ActivatedRoute,
       private data_services: DataService,
+      public toastr: ToastrManager,
     ){
      
   }
@@ -19,8 +22,13 @@ export class AuthGuard implements CanActivate {
     if(sessionStorage.getItem("auth_token") != undefined){
       return true;
     }else{
+<<<<<<< HEAD
       this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
         return false;
+=======
+     // this.toastr.errorToastr('You must be login first');
+      this.router.navigate(['/login']);
+>>>>>>> 20de7a4096d368a08b9381f665e3dfbabb74591c
     }   
   }
 }
