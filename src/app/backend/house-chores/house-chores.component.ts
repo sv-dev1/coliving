@@ -155,7 +155,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getUsers().subscribe((response:any) =>{   
 			this.allUsersArray = this.allUsersArray.concat(response.users);
 			this.allUsers = this.allUsersArray;
-			//console.log('allUsers',this.allUsers);
+			console.log('allUsers',this.allUsers);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
