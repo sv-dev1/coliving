@@ -56,10 +56,10 @@
 											</div>
 										</div>
 										<div class="form-group form-parts">
-											<input type="text" class="form-control" placeholder="User Name" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+											<input type="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
 											
 											<div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-												<span class="for-sub-name" *ngIf="f.userName.errors.required">User Name is required.</span>
+												<span class="for-sub-name" *ngIf="f.userName.errors.required">Username is required.</span>
 											</div>
 										</div>
 										<div class="form-group form-parts">
