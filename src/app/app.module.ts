@@ -32,10 +32,7 @@ import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
 import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthService} from './auth.service';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
@@ -74,25 +71,17 @@ const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: 
     BsDatepickerModule.forRoot(),
     FullCalendarModule,
     NgxUiLoaderModule,
-<<<<<<< HEAD
     NgbModule,
-    SocketIoModule.forRoot(config)
-=======
-    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule
+    SocketIoModule.forRoot(config),
     NgbModule
->>>>>>> 645d8b7de49bf5b0313ee7523444fc3d15e4b70e
+
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-<<<<<<< HEAD
       DatePipe,ChatService,
-=======
-     AuthService,  DatePipe,ChatService
->>>>>>> 645d8b7de49bf5b0313ee7523444fc3d15e4b70e
+
     ],
   bootstrap: [AppComponent]
 })

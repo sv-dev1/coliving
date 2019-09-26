@@ -84,7 +84,7 @@ export class HouseChoresComponent implements OnInit {
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
-
+    socket:any=[];
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
