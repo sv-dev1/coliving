@@ -27,11 +27,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if(err instanceof HttpErrorResponse) {
                     console.log(err);
                     var strung = JSON.stringify(err['error']);
-                   // console.log(strung.substring(1,strung.length-1));
                     if(err.status == 401){
-                        this.toastr.errorToastr('Session Expired');
-                        this.router.navigate(['/login']);
-                        this.toastr.errorToastr('You must login first!');
+                        // sessionStorage.removeItem('auth_token');
+                        // this.toastr.errorToastr('Session Expired');
+                        // this.router.navigate(['/login']);
+                        this.toastr.errorToastr('Session Expired,Please Login again');
                     }
                     if(err.status == 404){
                         this.toastr.errorToastr('Username does not exist');
@@ -45,9 +45,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if(err.status == 503){
                         this.toastr.errorToastr('Service Unavailable');
                     }
-                    if(err.status == 0){
-                        this.toastr.errorToastr('Service Unavailable at moment.Please try after some time.');
+                     if(err.status == 0){
+                        this.toastr.errorToastr('Unknown Error');
                     }
+                    
                       
             }
                 return of(err);

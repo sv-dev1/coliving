@@ -3,6 +3,9 @@ import { RouterModule, Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { AuthService} from '../auth.service';
+import { SocialUser } from 'angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +23,13 @@ export class LoginComponent implements OnInit {
   errorsArr:any = []; 
   returnUrl: string;
   res:any = [];
-  
+  user: SocialUser;
+
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
     private data_service : DataService,
+    private authService: AuthService,
     public toastr: ToastrManager) 
   { 
     this.loginForm = this.formBuilder.group({
@@ -73,5 +78,23 @@ export class LoginComponent implements OnInit {
     }
   } 
 
+  signInWithFb() {
+    this.authService.signInWithFacebook()
+    .then((res) => { 
+        this.router.navigate(['dashboard'])
+      })
+    .catch((err) => console.log(err)); 
+   }
 
+  signInWithTwitter(){
+    console.log("TwitterClicked");
+   // this.authService.signIn
+  }
+  signInWithGoogle(){
+    this.authService.signInWithGoogle()
+    .then((res) => { 
+        this.router.navigate(['dashboard'])
+      })
+    .catch((err) => console.log(err)); 
+   }
 }
