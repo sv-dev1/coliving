@@ -28,6 +28,7 @@ import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
 import { SettingsComponent } from './backend/settings/settings.component';
+import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
 import { environment } from '../environments/environment';
@@ -35,6 +36,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService} from './auth.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -73,11 +75,13 @@ import { AuthService} from './auth.service';
     AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
     AngularFireDatabaseModule,
     AngularFireAuthModule
+    NgbModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-    AuthService, DatePipe
+     AuthService,  DatePipe,ChatService
     ],
   bootstrap: [AppComponent]
 })
