@@ -1329,7 +1329,9 @@ ul.for-login-tabs li a:hover{
     overflow-y: auto;
     height: 500px;
 }
-
+.team-member {
+    width: 100% !important;
+}
 
 
 

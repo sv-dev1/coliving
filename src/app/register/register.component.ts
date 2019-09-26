@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  Router, } from '@angular/router';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,12 +18,14 @@ export class RegisterComponent implements OnInit {
   isError : boolean = false;
   isSuccess : boolean = false;
   errorsArr:any = []; 
-  
+  private rc: string;
+
   constructor(	
         private formBuilder:FormBuilder,	
         private router: Router,
         private data_service : DataService,
-        public toastr: ToastrManager
+        public toastr: ToastrManager,
+        private route: ActivatedRoute
     ) { 
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -35,9 +38,15 @@ export class RegisterComponent implements OnInit {
       agree: ['false', Validators.requiredTrue],
       referralCode: ['']
     });
-  }
-
+    
+  } 
   ngOnInit() {
+   const referralCode: string = this.route.snapshot.queryParamMap.get('rc');
+      if(referralCode) {
+        this.registerForm.patchValue({
+            referralCode : referralCode,
+        });  
+      }
   }
   get f() {  
     return this.registerForm.controls; 

@@ -42,7 +42,7 @@ export class RefferalCodeComponent implements OnInit {
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
 			this.referralCodeForm.patchValue({
-				referralCode : location.origin+'/'+'sign-up/'+this.userDataArr.ref_code,
+				referralCode : location.origin+'/'+'sign-up?rc='+this.userDataArr.ref_code,
 			});	
 		},error=>{ 
 			console.log("ERROR");

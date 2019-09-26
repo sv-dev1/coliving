@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   base_url : "https://tx.kindlebit.com/" ,
   image_base_url : "http://apitx.kindlebit.com/uploads/",
+  socket_url : "https://chatapi.kindlebit.com",
   firebase: {
     apiKey: "AIzaSyB1tg0KNJNUei7dK-LKv7M_k81OhQffa5A",
     authDomain: "coliving-a1416.firebaseapp.com",

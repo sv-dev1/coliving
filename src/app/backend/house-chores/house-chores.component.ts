@@ -11,6 +11,8 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
+//import { Socket } from 'ngx-socket-io';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-house-chores',
@@ -45,6 +47,7 @@ export class HouseChoresComponent implements OnInit {
 	isNextStep2:boolean= false;
 	todayDate:boolean=false;
 	addTaskForm: FormGroup;
+	
 	submitted = false;
 	allUsersArray: any = [];
 	allUsers:any = [];
@@ -62,10 +65,26 @@ export class HouseChoresComponent implements OnInit {
 	pending_length : any = [];
 	complete_length : any = [];
 	minimumDate = new Date();
-	message: string;
+	message: string = "";
 	messages: any = [];
 	teamName:string;
-    today:any;
+	today:any;
+	team_id : string = "";
+	user_id : string = "";
+	logged_in_username : string = "";
+
+
+	userDataArr:any=[];
+	status: boolean = false;
+	indexTab:any ="";
+	firstTeam:any=[];
+	data:any=[];
+	data1:any=[];
+	indexCheck = 0;
+	by_default_team : any = [];
+	gruopMessages : any = [];
+	socket_url:string = '';
+    socket:any=[];
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -73,6 +92,7 @@ export class HouseChoresComponent implements OnInit {
 		public toastr: ToastrManager,
 		private http : HttpClient,
 		private datePipe: DatePipe,
+		//private socket: Socket
 		
 		) { 
 		this.addTaskForm = this.formBuilder.group({
@@ -83,8 +103,11 @@ export class HouseChoresComponent implements OnInit {
 			image: ['', Validators.required],
 			notes: ['', Validators.required],
 		});
+
 		this.base_url = environment.base_url;
 		this.today = new Date();
+		//this.socket_url = environment.socket_url;
+        //this.socket.connect();
 		
 	}
 	ngOnInit() {
@@ -100,13 +123,13 @@ export class HouseChoresComponent implements OnInit {
 		this.getTeams();
 		this.getTask();
 		this.allTaskListing();
+		this.getMessages();
+		this.loadMessages();
+		this.loadMyMessages();  
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.add('popCustomHtml');
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.add('popCustomBody');
-		
-		
-		
 	}
 	@HostListener('document:keypress', ['$event'])
 
@@ -134,7 +157,7 @@ export class HouseChoresComponent implements OnInit {
 		this.islockbgblue = false;
 	}
 	onNextStepClick(id) {
-		console.log('id', id);
+		//console.log('id', id);
 		if(id == '1'){
 			this.isNextStep =false;
 			this.isNextStep1 = true;
@@ -155,7 +178,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getUsers().subscribe((response:any) =>{   
 			this.allUsersArray = this.allUsersArray.concat(response.users);
 			this.allUsers = this.allUsersArray;
-			console.log('allUsers',this.allUsers);
+			//console.log('allUsers',this.allUsers);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -177,7 +200,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
-			//console.log('allTeam',this.allTeam);
+			this.firstTeam = this.allTeam[0];
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -292,6 +315,66 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
+	
+	openChat(team,index){
+		this.team_id = team.teamId;
+		this.user_id = team.userId;
+		this.logged_in_username = sessionStorage.getItem("user_name");
+		this.status = !this.status;
+		this.indexCheck = index;			
+	}
+
+	sendMessgae() {
+		if(this.user_id ==''){
+			this.by_default_team = this.firstTeam;
+			this.data = {
+				"userId": this.by_default_team.userId,
+				"teamId": this.by_default_team.teamId,
+				"username": sessionStorage.getItem("user_name"),
+				"msg": this.message
+			}
+		} else {
+			this.data = {
+				"userId": this.user_id,
+				"teamId": this.team_id,
+				"username":this.logged_in_username,
+				"msg": this.message
+			}
+		}
+		console.log('data',this.data);
+		this.socket.emit('newMessage', this.data);
+		this.message = '';
+	}
+
+	getMessages() {
+		this.socket.on('getMessage', (data) => {
+			console.log('getMessage',data);
+			this.messages.push(data);   
+		});  
+	} 
+
+	loadMyMessages() {
+		this.socket.on('messages', (data) => {
+			this.gruopMessages = data.messages; 
+		});
+
+	}
+	loadMessages() {
+		if(this.user_id ==''){
+			this.by_default_team = this.firstTeam;
+			this.data = {
+				"userId": this.by_default_team.userId,
+				"teamId": this.by_default_team.teamId,
+			}
+		} else {
+			this.data = {
+				"userId": this.user_id,
+				"teamId": this.team_id,
+			}
+		}
+		this.socket.emit('load-messages', this.data); 
+	}
+
 
 } 
 
