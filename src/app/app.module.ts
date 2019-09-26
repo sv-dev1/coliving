@@ -32,7 +32,9 @@ import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: {} };
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MyAccountComponent,
     RefferalCodeComponent,
     SettingsComponent,
-    
+   
   ],
   imports: [
     BrowserModule,
@@ -67,13 +69,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BsDatepickerModule.forRoot(),
     FullCalendarModule,
     NgxUiLoaderModule,
-    NgbModule
+    NgbModule,
+    SocketIoModule.forRoot(config)
 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-      DatePipe,ChatService
+      DatePipe,ChatService,
     ],
   bootstrap: [AppComponent]
 })

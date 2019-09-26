@@ -56,13 +56,14 @@ export class LoginComponent implements OnInit {
       //console.log(input_data);
       this.data_service.login(input_data).subscribe((response:any) =>{
        // console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
-        //console.log('token after login', response);
+        //console.log('token after login', response.username);
         this.res = JSON.stringify(response, undefined, 2); 
         sessionStorage.setItem("auth_token", response.token);
-        this.toastr.successToastr('You are logged in successfully!', 'Hello,');
+        sessionStorage.setItem("user_name", response.username);
+       
+        this.toastr.successToastr('You are logged in successfully!');
         this.router.navigate(['/dashboard']);  
         this.isError = false;
-        
       }, error =>{ 
         //console.log('errrror',error);
         this.isError = true; 
