@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         this.isError = false;
         
       }, error =>{ 
-        console.log('errrror',error);
+        //console.log('errrror',error);
         this.isError = true; 
         //this.errorsArr = error.error.username;
         this.toastr.errorToastr('Invalid Credentials','Error');

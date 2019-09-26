@@ -44,7 +44,7 @@
 								<div class="form-content">
 									<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
 										<div class="form-group form-parts">
-											<input type="text" class="form-control" placeholder="User Name" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" formControlName="username" required>
+											<input type="text" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" formControlName="username" required>
 											<div *ngIf="submitted && f.username.errors" class="invalid-feedback">
 											<div *ngIf="f.username.errors.required">
 													Username is required.
@@ -80,7 +80,7 @@
 												</div>
 											</div>
 										</div>
-										<button type="submit" class="btn btn-orange">Submit</button>
+										<button type="submit" class="btn btn-orange">Sign In</button>
 									</form>
 								</div>
 								
