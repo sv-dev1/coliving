@@ -24,7 +24,9 @@ export class HeaderComponent implements OnInit {
   image_url: string = "";
   image_base_url:any;
   base_url:any;
+  images: string = "";
 
+response:any;
   constructor(
         private router: Router,
         public toastr: ToastrManager,
@@ -43,7 +45,7 @@ export class HeaderComponent implements OnInit {
   }
 
   systemLogout($event){ 
-    console.log($event);
+   // console.log($event);
   	if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = false;
       sessionStorage.removeItem("auth_token");
@@ -60,10 +62,10 @@ export class HeaderComponent implements OnInit {
     }
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', token);
-    // console.log('token',token);
      this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
       this.userDataArr = response.users[0]; 
       this.image_url = this.image_base_url+''+this.userDataArr.userId;
+      
     },error=>{ 
       console.log("ERROR");
       console.log(error.error);

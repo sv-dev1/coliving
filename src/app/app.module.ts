@@ -30,6 +30,12 @@ import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.com
 import { SettingsComponent } from './backend/settings/settings.component';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService} from './auth.service';
+
 
 @NgModule({
   declarations: [
@@ -64,12 +70,14 @@ import { LoaderInterceptor } from './helpers/loader.interceptor';
     BsDatepickerModule.forRoot(),
     FullCalendarModule,
     NgxUiLoaderModule,
-
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-      DatePipe
+    AuthService, DatePipe
     ],
   bootstrap: [AppComponent]
 })

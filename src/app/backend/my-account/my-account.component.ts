@@ -44,6 +44,8 @@ export class MyAccountComponent implements OnInit {
 			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
 			country: ['', Validators.required],
 			address: ['', Validators.required],
+			image:[''],
+			file:['']
 		});
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;

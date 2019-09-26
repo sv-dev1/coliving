@@ -10,7 +10,6 @@ export class BookingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	sessionStorage.removeItem("auth_token");
   }
 
 }

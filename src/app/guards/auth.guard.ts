@@ -22,8 +22,9 @@ export class AuthGuard implements CanActivate {
     if(sessionStorage.getItem("auth_token") != undefined){
       return true;
     }else{
-     // this.toastr.errorToastr('You must be login first');
       this.router.navigate(['/login']);
+      this.toastr.infoToastr('You must be login first!!');
+      return false;
     }   
   }
 }
