@@ -35,6 +35,8 @@ export class CreateBillComponent implements OnInit {
   teamEmpty:boolean=false;
   userEmpty:boolean=false;
   selectEmpty:boolean=false;
+  list : any =[];
+
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -121,15 +123,20 @@ export class CreateBillComponent implements OnInit {
         }
   }
 
-  getTeam(){
-        let tmp = [];
+  getTeam(){        
         this.data_service.getTeam().subscribe((response:any) =>{  
-          this.teamData=response.teams;
-          for(let i=0; i < this.teamData.length; i++) {
-            tmp.push({ id: this.teamData[i].teamId, itemName: this.teamData[i].name });
-          }
-          this.dropdownList = tmp;
-          
+          this.teamData=response['teams'];
+         // console.log(this.teamData);
+          this.teamData.forEach(ele => {
+            let obj = {};
+            obj['id'] = ele['teamId'];
+            obj['itemName'] = ele['name'];
+            this.dropdownList.push(obj);
+          });
+        //  console.log(this.dropdownList);
+          // for(let i=0; i < this.teamData.length; i++) {
+          //   this.dropdownList.push({ "id": this.teamData[i]['teamId'], "itemName": this.teamData[i]['name'] });
+          // }
           this.dropdownSettings = { 
              singleSelection: false, 
              text:"Select Team",
@@ -147,19 +154,15 @@ export class CreateBillComponent implements OnInit {
   }
 
   onTeamSelection() { 
-    let list: string[] = [];
     let tmp = [];
-    this.selectedItems.forEach(element => {
-      element.forEach(obj => {
-        list.push(obj.id);
-      });
-    });
-    let postArr = {'teamId': list};
+    let postArr = {'teamId': this.list};
+    console.log(postArr);
     this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
          this.teamuser=response.teams;
          for(let i=0; i < this.teamuser.length; i++) {
+         if(this.teamuser[i].userProfile){
              tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].userProfile['firstName']});
-        }
+        }}
         this.userdropdownList = tmp;
         this.userdropdownSettings = { 
           singleSelection: false, 
@@ -178,20 +181,22 @@ export class CreateBillComponent implements OnInit {
   
   }
   onItemSelect(item:any){
-     this.selectedItems.push(item);
-     this.onTeamSelection();
+    this.list.push(item['id']);
+    this.onTeamSelection();
     }
   OnItemDeSelect(item:any){
-    console.log(this.selectedItems);
+    this.list.splice(this.list.indexOf(this.list), 1);
     this.onTeamSelection();
   }
   onSelectAll(items: any){
-    this.selectedItems.push(items);
-   // console.log(this.selectedItems);
+    items.forEach(element => {
+       this.list.push(element['id']);
+     });
     this.onTeamSelection();
   }
   onDeSelectAll(items: any){
       console.log(items);
+      this.list=[];
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
