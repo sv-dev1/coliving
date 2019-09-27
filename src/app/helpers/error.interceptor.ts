@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpEvent, HttpResponse, HttpErrorResponse }   from '@angular/common/http';
 import { Injectable } from "@angular/core"
 import { Observable, of } from "rxjs";
-import { tap, catchError } from "rxjs/operators";
+import { tap, catchError,map } from "rxjs/operators";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrManager } from 'ng6-toastr-notifications';
 
@@ -11,50 +11,37 @@ export class ErrorInterceptor implements HttpInterceptor {
         private router: Router,
         public toastr: ToastrManager,
     ) {}
-    intercept(
-        req: HttpRequest<any>,
-        next: HttpHandler
-      ): Observable<HttpEvent<any>> {
-    
-        return next.handle(req).pipe(
-            tap(evt => {
-                if (evt instanceof HttpResponse) {
-                    if(evt.body && evt.body.success)
-                        this.toastr.successToastr(evt.body.success.message, evt.body.success.title, { positionClass: 'toast-bottom-center' });
-                }
-            }),
-            catchError((err: any) => {
-                if(err instanceof HttpErrorResponse) {
-                    console.log(err);
-                    var strung = JSON.stringify(err['error']);
-                    if(err.status == 401){
-                        // sessionStorage.removeItem('auth_token');
-                        // this.toastr.errorToastr('Session Expired');
-                        // this.router.navigate(['/login']);
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        const token: string = localStorage.getItem('token');
+
+        if (token) {
+            request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
+        }
+
+        if (!request.headers.has('Content-Type')) {
+            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+        }
+
+        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
+
+        return next.handle(request).pipe(
+            map((event: HttpEvent<any>) => {
+                if (event instanceof HttpResponse) {
+                    console.log('event--->>>', event);
+                     if(event.status == 401){
                         this.toastr.errorToastr('Session Expired,Please Login again');
+                        sessionStorage.removeItem("auth_token");
+                        this.router.navigate(['']);
                     }
-                    if(err.status == 404){
-                        this.toastr.errorToastr('Username does not exist');
-                    }
-                    if(err['error'].password){
-                       this.toastr.errorToastr('Password is invalid');
-                    }
-                    if(err.status == 500){
+                    if(event.status == 500){
                         this.toastr.errorToastr('Internal server Error');
                     }
-                    if(err.status == 503){
+                    if(event.status == 503){
                         this.toastr.errorToastr('Service Unavailable');
                     }
-                     if(err.status == 0){
-                        this.toastr.errorToastr('Unknown Error');
-                    }
-                    
-                      
-            }
-                return of(err);
+
+                }
+                return event;
             }));
-    
-      
-      
-}
+    }
 }

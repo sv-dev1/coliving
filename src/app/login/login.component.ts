@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
+import { CONTEXT_NAME } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +24,15 @@ export class LoginComponent implements OnInit {
   errorsArr:any = []; 
   returnUrl: string;
   res:any = [];
- 
+  userInfo:any =[];
+  private user: SocialUser;
+  private loggedIn: boolean;
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
     private data_service : DataService,
-    public toastr: ToastrManager) 
+    public toastr: ToastrManager,
+    private authService: AuthService) 
   { 
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
@@ -37,7 +44,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-  	
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+
   }
   get f() { return this.loginForm.controls; }
 
@@ -53,7 +64,6 @@ export class LoginComponent implements OnInit {
         "username" : form.username,
         "password" : form.password, 		
       }
-      //console.log(input_data);
       this.data_service.login(input_data).subscribe((response:any) =>{
        // console.log('asdasdsadsa',JSON.stringify(response, undefined, 2));
         //console.log('token after login', response.username);
@@ -73,6 +83,100 @@ export class LoginComponent implements OnInit {
       })
     }
   } 
+  signInWithFb(): void {
+    console.log("fb");
 
-  
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => {console.log(x)
+      const input_data = {
+        "firstName" : x.firstName,
+        "lastName" : x.lastName,      
+        "username" : x.firstName + 12,
+        "email" : x.email,
+        "password" : x.firstName+'@123',
+        "password2" : x.firstName+'@123',
+        "phoneNo": "0000000000",
+        "ref_code": "0000000",
+        "roleId" :4    
+      }
+      this.data_service.register(input_data).subscribe((response:any) =>{
+        console.log('after register response');
+        console.log(response);
+        sessionStorage.setItem("auth_token", response.token);
+            location.href = "/dashboard"; 
+      }, error =>{
+         window.scrollTo(0, 0);
+        if(error.error.username){
+          this.errorsArr = error.error.username;
+          const input_data = { 
+            "username" : x.firstName + 12,
+            "password" :x.firstName+'@123',		
+          }
+          this.data_service.login(input_data).subscribe((response:any) =>{
+            this.res = JSON.stringify(response, undefined, 2); 
+            sessionStorage.setItem("auth_token", response.token);
+            sessionStorage.setItem("user_name", response.username);
+            this.toastr.successToastr('You are logged in successfully!');
+            this.router.navigate(['/dashboard']);  
+          }, error =>{ 
+            this.isError = true; 
+        //    this.toastr.errorToastr('Invalid Credentials','Error');
+          })
+       }
+    })
+    
+    
+    
+    
+    
+    });
+  } 
+  signInWithTwitter(){
+    console.log("twitter");
+  }
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
+      console.log(x);
+      const input_data = {
+        "firstName" : x.firstName,
+        "lastName" : x.lastName,      
+        "username" : x.firstName + 12,
+        "email" : x.email,
+        "password" : x.firstName+'@123',
+        "password2" : x.firstName+'@123',
+        "phoneNo": "0000000000",
+        "ref_code": "0000000",
+        "roleId" :4    
+      }
+      this.data_service.register(input_data).subscribe((response:any) =>{
+        console.log('after register response');
+        console.log(response);
+        sessionStorage.setItem("auth_token", response.token);
+            location.href = "/dashboard"; 
+      }, error =>{
+         window.scrollTo(0, 0);
+        if(error.error.username){
+          this.errorsArr = error.error.username;
+          const input_data = { 
+            "username" : x.firstName + 12,
+            "password" :x.firstName+'@123',		
+          }
+          this.data_service.login(input_data).subscribe((response:any) =>{
+            this.res = JSON.stringify(response, undefined, 2); 
+            sessionStorage.setItem("auth_token", response.token);
+            sessionStorage.setItem("user_name", response.username);
+            this.toastr.successToastr('You are logged in successfully!');
+            this.router.navigate(['/dashboard']);  
+          }, error =>{ 
+            this.isError = true; 
+        //    this.toastr.errorToastr('Invalid Credentials','Error');
+          })
+       }
+    })
+  });
+   
+  }
+  signOut(): void {
+    this.authService.signOut();
+  }
+
 }

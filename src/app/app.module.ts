@@ -35,8 +35,26 @@ import { environment } from '../environments/environment';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
 
 const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: {} };
+
+let Loginconfig = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(environment.google_CLIENTID)
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("401629237208445")
+  }
+]);
+ 
+export function provideConfig() {
+  return Loginconfig;
+}
 
 @NgModule({
   declarations: [
@@ -73,7 +91,8 @@ const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: 
     NgxUiLoaderModule,
     NgbModule,
     SocketIoModule.forRoot(config),
-    NgbModule
+    NgbModule,
+    SocialLoginModule
 
 
   ],
@@ -81,7 +100,7 @@ const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: 
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
       DatePipe,ChatService,
-
+      { provide: AuthServiceConfig,     useFactory: provideConfig   }
     ],
   bootstrap: [AppComponent]
 })

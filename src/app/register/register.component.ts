@@ -4,6 +4,9 @@ import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-register',
@@ -70,7 +73,6 @@ export class RegisterComponent implements OnInit {
         "phoneNo": form.phoneNumber,
         "ref_code":form.referralCode,
         "roleId" :4    
-
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  
