@@ -12,18 +12,14 @@
 									<p class="des">Login using social media to get quick access</p>									
 									<div class="row social-buttons">
 										<div class="col-4 col-md-12">
-											<a href="#" class="btn btn-social btn-facebook">
-												<i class="fab fa-facebook-f"></i> <span class="hide-small">SignUp with facebook</span>
+											<a class="btn btn-social btn-facebook">
+												<i class="fab fa-facebook-f"></i> <span class="hide-small">Signin with facebook</span>
 											</a>
 										</div>
+									
 										<div class="col-4 col-md-12">
-											<a href="#" class="btn btn-social btn-twitter">
-												<i class="fab fa-twitter"></i> <span class="hide-small">SignUp with twitter</span>
-											</a>
-										</div>
-										<div class="col-4 col-md-12">
-											<a href="#" class="btn btn-social btn-google">
-												<i class="fab fa-google-plus-g"></i> <span class="hide-small">SignUp with google</span>
+											<a class="btn btn-social btn-google" >
+												<i class="fab fa-google-plus-g"></i> <span class="hide-small">Signin with google</span>
 											</a>
 										</div>
 									</div>
@@ -90,6 +86,9 @@
 
 											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
 												<span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
+												<div *ngIf="f.confPassword.errors.ConfirmPassword">
+													Confirm password must be same as password
+												 </div>
 											</div> 
 
 											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
