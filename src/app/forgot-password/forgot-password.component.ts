@@ -49,8 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
 			return;
 		} else {
 			const input_data = { 
-				"username" : formValue.username,
-				 		
+				"username" : formValue.username, 		
 			}
 			this.data_service.forgetPassword(input_data).subscribe((response:any) =>{
 				//console.log('response on component', response.message);
