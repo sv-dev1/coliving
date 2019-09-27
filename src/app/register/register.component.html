@@ -86,6 +86,9 @@
 
 											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
 												<span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
+												<div *ngIf="f.confPassword.errors.ConfirmPassword">
+													Confirm password must be same as password
+												 </div>
 											</div> 
 
 											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">

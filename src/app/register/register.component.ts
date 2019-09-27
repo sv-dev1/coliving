@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
-
+import { ConfirmPasswordValidator } from '../helpers/confirm-password.validator';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -40,7 +40,10 @@ export class RegisterComponent implements OnInit {
       phoneNumber:['', [Validators.required, Validators.minLength(8),Validators.maxLength(15)]],
       agree: ['false', Validators.requiredTrue],
       referralCode: ['']
-    });
+    },{
+      validator: ConfirmPasswordValidator.MatchPassword
+    }
+    );
     
   } 
   ngOnInit() {
@@ -60,6 +63,7 @@ export class RegisterComponent implements OnInit {
     console.log("working here");
     this.submitted = true;
     if (this.registerForm.invalid) {
+      console.log("error");
       return;
     }else{
       
