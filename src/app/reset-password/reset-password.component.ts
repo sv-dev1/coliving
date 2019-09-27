@@ -5,6 +5,8 @@ import { DataService } from '../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import { ActivatedRoute } from '@angular/router';
+import { MustMatch } from '../helpers/must-match.validator';
+
 
 @Component({
 	selector: 'app-reset-password',
@@ -36,10 +38,11 @@ export class ResetPasswordComponent implements OnInit {
 
 		this.resetPasswordForm = this.formBuilder.group({
 			password: ['', [Validators.required, Validators.minLength(8)]],
-			confPassword: ['', [Validators.required, Validators.minLength(8)]],    
+			confPassword:  ['', Validators.required]
+           }, {
+            validator: MustMatch('password', 'confPassword')  
 		}); 
 	}
-
 	ngOnInit() {
 		const token: string = this.route.snapshot.queryParamMap.get('t');
 		if(token) {
@@ -51,13 +54,13 @@ export class ResetPasswordComponent implements OnInit {
 		if(token) {
 			this.data_service.verifyToken(token).subscribe((response:any) =>{
 				this.res = JSON.stringify(response, undefined, 2);
-				 console.log(response);
+				 //console.log(response);
 				if(response.userId !='') {
 					   this.user_id = response.userId;
 				} 
 				this.isError = false;
 			}, error =>{ 
-				console.log('errrror',error.error.errors.message);
+				
 				this.isError = true; 
 				this.toastr.errorToastr(error.error.errors.message,'Error');
 				this.router.navigate(['/login']);
