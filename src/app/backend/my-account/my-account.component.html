@@ -37,7 +37,15 @@
                                                     </div>
                                             </div>
                                         </div>
-                                        
+                                      <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="team">Email:</label>
+                                                 <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                                        <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+                                                    </div>
+                                            </div>
+                                        </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="team">Phone Number:</label>

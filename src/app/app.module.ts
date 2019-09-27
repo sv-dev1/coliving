@@ -35,6 +35,9 @@ import { environment } from '../environments/environment';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
 
 const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: {} };
 
@@ -57,6 +60,9 @@ const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: 
     MyAccountComponent,
     RefferalCodeComponent,
     SettingsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+   
    
   ],
   imports: [

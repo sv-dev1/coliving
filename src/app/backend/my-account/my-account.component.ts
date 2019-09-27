@@ -40,6 +40,7 @@ export class MyAccountComponent implements OnInit {
 		this.updateProfileForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
+			email: ['', Validators.required],
 			phoneNumber: ['', Validators.required],
 			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
 			country: ['', Validators.required],
@@ -66,11 +67,12 @@ export class MyAccountComponent implements OnInit {
        // console.log('token',token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
-			//console.log('sfsfdf', response.users[0]);
+			console.log('sfsfdf', response.users[0]);
 			this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			this.updateProfileForm.patchValue({
 				firstName : this.userDataArr.firstName,
 				lastName : this.userDataArr.lastName,
+				email : this.userDataArr.email,
 				phoneNumber : this.userDataArr.phoneNo,
 				postalCode : this.userDataArr.postalCode,
 				address : this.userDataArr.address,
@@ -112,7 +114,7 @@ export class MyAccountComponent implements OnInit {
 			const input_data = { 
 				"first_name" : form.firstName, 
 				"last_name" : form.lastName,
-				"email" : this.email,
+				"email" : form.email,
 				"upload_photo" : this.fileData,
 				"phoneNo" : form.phoneNumber,
 				"postalCode" : form.postalCode,

@@ -14,12 +14,17 @@ import { SplitBillComponent } from './backend/split-bill/split-bill.component';
 import { MyAccountComponent } from './backend/my-account/my-account.component';
 import { RefferalCodeComponent } from './backend/refferal-code/refferal-code.component';
 import { SettingsComponent } from './backend/settings/settings.component';
+import { Socket } from 'ng-socket-io';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent },
   { path: 'create-bill', component: CreateBillComponent, canActivate: [AuthGuard] },

@@ -1332,8 +1332,17 @@ ul.for-login-tabs li a:hover{
 .team-member {
     width: 100% !important;
 }
-
-
+.cus-forgot ul.for-login-tabs li {
+    width: 100%;
+    text-align: center;
+}
+.cus-forgot .col-12.forgot a {
+    cursor: pointer;
+    color: #0056b3;
+}
+.cus-forgot .left-side { 
+    min-height: 250px !important;
+}
 
 
 
