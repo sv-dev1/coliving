@@ -32,11 +32,12 @@ import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
 import { environment } from '../environments/environment';
-
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const config: SocketIoConfig = { url: 'https://chatapi.kindlebit.com', options: {} };
@@ -75,6 +76,9 @@ export function provideConfig() {
     MyAccountComponent,
     RefferalCodeComponent,
     SettingsComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+   
    
   ],
   imports: [
