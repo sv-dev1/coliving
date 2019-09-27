@@ -12,6 +12,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 //import { Socket } from 'ngx-socket-io';
+import * as io from 'socket.io-client';
+import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -77,14 +79,15 @@ export class HouseChoresComponent implements OnInit {
 	userDataArr:any=[];
 	status: boolean = false;
 	indexTab:any ="";
-	firstTeam:any=[];
-	data:any=[];
+	firstTeam:any;
+	data:any;
 	data1:any=[];
 	indexCheck = 0;
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
     socket:any=[];
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -106,10 +109,11 @@ export class HouseChoresComponent implements OnInit {
 
 		this.base_url = environment.base_url;
 		this.today = new Date();
-		//this.socket_url = environment.socket_url;
-        //this.socket.connect();
-		
+	//	this.socket_url = environment.socket_url;
+     //   this.socket = io(this.socket_url);
+ 		// this.socket.connect(); 
 	}
+
 	ngOnInit() {
 		this.isWelcomeModal = true;  
 		this.keyboard =true;
@@ -123,13 +127,12 @@ export class HouseChoresComponent implements OnInit {
 		this.getTeams();
 		this.getTask();
 		this.allTaskListing();
-		this.getMessages();
-		this.loadMessages();
-		this.loadMyMessages();  
+		
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.add('popCustomHtml');
 		const body = document.getElementsByTagName('body')[0];
 		body.classList.add('popCustomBody');
+
 	}
 	@HostListener('document:keypress', ['$event'])
 
@@ -178,7 +181,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getUsers().subscribe((response:any) =>{   
 			this.allUsersArray = this.allUsersArray.concat(response.users);
 			this.allUsers = this.allUsersArray;
-			//console.log('allUsers',this.allUsers);
+			//console.log('allUsers',this.allUsers[0].login.username);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -200,12 +203,16 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
+			//console.log(this.allTeam);
 			this.firstTeam = this.allTeam[0];
-			this.isError = false;    
+			//console.log("firsttema", this.firstTeam);
+			this.isError = false;
+			this.loadMessages();    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
+		
 	}
 	get f() {  
 		return this.addTaskForm.controls; 
@@ -321,7 +328,8 @@ export class HouseChoresComponent implements OnInit {
 		this.user_id = team.userId;
 		this.logged_in_username = sessionStorage.getItem("user_name");
 		this.status = !this.status;
-		this.indexCheck = index;			
+		this.indexCheck = index;	
+		this.loadMessages();		
 	}
 
 	sendMessgae() {
@@ -356,23 +364,26 @@ export class HouseChoresComponent implements OnInit {
 	loadMyMessages() {
 		this.socket.on('messages', (data) => {
 			this.gruopMessages = data.messages; 
+			console.log(this.gruopMessages);
 		});
 
 	}
 	loadMessages() {
-		if(this.user_id ==''){
+		if(this.user_id){
+			this.data = {
+				"userId": this.user_id,
+				"teamId": this.team_id,
+			}
+		} else {
 			this.by_default_team = this.firstTeam;
 			this.data = {
 				"userId": this.by_default_team.userId,
 				"teamId": this.by_default_team.teamId,
 			}
-		} else {
-			this.data = {
-				"userId": this.user_id,
-				"teamId": this.team_id,
-			}
 		}
-		this.socket.emit('load-messages', this.data); 
+		console.log('data', this.data);
+		this.socket.emit('load-messages', this.data);
+               this.getMessages();
 	}
 
 

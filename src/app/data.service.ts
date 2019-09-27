@@ -164,8 +164,39 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			return Observable.throw(error);});
-	
-	}
 
+	}
+	forgetPassword(input_data){
+		return this.http.post(this.base_url+'forget-password',input_data)
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	verifyToken(input_data){
+		let url = this.base_url+'reset/'+input_data;
+		return this.http.post(url , "")
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	resetPassword(inputData){
+		let userId = inputData.user_id;
+		let token = inputData.token;
+		const input_data = {
+			'password': inputData.password,
+			'password2': inputData.password2
+		}
+		let url = this.base_url+'reset/password/'+userId+'/'+token;
+		return this.http.post(url ,input_data)
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
 	
 }

@@ -23,36 +23,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.toastr.successToastr(evt.body.success.message, evt.body.success.title, { positionClass: 'toast-bottom-center' });
                 }
             }),
-            catchError((err: any) => {
-                if(err instanceof HttpErrorResponse) {
-                    console.log(err);
-                    var strung = JSON.stringify(err['error']);
-                    if(err.status == 401){
-                        // sessionStorage.removeItem('auth_token');
-                        // this.toastr.errorToastr('Session Expired');
-                        // this.router.navigate(['/login']);
-                        this.toastr.errorToastr('Session Expired,Please Login again');
-                    }
-                    if(err.status == 404){
-                        this.toastr.errorToastr('Username does not exist');
-                    }
-                    if(err['error'].password){
-                       this.toastr.errorToastr('Password is invalid');
-                    }
-                    if(err.status == 500){
-                        this.toastr.errorToastr('Internal server Error');
-                    }
-                    if(err.status == 503){
-                        this.toastr.errorToastr('Service Unavailable');
-                    }
-                     if(err.status == 0){
-                        this.toastr.errorToastr('Unknown Error');
-                    }
-                    
-                      
-            }
-                return of(err);
-            }));
+            
+            );
     
       
       

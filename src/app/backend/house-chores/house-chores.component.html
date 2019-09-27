@@ -430,7 +430,7 @@
                         <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
                            <option value="" disabled>Please select one option</option>
                            <option *ngFor="let users of allUsers" value="{{users?.userId}}">
-                              {{users?.firstName}} {{users?.lastName}}
+                              {{users.login?.username}}
                            </option>
                         </select>
                         <div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
