@@ -28,12 +28,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if(event.status == 503){
                         this.toastr.errorToastr('Service Unavailable');
                     }
-
                 }
                 return event;
             }),
             catchError((err: HttpErrorResponse) => {
-                console.log('error--->>>',err);
+                
                 const error = err.error.message || err.statusText;
                     if(err.status == 0){
                     this.toastr.errorToastr('Service Unavailable');
