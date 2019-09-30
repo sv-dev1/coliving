@@ -134,6 +134,7 @@ export class LoginComponent implements OnInit {
     console.log("twitter");
   }
   signInWithGoogle(): void {
+    console.log("google");
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
       console.log(x);
       const input_data = {

@@ -74,8 +74,6 @@ export class HouseChoresComponent implements OnInit {
 	team_id : string = "";
 	user_id : string = "";
 	logged_in_username : string = "";
-
-
 	userDataArr:any=[];
 	status: boolean = false;
 	indexTab:any ="";
@@ -121,7 +119,6 @@ export class HouseChoresComponent implements OnInit {
 		this.isWelcomeBlock =true;	
 		this.isHouse1st=true;
 		this.isProgressBlue =false;
-
 		this.getUsers();
 		this.getCategorie();
 		this.getTeams();
@@ -383,7 +380,7 @@ export class HouseChoresComponent implements OnInit {
 		}
 		console.log('data', this.data);
 		this.socket.emit('load-messages', this.data);
-               this.getMessages();
+    this.getMessages();
 	}
 
 
