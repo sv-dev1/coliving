@@ -60,8 +60,8 @@ export class ForgotPasswordComponent implements OnInit {
 			}, error =>{ 
 				//console.log('errrror',error);
 				this.isError = true; 
-				this.toastr.errorToastr('response.message','Error');
-		
+				console.log(error);
+				this.toastr.errorToastr(error.statusText);
 			})
 		}
 	}
