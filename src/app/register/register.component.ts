@@ -22,13 +22,15 @@ export class RegisterComponent implements OnInit {
   isSuccess : boolean = false;
   errorsArr:any = []; 
   private rc: string;
+  res:any = [];
 
   constructor(	
         private formBuilder:FormBuilder,	
         private router: Router,
         private data_service : DataService,
         public toastr: ToastrManager,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private authService: AuthService
     ) { 
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -94,5 +96,98 @@ export class RegisterComponent implements OnInit {
       })
 
     }
+  }
+  signInWithFb(): void {
+    console.log("fb");
+
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => {console.log(x)
+      const input_data = {
+        "firstName" : x.firstName,
+        "lastName" : x.lastName,      
+        "username" : x.firstName + 12,
+        "email" : x.email,
+        "password" : x.firstName+'@123',
+        "password2" : x.firstName+'@123',
+        "phoneNo": "0000000000",
+        "ref_code": "0000000",
+        "roleId" :4    
+      }
+      this.data_service.register(input_data).subscribe((response:any) =>{
+        console.log('after register response');
+        console.log(response);
+        sessionStorage.setItem("auth_token", response.token);
+            location.href = "/dashboard"; 
+      }, error =>{
+         window.scrollTo(0, 0);
+        if(error.error.username){
+          this.errorsArr = error.error.username;
+          const input_data = { 
+            "username" : x.firstName + 12,
+            "password" :x.firstName+'@123',		
+          }
+          this.data_service.login(input_data).subscribe((response:any) =>{
+            this.res = JSON.stringify(response, undefined, 2); 
+            sessionStorage.setItem("auth_token", response.token);
+            sessionStorage.setItem("user_name", response.username);
+            this.toastr.successToastr('You are logged in successfully!');
+            this.router.navigate(['/dashboard']);  
+          }, error =>{ 
+            this.isError = true; 
+        //    this.toastr.errorToastr('Invalid Credentials','Error');
+          })
+       }
+    })
+    
+    
+    
+    
+    
+    });
+  } 
+  signInWithTwitter(){
+    console.log("twitter");
+  }
+  signInWithGoogle(): void {
+    console.log("google");
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
+      console.log(x);
+      const input_data = {
+        "firstName" : x.firstName,
+        "lastName" : x.lastName,      
+        "username" : x.firstName + 12,
+        "email" : x.email,
+        "password" : x.firstName+'@123',
+        "password2" : x.firstName+'@123',
+        "phoneNo": "0000000000",
+        "ref_code": "0000000",
+        "roleId" :4    
+      }
+      this.data_service.register(input_data).subscribe((response:any) =>{
+        console.log('after register response');
+        console.log(response);
+        sessionStorage.setItem("auth_token", response.token);
+            location.href = "/dashboard"; 
+      }, error =>{
+         window.scrollTo(0, 0);
+        if(error.error.username){
+          this.errorsArr = error.error.username;
+          const input_data = { 
+            "username" : x.firstName + 12,
+            "password" :x.firstName+'@123',		
+          }
+          this.data_service.login(input_data).subscribe((response:any) =>{
+            this.res = JSON.stringify(response, undefined, 2); 
+            sessionStorage.setItem("auth_token", response.token);
+            sessionStorage.setItem("user_name", response.username);
+            this.toastr.successToastr('You are logged in successfully!');
+            this.router.navigate(['/dashboard']);  
+          }, error =>{ 
+            this.isError = true; 
+        //    this.toastr.errorToastr('Invalid Credentials','Error');
+          })
+       }
+    })
+  });
+   
   }
 }
