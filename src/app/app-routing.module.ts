@@ -17,6 +17,7 @@ import { SettingsComponent } from './backend/settings/settings.component';
 import { Socket } from 'ng-socket-io';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { TaskSuggestionsComponent } from './backend/task-suggestions/task-suggestions.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
   { path: 'refer-a-friend', component: RefferalCodeComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'task-suggestions/:p1:p2', component: TaskSuggestionsComponent, canActivate: [AuthGuard] },
 
   {path: '**', redirectTo: '/'},
  

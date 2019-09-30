@@ -54,7 +54,5 @@ export class RefferalCodeComponent implements OnInit {
 	     document.execCommand('copy');
 	     inputElement.setSelectionRange(0, 0)
 	     this.toastr.successToastr('Referral Link copied successfully!', 'Success!');
-	    
-
 	}
 }

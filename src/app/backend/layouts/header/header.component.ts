@@ -62,13 +62,15 @@ response:any;
     }
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', token);
-    console.log(headers);
+   
      this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
       this.userDataArr = response.users[0]; 
       this.image_url = this.image_base_url+''+this.userDataArr.userId;
     },error=>{ 
-      console.log("ERROR");
-      console.log(error.error);
+      //console.log("ERROR");
+     // console.log(error.error);
+      this.isError = true; 
+      this.errorsArr = error.error;
     });  
   }
 }
