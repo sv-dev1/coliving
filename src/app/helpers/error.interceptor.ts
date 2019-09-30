@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
+                    //console.log('event--->>>', event);
                      if(event.status == 401){
                         this.toastr.errorToastr('Session Expired,Please Login again');
                         sessionStorage.removeItem("auth_token");

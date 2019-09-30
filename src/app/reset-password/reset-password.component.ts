@@ -25,7 +25,7 @@ export class ResetPasswordComponent implements OnInit {
 	returnUrl: string;
 	res:any = [];
     user_id:string ='';
-    token:any;
+    token:any ='';
 
 	constructor(
 		private formBuilder:FormBuilder,	
