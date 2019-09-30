@@ -39,7 +39,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if(event.status == 503){
                         this.toastr.errorToastr('Service Unavailable');
                     }
-
                 }
                 return event;
             }));
