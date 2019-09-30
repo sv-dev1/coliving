@@ -73,6 +73,7 @@ export class HouseChoresComponent implements OnInit {
 	today:any;
 	team_id : string = "";
 	user_id : string = "";
+	nickname: string = "";
 	logged_in_username : string = "";
 
 
@@ -86,7 +87,6 @@ export class HouseChoresComponent implements OnInit {
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
-    socket:any=[];
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -95,7 +95,7 @@ export class HouseChoresComponent implements OnInit {
 		public toastr: ToastrManager,
 		private http : HttpClient,
 		private datePipe: DatePipe,
-		//private socket: Socket
+		private socket: Socket
 		
 		) { 
 		this.addTaskForm = this.formBuilder.group({
@@ -111,7 +111,7 @@ export class HouseChoresComponent implements OnInit {
 		this.today = new Date();
 	//	this.socket_url = environment.socket_url;
      //   this.socket = io(this.socket_url);
- 		// this.socket.connect(); 
+ 		 this.socket.connect(); 
 	}
 
 	ngOnInit() {
@@ -127,7 +127,7 @@ export class HouseChoresComponent implements OnInit {
 		this.getTeams();
 		this.getTask();
 		this.allTaskListing();
-		
+		this.logged_in_username = sessionStorage.getItem("user_name");
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.add('popCustomHtml');
 		const body = document.getElementsByTagName('body')[0];
@@ -207,6 +207,7 @@ export class HouseChoresComponent implements OnInit {
 			this.firstTeam = this.allTeam[0];
 			//console.log("firsttema", this.firstTeam);
 			this.isError = false;
+			this.joinChat();
 			this.loadMessages();    
 		}, error =>{ 
 			this.isError = true; 
@@ -322,14 +323,38 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-	
+	navigateToSuggestions(task){
+		this.router.navigate(['/task-suggestions',{p1: task.id, p2: task.userId}]);
+	}
 	openChat(team,index){
+		//console.log('team',team);
 		this.team_id = team.teamId;
 		this.user_id = team.userId;
-		this.logged_in_username = sessionStorage.getItem("user_name");
+		this.nickname = team.name;
 		this.status = !this.status;
 		this.indexCheck = index;	
-		this.loadMessages();		
+		this.joinChat();		
+	}
+
+	joinChat() { 
+		if(this.user_id){
+			this.data = {
+				"nickname": this.nickname,
+				"from_id": this.user_id,
+				"username": this.logged_in_username,
+				"to_id": this.team_id,			
+			}
+		} else {
+			this.by_default_team = this.firstTeam;
+			this.data = {	
+				"nickname": this.by_default_team.name,
+				"from_id": this.by_default_team.userId,
+				"username": this.logged_in_username,
+				"to_id": this.by_default_team.teamId,
+			}
+		}
+		console.log('join chat data', this.data);
+		this.socket.emit('set-nickname', this.data);	
 	}
 
 	sendMessgae() {
@@ -366,7 +391,6 @@ export class HouseChoresComponent implements OnInit {
 			this.gruopMessages = data.messages; 
 			console.log(this.gruopMessages);
 		});
-
 	}
 	loadMessages() {
 		if(this.user_id){
@@ -381,12 +405,11 @@ export class HouseChoresComponent implements OnInit {
 				"teamId": this.by_default_team.teamId,
 			}
 		}
-		console.log('data', this.data);
+		
 		this.socket.emit('load-messages', this.data);
                this.getMessages();
 	}
-
-
+	
 } 
 
 
