@@ -16,11 +16,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    //console.log('event--->>>', event);
+                    // /console.log('event--->>>', event);
                      if(event.status == 401){
                         this.toastr.errorToastr('Session Expired,Please Login again');
                         sessionStorage.removeItem("auth_token");
-                        this.router.navigate(['']);
+                        this.router.navigate(['/login']);
                     }
                     if(event.status == 500){
                         this.toastr.errorToastr('Internal server Error');
@@ -32,13 +32,25 @@ export class ErrorInterceptor implements HttpInterceptor {
                 return event;
             }),
             catchError((err: HttpErrorResponse) => {
-                
                 const error = err.error.message || err.statusText;
-                    if(err.status == 0){
+                if(err.status == 0){
                     this.toastr.errorToastr('Service Unavailable');
+                    sessionStorage.removeItem("auth_token");
+                    this.router.navigate(['/login']);
+                }
+                if(err.status == 401){
+                    this.toastr.errorToastr('Session Expired,Please Login again');
+                    sessionStorage.removeItem("auth_token");
+                    this.router.navigate(['/login']);
+                }
+                if(err.error.username) {
+                    this.toastr.errorToastr(err.error.username,'Error');
+                }
+                if(err.error.email) {
+                    this.toastr.errorToastr(err.error.email,'Error');
                 }
                 return throwError(err);
-        }));
+            }));
     }
    
 }
