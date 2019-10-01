@@ -40,6 +40,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TaskSuggestionsComponent } from './backend/task-suggestions/task-suggestions.component';
 import { Socket } from 'ng-socket-io';
+import { BlockCopyPasteDirective } from './block-copy-paste.directive';
 
 const config: SocketIoConfig = { url: 'http://13.232.117.84:2900', options: {} };
 
@@ -80,6 +81,7 @@ export function provideConfig() {
     ForgotPasswordComponent,
     ResetPasswordComponent,
     TaskSuggestionsComponent,
+    BlockCopyPasteDirective,
    
   ],
   imports: [

@@ -166,6 +166,43 @@ export class DataService {
 			return Observable.throw(error);});
 
 	}
+	getTaskSuggestionByTeamId(teamID){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		let url = this.base_url+'task/'+teamID+'/suggestion';
+		return this.http.get(url,{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+
+	}
+	addSuggestion(input) {
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+	        let userId = sessionStorage.getItem('userId');
+			const input_data = {
+				'taskId': input.taskId,
+				'notes': input.notes,
+				'userId':userId
+			}
+			let url = this.base_url+'task/suggestion';
+			return this.http.post(url ,input_data,{ headers: headers })
+			.map((response:Response)=>{
+				return response;
+			})
+			.catch((error:Error) => {
+				return Observable.throw(error);});
+	}
 	forgetPassword(input_data){
 		return this.http.post(this.base_url+'forget-password',input_data)
 		.map((response:Response)=>{

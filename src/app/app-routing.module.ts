@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard] },
   { path: 'refer-a-friend', component: RefferalCodeComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'task-suggestions/:p1:p2', component: TaskSuggestionsComponent, canActivate: [AuthGuard] },
+  { path: 'task-suggestions/:p1', component: TaskSuggestionsComponent, canActivate: [AuthGuard] },
 
   {path: '**', redirectTo: '/'},
  
