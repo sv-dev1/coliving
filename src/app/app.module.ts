@@ -99,9 +99,8 @@ export function provideConfig() {
     NgbModule,
     SocketIoModule.forRoot(config),
     NgbModule,
-    SocialLoginModule
-
-
+    SocialLoginModule,
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -15,15 +15,19 @@ export class TaskSuggestionsComponent implements OnInit {
 	task_id:any ='';
 	user_id:any ='';
 	errorsArr:any;
-	taskByIdArray:any=[];
-	taskById:any=[];
+	suggestionsArray:any=[];
+	suggestions:any=[];
+	taskDetailArray:any=[];
+	taskDetail:any=[];
 	addSuggestionForm: FormGroup;
 	submitted = false; 
 	fagree =false;
 	isError : boolean = false;
 	isSuccess : boolean = false;
 	errorsArrUser:any =[]; 
-
+    demo:any=[];
+    isSuggestion : boolean = false;
+    
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -35,20 +39,36 @@ export class TaskSuggestionsComponent implements OnInit {
 		this.addSuggestionForm = this.formBuilder.group({
 			suggestion: ['', Validators.required],
 		});
+		 
 	}
 
 	ngOnInit() {
 		let url = this.route.snapshot.url.join().split(',')
 		this.task_id = url[1];
-		this.getTaskSuggestionByTeamId(this.task_id); 
+		this.getTaskSuggestionByTaskId(this.task_id); 
 		//console.log('teamId',this.task_id);
 		
 	}
-	getTaskSuggestionByTeamId(teamID){
 
-		this.data_service.getTaskSuggestionByTeamId(teamID).subscribe((response:any) =>{   
-			this.taskByIdArray = this.taskByIdArray.concat(response.suggestionList);
-			this.taskById = this.taskByIdArray;
+	suggExp(){
+		
+		this.isSuggestion =! this.isSuggestion;
+	}
+
+	navigateToTaskList(){
+	     this.router.navigate(['/house-chores']); 
+	}
+	
+	getTaskSuggestionByTaskId(taskID){
+        this.suggestionsArray = [];
+        this.taskDetailArray = [];
+		this.data_service.getTaskSuggestionByTeamId(taskID).subscribe((response:any) =>{   
+			this.suggestionsArray = response.suggestionList.suggestionArr;
+			this.suggestions = this.suggestionsArray;
+			//console.log('suggestions',this.suggestions);
+			this.taskDetailArray = this.taskDetailArray.concat(response.suggestionList.taskArr);
+			this.taskDetail= this.taskDetailArray;
+
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -68,15 +88,13 @@ export class TaskSuggestionsComponent implements OnInit {
 				"notes" : formValue.suggestion,
 				"taskId": this.task_id,
 			}
-
 			this.data_service.addSuggestion(input_data).subscribe((response:any) =>{  
-				console.log('after',response);
 				this.toastr.successToastr(response.message, 'Success!');		
 				this.isError = false;
 				this.isSuccess = true;   
 				this.submitted = false;  
 			    this.addSuggestionForm.reset();
-			    this.getTaskSuggestionByTeamId(this.task_id); 
+			    this.getTaskSuggestionByTaskId(this.task_id); 
 				this.router.navigate(['/task-suggestions',this.task_id]); 
   
 			}, error =>{

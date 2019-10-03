@@ -15,6 +15,8 @@ import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 //import * as io from 'socket.io-client';
 import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
+ 
+
 
 @Component({
 	selector: 'app-house-chores',
@@ -85,7 +87,11 @@ export class HouseChoresComponent implements OnInit {
 	curr = new Date();
 	eventInfo: boolean = false;
 	addTaskModal:boolean=false;
-
+    deleteTaskModal:boolean=false;
+    taskName:string='';
+    taskId:string='';
+    response:any=[];
+    
     //socket:any='';
     
 
@@ -107,15 +113,11 @@ export class HouseChoresComponent implements OnInit {
 			image: ['', Validators.required],
 			notes: ['', Validators.required],
 		});
-
 		this.base_url = environment.base_url;
 		this.today = new Date();
-
-  	//this.socket_url = environment.socket_url;
-    //this.socket = io(this.socket_url);
+        //this.socket_url = environment.socket_url;
+        //this.socket = io(this.socket_url);
  		 this.socket.connect(); 
-
-	   
 	}
 
 	ngOnInit() {
@@ -218,6 +220,37 @@ export class HouseChoresComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 		
+	}
+	deleteTaskDailog(task){
+		 //console.log('task',task);
+		   this.taskName = task.task_name;
+		   this.taskId = task.id;
+           this.deleteTaskModal=true;
+		   this.renderer.addClass(document.body, 'modal-open');
+	}
+	closeDeleteTaskModal(taskName){
+		this.deleteTaskModal=false;
+		this.renderer.removeClass(document.body, 'modal-open');
+		this.toastr.infoToastr('All information associated to the task '+taskName+' are safe.');
+	}
+	closeDeleteTaskModal1(){
+		this.deleteTaskModal=false;
+		this.renderer.removeClass(document.body, 'modal-open');
+	}
+	deleteTask(taskId){
+       if(taskId){
+	        this.data_service.deleteTask(taskId).subscribe((response:any) =>{
+	        this.response = JSON.stringify(response, undefined, 2); 
+	        this.closeDeleteTaskModal1();
+            this.allTaskListing();
+	        this.toastr.successToastr(response.message,'Success');
+	        this.router.navigate(['/house-chores']);  
+	        this.isError = false;
+	      }, error =>{ 
+	        this.isError = true; 
+	      //  this.toastr.errorToastr('Invalid Credentials','Error');
+	      })
+       }
 	}
 	get f() {  
 		return this.addTaskForm.controls; 
@@ -323,8 +356,12 @@ export class HouseChoresComponent implements OnInit {
 		console.log(event.event._def.publicId);
 	}
 	allTaskListing() {
+		this.allTask = [];
+		this.allTaskArray = [];
+		this.pending_length = [];
+		this.complete_length = [];
 		this.data_service.getTask().subscribe((response:any) =>{   
-			this.allTaskArray = this.allTaskArray.concat(response.tasks);
+			this.allTaskArray = response.tasks;
 			this.allTask = this.allTaskArray;
 			//console.log('All Task',this.allTask);
 			this.allTask.forEach(obj =>{

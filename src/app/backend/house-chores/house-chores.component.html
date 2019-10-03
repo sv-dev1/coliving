@@ -32,10 +32,12 @@
                         </div>
                         <div class="to_do_list">
                            <ul class="list-group" *ngFor="let task of pending_length,index as i">
-                                 
-                                 <li class="list-group-item active-user" (click)="navigateToSuggestions(task)">{{task.task_name}}<span class="badge badge-primary badge-pill"></span>
+                              <li class="list-group-item active-user" >
+                                 <span (click)="navigateToSuggestions(task)" placement="right" ngbTooltip="Click On {{task.task_name}} To Add Or View Suggestions." >{{task.task_name}}
+                                 </span>
+                                 <span class="badge badge-primary badge-pill"></span>
+                                 <span class="delete" ngbTooltip="Click To Delete The Task {{task.task_name}}" (click)="deleteTaskDailog(task)">&times;</span>
                               </li>
-                            
                            </ul>
                         </div>
                      </div>
@@ -48,11 +50,9 @@
                         </div>
                         <div class="to_do_list">
                            <ul class="list-group" *ngFor="let task of complete_length,index as i">
-                           
                               <li class="list-group-item active-user">{{task.task_name}}
                                  <span class="badge badge-primary badge-pill"></span>
                               </li>
-                          
                            </ul>
                         </div>
                      </div>
@@ -104,7 +104,6 @@
                            [events]="calendarEvents"
                            (dateClick)="handleDateClick($event)"
                            (eventClick)="event($event)"
-                          
                            ></full-calendar>
                         </div>
                         <!-- <button id="btnPrev" type="button">Prev</button>
@@ -123,67 +122,64 @@
                                        <div class="headind_srch">
                                           <div class="recent_heading">
                                              <h4>Teams</h4>
-
                                           </div>
                                        </div>
                                        <div class="inbox_chat" >
-                                        <div  class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
-                                             <div class="chat_people">
-                                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                                <div class="chat_ib" (click)="openChat(team,index)">
-                                                   <h5>
-                                                      {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
-                                                   </h5>
-                                                   <p>Test, which is a new approach to have all solutions 
-                                                      astrology under one roof.
-                                                   </p>
-                                                </div>
+                                          <div  class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
+                                          <div class="chat_people">
+                                             <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                             <div class="chat_ib" (click)="openChat(team,index)">
+                                                <h5>
+                                                   {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
+                                                </h5>
+                                                <p>Test, which is a new approach to have all solutions 
+                                                   astrology under one roof.
+                                                </p>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
-                                    <div class="mesgs">   
-                                        <div class="msg_history">
-                                          <div class="incoming_msg">
-                                             <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                             <div class="received_msg">
-                                                <div class="received_withd_msg">
-                                                   <p>Test which is a new approach to have all
-                                                      solutions
-                                                   </p>
-                                                   <span class="time_date"> 11:01 AM    |    June 9</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="outgoing_msg">
-                                             <div class="sent_msg">
+                                 </div>
+                                 <div class="mesgs">
+                                    <div class="msg_history">
+                                       <div class="incoming_msg">
+                                          <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                          <div class="received_msg">
+                                             <div class="received_withd_msg">
                                                 <p>Test which is a new approach to have all
                                                    solutions
                                                 </p>
-                                                <span class="time_date"> 11:01 AM    |    June 9</span> 
+                                                <span class="time_date"> 11:01 AM    |    June 9</span>
                                              </div>
-                                          </div>                                  
-                                       </div>
-                                       <div class="type_msg">
-                                       
-                                          <div class="input_msg_write">
-                                             <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
-                                             <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                           </div>
-                                     
+                                       </div>
+                                       <div class="outgoing_msg">
+                                          <div class="sent_msg">
+                                             <p>Test which is a new approach to have all
+                                                solutions
+                                             </p>
+                                             <span class="time_date"> 11:01 AM    |    June 9</span> 
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="type_msg">
+                                       <div class="input_msg_write">
+                                          <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
+                                          <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <!---   Chat HTML START End-------->
                         </div>
+                        <!---   Chat HTML START End-------->
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
+   </div>
    </div>
 </section>
 <div class="onload-popup">
@@ -416,94 +412,120 @@
    style="display: block; background-color: rgba(0, 0, 0, 0.32)" 
    [style.display]="addTaskModal ? 'block' : 'none'" *ngIf="addTaskModal" 
    aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Add task</h5>
-               <button type="button" class="close" (click)="close()">
-               <span aria-hidden="true">x</span>
-               </button>
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add task</h5>
+            <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">x</span>
+            </button>
+         </div>
+         <form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
+         <div class="modal-body custm_modal">
+            <div class="form-group">
+               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
+               <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
+               </div>
             </div>
-            <form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
-            <div class="modal-body custm_modal">
-               <div class="form-group">
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
-                  <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
-                     <span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i>Assign To</a>
-                        <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
-                           <option value="" disabled>Please select one option</option>
-                           <option *ngFor="let users of allUsers" value="{{users?.userId}}">
-                              {{users.login?.username}}
-                           </option>
-                        </select>
-                        <div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.assignTo.errors.required">Assign user to this task.</span>
-                        </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <a href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i>Assign To</a>
+                     <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
+                        <option value="" disabled>Please select one option</option>
+                        <option *ngFor="let users of allUsers" value="{{users?.userId}}">
+                           {{users.login?.username}}
+                        </option>
+                     </select>
+                     <div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.assignTo.errors.required">Assign user to this task.</span>
                      </div>
                   </div>
                </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-calendar" aria-hidden="true"></i>Due Date</a>
-                        <input type="text"
-                        placeholder="Datepicker"
-                        class="form-control"
-                        bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
-                        <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i>Category:Communal</a>
-                        <select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
-                           <option value="" disabled>Please select one option</option>
-                           <option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
-                              {{categories?.name}} 
-                           </option>
-                        </select>
-                        <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>Upload Photo</a>
-                        <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)">
-                        <img [src]="url" height="200" *ngIf="url !=''"> <br/>
-                        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-notes" aria-hidden="true"></i>Notes</a>
-                        <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
-                        <div *ngIf="submittenicknamed && f.notes.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <button type="submit" class="btn btn-orange" >Add Task</button>
             </div>
-            </form>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <a href="javascript:void(0)"><i class="fa fa-calendar" aria-hidden="true"></i>Due Date</a>
+                     <input type="text"
+                     placeholder="Datepicker"
+                     class="form-control"
+                     bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
+                     <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i>Category:Communal</a>
+                     <select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                        <option value="" disabled>Please select one option</option>
+                        <option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
+                           {{categories?.name}} 
+                        </option>
+                     </select>
+                     <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>Upload Photo</a>
+                     <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)">
+                     <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+                     <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <a href="javascript:void(0)"><i class="fa fa-notes" aria-hidden="true"></i>Notes</a>
+                     <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
+                     <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <button type="submit" class="btn btn-orange" >Add Task</button>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>
+</div>
+<div class="modal-dialog-img col-md-6" >
+   <div class="modal" id="myModal11" backdrop="static" role="dialog" tabindex="-1" 
+   style="display: block; background-color: rgba(0, 0, 0, 0.32)" 
+   [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" 
+   aria-hidden="true">
+   <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Task deletion</h4>
+            <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
+            <p>All information associated to this task will be permanently deleted.
+               <span class="text-danger">This operation can not be undone.</span>
+            </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeDeleteTaskModal(taskName)">Cancel</button>
+            <button type="button" class="btn btn-orange-sm" (click)="deleteTask(taskId)">Yes,Delete It</button>
          </div>
       </div>
    </div>
