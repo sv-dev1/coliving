@@ -1346,7 +1346,15 @@ td.fc-day-top.fc-sat.fc-past {
     right: 0;
     bottom: 0;
 }
-
+button.fc-dayGridMonth-button.fc-button.fc-button-primary{
+    text-transform: capitalize;
+}
+button.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active{
+    text-transform: capitalize;
+}
+button.fc-timeGridDay-button.fc-button.fc-button-primary{
+    text-transform: capitalize;
+}
  .teamError-msg {
     width: 100%;
     margin-top: 0.25rem;

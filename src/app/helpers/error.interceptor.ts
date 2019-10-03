@@ -33,6 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 return event;
             }),
             catchError((err: HttpErrorResponse) => {
+                console.log(err);
                 const error = err.error.message || err.statusText;
                 if(err.status == 0){
                     this.toastr.errorToastr('Service Unavailable');
@@ -50,11 +51,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if(err.error.email) {
                     this.toastr.errorToastr(err.error.email,'Error');
                 }
-                if(err.error.username) {
-                      this.toastr.errorToastr(err.error.username,'Error');
-                }
-                if(err.error.email) {
-                     this.toastr.errorToastr(err.error.email,'Error');
+                if(err.error.password) {
+                    this.toastr.errorToastr(err.error.password,'Error');
                 }
                 
                 return throwError(err);

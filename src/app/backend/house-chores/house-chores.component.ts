@@ -81,14 +81,13 @@ export class HouseChoresComponent implements OnInit {
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
-
 	curr = new Date();
 	eventInfo: boolean = false;
 	addTaskModal:boolean=false;
-
-    //socket:any='';
-    
-
+	IsKid:boolean=false;
+	IsPet:boolean=false;
+	IsN:boolean=false;
+	OtherPro:any=[];
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -96,8 +95,8 @@ export class HouseChoresComponent implements OnInit {
 		public toastr: ToastrManager,
 		private http : HttpClient,
 		private datePipe: DatePipe,
-		private socket: Socket,    private renderer: Renderer2
-
+		private socket: Socket, 
+		private renderer: Renderer2
 		) { 
 		this.addTaskForm = this.formBuilder.group({
 			taskName: ['', Validators.required],
@@ -107,15 +106,9 @@ export class HouseChoresComponent implements OnInit {
 			image: ['', Validators.required],
 			notes: ['', Validators.required],
 		});
-
 		this.base_url = environment.base_url;
 		this.today = new Date();
-
-  	//this.socket_url = environment.socket_url;
-    //this.socket = io(this.socket_url);
  		 this.socket.connect(); 
-
-	   
 	}
 
 	ngOnInit() {
@@ -156,12 +149,37 @@ export class HouseChoresComponent implements OnInit {
 		body.classList.remove('popCustomBody');
 	}
 	openNextTabModal(id) {
-
+		if(id == 1){
+			this.IsKid=true;
+		}
+		if(id == 2){
+			this.IsPet=true;
+		}
+		if(id == 3){
+			this.IsN=true;
+		}
 		this.isWelcomeBlock = false;
 		this.isBrightNestBlock =true;
 		this.isNextStep =true;
 		this.isProgressBlue =true;
 		this.islockbgblue = false;
+
+	}
+	otherPro(event){
+   console.log(event);
+		// if(event.target.checked){
+		// 		this.OtherPro.push(id);
+		// }
+		// else{
+		// 	for(var i=0;i<=this.OtherPro.length;i++)
+		// 	{
+		// 		if(this.OtherPro[i] == id){
+		// 			this.OtherPro.splice(this.OtherPro.indexOf(this.OtherPro), 1);
+		// 		}
+		// 	}
+		// }
+		console.log(this.OtherPro);
+
 	}
 	onNextStepClick(id) {
 		//console.log('id', id);
