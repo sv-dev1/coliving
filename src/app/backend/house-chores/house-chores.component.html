@@ -55,124 +55,146 @@
                               </li>
                            </ul>
                         </div>
-                     </div>
-                     <div class="custm_to-do mb-4">
-                        <div class="to-do_heading">
-                           <h2>Suggestions</h2>
-                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                           <span aria-hidden="true">5</span>
-                           </button>
+                        <div class="custm_to-do mb-4">
+                           <div class="to-do_heading">
+                              <h2>Suggestions</h2>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">5</span>
+                              </button>
+                           </div>
+                           <div class="to_do_list">
+                              <ul class="list-group">
+                                 <li class="list-group-item active-plus">
+                                    Clean outside of fridge
+                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                 </li>
+                                 <li class="list-group-item active-plus">
+                                    Tidy desk
+                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                 </li>
+                                 <li class="list-group-item active-plus">
+                                    Clean drawers
+                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                 </li>
+                                 <li class="list-group-item active-plus">
+                                    Fold towels
+                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                 </li>
+                                 <li class="list-group-item active-plus">
+                                    Clean drawers
+                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                 </li>
+                              </ul>
+                           </div>
                         </div>
-                        <div class="to_do_list">
-                           <ul class="list-group">
-                              <li class="list-group-item active-plus">
-                                 Clean outside of fridge
-                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                              </li>
-                              <li class="list-group-item active-plus">
-                                 Tidy desk
-                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                              </li>
-                              <li class="list-group-item active-plus">
-                                 Clean drawers
-                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                              </li>
-                              <li class="list-group-item active-plus">
-                                 Fold towels
-                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                              </li>
-                              <li class="list-group-item active-plus">
-                                 Clean drawers
-                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                              </li>
-                           </ul>
-                        </div>
                      </div>
-                  </div>
-                  <div class="tab-pane fade" id="create-event">
-                     <div class="calendar-wrapper custm_calender">
-                        <div class='app-calendar'>
-                           <full-calendar
-                           defaultView="timeGridWeek"
-                           [header]="{
-                           left: 'prev,next today',
-                           center: 'title',
-                           right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                           }"
-                           [plugins]="calendarPlugins"
-                           [weekends]="calendarWeekends"
-                           [events]="calendarEvents"
-                           (dateClick)="handleDateClick($event)"
-                           (eventClick)="event($event)"
-                           ></full-calendar>
+                     <div class="tab-pane fade" id="create-event">
+                        <div class="calendar-wrapper custm_calender">
+                           <div class='app-calendar'>
+                              <full-calendar
+                              defaultView="timeGridWeek"
+                              [header]="{
+                              left: 'prev,next today',
+                              center: 'title',
+                              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                              }"
+                              [plugins]="calendarPlugins"
+                              [weekends]="calendarWeekends"
+                              [events]="calendarEvents"
+                              (dateClick)="handleDateClick($event)"
+                              (eventClick)="event($event)"
+                              ></full-calendar>
+                           </div>
                         </div>
-                        <!-- <button id="btnPrev" type="button">Prev</button>
-                           <button id="btnNext" type="button">Next</button> -->
-                        <div id="divCal"></div>
-                     </div>
-                  </div>
-                  <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
-                     <div class="team-member">
-                        <div class="custom_member">
-                           <!---   Chat HTML START -------->
-                           <div class="container">
-                              <div class="messaging">
-                                 <div class="inbox_msg">
-                                    <div class="inbox_people">
-                                       <div class="headind_srch">
-                                          <div class="recent_heading">
-                                             <h4>Teams</h4>
-                                          </div>
-                                       </div>
-                                       <div class="inbox_chat" >
-                                          <div  class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
-                                          <div class="chat_people">
-                                             <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                             <div class="chat_ib" (click)="openChat(team,index)">
-                                                <h5>
-                                                   {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
-                                                </h5>
-                                                <p>Test, which is a new approach to have all solutions 
-                                                   astrology under one roof.
-                                                </p>
+                        <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
+                           <div class="team-member">
+                              <div class="custom_member">
+                                 <!---   Chat HTML START -------->
+                                 <div class="container">
+                                    <div class="messaging">
+                                       <div class="inbox_msg">
+                                          <div class="inbox_people">
+                                             <div class="headind_srch">
+                                                <div class="recent_heading">
+                                                   <h4>Teams</h4>
+                                                </div>
+                                             </div>
+                                             <div class="inbox_chat" >
+                                                <div  class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
+                                                <div class="chat_people">
+                                                   <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                   <div class="chat_ib" (click)="openChat(team,index)">
+                                                      <h5>
+                                                         {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
+                                                      </h5>
+                                                      <p>Test, which is a new approach to have all solutions 
+                                                         astrology under one roof.
+                                                      </p>
+                                                   </div>
+                                                </div>
                                              </div>
                                           </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="mesgs">
-                                    <div class="msg_history">
-                                       <div class="incoming_msg">
-                                          <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                          <div class="received_msg">
-                                             <div class="received_withd_msg">
-                                                <p>Test which is a new approach to have all
-                                                   solutions
-                                                </p>
-                                                <span class="time_date"> 11:01 AM    |    June 9</span>
+                                          <div class="mesgs">
+                                             <div class="msg_history">
+                                                <div class="incoming_msg">
+                                                   <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                   <div class="received_msg">
+                                                      <div class="received_withd_msg">
+                                                         <p>Test which is a new approach to have all
+                                                            solutions
+                                                         </p>
+                                                         <span class="time_date"> 11:01 AM    |    June 9</span>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <div class="outgoing_msg">
+                                                   <div class="sent_msg">
+                                                   </div>
+                                                   <div class="mesgs">
+                                                      <div class="msg_history">
+                                                         <div class="incoming_msg">
+                                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                            <div class="received_msg">
+                                                               <div class="received_withd_msg">
+                                                                  <p>Test which is a new approach to have all
+                                                                     solutions
+                                                                  </p>
+                                                                  <span class="time_date"> 11:01 AM    |    June 9</span>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="type_msg">
+                                                            <div class="input_msg_write">
+                                                               <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
+                                                               <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                                            </div>
+                                                            <div class="outgoing_msg">
+                                                               <div class="sent_msg">
+                                                                  <p>Test which is a new approach to have all
+                                                                     solutions
+                                                                  </p>
+                                                                  <span class="time_date"> 11:01 AM    |    June 9</span> 
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="type_msg">
+                                                            <div class="input_msg_write">
+                                                               <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
+                                                               <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
                                              </div>
+                                             <!---   Chat HTML START End-------->
                                           </div>
-                                       </div>
-                                       <div class="outgoing_msg">
-                                          <div class="sent_msg">
-                                             <p>Test which is a new approach to have all
-                                                solutions
-                                             </p>
-                                             <span class="time_date"> 11:01 AM    |    June 9</span> 
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="type_msg">
-                                       <div class="input_msg_write">
-                                          <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
-                                          <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <!---   Chat HTML START End-------->
                      </div>
                   </div>
                </div>
@@ -220,24 +242,36 @@
                   <div class="col-md-4">
                      <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock" (click) ="openNextTabModal('1')">
                         <div class="kid-bx text-center p-3">
-                           <h6 class="mb-3">Kids</h6>
-                           <img class="img-fluid" src="assets/images/kids-background.png" width="100">
+                           <label class="block-check">
+                              <h6 class="mb-3">Kids</h6>
+                              <img class="img-fluid" src="assets/images/kids-background.png" width="100">
+                              <input type="checkbox" checked="checked" *ngIf="IsKid">
+                              <span class="checkmark" *ngIf="IsKid"></span>
+                           </label>
                         </div>
                      </a>
                   </div>
                   <div class="col-md-4">
                      <a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('2')">
                         <div class="kid-bx text-center p-3">
-                           <h6 class="mb-3">Pets</h6>
-                           <img class="img-fluid" src="assets/images/pets-background.png" width="100">
+                           <label class="block-check">
+                              <h6 class="mb-3">Pets</h6>
+                              <img class="img-fluid" src="assets/images/pets-background.png" width="100">
+                              <input type="checkbox" *ngIf="IsPet" checked="checked">
+                              <span class="checkmark" *ngIf="IsPet"></span>
+                           </label>
                         </div>
                      </a>
                   </div>
                   <div class="col-md-4">
                      <a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('3')">
                         <div class="kid-bx text-center p-3">
-                           <h6 class="mb-3">Neither</h6>
-                           <img class="img-fluid" src="assets/images/neither-background.png" width="80">
+                           <label class="block-check">
+                              <h6 class="mb-3">Neither</h6>
+                              <img class="img-fluid" src="assets/images/neither-background.png" width="80">
+                              <input type="checkbox" *ngIf="IsN" checked="checked">
+                              <span class="checkmark" *ngIf="IsN"></span>
+                           </label>
                         </div>
                      </a>
                   </div>
@@ -253,48 +287,72 @@
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
                      <div class="orange-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">EXTERIOR</h6>
-                        <img class="img-fluid" src="assets/images/exterior-background.png" width="100">
+                        <label class="block-check">
+                           <h6 class="mb-3">EXTERIOR</h6>
+                           <img class="img-fluid" src="assets/images/exterior-background.png" width="100">
+                           <input type="checkbox" (change)="otherPro($event)" id="1">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)">
                      <div class="blue-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">POOL</h6>
-                        <img class="img-fluid" src="assets/images/pool-background.png" width="100">
+                        <label class="block-check">
+                           <h6 class="mb-3">POOL</h6>
+                           <img class="img-fluid" src="assets/images/pool-background.png" width="100">
+                           <input type="checkbox"  (change)="otherPro($event)" id="2">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)">
                      <div class="pink-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">BASEMENT</h6>
-                        <img class="img-fluid" src="assets/images/basement-background.png" width="80">
+                        <label class="block-check">
+                           <h6 class="mb-3">BASEMENT</h6>
+                           <img class="img-fluid" src="assets/images/basement-background.png" width="80">
+                           <input type="checkbox"  (change)="otherPro($event)" id="3">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)">
                      <div class="orange-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">LAWN/GARDEN</h6>
-                        <img class="img-fluid" src="assets/images/lawn-background.png" width="100">
+                        <label class="block-check">
+                           <h6 class="mb-3">LAWN/GARDEN</h6>
+                           <img class="img-fluid" src="assets/images/lawn-background.png" width="100">
+                           <input type="checkbox"  (change)="otherPro($event)" id="4">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)">
                      <div class="blue-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">GARAGE</h6>
-                        <img class="img-fluid" src="assets/images/garage-background.png" width="100">
+                        <label class="block-check">
+                           <h6 class="mb-3">GARAGE</h6>
+                           <img class="img-fluid" src="assets/images/garage-background.png" width="100">
+                           <input type="checkbox"  (change)="otherPro($event)" id="5">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
                <div class="col-md-4 mb-3">
                   <a class="text-decoration-none" href="javascript:void(0)">
                      <div class="pink-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">ATTIC</h6>
-                        <img class="img-fluid" src="assets/images/attic-background.png" width="80">
+                        <label class="block-check">
+                           <h6 class="mb-3">ATTIC</h6>
+                           <img class="img-fluid" src="assets/images/attic-background.png" width="80">
+                           <input type="checkbox" (change)="otherPro($event)" id="6">
+                           <span class="checkmark"></span>
+                        </label>
                      </div>
                   </a>
                </div>
@@ -529,4 +587,5 @@
          </div>
       </div>
    </div>
+</div>
 </div>
