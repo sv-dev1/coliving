@@ -1389,12 +1389,28 @@ button.fc-timeGridDay-button.fc-button.fc-button-primary{
 .customPhoneMessage {
     text-align: left;
     font-size: 12px;
-    color:#dc3545;;
+    color:#dc3545;
 }
 
+/*.tooltip-inner {
+    background-color: #00acd6 !important;
+    color: #dc3545 !important;
 
+}*/
 
-
+li.list-group-item.active-user:hover {
+    background: #f1ece6 !important;
+}
+.delete {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  padding: 12px 16px;
+  transform: translate(0%, -50%);
+  color:#ed502d;
+}
+.delete:hover {background: #bbb;}
 
 
 

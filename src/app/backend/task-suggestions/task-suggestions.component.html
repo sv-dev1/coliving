@@ -14,8 +14,12 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card mb-3">
-						<div class="card-header">Add Suggestion To Task</div>
-						<div class="card-body">
+						<div class="card-header" (click)="suggExp()" ><i [ngClass]="isSuggestion ? 'fa fa-minus' : 'fa fa-plus'" aria-hidden="true"></i>&nbsp;Add Suggestion To Task&nbsp;:&nbsp;<strong>{{taskDetail[0]?.task_name}}</strong>
+							<span class="pull-right delete" (click)="navigateToTaskList()" *ngIf="isSuggestion == false">
+							   <i class="fa fa-arrow-left" style="color:black;" placement="left" ngbTooltip="Go Back"></i>
+							</span>
+							</div>
+						<div class="card-body" id="demo" *ngIf="isSuggestion == true">
 							<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
 								<div class="row">
 									<div class="col-12 col-sm-12">
@@ -30,6 +34,9 @@
 								</div>
 								<div class="col-12 col-sm-12 text-center">
 									<button type="submit" class="btn btn-orange-sm pull-left">Submit</button>
+									<button type="button" class="btn btn-orange-sm pull-right" (click)="navigateToTaskList()">Go Back</button>
+									
+									
 								</div>
 							</form>
 						</div>
@@ -39,7 +46,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card mb-3">
-						<div class="card-header">Previous suggestions List</div>
+						<div class="card-header"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;Previous suggestions List</div>
 						<div class="card-body">
 
 							<div class="row bootstrap snippets">
@@ -49,22 +56,25 @@
 
 											<div class="panel-body">
 
-												<ul class="media-list" *ngFor="let task of taskById, index as i">
+												<ul class="media-list" *ngFor="let suggestion of suggestions, index as i">
 													<li class="media">
 														<a href="#" class="pull-left">
 															<img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
 														</a>
 														<div class="media-body">
 															<span class="text-muted pull-right">
-																<small class="text-muted">30 min ago</small>
+																<small class="text-muted">{{suggestion.created_at | date: 'yyyy-MM-dd HH:mm:ss'}}</small>
 															</span>
-															<strong class="text-success">@MartinoMont</strong>
+															<strong class="text-success">@{{suggestion.userProfile?.firstName}}&nbsp;{{suggestion.userProfile?.lastName}}</strong>
 															<p>
-															 {{task?.notes}}
+															 {{suggestion?.notes}}
 															</p>
 														</div>
 													</li>
 												</ul>
+											</div>
+											<div class="panel-body" *ngIf="!suggestions?.length > 0">
+												<p class="text-center">No Previous Suggesstions Availbale For Task {{taskDetail[0]?.task_name}}</p>
 											</div>
 										</div>
 									</div>
