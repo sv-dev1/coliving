@@ -25,7 +25,9 @@ export class TaskSuggestionsComponent implements OnInit {
 	isError : boolean = false;
 	isSuccess : boolean = false;
 	errorsArrUser:any =[]; 
-
+    demo:any=[];
+    isSuggestion : boolean = false;
+    
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -47,14 +49,22 @@ export class TaskSuggestionsComponent implements OnInit {
 		//console.log('teamId',this.task_id);
 		
 	}
+
+	suggExp(){
+		
+		this.isSuggestion =! this.isSuggestion;
+	}
+
 	navigateToTaskList(){
 	     this.router.navigate(['/house-chores']); 
 	}
+	
 	getTaskSuggestionByTaskId(taskID){
-
+        this.suggestionsArray = [];
+        this.taskDetailArray = [];
 		this.data_service.getTaskSuggestionByTeamId(taskID).subscribe((response:any) =>{   
-			this.suggestionsArray = this.suggestionsArray.concat(response.suggestionList.suggestionArr);
-			this.suggestions= this.suggestionsArray;
+			this.suggestionsArray = response.suggestionList.suggestionArr;
+			this.suggestions = this.suggestionsArray;
 			//console.log('suggestions',this.suggestions);
 			this.taskDetailArray = this.taskDetailArray.concat(response.suggestionList.taskArr);
 			this.taskDetail= this.taskDetailArray;
@@ -78,15 +88,13 @@ export class TaskSuggestionsComponent implements OnInit {
 				"notes" : formValue.suggestion,
 				"taskId": this.task_id,
 			}
-
 			this.data_service.addSuggestion(input_data).subscribe((response:any) =>{  
-				
 				this.toastr.successToastr(response.message, 'Success!');		
 				this.isError = false;
 				this.isSuccess = true;   
 				this.submitted = false;  
 			    this.addSuggestionForm.reset();
-			    //this.getTaskSuggestionByTaskId(this.task_id); 
+			    this.getTaskSuggestionByTaskId(this.task_id); 
 				this.router.navigate(['/task-suggestions',this.task_id]); 
   
 			}, error =>{

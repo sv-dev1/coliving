@@ -122,7 +122,7 @@
 										<div class="form-group">
 											<div class="form-check">
 												<label class="form-check-label agree">
-													<input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> I agree to the <a href="">privacy policy</a> and <a href="">terms of service.</a>
+													<input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> I agree to the <a href="javascript:void(0);">privacy policy</a> and <a href="javascript:void(0);">terms of service.</a>
 													<div *ngIf="submitted && f.agree.errors" class="invalid-feedback">
 														<span class="for-sub-name" id="cust" *ngIf="submitted && f.agree.errors.required || f.agree == undefined" class="for-sub-name"> This field is required.</span>
 													</div>

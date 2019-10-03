@@ -14,8 +14,12 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card mb-3">
-						<div class="card-header"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add Suggestion To Task&nbsp;:&nbsp;<strong>{{taskDetail[0]?.task_name}}</strong></div>
-						<div class="card-body">
+						<div class="card-header" (click)="suggExp()" ><i [ngClass]="isSuggestion ? 'fa fa-minus' : 'fa fa-plus'" aria-hidden="true"></i>&nbsp;Add Suggestion To Task&nbsp;:&nbsp;<strong>{{taskDetail[0]?.task_name}}</strong>
+							<span class="pull-right delete" (click)="navigateToTaskList()" *ngIf="isSuggestion == false">
+							   <i class="fa fa-arrow-left" style="color:black;" placement="left" ngbTooltip="Go Back"></i>
+							</span>
+							</div>
+						<div class="card-body" id="demo" *ngIf="isSuggestion == true">
 							<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
 								<div class="row">
 									<div class="col-12 col-sm-12">
@@ -30,7 +34,9 @@
 								</div>
 								<div class="col-12 col-sm-12 text-center">
 									<button type="submit" class="btn btn-orange-sm pull-left">Submit</button>
-									<button type="button" class="btn btn-orange-sm pull-right" (click)="navigateToTaskList()">Back</button>
+									<button type="button" class="btn btn-orange-sm pull-right" (click)="navigateToTaskList()">Go Back</button>
+									
+									
 								</div>
 							</form>
 						</div>
