@@ -44,18 +44,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                     sessionStorage.removeItem("auth_token");
                     this.router.navigate(['/login']);
                 }
+                
                 if(err.error.username) {
                     this.toastr.errorToastr(err.error.username,'Error');
                 }
                 if(err.error.email) {
                     this.toastr.errorToastr(err.error.email,'Error');
                 }
-                if(err.error.username) {
-                      this.toastr.errorToastr(err.error.username,'Error');
-                }
-                if(err.error.email) {
-                     this.toastr.errorToastr(err.error.email,'Error');
-                }
+               
                 
                 return throwError(err);
             }));

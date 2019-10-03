@@ -33,8 +33,12 @@
                         <div class="to_do_list">
                            <ul class="list-group" *ngFor="let task of pending_length,index as i">
                                  
-                                 <li class="list-group-item active-user" (click)="navigateToSuggestions(task)">{{task.task_name}}<span class="badge badge-primary badge-pill"></span>
-                              </li>
+                                 <li class="list-group-item active-user" >
+                                    <span (click)="navigateToSuggestions(task)" placement="right" ngbTooltip="Click On {{task.task_name}} To Add Or View Suggestions." >{{task.task_name}}
+                                    </span>
+                                    <span class="badge badge-primary badge-pill"></span>
+                                    <span class="delete" ngbTooltip="Click To Delete The Task {{task.task_name}}" (click)="deleteTask(task)">&times;</span>
+                                 </li>
                             
                            </ul>
                         </div>
@@ -495,7 +499,7 @@
                      <div class="assign_name">
                         <a href="javascript:void(0)"><i class="fa fa-notes" aria-hidden="true"></i>Notes</a>
                         <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
-                        <div *ngIf="submittenicknamed && f.notes.errors" class="invalid-feedback">
+                        <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
                         </div>
                      </div>

@@ -219,6 +219,9 @@ export class HouseChoresComponent implements OnInit {
 		})
 		
 	}
+	deleteTask(taskId){
+          console.log('taskId',taskId);
+	}
 	get f() {  
 		return this.addTaskForm.controls; 
 	}

@@ -79,9 +79,7 @@
 											<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
 												<span class="for-sub-name" *ngIf="f.password.errors.minlength">Your password must be at least 8 characters.</span>
 											</div>
-											<div *ngIf="this.messagePaste ==='true' || this.messageCopy  ==='true' ||this.messageCut ==='true'">
-												<span class="customPhoneMessage">{{messagetxt}}</span>
-											</div>
+											
 										</div>
 										
 										<div class="form-group form-parts">
@@ -100,9 +98,7 @@
 											<div *ngIf="isError == true" >
 												<span class="for-sub-name">{{errorsArr?.password2}}</span>
 											</div>
-											<div *ngIf="this.messagePaste|| this.messageCopy  || this.messageCut ">
-												<span class="customPhoneMessage">{{messagetxt}}</span>
-											</div>
+											
 										</div>
 										<div class="form-group form-parts">
 											<input type="text"  placeholder="Phone Number" class="form-control" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" (keypress)="keyPress($event)">
