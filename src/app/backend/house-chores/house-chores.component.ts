@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild} from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild,Renderer2 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
@@ -23,14 +23,11 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class HouseChoresComponent implements OnInit {
-	//@ViewChild('calendar') calendarComponent: FullCalendarComponent; // the #calendar in the template
 
 	calendarVisible = true;
 	calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 	calendarWeekends = true;
-	calendarEvents: EventInput[] = [
-	{ title: '', start: "" }
-	];
+	calendarEvents: EventInput[] = [	{ title: '', start: "" , id:'' }];
 	isSuccess = false;
 	isLoading = false;
 	display='none';
@@ -49,7 +46,6 @@ export class HouseChoresComponent implements OnInit {
 	isNextStep2:boolean= false;
 	todayDate:boolean=false;
 	addTaskForm: FormGroup;
-	
 	submitted = false;
 	allUsersArray: any = [];
 	allUsers:any = [];
@@ -85,8 +81,14 @@ export class HouseChoresComponent implements OnInit {
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
+
+	curr = new Date();
+	eventInfo: boolean = false;
+	addTaskModal:boolean=false;
+
     //socket:any='';
     
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -94,8 +96,8 @@ export class HouseChoresComponent implements OnInit {
 		public toastr: ToastrManager,
 		private http : HttpClient,
 		private datePipe: DatePipe,
-		private socket: Socket
-		
+		private socket: Socket,    private renderer: Renderer2
+
 		) { 
 		this.addTaskForm = this.formBuilder.group({
 			taskName: ['', Validators.required],
@@ -108,9 +110,12 @@ export class HouseChoresComponent implements OnInit {
 
 		this.base_url = environment.base_url;
 		this.today = new Date();
-	    this.socket_url = environment.socket_url;
-         //this.socket = io(this.socket_url);
- 		this.socket.connect(); 
+
+  	//this.socket_url = environment.socket_url;
+    //this.socket = io(this.socket_url);
+ 		 this.socket.connect(); 
+
+	   
 	}
 
 	ngOnInit() {
@@ -132,6 +137,7 @@ export class HouseChoresComponent implements OnInit {
 		body.classList.add('popCustomBody');
 
 	}
+
 	@HostListener('document:keypress', ['$event'])
 
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -245,7 +251,6 @@ export class HouseChoresComponent implements OnInit {
 				"category" : form.category,
 				"notes" : form.notes,
 			} 
-			//console.log(input_data);  
 			const formData = new FormData();
 			formData.append('task_name', input_data.task_name);
 			formData.append('assignTo', input_data.assign_to);	   
@@ -253,17 +258,13 @@ export class HouseChoresComponent implements OnInit {
 			formData.append('photo', this.fileData);
 			formData.append('category_id', input_data.category);
 			formData.append('notes', input_data.notes);   
-
-			//console.log('form data',formData);
 			let token; 
 			if(sessionStorage.getItem("auth_token")!=undefined){
 				token = sessionStorage.getItem("auth_token"); 
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
 			this.http.post(this.base_url+'createTask', formData, httpOptions).subscribe((response:any) => {
-				//console.log('response response',response); 
 				this.toastr.successToastr('Task added successfully.', 'Success!');
-				
 				this.isError = false;
 				this.isSuccess = true; 
 				this.submitted = false;   	
@@ -278,16 +279,13 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTask().subscribe((response:any) =>{   
 			response.tasks.forEach(element => {
 				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
-				this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
+				this.calendarEvents = this.calendarEvents.concat({ 
 					title: element.task_name,
 					start: element.due_date,
+					id:element.taskId
 				})
 			});
-			//console.log(this.calendarEvents);
-			//		console.log(this.allTask);
-			//	 this.allTaskArray = this.allTaskArray.concat(response.Task);
-			// this.allTask = this.allTaskArray;
-			// console.log('allTask',this.allTask);
+		
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -295,13 +293,34 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	handleDateClick(arg) {
-		if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-			this.calendarEvents = this.calendarEvents.concat({ // add new event data. must create new array
-				title: 'New Event',
-				start: arg.date,
-				allDay: arg.allDay
-			})
-		}
+	
+		let today=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
+		let check=arg.dateStr;
+	
+	  if(check < today)
+    {
+			console.log("previous");
+       
+    }
+    else
+    {
+			console.log("next");
+			this.eventInfo=true;
+			this.addTaskModal=true;
+			this.renderer.addClass(document.body, 'modal-open');
+    }
+
+	}
+	openaddTask(){
+		this.addTaskModal=true;
+		this.renderer.addClass(document.body, 'modal-open');
+	}
+	close(){
+		this.addTaskModal=false;
+		this.renderer.removeClass(document.body, 'modal-open');
+	}
+	event(event){
+		console.log(event.event._def.publicId);
 	}
 	allTaskListing() {
 		this.data_service.getTask().subscribe((response:any) =>{   
@@ -333,7 +352,6 @@ export class HouseChoresComponent implements OnInit {
 		this.indexCheck = index;	
 		this.joinChat();		
 	}
-
 	joinChat() { 
 		if(this.user_id){
 			this.data = {
@@ -351,10 +369,9 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
-		console.log('join chat data', this.data);
+	//	console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
 	}
-
 	sendMessgae() {
 		if(this.user_id ==''){
 			this.by_default_team = this.firstTeam;
@@ -376,14 +393,12 @@ export class HouseChoresComponent implements OnInit {
 		this.socket.emit('newMessage', this.data);
 		this.message = '';
 	}
-
 	getMessages() {
 		this.socket.on('getMessage', (data) => {
 			console.log('getMessage',data);
 			this.messages.push(data);   
 		});  
 	} 
-
 	loadMyMessages() {
 		this.socket.on('messages', (data) => {
 			this.gruopMessages = data.messages; 
