@@ -39,19 +39,31 @@
                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Email:</label>
-                               <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                               <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                   <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                                <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Username:</label>
+                               <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
+                               <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.userName.errors.required">userName is required.</span>
                                </div>
                             </div>
                          </div>
                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Phone Number:</label>
-                               <input type="text" id="phoneNumber" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" >
+                               <input type="text" id="phoneNumber" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" (keypress)="keyPress($event)">
                                <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
                                   <span class="for-sub-name" *ngIf="f.phoneNumber.errors.required">Phone Number is required.</span>
                                </div>
+                                <div *ngIf="this.messageDigit">
+                                    <span class="customPhoneMessage">{{this.messageDigit}}</span>
+                                </div>
                             </div>
                          </div>
                          <div class="col-12 col-sm-6">
@@ -66,13 +78,16 @@
                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Postal Code:</label>
-                               <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }">
+                               <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
                                <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
                                   <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
                                </div>
                                <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
                                   <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
                                </div>
+                                <div *ngIf="this.messageDigit1">
+                                    <span class="customPhoneMessage">{{this.messageDigit1}}</span>
+                                </div>
                             </div>
                          </div>
                          <div class="col-12 col-sm-6">

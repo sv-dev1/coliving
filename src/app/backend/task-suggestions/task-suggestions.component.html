@@ -1,8 +1,81 @@
 <section class="wrapper work-panel">
-   <app-header></app-header>
-   <app-sidebar></app-sidebar>
-   <div class="work-block">
-      <div class="container">
-      </div>
-  </div>
+	<app-header></app-header>
+	<app-sidebar></app-sidebar>
+	<div class="work-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="breadcrumb custom-breadcrumb">
+						<li class="breadcrumb-item"><a routerLink='/dashboard'>Home</a></li>
+						<li class="breadcrumb-item active">Task suggestions Page</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-3">
+						<div class="card-header">Add Suggestion To Task</div>
+						<div class="card-body">
+							<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
+								<div class="row">
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label for="title">Add Suggestion:</label>
+											<textarea id="notes" class="form-control"rows="5" cols="5" formControlName="suggestion" [ngClass]="{ 'is-invalid': submitted && f.suggestion.errors }"></textarea>
+											<div *ngIf="submitted && f.suggestion.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.suggestion.errors.required">Suggestion is required.</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-sm-12 text-center">
+									<button type="submit" class="btn btn-orange-sm pull-left">Submit</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div> 
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-3">
+						<div class="card-header">Previous suggestions List</div>
+						<div class="card-body">
+
+							<div class="row bootstrap snippets">
+								<div class="col-md-12 col-md-offset-2 col-sm-12">
+									<div class="comment-wrapper">
+										<div class="panel panel-info">
+
+											<div class="panel-body">
+
+												<ul class="media-list" *ngFor="let task of taskById, index as i">
+													<li class="media">
+														<a href="#" class="pull-left">
+															<img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+														</a>
+														<div class="media-body">
+															<span class="text-muted pull-right">
+																<small class="text-muted">30 min ago</small>
+															</span>
+															<strong class="text-success">@MartinoMont</strong>
+															<p>
+															 {{task?.notes}}
+															</p>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
