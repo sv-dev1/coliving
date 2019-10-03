@@ -12,7 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 //import { Socket } from 'ngx-socket-io';
-import * as io from 'socket.io-client';
+//import * as io from 'socket.io-client';
 import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
 
@@ -81,9 +81,14 @@ export class HouseChoresComponent implements OnInit {
 	by_default_team : any = [];
 	gruopMessages : any = [];
 	socket_url:string = '';
+
 	curr = new Date();
 	eventInfo: boolean = false;
 	addTaskModal:boolean=false;
+
+    //socket:any='';
+    
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -105,9 +110,12 @@ export class HouseChoresComponent implements OnInit {
 
 		this.base_url = environment.base_url;
 		this.today = new Date();
+
   	//this.socket_url = environment.socket_url;
     //this.socket = io(this.socket_url);
  		 this.socket.connect(); 
+
+	   
 	}
 
 	ngOnInit() {
@@ -333,7 +341,7 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	navigateToSuggestions(task){
-		this.router.navigate(['/task-suggestions',{p1: task.id, p2: task.userId}]);
+		this.router.navigate(['/task-suggestions',task.id]);
 	}
 	openChat(team,index){
 		//console.log('team',team);

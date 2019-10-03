@@ -1375,8 +1375,14 @@ td.fc-day-top.fc-sat.fc-past {
 .cus-forgot .left-side { 
     min-height: 250px !important;
 }
-
-
+.card-header:first-child{
+ background: #f1ece6;
+}
+.customPhoneMessage {
+    text-align: left;
+    font-size: 12px;
+    color:#dc3545;;
+}
 
 
 

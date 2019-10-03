@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
         this.res = JSON.stringify(response, undefined, 2); 
         sessionStorage.setItem("auth_token", response.token);
         sessionStorage.setItem("user_name", response.username);
-       
+         sessionStorage.setItem("userId", response.userId);
         this.toastr.successToastr('You are logged in successfully!');
         this.router.navigate(['/dashboard']);  
         this.isError = false;

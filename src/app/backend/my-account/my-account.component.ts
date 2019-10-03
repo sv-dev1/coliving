@@ -29,7 +29,8 @@ export class MyAccountComponent implements OnInit {
 	url:any;
 	userDataArr:any;
 	email:any;
-
+    messageDigit:string='';
+    messageDigit1:string='';
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -41,6 +42,7 @@ export class MyAccountComponent implements OnInit {
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			email: ['', Validators.required],
+			userName: ['', Validators.required],
 			phoneNumber: ['', Validators.required],
 			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
 			country: ['', Validators.required],
@@ -67,12 +69,14 @@ export class MyAccountComponent implements OnInit {
        // console.log('token',token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
+
 			console.log('sfsfdf', response.users[0]);
 			this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			this.updateProfileForm.patchValue({
 				firstName : this.userDataArr.firstName,
 				lastName : this.userDataArr.lastName,
 				email : this.userDataArr.email,
+				userName : sessionStorage.getItem('user_name'),
 				phoneNumber : this.userDataArr.phoneNo,
 				postalCode : this.userDataArr.postalCode,
 				address : this.userDataArr.address,
@@ -104,6 +108,26 @@ export class MyAccountComponent implements OnInit {
 			this.url = reader.result; 
 		}
 	}
+	keyPress(event: any) {
+	this.messageDigit1 ='';
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    // console.log(inputChar, e.charCode);
+       if (!pattern.test(inputChar)) {
+         this.messageDigit = 'Only digit allowed.';
+           event.preventDefault();
+      }
+    }
+    keyPress1(event: any) {
+    this.messageDigit ='';
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    // console.log(inputChar, e.charCode);
+       if (!pattern.test(inputChar)) {
+         this.messageDigit1 = 'Only digit allowed.';
+           event.preventDefault();
+      }
+    }
 	updateProfile(form){
 		console.log('ffsdf ',form);
 		this.submitted = true;  

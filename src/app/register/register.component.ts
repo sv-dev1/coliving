@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {  Router, } from '@angular/router';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { DataService } from '../data.service';
@@ -8,6 +8,7 @@ import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import { ConfirmPasswordValidator } from '../helpers/confirm-password.validator';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,17 +21,22 @@ export class RegisterComponent implements OnInit {
   msg = ''; 
   isError : boolean = false;
   isSuccess : boolean = false;
-  errorsArr:any = []; 
+  errorsArr:any = [];
+  errorsArrUser:any =[]; 
   private rc: string;
   res:any = [];
-
+  messageDigit:string='';
+  color : string='green';
+  child : boolean=true;
+messahecczcz:string='';
+  
   constructor(	
-        private formBuilder:FormBuilder,	
-        private router: Router,
-        private data_service : DataService,
-        public toastr: ToastrManager,
-        private route: ActivatedRoute,
-        private authService: AuthService
+    private formBuilder:FormBuilder,	
+    private router: Router,
+    private data_service : DataService,
+    public toastr: ToastrManager,
+    private route: ActivatedRoute,
+    private authService: AuthService
     ) { 
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -48,18 +54,28 @@ export class RegisterComponent implements OnInit {
     );
     
   } 
+
   ngOnInit() {
-   const referralCode: string = this.route.snapshot.queryParamMap.get('rc');
-      if(referralCode) {
-        this.registerForm.patchValue({
-            referralCode : referralCode,
-        });  
-      }
+    const referralCode: string = this.route.snapshot.queryParamMap.get('rc');
+    if(referralCode) {
+      this.registerForm.patchValue({
+        referralCode : referralCode,
+      });  
+    }
   }
+ 
   get f() {  
     return this.registerForm.controls; 
   }
-
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    // console.log(inputChar, e.charCode);
+    if (!pattern.test(inputChar)) {
+      this.messageDigit = 'Only digit allowed.';
+      event.preventDefault();
+    }
+  }
   register(form){
 
     console.log("working here");
@@ -68,7 +84,7 @@ export class RegisterComponent implements OnInit {
       console.log("error");
       return;
     }else{
-      
+
       const input_data = {
         "firstName" : form.firstName,
         "lastName" : form.lastName,      
@@ -83,15 +99,15 @@ export class RegisterComponent implements OnInit {
       
       this.data_service.register(input_data).subscribe((response:any) =>{  
         console.log('after register response',response);
-              this.toastr.successToastr('Registered Successfully.', 'Success!');
-              this.router.navigate(['/login']); 
-              this.isError = false;
-              this.isSuccess = true;            
+        this.toastr.successToastr('Registered Successfully.', 'Success!');
+        this.router.navigate(['/login']); 
+        this.isError = false;
+        this.isSuccess = true;            
       }, error =>{
-         this.isError = true;   
-         window.scrollTo(0, 0);
-        this.errorsArr = error.error.username;
-        this.toastr.errorToastr(this.errorsArr, 'Error!');
+        this.isError = true;   
+        window.scrollTo(0, 0);
+        this.errorsArrUser = error.error.username;
+        //this.toastr.errorToastr(this.errorsArr, 'Error!');
         //console.log('dffsdfsd',JSON.stringify(this.errorsArr, undefined, 2))
       })
 
@@ -116,9 +132,9 @@ export class RegisterComponent implements OnInit {
         console.log('after register response');
         console.log(response);
         sessionStorage.setItem("auth_token", response.token);
-            location.href = "/dashboard"; 
+        location.href = "/dashboard"; 
       }, error =>{
-         window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         if(error.error.username){
           this.errorsArr = error.error.username;
           const input_data = { 
@@ -133,15 +149,15 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/dashboard']);  
           }, error =>{ 
             this.isError = true; 
-        //    this.toastr.errorToastr('Invalid Credentials','Error');
+            //    this.toastr.errorToastr('Invalid Credentials','Error');
           })
-       }
-    })
-    
-    
-    
-    
-    
+        }
+      })
+
+
+
+
+
     });
   } 
   signInWithTwitter(){
@@ -166,9 +182,9 @@ export class RegisterComponent implements OnInit {
         console.log('after register response');
         console.log(response);
         sessionStorage.setItem("auth_token", response.token);
-            location.href = "/dashboard"; 
+        location.href = "/dashboard"; 
       }, error =>{
-         window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
         if(error.error.username){
           this.errorsArr = error.error.username;
           const input_data = { 
@@ -183,11 +199,11 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/dashboard']);  
           }, error =>{ 
             this.isError = true; 
-        //    this.toastr.errorToastr('Invalid Credentials','Error');
+            //    this.toastr.errorToastr('Invalid Credentials','Error');
           })
-       }
-    })
-  });
-   
+        }
+      })
+    });
+
   }
 }
