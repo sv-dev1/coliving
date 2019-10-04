@@ -73,7 +73,7 @@
 													</li>
 												</ul>
 											</div>
-											<div class="panel-body" *ngIf="!suggestions?.length > 0">
+											<div class="panel-body" *ngIf="suggestions?.length <= 0">
 												<p class="text-center">No Previous Suggesstions Availbale For Task {{taskDetail[0]?.task_name}}</p>
 											</div>
 										</div>

@@ -407,19 +407,20 @@
    </div>
 </div>
 </div>
-<div class="modal-dialog-img col-md-6" >
-   <div class="modal" id="myModal11" backdrop="static" role="dialog" tabindex="-1" 
-   style="display: block; background-color: rgba(0, 0, 0, 0.32)" 
-   [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" 
-   aria-hidden="true">
-   <div class="modal-dialog modal-lg" role="document">
+<!---  Modal to delete TASK  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >
+   <div class="modal-dialog modaldialog12">
       <div class="modal-content">
+         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Task deletion</h4>
-            <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+            <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
             </button>
          </div>
+         <!-- Modal body -->
          <div class="modal-body">
             <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
             <p>All information associated to this task will be permanently deleted.
