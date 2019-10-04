@@ -118,5 +118,7 @@ response:any;
   }
   closeModal(){
     this.isChangePassword = false;
+    this.submitted = false;     
+    this.ConPass.reset();
   }
 }

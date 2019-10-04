@@ -467,6 +467,8 @@ export class HouseChoresComponent implements OnInit {
 	}
 	close(){
 		this.addTaskModal=false;
+		this.submitted = false;   	
+		this.addTaskForm.reset();
 		this.renderer.removeClass(document.body, 'modal-open');
 	}
 	event(event){
