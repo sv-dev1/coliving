@@ -60,7 +60,7 @@
                                     <input type="text" placeholder="Date of Birth"
                                          class="form-control"
                                          #dp="bsDatepicker"
-                                         bsDatepicker [(bsValue)]="myDateValue" formControlName="dob" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                                         bsDatepicker formControlName="dob"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
                                          <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
                                         <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of Birth is required.</span>
                                </div>
