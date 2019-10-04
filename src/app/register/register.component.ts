@@ -98,16 +98,16 @@ messahecczcz:string='';
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  
-        console.log('after register response',response);
         this.toastr.successToastr('Registered Successfully.', 'Success!');
         this.router.navigate(['/login']); 
         this.isError = false;
         this.isSuccess = true;            
       }, error =>{
         this.isError = true;   
-        window.scrollTo(0, 0);
-        this.errorsArrUser = error.error.username;
-        //this.toastr.errorToastr(this.errorsArr, 'Error!');
+         window.scrollTo(0, 0);
+         console.log('errror',error);
+         this.errorsArrUser = error.error.username;
+         //this.toastr.errorToastr(this.errorsArr, 'Error!');
         //console.log('dffsdfsd',JSON.stringify(this.errorsArr, undefined, 2))
       })
 

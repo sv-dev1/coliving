@@ -48,7 +48,12 @@ export class MyAccountComponent implements OnInit {
 			country: ['', Validators.required],
 			address: ['', Validators.required],
 			image:[''],
-			file:['']
+			file:[''],
+			dob:['', Validators.required],
+			occupation:['', Validators.required],
+			gender:['', Validators.required],
+			short_bio:['', Validators.required],
+			interests:['', Validators.required]
 		});
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;

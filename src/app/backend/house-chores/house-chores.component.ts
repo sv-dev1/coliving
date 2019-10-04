@@ -355,20 +355,16 @@ export class HouseChoresComponent implements OnInit {
 	
 		let today=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
 		let check=arg.dateStr;
-	
-	  if(check < today)
-    {
-			console.log("previous");
-       
-    }
-    else
-    {
+	    if(check < today)
+        {
+			console.log("previous");  
+        }
+        else {
 			console.log("next");
 			this.eventInfo=true;
 			this.addTaskModal=true;
-			this.renderer.addClass(document.body, 'modal-open');
-    }
-
+	  		this.renderer.addClass(document.body, 'modal-open');
+         }
 	}
 	openaddTask(){
 		this.addTaskModal=true;
@@ -432,7 +428,7 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
-	//	console.log('join chat data', this.data);
+		console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
 	}
 	sendMessgae() {

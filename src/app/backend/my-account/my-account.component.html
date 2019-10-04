@@ -45,7 +45,7 @@
                                </div>
                             </div>
                          </div>
-                                <div class="col-12 col-sm-6">
+                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Username:</label>
                                <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
@@ -54,7 +54,89 @@
                                </div>
                             </div>
                          </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Date Of Birth:</label>
+                                    <input type="text" placeholder="Date of Birth"
+                                         class="form-control"
+                                         #dp="bsDatepicker"
+                                         bsDatepicker [(bsValue)]="myDateValue" formControlName="dob" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                                         <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                                        <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of Birth is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Occupation/Timetable:</label>
+                                  <span class="custom-dropdown big">
+                                      <select formControlName="occupation" id="occupation">   
+                                        
+                                          <option value="1">Full time employee</option>
+                                          <option value="2">Part time employee</option><option value="3">Part time/Full time student</option>
+                                          <option value="4">Part time/Full time internship</option>
+                                    </select>
+                                  </span>
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">What would be your typical get up time during the week days:</label>
+                                 
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                           <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Day of moving in/out:</label>
+                              
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Price:</label>
+                              
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">How long willing to stay:</label>
+                              
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Gender:</label>
+                                 <label class="radio-inline">
+                                    <input type="radio" formControlName="gender" checked>
+                                    Male
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" formControlName="gender">Female
+                                  </label>
+                                  <label class="radio-inline">
+                                    <input type="radio" formControlName="gender">Other
+                                  </label>
+                                  <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Phone Number:</label>
                                <input type="text" id="phoneNumber" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" (keypress)="keyPress($event)">
@@ -66,6 +148,25 @@
                                 </div>
                             </div>
                          </div>
+                         <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Short bio:</label>
+                                  <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="short_bio" [ngClass]="{ 'is-invalid': submitted && f.short_bio.errors }"></textarea>
+                                  <div *ngIf="submitted && f.short_bio.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.short_bio.errors.required">Short Bio is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                             <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                               <label for="team">Interests:</label>
+                                  <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interests" [ngClass]="{ 'is-invalid': submitted && f.interests.errors }"></textarea>
+                                  <div *ngIf="submitted && f.interests.errors" class="invalid-feedback">
+                                  <span class="for-sub-name" *ngIf="f.interests.errors.required">Interests is required.</span>
+                               </div>
+                            </div>
+                         </div>
+                    
                          <div class="col-12 col-sm-6">
                             <div class="form-group">
                                <label for="team">Address:</label>
