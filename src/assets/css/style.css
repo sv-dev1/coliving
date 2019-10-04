@@ -1412,7 +1412,25 @@ li.list-group-item.active-user:hover {
 }
 .delete:hover {background: #bbb;}
 
+#taskDel {
+  text-align: center;
+   background-color: rgba(0, 0, 0, 0.7);
+}
 
+@media screen and (min-width: 768px) { 
+ #taskDel:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modaldialog12 {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
 
 
 

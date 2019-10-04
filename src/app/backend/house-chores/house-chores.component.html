@@ -88,113 +88,88 @@
                            </div>
                         </div>
                      </div>
-                     <div class="tab-pane fade" id="create-event">
-                        <div class="calendar-wrapper custm_calender">
-                           <div class='app-calendar'>
-                              <full-calendar
-                              defaultView="timeGridWeek"
-                              [header]="{
-                              left: 'prev,next today',
-                              center: 'title',
-                              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                              }"
-                              [plugins]="calendarPlugins"
-                              [weekends]="calendarWeekends"
-                              [events]="calendarEvents"
-                              (dateClick)="handleDateClick($event)"
-                              (eventClick)="event($event)"
-                              ></full-calendar>
-                           </div>
+                  </div>
+                  <div class="tab-pane fade" id="create-event">
+                     <div class="calendar-wrapper custm_calender">
+                        <div class='app-calendar'>
+                           <full-calendar
+                           defaultView="timeGridWeek"
+                           [header]="{
+                           left: 'prev,next today',
+                           center: 'title',
+                           right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                           }"
+                           [plugins]="calendarPlugins"
+                           [weekends]="calendarWeekends"
+                           [events]="calendarEvents"
+                           (dateClick)="handleDateClick($event)"
+                           (eventClick)="event($event)"
+                           ></full-calendar>
                         </div>
-                        <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
-                           <div class="team-member">
-                              <div class="custom_member">
-                                 <!---   Chat HTML START -------->
-                                 <div class="container">
-                                    <div class="messaging">
-                                       <div class="inbox_msg">
-                                          <div class="inbox_people">
-                                             <div class="headind_srch">
-                                                <div class="recent_heading">
-                                                   <h4>Teams</h4>
-                                                </div>
-                                             </div>
-                                             <div class="inbox_chat" >
-                                                <div  class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
-                                                <div class="chat_people">
-                                                   <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                                   <div class="chat_ib" (click)="openChat(team,index)">
-                                                      <h5>
-                                                         {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
-                                                      </h5>
-                                                      <p>Test, which is a new approach to have all solutions 
-                                                         astrology under one roof.
-                                                      </p>
-                                                   </div>
-                                                </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
+                     <div class="team-member">
+                        <div class="custom_member">
+                           <!--- Chat HTML START -------->
+                           <div class="container">
+                              <div class="messaging">
+                                 <div class="inbox_msg">
+                                    <div class="inbox_people">
+                                       <div class="headind_srch">
+                                          <div class="recent_heading">
+                                             <h4>Teams</h4>
+                                          </div>
+                                       </div>
+                                       <div class="inbox_chat" >
+                                          <div class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
+                                          <div class="chat_people">
+                                             <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                             <div class="chat_ib" (click)="openChat(team,index)">
+                                                <h5>
+                                                   {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
+                                                </h5>
+                                                <p>Test, which is a new approach to have all solutions 
+                                                   astrology under one roof.
+                                                </p>
                                              </div>
                                           </div>
-                                          <div class="mesgs">
-                                             <div class="msg_history">
-                                                <div class="incoming_msg">
-                                                   <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                                   <div class="received_msg">
-                                                      <div class="received_withd_msg">
-                                                         <p>Test which is a new approach to have all
-                                                            solutions
-                                                         </p>
-                                                         <span class="time_date"> 11:01 AM    |    June 9</span>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <div class="outgoing_msg">
-                                                   <div class="sent_msg">
-                                                   </div>
-                                                   <div class="mesgs">
-                                                      <div class="msg_history">
-                                                         <div class="incoming_msg">
-                                                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                                            <div class="received_msg">
-                                                               <div class="received_withd_msg">
-                                                                  <p>Test which is a new approach to have all
-                                                                     solutions
-                                                                  </p>
-                                                                  <span class="time_date"> 11:01 AM    |    June 9</span>
-                                                               </div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="type_msg">
-                                                            <div class="input_msg_write">
-                                                               <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
-                                                               <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                                            </div>
-                                                            <div class="outgoing_msg">
-                                                               <div class="sent_msg">
-                                                                  <p>Test which is a new approach to have all
-                                                                     solutions
-                                                                  </p>
-                                                                  <span class="time_date"> 11:01 AM    |    June 9</span> 
-                                                               </div>
-                                                            </div>
-                                                         </div>
-                                                         <div class="type_msg">
-                                                            <div class="input_msg_write">
-                                                               <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
-                                                               <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                                            </div>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="mesgs">
+                                    <div class="msg_history">
+                                       <div class="incoming_msg">
+                                          <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                          <div class="received_msg">
+                                             <div class="received_withd_msg">
+                                                <p>Test which is a new approach to have all
+                                                   solutions
+                                                </p>
+                                                <span class="time_date"> 11:01 AM | June 9</span>
                                              </div>
-                                             <!---   Chat HTML START End-------->
                                           </div>
+                                       </div>
+                                       <div class="outgoing_msg">
+                                          <div class="sent_msg">
+                                             <p>Test which is a new approach to have all
+                                                solutions
+                                             </p>
+                                             <span class="time_date"> 11:01 AM | June 9</span> 
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="type_msg">
+                                       <div class="input_msg_write">
+                                          <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message">
+                                          <button class="msg_send_btn" type="button" (click)="sendMessgae()"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                        </div>
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
+                        <!--- Chat HTML START End-------->
                      </div>
                   </div>
                </div>
@@ -562,19 +537,20 @@
    </div>
 </div>
 </div>
-<div class="modal-dialog-img col-md-6" >
-   <div class="modal" id="myModal11" backdrop="static" role="dialog" tabindex="-1" 
-   style="display: block; background-color: rgba(0, 0, 0, 0.32)" 
-   [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" 
-   aria-hidden="true">
-   <div class="modal-dialog modal-lg" role="document">
+<!---  Modal to delete TASK  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >
+   <div class="modal-dialog modaldialog12">
       <div class="modal-content">
+         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Task deletion</h4>
-            <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+            <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
             </button>
          </div>
+         <!-- Modal body -->
          <div class="modal-body">
             <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
             <p>All information associated to this task will be permanently deleted.
