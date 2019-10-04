@@ -268,6 +268,22 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+
+	change_password(input_change){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);	    
+    	return this.http.put(this.base_url+'password',input_change, { headers: headers })
+    	.map((response:Response)=>{
+    		  const data = response;
+    		  return data;
+    		})
+    	.catch((error:Error) => {
+    		//console.log(error);
+    		return Observable.throw(error);});
+    	
+    } 
 	submitQuest(formData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){

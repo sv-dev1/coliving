@@ -5,6 +5,7 @@ import { DataService } from '../../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
+import { MustMatch } from '../../../helpers/must-match.validator';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,11 @@ export class HeaderComponent implements OnInit {
   image_base_url:any;
   base_url:any;
   images: string = "";
+  isChangePassword: boolean = false;
+  ConPass:FormGroup;
+  submitted: boolean =false;
+  firstName:string='';
+  lastName:string='';
 
 response:any;
   constructor(
@@ -32,9 +38,17 @@ response:any;
         public toastr: ToastrManager,
         private data_service : DataService,
         private http : HttpClient,
+        private formBuilder:FormBuilder
     ) {
         this.base_url = environment.base_url;
         this.image_base_url = environment.image_base_url;
+        this.ConPass = this.formBuilder.group({       
+            cuPass:['', [Validators.required, Validators.minLength(6)]], 
+            pwd: ['', [Validators.required, Validators.minLength(6)]],
+             confirmPassword:['', Validators.required]      
+        },{
+              validator: MustMatch('pwd', 'confirmPassword')
+        });
      }
 
   ngOnInit() {
@@ -64,12 +78,45 @@ response:any;
     headers = headers.set('Authorization', token);
      this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
       this.userDataArr = response.users[0]; 
+      console.log(this.userDataArr);
       this.image_url = this.image_base_url+''+this.userDataArr.userId;
+      this.firstName = this.userDataArr.firstName;
+      this.lastName = this.userDataArr.lastName;
     },error=>{ 
       //console.log("ERROR");
      // console.log(error.error);
       this.isError = true; 
       this.errorsArr = error.error;
     });  
+  }
+  get f() { return this.ConPass.controls; }
+
+   onSubmit(form){
+    this.submitted = true;
+    if(this.ConPass.invalid) {
+        return;
+    }else{
+      const input = {  
+        "password": form.cuPass, 
+        "newPassword": form.pwd,                
+        "newPassword2": form.confirmPassword,
+      } 
+  
+      console.log(input); 
+       this.data_service.change_password(input).subscribe((response:any)=> { 
+          this.toastr.successToastr(response.message,'Success');
+          this.isChangePassword = false;           
+          this.ConPass.reset();
+        },error =>{
+          console.log(error);
+        });
+
+    }
+  }
+  changePasswordModal(){
+    this.isChangePassword = true;
+  }
+  closeModal(){
+    this.isChangePassword = false;
   }
 }

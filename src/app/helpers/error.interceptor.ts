@@ -26,14 +26,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.toastr.errorToastr('Internal server Error');
                     }
                     if(event.status == 503){
-                        this.toastr.errorToastr('Service Unavailable');
-                        
+                        this.toastr.errorToastr('Service Unavailable');                       
                     }
+
                 }
                 return event;
             }),
             catchError((err: HttpErrorResponse) => {
-                console.log(err);
+                console.log('err',err);
                 const error = err.error.message || err.statusText;
                 if(err.status == 0){
                     this.toastr.errorToastr('Service Unavailable');
@@ -55,6 +55,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if(err.error.password) {
                     this.toastr.errorToastr(err.error.password,'Error');
                 }
+                if(err.error.referalCode) {
+                    this.toastr.errorToastr(err.error.referalCode,'Error');
+                }
+                if(err.error.newPassword) {
+                     this.toastr.errorToastr(err.error.newPassword,'Error');
+                }
+                 if(err.error.newPassword2) {
+                     this.toastr.errorToastr(err.error.newPassword2,'Error');
+                }
+                
  
                 return throwError(err);
             }));

@@ -1,0 +1,48 @@
+
+.sssss.nav.nav-tabs{
+
+  border: none;
+    color:#fff;
+    background:#272e38;
+    border-radius:0;
+
+}
+.sssss div a.nav-item.nav-link,
+.sssss div a.nav-item.nav-link.active
+{
+    border: none;
+    padding: 18px 25px;
+    color:#6c757d;
+    background:#f1ece6;
+    border-radius:0;
+}
+
+.sssss div a.nav-item.nav-link.active:after
+ {
+  content: "";
+  position: relative;
+  bottom: -60px;
+  left: -10%;
+  border: 15px solid transparent;
+  border-top-color: #e74c3c ;
+}
+.tab-content{
+     background: #fdfdfd;
+    line-height: 25px;
+    /*border: 1px solid #ddd;*/
+    padding:30px 25px;
+}
+
+.sssss div a.nav-item.nav-link:hover,
+.sssss div a.nav-item.nav-link:focus
+{
+  border: none;
+    background: #ed502d;
+    color:#fff;
+    border-radius:0;
+    transition:background 0.20s linear;
+}
+div#nav-tabContent {
+    height: 500px;
+    overflow-y: auto;
+}

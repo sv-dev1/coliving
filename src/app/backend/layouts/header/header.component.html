@@ -26,9 +26,61 @@
 			</span>		
 			<div class="profile-menu">
 				<a routerLink="/my-account" class="">My Account</a>
+				<a href="javascript:void(0)" (click)="changePasswordModal()">Change Password</a>
 				<a href="javascript:void(0)" class="">Help</a>
-				<a href="javascript:void(0)" (click)="systemLogout($event)" class="">LogOut</a>
+				<a href="javascript:void(0)" (click)="systemLogout($event)" class="">Logout</a>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="container">				
+				<!-- The Modal -->
+				<div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isChangePassword ? 'block' : 'none'" *ngIf="isChangePassword">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title">Change Password</h4>
+								<button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body">
+								<p><strong>{{firstName}}&nbsp;{{lastName}}<span class="text-primary"></span></strong>&nbsp;are you sure you want to change the password?</p>
+								<form [formGroup]="ConPass" (ngSubmit)="onSubmit(ConPass.value)" >	
+								<div class="form-group">
+										<label>Current Password:</label>
+										<input type="password" formControlName="cuPass" class="form-control" [ngClass]="{'is-invalid': submitted && f.cuPass.errors}" />
+										<div *ngIf="submitted && f.cuPass.errors" class="invalid-feedback">
+											<div *ngIf="f.cuPass.errors.required">Current password is required. </div>
+											<div *ngIf="f.cuPass.errors.minlength">Current password must be at least 6 characters.</div>
+										</div>
+									</div>								
+									<div class="form-group">
+										<label>New Password</label>
+										<input type="password" formControlName="pwd" class="form-control" [ngClass]="{'is-invalid': submitted && f.pwd.errors}" />
+										<div *ngIf="submitted && f.pwd.errors" class="invalid-feedback">
+											<div *ngIf="f.pwd.errors.required">New password is required. </div>
+											<div *ngIf="f.pwd.errors.minlength">New password must be at least 6 characters.</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Confirm Password:</label>
+										<input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+										<div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+											<div *ngIf="f.confirmPassword.errors.required">Confirm Password is required.</div>
+											<div *ngIf="f.confirmPassword.errors.mustMatch">Confirm Password must match.</div>
+										</div>
+									</div>                       
+									
+									  <div class="modal-footer">
+							            <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+							            <button type="submit" class="btn btn-orange-sm">Yes,Update It</button>
+							         </div>									
+								</form> 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
