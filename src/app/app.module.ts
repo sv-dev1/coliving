@@ -41,6 +41,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TaskSuggestionsComponent } from './backend/task-suggestions/task-suggestions.component';
 import { Socket } from 'ng-socket-io';
 import { BlockCopyPasteDirective } from './block-copy-paste.directive';
+import {MatSliderModule} from '@angular/material/slider';
 
 const config: SocketIoConfig = { url: 'http://13.232.117.84:2900', options: {} };
 
@@ -100,7 +101,7 @@ export function provideConfig() {
     SocketIoModule.forRoot(config),
     NgbModule,
     SocialLoginModule,
-    
+    MatSliderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

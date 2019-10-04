@@ -709,7 +709,7 @@ input#exampleInputEmail1 {
 .lock-bg-blue { background: url(../images/lock-background.png); padding:20px 30px 20px 200px;  background-repeat: no-repeat;   height: 95px; width: 100%;    background-size: 725px; background-color: #c9e6f1;}
 
 .lock-bg-blue p.graph {  margin: 0;  font-size: 18px; font-weight:500; color:#4babcf;}
-.kid-bx { background: #E5E1E9; border-radius: 4px;  height: 150px;     line-height: 80px;}
+.kid-bx { background: #E5E1E9; border-radius: 4px;  height: 150px;    }
 .house-text { display: inline-block;  width: 100%;}
 .kid-bx h6 { color: #000; font-size: 13px;  text-transform: uppercase;  font-weight: 600;}
 .onload-popup .modal-dialog{max-width:725px; width:100%;}
@@ -2558,7 +2558,14 @@ cursor: pointer;
   transform: rotate(45deg);
 }
 
-
+.kid-bx.text-center.p-3 p {
+    margin: 0;
+    text-align: left;
+    color: #4babcf;
+}
+.mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label, .mat-accent .mat-slider-track-fill{
+    background-color: #4babcf !important;
+}
 /*--checkbox css end--*/
 /* End House chores */
 

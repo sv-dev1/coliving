@@ -11,8 +11,6 @@ import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
-//import { Socket } from 'ngx-socket-io';
-//import * as io from 'socket.io-client';
 import { Socket } from 'ng-socket-io';
 import { Observable } from 'rxjs/Observable';
  
@@ -89,12 +87,20 @@ export class HouseChoresComponent implements OnInit {
 	IsKid:boolean=false;
 	IsPet:boolean=false;
 	IsN:boolean=false;
-	OtherPro:any=[];
-    deleteTaskModal:boolean=false;
-    taskName:string='';
-    taskId:string='';
-    response:any=[];
-
+	OtherProd:any=[];
+  deleteTaskModal:boolean=false;
+  taskName:string='';
+  taskId:string='';
+  response:any=[];
+	tChoice: any =[];
+	fChoice: any =[];
+	progOne: boolean = false;
+	progTwo: boolean = false;
+  progre : boolean = true;
+	finalProg: boolean = false;
+	SubmitWelcome: boolean = false;
+	party: boolean = false;
+  welcomeform: FormGroup;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -114,11 +120,22 @@ export class HouseChoresComponent implements OnInit {
 			image: ['', Validators.required],
 			notes: ['', Validators.required],
 		});
+		this.welcomeform = this.formBuilder.group({
+		
+			partying: [''],
+			alcohol: [''],
+			smoking: [''],
+			apartment_clean_importance: [''],
+			music: [''],
+			apartment_party: [''],
+			social_account: ['linkedin'],
+			religion: ['1'],
+		});
+		
+
 		this.base_url = environment.base_url;
 		this.today = new Date();
-        //this.socket_url = environment.socket_url;
-        //this.socket = io(this.socket_url);
- 		 this.socket.connect(); 
+    this.socket.connect(); 
 	}
 
 	ngOnInit() {
@@ -152,6 +169,8 @@ export class HouseChoresComponent implements OnInit {
 		}
 	}
 	close_welcome(){
+		console.log(this.welcomeform.value);
+
 		this.isWelcomeModal = false;
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.remove('popCustomHtml');
@@ -159,6 +178,7 @@ export class HouseChoresComponent implements OnInit {
 		body.classList.remove('popCustomBody');
 	}
 	openNextTabModal(id) {
+		console.log("firstSelect",id);
 		if(id == 1){
 			this.IsKid=true;
 		}
@@ -176,38 +196,101 @@ export class HouseChoresComponent implements OnInit {
 
 	}
 	otherPro(event){
-   console.log(event);
-		// if(event.target.checked){
-		// 		this.OtherPro.push(id);
-		// }
-		// else{
-		// 	for(var i=0;i<=this.OtherPro.length;i++)
-		// 	{
-		// 		if(this.OtherPro[i] == id){
-		// 			this.OtherPro.splice(this.OtherPro.indexOf(this.OtherPro), 1);
-		// 		}
-		// 	}
-		// }
-		console.log(this.OtherPro);
+		if(event.target.checked){
+			this.OtherProd.push(event.target.value);
+		}
+		else{
+			for(var i=0;i<=this.OtherProd.length;i++)
+			{
+				if(this.OtherProd[i] == event.target.value){
+					this.OtherProd.splice(i,1);
+				}
+			}
+		}
+		console.log("SecondChoice",this.OtherProd);
+	}
+	TChoice(event){
+		if(event.target.checked){
+			this.tChoice.push(event.target.value);
+		}
+		else{
+			for(var i=0;i<=this.tChoice.length;i++)
+			{
+				if(this.tChoice[i] == event.target.value){
+					this.tChoice.splice(i,1);
+				}
+			}
+		}
+		console.log("ThirdChoice",this.tChoice);
+	}
 
+	FChoice(event){
+		if(event.target.checked){
+			this.fChoice.push(event.target.value);
+		}
+		else{
+			for(var i=0;i<=this.fChoice.length;i++)
+			{
+				if(this.fChoice[i] == event.target.value){
+					this.fChoice.splice(i,1);
+				}
+			}
+		}
+		console.log("FourthChoice",this.fChoice);
+	}
+	
+	choose(){
+		this.party=true;
+		this.isWelcomeBlock = false;
+		this.isBrightNestBlock =true;
+		this.isNextStep =true;
+		this.isProgressBlue =true;
+		this.islockbgblue = false;
 	}
 	onNextStepClick(id) {
-		//console.log('id', id);
+		console.log('id', id);
 		if(id == '1'){
 			this.isNextStep =false;
 			this.isNextStep1 = true;
 			this.isNextStep2 = false;
+			this.progOne = true;
 		} else if(id == '2'){
 			this.isNextStep = false;
 			this.isNextStep1 = false;
 			this.isNextStep2 = true;
+			this.progTwo = true;
 		} else {
 			this.isNextStep =false;
 			this.isNextStep1 = false;
 			this.isNextStep2 = false;
+			this.finalProg=true;
 		}
 		this.isHouse1st = false;
 		this.isHomeQuizStep = id;
+
+	}
+	queSubmit(){
+		this.submitted = true;  
+		console.log(this.welcomeform.value);
+
+		if (this.welcomeform.invalid) {
+			return;
+		}
+		this.data_service.submitQuest(this.welcomeform.value).subscribe((response:any) =>{  
+			console.log('after submit response',response);
+			this.toastr.successToastr('Survey Completed.', 'Success!');
+
+			this.isWelcomeModal = false;
+			const html = document.getElementsByTagName('html')[0];
+			html.classList.remove('popCustomHtml');
+			const body = document.getElementsByTagName('body')[0];
+			body.classList.remove('popCustomBody');
+		}, error =>{
+			console.log(error);
+			this.toastr.errorToastr(error.error);
+
+ 		})
+		
 	}
 	getUsers() {
 		this.data_service.getUsers().subscribe((response:any) =>{   
@@ -325,6 +408,7 @@ export class HouseChoresComponent implements OnInit {
 			this.http.post(this.base_url+'createTask', formData, httpOptions).subscribe((response:any) => {
 				this.toastr.successToastr('Task added successfully.', 'Success!');
 				this.isError = false;
+				this.addTaskModal=false;
 				this.isSuccess = true; 
 				this.submitted = false;   	
 				this.addTaskForm.reset();
@@ -352,9 +436,9 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	handleDateClick(arg) {
-	
 		let today=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
 		let check=arg.dateStr;
+
 	    if(check < today)
         {
 			console.log("previous");  
@@ -365,6 +449,17 @@ export class HouseChoresComponent implements OnInit {
 			this.addTaskModal=true;
 	  		this.renderer.addClass(document.body, 'modal-open');
          }
+	  if(check < today)
+    {
+			console.log("previous");
+    }
+    else
+    {
+			console.log("next");
+			this.eventInfo=true;
+			this.addTaskModal=true;
+			this.renderer.addClass(document.body, 'modal-open');
+    }
 	}
 	openaddTask(){
 		this.addTaskModal=true;
@@ -483,6 +578,4 @@ export class HouseChoresComponent implements OnInit {
 	}
 	
 } 
-
-
 

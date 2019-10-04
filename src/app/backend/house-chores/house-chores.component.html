@@ -10,7 +10,7 @@
                      <a class="nav-link active" data-toggle="tab" href="#active-booking">All</a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" data-toggle="tab" href="#create-event">Calender</a>
+                     <a class="nav-link" data-toggle="tab" href="#create-event">Calendar</a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" data-toggle="tab" href="#completed-booking">Team</a>
@@ -43,7 +43,7 @@
                      </div>
                      <div class="custm_to-do mb-4">
                         <div class="to-do_heading">
-                           <h2>Completed</h2>
+                           <h2>Complete</h2>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                            <span aria-hidden="true">{{complete_length ? complete_length.length : '0' }}</span>
                            </button>
@@ -55,37 +55,37 @@
                               </li>
                            </ul>
                         </div>
-                        <div class="custm_to-do mb-4">
-                           <div class="to-do_heading">
-                              <h2>Suggestions</h2>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">5</span>
-                              </button>
-                           </div>
-                           <div class="to_do_list">
-                              <ul class="list-group">
-                                 <li class="list-group-item active-plus">
-                                    Clean outside of fridge
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Tidy desk
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Clean drawers
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Fold towels
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Clean drawers
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                              </ul>
-                           </div>
+                     </div>
+                     <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>Suggestions</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">5</span>
+                           </button>
+                        </div>
+                        <div class="to_do_list">
+                           <ul class="list-group">
+                              <li class="list-group-item active-plus">
+                                 Clean outside of fridge
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Tidy desk
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Clean drawers
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Fold towels
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Clean drawers
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                           </ul>
                         </div>
                      </div>
                   </div>
@@ -203,51 +203,62 @@
             </div>
          </div>
          <div class="progress-blue" *ngIf="isProgressBlue">
-            <div class="progress-25"></div>
+            <!-- <div class="progress-25"></div> -->
+            <div [ngClass]="{
+               'progress-25': progre,
+               'progress-25N': progOne,
+               'progress-25Ne': progTwo,
+               'progress-25Nxt':finalProg
+               }"></div>
          </div>
+         <form [formGroup]="welcomeform" (ngSubmit)="queSubmit()">
          <div class="modal-body p-0">
             <div class="lock-bg-blue" *ngIf="islockbgblue">
                <p class="graph">Take our 60 second Home Quiz to<br> unlock custom tips</p>
             </div>
             <div class="p-5" id="House1st" *ngIf="isHouse1st">
                <div class="house-text text-center">
-                  <h3>Which of these do you have in your house?</h3>
-                  <p>(Please select all that apply)</p>
+                  <h3>Which of these do you have in your interest?</h3>
+                  <p></p>
                </div>
                <div class="row mt-2">
                   <div class="col-md-4">
-                     <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock" (click) ="openNextTabModal('1')">
+                     <a class="text-decoration-none"  id="KidBlock" (click)="choose()" >
                         <div class="kid-bx text-center p-3">
-                           <label class="block-check">
-                              <h6 class="mb-3">Kids</h6>
-                              <img class="img-fluid" src="assets/images/kids-background.png" width="100">
-                              <input type="checkbox" checked="checked" *ngIf="IsKid">
-                              <span class="checkmark" *ngIf="IsKid"></span>
-                           </label>
+                           <h6 class="mb-3">Partying</h6>
+                           
+                           <div *ngIf="party">
+                              <p><input type="radio" formControlName="partying" value="0"> Yes</p>
+                              <p><input type="radio" formControlName="partying" value="1"> No</p>
+                              <p> <input type="radio" formControlName="partying" value="2"> Sometimes  </p>
+                              <p><input type="radio" formControlName="partying" value="3"> Strictly Against  </p>
+                           </div>
                         </div>
                      </a>
                   </div>
                   <div class="col-md-4">
-                     <a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('2')">
+                     <a class="text-decoration-none"  (click)="choose()">
                         <div class="kid-bx text-center p-3">
-                           <label class="block-check">
-                              <h6 class="mb-3">Pets</h6>
-                              <img class="img-fluid" src="assets/images/pets-background.png" width="100">
-                              <input type="checkbox" *ngIf="IsPet" checked="checked">
-                              <span class="checkmark" *ngIf="IsPet"></span>
-                           </label>
+                           <h6 class="mb-3">Alcohol</h6>
+                           <div *ngIf="party">
+                              <p><input type="radio" formControlName="alcohol" value="0"> Yes</p>
+                              <p><input type="radio" formControlName="alcohol" value="1"> No</p>
+                              <p> <input type="radio" formControlName="alcohol" value="2"> Sometimes  </p>
+                              <p><input type="radio" formControlName="alcohol" value="3"> Strictly Against  </p>
+                           </div>
                         </div>
                      </a>
                   </div>
                   <div class="col-md-4">
-                     <a class="text-decoration-none" href="javascript:void(0)" (click) ="openNextTabModal('3')">
+                     <a class="text-decoration-none"  (click)="choose()">
                         <div class="kid-bx text-center p-3">
-                           <label class="block-check">
-                              <h6 class="mb-3">Neither</h6>
-                              <img class="img-fluid" src="assets/images/neither-background.png" width="80">
-                              <input type="checkbox" *ngIf="IsN" checked="checked">
-                              <span class="checkmark" *ngIf="IsN"></span>
-                           </label>
+                           <h6 class="mb-3">Smoking</h6>
+                           <div *ngIf="party">
+                              <p><input type="radio" formControlName="smoking" value="0"> Yes</p>
+                              <p><input type="radio" formControlName="smoking" value="1"> No</p>
+                              <p> <input type="radio" formControlName="smoking" value="2"> Sometimes  </p>
+                              <p><input type="radio" formControlName="smoking" value="3"> Strictly Against  </p>
+                           </div>
                         </div>
                      </a>
                   </div>
@@ -256,187 +267,46 @@
          </div>
          <div class="homequiz-section p-5" id="HomeQuizStep1" *ngIf="isHomeQuizStep == '1'">
             <div class="house-text text-center">
-               <h3>What else do you take care of?</h3>
-               <p>(Please select all that apply)</p>
+               <h3>How important is it to you to live in a clean and tidy apartment generally?</h3>
+               <p>(Please choose range)</p>
             </div>
-            <div class="row mt-2">
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
-                     <div class="orange-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">EXTERIOR</h6>
-                           <img class="img-fluid" src="assets/images/exterior-background.png" width="100">
-                           <input type="checkbox" (change)="otherPro($event)" id="1">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="blue-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">POOL</h6>
-                           <img class="img-fluid" src="assets/images/pool-background.png" width="100">
-                           <input type="checkbox"  (change)="otherPro($event)" id="2">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="pink-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">BASEMENT</h6>
-                           <img class="img-fluid" src="assets/images/basement-background.png" width="80">
-                           <input type="checkbox"  (change)="otherPro($event)" id="3">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="orange-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">LAWN/GARDEN</h6>
-                           <img class="img-fluid" src="assets/images/lawn-background.png" width="100">
-                           <input type="checkbox"  (change)="otherPro($event)" id="4">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="blue-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">GARAGE</h6>
-                           <img class="img-fluid" src="assets/images/garage-background.png" width="100">
-                           <input type="checkbox"  (change)="otherPro($event)" id="5">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="pink-bx kid-bx text-center p-3">
-                        <label class="block-check">
-                           <h6 class="mb-3">ATTIC</h6>
-                           <img class="img-fluid" src="assets/images/attic-background.png" width="80">
-                           <input type="checkbox" (change)="otherPro($event)" id="6">
-                           <span class="checkmark"></span>
-                        </label>
-                     </div>
-                  </a>
-               </div>
+            <div class="row mt-2 sliderpos">
+               <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_clean_importance"  thumbLabel tickInterval="1"></mat-slider>
             </div>
          </div>
          <div class="homequiz-section p-5" id="HomeQuizStep2" *ngIf="isHomeQuizStep == '2'">
             <div class="house-text text-center">
-               <h3>Does your home have a...?</h3>
+               <h3>How much do you like a music in your apartment</h3>
             </div>
-            <div class="row mt-2">
-               <div class="col-md-6 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
-                     <div class="orange-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">A/C</h6>
-                        <img class="img-fluid" src="assets/images/ac-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-6 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="blue-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">BOILER</h6>
-                        <img class="img-fluid" src="assets/images/boiler-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-6 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="orange-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">FURNACE</h6>
-                        <img class="img-fluid" src="assets/images/furnace-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-6 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="blue-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">WATER HEATER</h6>
-                        <img class="img-fluid" src="assets/images/waterheater-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
+            <div class="row mt-2 sliderpos">
+               <mat-slider min="1" max="5" step="1" value="1" formControlName="music" thumbLabel tickInterval="1"></mat-slider>
             </div>
          </div>
          <div class="homequiz-section p-5" id="HomeQuizStep3" *ngIf="isHomeQuizStep == '3'">
             <div class="house-text text-center">
-               <h3>What kind of tips do you want for<br> your home?</h3>
+               <h3>Party in your apartment </h3>
             </div>
-            <div class="row mt-2">
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)" id="KidBlock">
-                     <div class="yellow-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">SAVVY</h6>
-                        <img class="img-fluid" src="assets/images/savvy-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="blue-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">CLEAN</h6>
-                        <img class="img-fluid" src="assets/images/clean-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="green-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">GREEN</h6>
-                        <img class="img-fluid" src="assets/images/green-background.png" width="80">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="orange-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">HEALTHY</h6>
-                        <img class="img-fluid" src="assets/images/healthy-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="pink-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">HANDY</h6>
-                        <img class="img-fluid" src="assets/images/handy-background.png" width="100">
-                     </div>
-                  </a>
-               </div>
-               <div class="col-md-4 mb-3">
-                  <a class="text-decoration-none" href="javascript:void(0)">
-                     <div class="lgreen-bx kid-bx text-center p-3">
-                        <h6 class="mb-3">CREATIVE</h6>
-                        <img class="img-fluid" src="assets/images/creative-background.png" width="80">
-                     </div>
-                  </a>
-               </div>
+            <div class="row mt-2 sliderpos">
+               <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_party" thumbLabel tickInterval="1"></mat-slider>
+            </div>
+            <div class="next-btn"  id="SubmitWelcome">
+               <button type="button" class="btn btn-secondary" >Back</button>
+               <button type="submit" class="btn btn-secondary">Submit</button>
             </div>
          </div>
          <div class="next-btn" id="NextStep" *ngIf="isNextStep">
+               
             <button type="button" class="btn btn-secondary" (click)="onNextStepClick('1')">Next</button>
          </div>
          <div class="next-btn"  id="NextStep1" *ngIf="isNextStep1">
+               <button type="button" class="btn btn-secondary">Back</button>
             <button type="button" class="btn btn-secondary" (click)="onNextStepClick('2')">Next</button>
          </div>
          <div class="next-btn"  id="NextStep2" *ngIf="isNextStep2" >
+               <button type="button" class="btn btn-secondary">Back</button>
             <button type="button" class="btn btn-secondary" (click)="onNextStepClick('3')">Next</button>
          </div>
+         </form>
       </div>
    </div>
 </div>
