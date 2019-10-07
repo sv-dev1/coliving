@@ -269,7 +269,7 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-	change_password(input_change){
+	changePassword(input_change){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
 		let headers = new HttpHeaders();

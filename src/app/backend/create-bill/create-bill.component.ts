@@ -46,12 +46,12 @@ export class CreateBillComponent implements OnInit {
     private http : HttpClient,
   ) { 
     this.createBillForm = this.formBuilder.group({
-      team: ['', Validators.required], 
-      title: ['', Validators.required],
-      amount: ['', Validators.required],
-      date:['', Validators.required],
-      bill:['', Validators.required],
-      assign_to:['', Validators.required]
+        team: ['', Validators.required], 
+        title: ['', Validators.required],
+        amount: ['', Validators.required],
+        date:['', Validators.required],
+        bill:['', Validators.required],
+        assign_to:['', Validators.required]
     });
     this.base_url = environment.base_url;
 

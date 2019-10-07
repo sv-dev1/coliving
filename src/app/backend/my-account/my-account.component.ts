@@ -5,6 +5,7 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -31,13 +32,20 @@ export class MyAccountComponent implements OnInit {
 	email:any;
     messageDigit:string='';
     messageDigit1:string='';
+    time = {hour: 13, minute: 30};
+    today:any;
+   teamEmpty:boolean=false;
+  userEmpty:boolean=false;
+
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
 		public toastr: ToastrManager,
 		private data_service : DataService,
 		private http : HttpClient,
+		calendar: NgbCalendar
 		) {   
+		  
 		this.updateProfileForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
@@ -51,19 +59,26 @@ export class MyAccountComponent implements OnInit {
 			file:[''],
 			dob:['', Validators.required],
 			occupation:['', Validators.required],
+			price:['', Validators.required],
+            getUptime:['', Validators.required],
+            inOut:['', Validators.required],
+            willingToSay:['', Validators.required],
 			gender:['', Validators.required],
 			short_bio:['', Validators.required],
-			interests:['', Validators.required]
+			interests:['', Validators.required],
+			language:['', Validators.required],
+			nationality:['', Validators.required]
 		});
+		this.today = new Date();
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
-
+  
 	ngOnInit() {
 		this.getUserData();
 	}
 	getUserData(){ 
-		console.log('All users gets list out under this function');
+		
 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -135,6 +150,14 @@ export class MyAccountComponent implements OnInit {
     }
 	updateProfile(form){
 		console.log('ffsdf ',form);
+		if(this.updateProfileForm.value['language']=="")
+      {
+        this.teamEmpty=true;
+      }
+      if(this.updateProfileForm.value['nationality']=="")
+      {
+        this.userEmpty=true;
+      }
 		this.submitted = true;  
 		if (this.updateProfileForm.invalid) {
 			return;

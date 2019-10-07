@@ -12,10 +12,10 @@
 			</a>
 		</li>
 		
-		<li routerLinkActive="active">
-			<a routerLink="/house-chores" routerLinkActive="active-link">
-				<i class="fas fa-tachometer-alt"></i>
-				<p>House Chores</p>
+		<li routerLinkActive="active" [class.active]="isHouse == true">
+		   <a routerLink="/house-chores" routerLinkActive="active-link">
+			    <i class="fas fa-tachometer-alt"></i>
+			      <p>House Chores</p>
 			</a>
 		</li>
 		<li routerLinkActive="active">
