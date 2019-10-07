@@ -227,11 +227,9 @@ export class HouseChoresComponent implements OnInit {
 	getMessages() {
 		this.socket.on('getMessage', (data) => {
 			console.log('getMessage',data);
-			this.gruopMessages.push(data);
-			//this.loadMessages();   
+			this.gruopMessages.push(data);	
 		});  
-		//this.loadMyMessages();
-		//this.loadMessages();
+		
 	} 
 	loadMyMessages() {
 		this.socket.on('messages', (data) => {
