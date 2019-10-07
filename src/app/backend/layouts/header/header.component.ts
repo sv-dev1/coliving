@@ -78,7 +78,7 @@ response:any;
     headers = headers.set('Authorization', token);
      this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
       this.userDataArr = response.users[0]; 
-      console.log(this.userDataArr);
+      //console.log(this.userDataArr);
       this.image_url = this.image_base_url+''+this.userDataArr.userId;
       this.firstName = this.userDataArr.firstName;
       this.lastName = this.userDataArr.lastName;
@@ -103,7 +103,7 @@ response:any;
       } 
   
       console.log(input); 
-       this.data_service.change_password(input).subscribe((response:any)=> { 
+       this.data_service.changePassword(input).subscribe((response:any)=> { 
           this.toastr.successToastr(response.message,'Success');
           this.isChangePassword = false;           
           this.ConPass.reset();

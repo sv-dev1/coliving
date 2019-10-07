@@ -88,19 +88,20 @@ export class HouseChoresComponent implements OnInit {
 	IsPet:boolean=false;
 	IsN:boolean=false;
 	OtherProd:any=[];
-  deleteTaskModal:boolean=false;
-  taskName:string='';
-  taskId:string='';
-  response:any=[];
+	deleteTaskModal:boolean=false;
+	taskName:string='';
+	taskId:string='';
+	response:any=[];
 	tChoice: any =[];
-	fChoice: any =[];
-	progOne: boolean = false;
+    fChoice: any =[];
+    progOne: boolean = false;
 	progTwo: boolean = false;
-  progre : boolean = true;
+	progre : boolean = true;
 	finalProg: boolean = false;
 	SubmitWelcome: boolean = false;
 	party: boolean = false;
-  welcomeform: FormGroup;
+	welcomeform: FormGroup;
+    logged_in_id : string = "";
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -133,9 +134,13 @@ export class HouseChoresComponent implements OnInit {
 		});
 		
 
-		this.base_url = environment.base_url;
-		this.today = new Date();
-    this.socket.connect(); 
+		 this.base_url = environment.base_url;
+		 this.today = new Date();
+         this.socket.connect(); 
+         this.logged_in_id = sessionStorage.getItem("userId");
+
+        console.log(this.logged_in_id);
+
 	}
 
 	ngOnInit() {
@@ -158,6 +163,98 @@ export class HouseChoresComponent implements OnInit {
 
 	}
 
+	openChat(team,index){
+		//console.log('team',team);
+
+		this.team_id = team.teamId;
+		this.user_id = this.logged_in_id;
+		this.nickname = team.name;
+		this.status = !this.status;
+		this.indexCheck = index;	
+		this.joinChat();
+		this.getMessages();
+		this.loadMyMessages();	
+		this.loadMessages();
+
+	}
+	joinChat() { 
+		if(this.user_id){
+			this.data = {
+				"nickname": this.nickname,
+				"from_id": this.logged_in_id,
+				"username": this.logged_in_username,
+				"to_id": this.team_id,			
+			}
+		} else {
+			this.by_default_team = this.firstTeam;
+			this.data = {	
+				"nickname": this.by_default_team.name,
+				"from_id": this.logged_in_id,
+				"username": this.logged_in_username,
+				"to_id": this.by_default_team.teamId,
+			}
+		}
+		console.log('join chat data', this.data);
+		this.socket.emit('set-nickname', this.data);	
+
+		this.getMessages();
+		this.loadMyMessages();
+	}
+	sendMessgae() {
+		if(this.user_id ==''){
+			this.by_default_team = this.firstTeam;
+			this.data = {
+				"userId": this.logged_in_id,
+				"teamId": this.by_default_team.teamId,
+				"username": sessionStorage.getItem("user_name"),
+				"msg": this.message
+			}
+		} else {
+			this.data = {
+				"userId": this.logged_in_id,
+				"teamId": this.team_id,
+				"username":this.logged_in_username,
+				"msg": this.message
+			}
+		}
+		console.log('data',this.data);
+		this.socket.emit('newMessage', this.data);
+		this.message = '';
+		this.getMessages()
+		this.loadMyMessages();
+		this.loadMessages();
+	}
+	getMessages() {
+		this.socket.on('getMessage', (data) => {
+			console.log('getMessage',data);
+			this.gruopMessages.push(data);	
+		});  
+		
+	} 
+	loadMyMessages() {
+		this.socket.on('messages', (data) => {
+			this.gruopMessages = data.messages; 
+			console.log('gruopMessages',this.gruopMessages);
+		});
+	}
+	loadMessages() {
+		if(this.user_id){
+			this.data = {
+				"userId": this.user_id,
+				"teamId": this.team_id,
+			}
+		} else {
+			this.by_default_team = this.firstTeam;
+			this.data = {
+				"userId": this.by_default_team.userId,
+				"teamId": this.by_default_team.teamId,
+			}
+		}
+		
+		this.socket.emit('load-messages', this.data);
+         this.getMessages();
+	}
+
 	@HostListener('document:keypress', ['$event'])
 
 	handleKeyboardEvent(event: KeyboardEvent) {
@@ -169,7 +266,7 @@ export class HouseChoresComponent implements OnInit {
 		}
 	}
 	close_welcome(){
-		console.log(this.welcomeform.value);
+		//console.log(this.welcomeform.value);
 
 		this.isWelcomeModal = false;
 		const html = document.getElementsByTagName('html')[0];
@@ -271,7 +368,7 @@ export class HouseChoresComponent implements OnInit {
 	}
 	queSubmit(){
 		this.submitted = true;  
-		console.log(this.welcomeform.value);
+		//console.log(this.welcomeform.value);
 
 		if (this.welcomeform.invalid) {
 			return;
@@ -450,16 +547,14 @@ export class HouseChoresComponent implements OnInit {
 	  		this.renderer.addClass(document.body, 'modal-open');
          }
 	  if(check < today)
-    {
+     {
 			console.log("previous");
-    }
-    else
-    {
+    }  else {
 			console.log("next");
 			this.eventInfo=true;
 			this.addTaskModal=true;
 			this.renderer.addClass(document.body, 'modal-open');
-    }
+        }
 	}
 	openaddTask(){
 		this.addTaskModal=true;
@@ -498,86 +593,6 @@ export class HouseChoresComponent implements OnInit {
 	}
 	navigateToSuggestions(task){
 		this.router.navigate(['/task-suggestions',task.id]);
-	}
-	openChat(team,index){
-		//console.log('team',team);
-		this.team_id = team.teamId;
-		this.user_id = team.userId;
-		this.nickname = team.name;
-		this.status = !this.status;
-		this.indexCheck = index;	
-		this.joinChat();		
-	}
-	joinChat() { 
-		if(this.user_id){
-			this.data = {
-				"nickname": this.nickname,
-				"from_id": this.user_id,
-				"username": this.logged_in_username,
-				"to_id": this.team_id,			
-			}
-		} else {
-			this.by_default_team = this.firstTeam;
-			this.data = {	
-				"nickname": this.by_default_team.name,
-				"from_id": this.by_default_team.userId,
-				"username": this.logged_in_username,
-				"to_id": this.by_default_team.teamId,
-			}
-		}
-		console.log('join chat data', this.data);
-		this.socket.emit('set-nickname', this.data);	
-	}
-	sendMessgae() {
-		if(this.user_id ==''){
-			this.by_default_team = this.firstTeam;
-			this.data = {
-				"userId": this.by_default_team.userId,
-				"teamId": this.by_default_team.teamId,
-				"username": sessionStorage.getItem("user_name"),
-				"msg": this.message
-			}
-		} else {
-			this.data = {
-				"userId": this.user_id,
-				"teamId": this.team_id,
-				"username":this.logged_in_username,
-				"msg": this.message
-			}
-		}
-		console.log('data',this.data);
-		this.socket.emit('newMessage', this.data);
-		this.message = '';
-	}
-	getMessages() {
-		this.socket.on('getMessage', (data) => {
-			console.log('getMessage',data);
-			this.messages.push(data);   
-		});  
-	} 
-	loadMyMessages() {
-		this.socket.on('messages', (data) => {
-			this.gruopMessages = data.messages; 
-			console.log(this.gruopMessages);
-		});
-	}
-	loadMessages() {
-		if(this.user_id){
-			this.data = {
-				"userId": this.user_id,
-				"teamId": this.team_id,
-			}
-		} else {
-			this.by_default_team = this.firstTeam;
-			this.data = {
-				"userId": this.by_default_team.userId,
-				"teamId": this.by_default_team.teamId,
-			}
-		}
-		
-		this.socket.emit('load-messages', this.data);
-    this.getMessages();
-	}
-	
-} 
+	}	
+}
 

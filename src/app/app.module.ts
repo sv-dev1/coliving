@@ -43,7 +43,7 @@ import { Socket } from 'ng-socket-io';
 import { BlockCopyPasteDirective } from './block-copy-paste.directive';
 import {MatSliderModule} from '@angular/material/slider';
 
-const config: SocketIoConfig = { url: 'http://13.232.117.84:2900', options: {} };
+const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
 let Loginconfig = new AuthServiceConfig([
   {

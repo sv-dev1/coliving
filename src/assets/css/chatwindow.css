@@ -95,6 +95,8 @@ img{ max-width:100%;}
   float: left;
   padding: 30px 15px 0 25px;
   width: 60%;
+  max-height: 600px;
+  overflow-y: auto;
 }
 
  .sent_msg p {
@@ -105,7 +107,7 @@ img{ max-width:100%;}
   padding: 5px 10px 5px 12px;
   width:100%;
 }
-.outgoing_msg{ overflow:hidden; margin:26px 0 26px;}
+.outgoing_msg{ overflow:hidden; /*margin:26px 0 26px;*/}
 .sent_msg {
   float: right;
   width: 46%;
@@ -134,10 +136,7 @@ img{ max-width:100%;}
   width: 33px;
 }
 .messaging { padding: 0 0 50px 0;}
-.msg_history {
-  height: 516px;
-  overflow-y: auto;
-}
+
 
 .chat_list:hover {
    pointer-events: auto !important;
