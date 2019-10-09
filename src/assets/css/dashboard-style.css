@@ -2567,6 +2567,16 @@ cursor: pointer;
     background-color: #4babcf !important;
 }
 /*--checkbox css end--*/
+.welErr{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+.noteList{
+    width: 100%;
+    word-break: break-all;
+}
 /* End House chores */
 
 
