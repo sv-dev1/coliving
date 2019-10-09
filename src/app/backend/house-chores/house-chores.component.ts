@@ -195,6 +195,7 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
+		
 		console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
 
@@ -256,7 +257,7 @@ export class HouseChoresComponent implements OnInit {
 				"teamId": this.by_default_team.teamId,
 			}
 		}
-		
+		this.nickname = this.nickname;
 		this.socket.emit('load-messages', this.data);
          this.getMessages();
 	}
