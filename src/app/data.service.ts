@@ -242,15 +242,12 @@ export class DataService {
 		}
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
-		console.log(this.base_url+'tasks/'+id);
-		return this.http.get(this.base_url+'tasks/'+id,{ headers: headers })
+		return this.http.get(this.base_url+'task/'+id+'/suggestion',{ headers: headers })
 		.map((response:Response)=>{
-			console.log(response);
 			return response;
 		})
 		.catch((error:Error) => {
 			return Observable.throw(error);});
-
 	}
 	deleteTask(inputData){
 		let token; 

@@ -6,15 +6,11 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import { EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { Socket } from 'ng-socket-io';
-import { Observable } from 'rxjs/Observable';
- 
-
 
 @Component({
 	selector: 'app-house-chores',
@@ -93,16 +89,21 @@ export class HouseChoresComponent implements OnInit {
 	taskId:string='';
 	response:any=[];
 	tChoice: any =[];
-    fChoice: any =[];
-    progOne: boolean = false;
+  fChoice: any =[];
+  progOne: boolean = false;
 	progTwo: boolean = false;
 	progre : boolean = true;
 	finalProg: boolean = false;
 	SubmitWelcome: boolean = false;
 	party: boolean = false;
 	welcomeform: FormGroup;
-    logged_in_id : string = "";
-
+  logged_in_id : string = "";
+	welcomeError: boolean;
+	quest: string;
+	currDate:any=[];
+	checkDate:any=[];
+	singleTaskData: any;
+	taskInfo:boolean=false;
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -122,34 +123,36 @@ export class HouseChoresComponent implements OnInit {
 			notes: ['', Validators.required],
 		});
 		this.welcomeform = this.formBuilder.group({
-		
-			partying: [''],
-			alcohol: [''],
-			smoking: [''],
-			apartment_clean_importance: [''],
-			music: [''],
-			apartment_party: [''],
-			social_account: ['linkedin'],
-			religion: ['1'],
+			partying: ['', Validators.required],
+			alcohol: ['', Validators.required],
+			smoking: ['', Validators.required],
+			apartment_clean_importance: ['', Validators.required],
+			music: ['', Validators.required],
+			apartment_party: ['', Validators.required],
+			social_account: [''],
+			religion: [''],
 		});
-		
-
 		 this.base_url = environment.base_url;
 		 this.today = new Date();
-         this.socket.connect(); 
-         this.logged_in_id = sessionStorage.getItem("userId");
-
-        console.log(this.logged_in_id);
-
+     this.socket.connect(); 
+     this.logged_in_id = sessionStorage.getItem("userId");
+       // console.log(this.logged_in_id);
 	}
 
 	ngOnInit() {
-		this.isWelcomeModal = true;  
-		this.keyboard =true;
-		this.display ='none';
-		this.isWelcomeBlock =true;	
-		this.isHouse1st=true;
-		this.isProgressBlue =false;
+		this.quest=sessionStorage.getItem("questionaire");
+		if(this.quest == "true"){
+			console.log("already completed survey");
+		}
+		else{
+			this.isWelcomeModal = true;  
+			this.keyboard =true;
+			this.display ='none';
+			this.isWelcomeBlock =true;	
+			this.isHouse1st=true;
+			this.isProgressBlue =false;
+		}
+	
 		this.getUsers();
 		this.getCategorie();
 		this.getTeams();
@@ -194,7 +197,7 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
-		console.log('join chat data', this.data);
+	//	console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
 
 		this.getMessages();
@@ -234,7 +237,7 @@ export class HouseChoresComponent implements OnInit {
 	loadMyMessages() {
 		this.socket.on('messages', (data) => {
 			this.gruopMessages = data.messages; 
-			console.log('gruopMessages',this.gruopMessages);
+		//	console.log('gruopMessages',this.gruopMessages);
 		});
 	}
 	loadMessages() {
@@ -343,9 +346,37 @@ export class HouseChoresComponent implements OnInit {
 		this.isNextStep =true;
 		this.isProgressBlue =true;
 		this.islockbgblue = false;
+	
+	}
+	back(id){
+		if(id == '1'){
+			this.isHomeQuizStep = 0;
+			this.isHouse1st=true;
+			this.isNextStep =true;
+			this.isNextStep1 = false;
+			this.isNextStep2 = false;
+			this.progre=true;
+		}
+		if(id == '2'){
+			this.isHomeQuizStep = 1;
+			this.isNextStep = false;
+			this.isNextStep1 = true;
+			this.isNextStep2 = false;
+			this.progOne = true;
+		}
+		if(id == '3'){
+			this.isHomeQuizStep = 2;
+			this.isNextStep = false;
+			this.isNextStep1 = false;
+			this.isNextStep2 = true;
+			this.progTwo = true;
+
+		}
+
 	}
 	onNextStepClick(id) {
-		console.log('id', id);
+		console.log(id);
+	
 		if(id == '1'){
 			this.isNextStep =false;
 			this.isNextStep1 = true;
@@ -364,19 +395,22 @@ export class HouseChoresComponent implements OnInit {
 		}
 		this.isHouse1st = false;
 		this.isHomeQuizStep = id;
-
 	}
 	queSubmit(){
 		this.submitted = true;  
 		//console.log(this.welcomeform.value);
+    if(this.wf.partying.errors && this.submitted){
+			console.log("invalid");
 
+		}
 		if (this.welcomeform.invalid) {
+			this.welcomeError=true;
 			return;
 		}
 		this.data_service.submitQuest(this.welcomeform.value).subscribe((response:any) =>{  
-			console.log('after submit response',response);
+	//		console.log('after submit response',response);
 			this.toastr.successToastr('Survey Completed.', 'Success!');
-
+			this.submitted=false;
 			this.isWelcomeModal = false;
 			const html = document.getElementsByTagName('html')[0];
 			html.classList.remove('popCustomHtml');
@@ -385,9 +419,7 @@ export class HouseChoresComponent implements OnInit {
 		}, error =>{
 			console.log(error);
 			this.toastr.errorToastr(error.error);
-
  		})
-		
 	}
 	getUsers() {
 		this.data_service.getUsers().subscribe((response:any) =>{   
@@ -425,7 +457,7 @@ export class HouseChoresComponent implements OnInit {
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
-		
+
 	}
 	deleteTaskDailog(task){
 		 //console.log('task',task);
@@ -461,11 +493,15 @@ export class HouseChoresComponent implements OnInit {
 	get f() {  
 		return this.addTaskForm.controls; 
 	}
+	get wf(){
+		return this.welcomeform.controls;
+	}
 	onSelectFile(event) {
 		this.fileData = event.target.files[0];
 		this.preview();
 	}
 	preview() {
+
 		var mimeType = this.fileData.type;
 		if (mimeType.match(/image\/*/) == null) {
 			return;
@@ -486,7 +522,7 @@ export class HouseChoresComponent implements OnInit {
 				"task_name" : form.taskName, 
 				"assign_to" : form.assignTo,
 				"due_date" : this.datePipe.transform(form.dueDate, 'yyyy-MM-dd'),
-				"photo" : this.fileData,
+				"photo" :    this.fileData,
 				"category" : form.category,
 				"notes" : form.notes,
 			} 
@@ -509,6 +545,7 @@ export class HouseChoresComponent implements OnInit {
 				this.isSuccess = true; 
 				this.submitted = false;   	
 				this.addTaskForm.reset();
+				this.getTask();
 				this.url ='';
 			},error=>{ 
 				this.toastr.errorToastr(error.error, 'Error!');
@@ -516,6 +553,7 @@ export class HouseChoresComponent implements OnInit {
 		}
 	}
 	getTask() {
+		this.calendarEvents=[];
 		this.data_service.getTask().subscribe((response:any) =>{   
 			response.tasks.forEach(element => {
 				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
@@ -533,28 +571,20 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	handleDateClick(arg) {
-		let today=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
-		let check=arg.dateStr;
+		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
+		this.checkDate=arg.dateStr;
 
-	    if(check < today)
-        {
-			console.log("previous");  
-        }
-        else {
-			console.log("next");
-			this.eventInfo=true;
-			this.addTaskModal=true;
-	  		this.renderer.addClass(document.body, 'modal-open');
-         }
-	  if(check < today)
-     {
-			console.log("previous");
-    }  else {
-			console.log("next");
+	    if(this.checkDate < this.currDate)
+      {
+		         //	console.log("previous");  
+      }
+      else {
+	     	//console.log("next");
 			this.eventInfo=true;
 			this.addTaskModal=true;
 			this.renderer.addClass(document.body, 'modal-open');
-        }
+      }
+ 
 	}
 	openaddTask(){
 		this.addTaskModal=true;
@@ -562,12 +592,29 @@ export class HouseChoresComponent implements OnInit {
 	}
 	close(){
 		this.addTaskModal=false;
-		this.submitted = false;   	
+		this.submitted = false;   
+		this.taskInfo=false;	
 		this.addTaskForm.reset();
 		this.renderer.removeClass(document.body, 'modal-open');
 	}
 	event(event){
-		console.log(event.event._def.publicId);
+		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
+		this.checkDate=this.datePipe.transform(event.event._instance.range.start, 'yyyy-MM-dd');
+		if(this.checkDate < this.currDate)
+		{
+			console.log("previous");  
+		}
+		else {
+			 this.taskInfo=true;
+			 let event_id=event.event._def.publicId;
+			 this.data_service.getTaskById(event_id).subscribe((response:any) =>{   
+				this.singleTaskData=response.suggestionList.taskArr;
+		 }, error =>{ 
+			 this.isError = true; 
+			 this.errorsArr = error.error;
+		 })
+		}
+
 	}
 	allTaskListing() {
 		this.allTask = [];
@@ -592,7 +639,7 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	navigateToSuggestions(task){
-		this.router.navigate(['/task-suggestions',task.id]);
+		this.router.navigate(['/task-suggestions',task]);
 	}	
+	
 }
-
