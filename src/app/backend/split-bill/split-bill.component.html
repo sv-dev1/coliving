@@ -17,7 +17,8 @@
 						<div class="card-header">Bill Participants</div>
 						<div class="card-body pb-0">
 							<div class="row">
-								<div class="col-12 col-sm-6">
+							
+								<div class="col-12 col-sm-6" *ngFor = "let bill of bills">
 									<div class="bill-parts">
 										<div class="for-image">
 											<img class="img-fluid" src="assets/images/avatar.png" />
@@ -34,93 +35,9 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-12 col-sm-6">
-									<div class="bill-parts">
-										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
-										</div>
-										<div class="for-detail">
-											<div class="name-box">
-												<p class="name">Vicky Kaushal</p>
-												<span class="price">$ 102.00</span>
-											</div>
- 										<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
-											</div>
 
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-6">
-									<div class="bill-parts">
-										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
-										</div>
-										<div class="for-detail">
-											<div class="name-box">
-												<p class="name">Mavi Tejpreet</p>
-												<span class="price">$ 51.00</span>
-											</div>
-											<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
-											</div>
 
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-6">
-									<div class="bill-parts">
-										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
-										</div>
-										<div class="for-detail">
-											<div class="name-box">
-												<p class="name">Saloni</p>
-												<span class="price">$ 51.00</span>
-											</div>
-											<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-6">
-									<div class="bill-parts">
-										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
-										</div>
-										<div class="for-detail">
-											<div class="name-box">
-												<p class="name">Preeti</p>
-												<span class="price">$ 51.00</span>
-											</div>
-											<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-12 col-sm-6">
-									<div class="bill-parts">
-										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
-										</div>
-										<div class="for-detail">
-											<div class="name-box">
-												<p class="name">Sanjay</p>
-												<span class="price">$ 51.00</span>
-											</div>
-											<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
-											</div>
-										</div>
-									</div>
-								</div>
+
 							</div>
 						</div> 
 					</div>

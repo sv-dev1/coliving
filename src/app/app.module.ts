@@ -42,6 +42,7 @@ import { TaskSuggestionsComponent } from './backend/task-suggestions/task-sugges
 import { Socket } from 'ng-socket-io';
 import { BlockCopyPasteDirective } from './block-copy-paste.directive';
 import {MatSliderModule} from '@angular/material/slider';
+import { CategoryComponent } from './backend/category/category.component';
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -83,6 +84,7 @@ export function provideConfig() {
     ResetPasswordComponent,
     TaskSuggestionsComponent,
     BlockCopyPasteDirective,
+    CategoryComponent,
    
   ],
   imports: [
