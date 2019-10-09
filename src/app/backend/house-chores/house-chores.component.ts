@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild,Renderer2 } from '@angular/core';
+import { Component, AfterViewChecked, ElementRef, ViewChild, OnInit, HostListener,Renderer2 } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
@@ -19,7 +19,7 @@ import { Socket } from 'ng-socket-io';
 })
 
 export class HouseChoresComponent implements OnInit {
-
+  
 	calendarVisible = true;
 	calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 	calendarWeekends = true;
@@ -97,13 +97,15 @@ export class HouseChoresComponent implements OnInit {
 	SubmitWelcome: boolean = false;
 	party: boolean = false;
 	welcomeform: FormGroup;
-  logged_in_id : string = "";
 	welcomeError: boolean;
 	quest: string;
 	currDate:any=[];
 	checkDate:any=[];
 	singleTaskData: any;
 	taskInfo:boolean=false;
+  logged_in_id : string = "";
+  valMessage: boolean = false;
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -165,7 +167,7 @@ export class HouseChoresComponent implements OnInit {
 		body.classList.add('popCustomBody');
 
 	}
-
+     
 	openChat(team,index){
 		//console.log('team',team);
 
@@ -204,7 +206,11 @@ export class HouseChoresComponent implements OnInit {
 		this.loadMyMessages();
 	}
 	sendMessgae() {
-		if(this.user_id ==''){
+		if(this.message == '') {
+         this.valMessage = true;
+         return;
+		} else {
+			if(this.user_id ==''){
 			this.by_default_team = this.firstTeam;
 			this.data = {
 				"userId": this.logged_in_id,
@@ -219,6 +225,7 @@ export class HouseChoresComponent implements OnInit {
 				"username":this.logged_in_username,
 				"msg": this.message
 			}
+		  }
 		}
 		console.log('data',this.data);
 		this.socket.emit('newMessage', this.data);

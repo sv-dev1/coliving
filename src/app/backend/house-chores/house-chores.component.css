@@ -1,1 +1,25 @@
 .msg_history {height: none !important;}
+
+
+.type_msg {
+    border-top: 1px solid #c4c4c4;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    padding-left: 15px;
+    background: #fff;
+}
+.inbox_msg {
+    position: relative;
+}
+.mesgs {
+    padding-bottom: 60px;
+    padding-top: 60px;
+}
+.headind_srch.testing {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+}

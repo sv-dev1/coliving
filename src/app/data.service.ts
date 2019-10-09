@@ -136,6 +136,21 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
+	addCategory(formData){
+        let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'category',formData,httpOptions)
+		.map((response:Response)=>{
+			console.log('questionaire response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
 	getCategories(){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -294,6 +309,36 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			console.log('error',error);
+			return Observable.throw(error);});
+	}
+	getCountries(){ 
+		return this.http.get(this.base_url+'countries')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	getLanguages(){ 
+		return this.http.get(this.base_url+'languages')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	getBills(){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);		
+		return this.http.get(this.base_url+'bills/',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
 }
