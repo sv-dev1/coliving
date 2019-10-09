@@ -11,16 +11,21 @@
 				<p>Dashboard</p>
 			</a>
 		</li>
-		
+		<li routerLinkActive="active">
+			<a routerLink="/categories" routerLinkActive="active-link">
+				<i class="fas fa-shopping-basket"></i>
+				<p>Categories</p>
+			</a>
+		</li>
 		<li routerLinkActive="active" [class.active]="isHouse == true">
 		   <a routerLink="/house-chores" routerLinkActive="active-link">
-			    <i class="fas fa-tachometer-alt"></i>
+			    <i class="fas fa-home"></i>
 			      <p>House Chores</p>
 			</a>
 		</li>
 		<li routerLinkActive="active">
 			<a routerLink="/split-bill" routerLinkActive="active-link">
-				<i class="fas fa-broom"></i>
+				<i class="fas fa-usd"></i>
 				<p>Split Bill</p>
 			</a>
 		</li>
@@ -32,13 +37,13 @@
 		</li>
 		<li routerLinkActive="active">
 			<a routerLink="/team-group"  routerLinkActive="active-link">
-				<i class="far fa-calendar-alt"></i>
+				<i class="fas fa-users"></i>
 				<p>Team Group</p>
 			</a>
 		</li>
 		<li routerLinkActive="active">
 			<a routerLink="/refer-a-friend"  routerLinkActive="active-link">
-				<i class="far fa fa-code"></i>
+				<i class="fas  fa-share"></i>
 				<p>Refer a friend</p>
 			</a>
 		</li>
