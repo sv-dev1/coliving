@@ -89,8 +89,8 @@ export class HouseChoresComponent implements OnInit {
 	taskId:string='';
 	response:any=[];
 	tChoice: any =[];
-  fChoice: any =[];
-  progOne: boolean = false;
+    fChoice: any =[];
+    progOne: boolean = false;
 	progTwo: boolean = false;
 	progre : boolean = true;
 	finalProg: boolean = false;
@@ -103,8 +103,8 @@ export class HouseChoresComponent implements OnInit {
 	checkDate:any=[];
 	singleTaskData: any;
 	taskInfo:boolean=false;
-  logged_in_id : string = "";
-  valMessage: boolean = false;
+    logged_in_id : string = "";
+    valMessage: boolean = false;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -136,8 +136,8 @@ export class HouseChoresComponent implements OnInit {
 		});
 		 this.base_url = environment.base_url;
 		 this.today = new Date();
-     this.socket.connect(); 
-     this.logged_in_id = sessionStorage.getItem("userId");
+         this.socket.connect(); 
+         this.logged_in_id = sessionStorage.getItem("userId");
        // console.log(this.logged_in_id);
 	}
 
@@ -153,6 +153,11 @@ export class HouseChoresComponent implements OnInit {
 			this.isWelcomeBlock =true;	
 			this.isHouse1st=true;
 			this.isProgressBlue =false;
+			const html = document.getElementsByTagName('html')[0];
+			html.classList.add('popCustomHtml');
+			const body = document.getElementsByTagName('body')[0];
+			body.classList.add('popCustomBody');
+
 		}
 	
 		this.getUsers();
@@ -161,11 +166,7 @@ export class HouseChoresComponent implements OnInit {
 		this.getTask();
 		this.allTaskListing();
 		this.logged_in_username = sessionStorage.getItem("user_name");
-		const html = document.getElementsByTagName('html')[0];
-		html.classList.add('popCustomHtml');
-		const body = document.getElementsByTagName('body')[0];
-		body.classList.add('popCustomBody');
-
+	
 	}
      
 	openChat(team,index){
@@ -279,7 +280,6 @@ export class HouseChoresComponent implements OnInit {
 	}
 	close_welcome(){
 		//console.log(this.welcomeform.value);
-
 		this.isWelcomeModal = false;
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.remove('popCustomHtml');
@@ -605,6 +605,10 @@ export class HouseChoresComponent implements OnInit {
 		this.taskInfo=false;	
 		this.addTaskForm.reset();
 		this.renderer.removeClass(document.body, 'modal-open');
+		const html = document.getElementsByTagName('html')[0];
+		html.classList.remove('popCustomHtml');
+		const body = document.getElementsByTagName('body')[0];
+		body.classList.remove('popCustomBody');
 	}
 	event(event){
 		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
