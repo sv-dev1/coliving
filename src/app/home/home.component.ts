@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
     });
   }
   ngOnInit() {
+    
     if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = true;
     } 

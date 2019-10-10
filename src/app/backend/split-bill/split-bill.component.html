@@ -17,27 +17,40 @@
 						<div class="card-header">Bill Participants</div>
 						<div class="card-body pb-0">
 							<div class="row">
-							
-								<div class="col-12 col-sm-6" *ngFor = "let bill of bills">
-									<div class="bill-parts">
+								<div class="col-12 col-sm-6" (click)="clickEvent()"  [ngClass]="status ? '' : ''"  *ngFor = "let bill of bills">
+									<div class="bill-parts" [ngStyle]="{'background':bill.color}">
 										<div class="for-image">
-											<img class="img-fluid" src="assets/images/avatar.png" />
+											<img (click)="zoomImage($event)" class="img-fluid" src="{{base_url}}{{bill.image}}" onerror="this.src='assets/images/no-image-available.png'" placement="right" ngbTooltip="Click to preview."/>
+										    	
 										</div>
 										<div class="for-detail">
 											<div class="name-box">
-												<p class="name">Alex Decosta</p>
-												<span class="price">$ 51.00</span>
+												<p class="name">{{bill.title}}</p>
+												<span class="price">${{bill.total_amount}}</span>
+											</div>
+                                            <div class="name-box2">
+												<span class="name2">Created By:</span>
+												<span class="price">&nbsp;{{bill.created_by}}</span>
+
 											</div>
 											<div class="name-box2">
-												<span class="name2">Car Pool</span>
-												<span class="price">Saturday Night</span>
+												<span class="name2">Your Contribution:</span>
+												<span class="price">&nbsp;${{bill.part}}</span>
+
+											</div>
+											<div class="name-box2">
+												<span class="name2">Due Date:</span>
+												<span class="price">&nbsp;{{bill.date}}</span>
+
+											</div>
+											<div class="name-box2">
+												<span class="name2"></span>
+												<span class="price">&nbsp;{{bill.message}}</span>
+
 											</div>
 										</div>
 									</div>
 								</div>
-
-
-
 							</div>
 						</div> 
 					</div>
@@ -46,3 +59,27 @@
 		</div>
 	</div>
 </section>
+
+<div class="container">          
+            <!-- The Modal -->
+           <div class="modal" id="imagwPopUp" [style.display]="isImageModal ? 'block' : 'none'" *ngIf="isImageModal" >
+               <div class="modal-dialog">
+                  <div class="modal-content">
+
+                     <!-- Modal Header -->
+                     <div class="modal-header nbC">
+                        <h4 class="modal-title">Add Category</h4>
+                        <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+                     </div>
+
+                     <!-- Modal body -->
+                     <div class="modal-body">
+                        <div class="for-image">
+							<img class="img-fluid" src="{{popImage}}" />
+										    	
+						</div>
+                     </div>
+                  </div>
+            </div>
+      </div>
+ </div>   

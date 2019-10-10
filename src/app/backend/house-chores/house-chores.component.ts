@@ -105,6 +105,7 @@ export class HouseChoresComponent implements OnInit {
 	taskInfo:boolean=false;
     logged_in_id : string = "";
     valMessage: boolean = false;
+    msgData:any=[];
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -241,6 +242,7 @@ export class HouseChoresComponent implements OnInit {
 		this.socket.on('getMessage', (data) => {
 			console.log('getMessage',data);
 			this.gruopMessages.push(data);	
+			this.msgData = data;
 		});  
 		
 	} 
