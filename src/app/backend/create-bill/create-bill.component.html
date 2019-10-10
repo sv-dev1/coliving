@@ -89,6 +89,7 @@
                                             <div class="form-group">
                                                 <label for="bill">Upload Bill:</label>
                                                 <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
+                                                <img [src]="url" height="200" *ngIf="url">
                                                 <div *ngIf="submitted && f.bill.errors" class="invalid-feedback">
                                                     <div *ngIf="f.bill.errors.required">Please Upload bill</div>
                                                  </div>

@@ -71,7 +71,7 @@
 
 										</div>
 										<div class="form-group form-parts">
-											<input type="password"  placeholder="Password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" appBlockCopyPaste>
+											<input type="password"  placeholder="Password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" appBlockCopyPaste placement="right" ngbTooltip="Direct Copy paste not allowed">
 											
 											<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
 												<span class="for-sub-name" *ngIf="f.password.errors.required"> Password is required.</span>
@@ -83,7 +83,7 @@
 										</div>
 										
 										<div class="form-group form-parts">
-											<input type="password"  placeholder="Confirm Password" class="form-control" formControlName="confPassword" [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }" appBlockCopyPaste>
+											<input type="password"  placeholder="Confirm Password" class="form-control" formControlName="confPassword" [ngClass]="{ 'is-invalid': submitted && f.confPassword.errors }" placement="right" ngbTooltip="Direct Copy paste not allowed" appBlockCopyPaste>
 
 											<div *ngIf="submitted && f.confPassword.errors" class="invalid-feedback">
 												<span class="for-sub-name" *ngIf="f.confPassword.errors.required">Confirm password is required.</span>
