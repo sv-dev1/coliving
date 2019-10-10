@@ -1,158 +1,158 @@
-	
-		// Cache selectors
-		var lastId,
-		topMenu = $("#menu-center"),
-		topMenuHeight = topMenu.outerHeight()+1,
-			 // All list items
-			 menuItems = topMenu.find("a"),
-			 // Anchors corresponding to menu items
-			 scrollItems = menuItems.map(function(){
-			 	var item = $($(this).attr("href"));
-			 	if (item.length) { return item; }
-			 });
+var Cal = function(divId) {
 
-			// Bind click handler to menu items
-			// so we can get a fancy scroll animation
-			menuItems.click(function(e){
-				var href = $(this).attr("href"),
-				  //offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
-				  offsetTop = href === "#" ? 0 : $(href).offset().top+1;
-				  $('html, body').stop().animate({ 
-				  	scrollTop: offsetTop
-				  }, 850);
-				  e.preventDefault();
-				});
+  //Store div id
+  this.divId = divId;
 
-			// Bind to scroll
-			$(window).scroll(function(){
-			   // Get container scroll position
-			   //var fromTop = $(this).scrollTop()+topMenuHeight;
-			   var fromTop = $(this).scrollTop();
-			   
-			   // Get id of current scroll item
-			   var cur = scrollItems.map(function(){
-			   	if ($(this).offset().top < fromTop)
-			   		return this;
-			   });
-			   // Get the id of the current element
-			   cur = cur[cur.length-1];
-			   var id = cur && cur.length ? cur[0].id : "";
-			   
-			   if (lastId !== id) {
-			   	lastId = id;
-				   // Set/remove active class
-				   menuItems
-				   .parent().removeClass("active")
-				   .end().filter("[href=#"+id+"]").parent().addClass("active");
-				}                   
-			});
-			
-			
-			
-			
-			
-			
-			
-			
-			// values to keep track of the number of letters typed, which quote to use. etc. Don't change these values.
-			var i = 0,
-			a = 0,
-			isBackspacing = false,
-			isParagraph = false;
+  // Days of week, starting on Sunday
+  this.DaysOfWeek = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat'
+  ];
 
-			// Typerwrite text content. Use a pipe to indicate the start of the second line "|".  
-			var textArray = [
-			"FIND AND BOOK ROOMS", 
-			"Save money by sharing homes"
-			];
+  // Months, stating on January
+  this.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
-			// Speed (in milliseconds) of typing.
-			var speedForward = 350, //Typing Speed
-				speedWait = 1000, // Wait between typing and backspacing
-				speedBetweenLines = 1000, //Wait between first and second lines
-				speedBackspace = 25; //Backspace Speed
+  // Set the current month, year
+  var d = new Date();
 
-			//Run the loop
-			typeWriter("output", textArray);
+  this.currMonth = d.getMonth();
+  this.currYear = d.getFullYear();
+  this.currDay = d.getDate();
 
-			function typeWriter(id, ar) {
-				var element = $("#" + id),
-				aString = ar[a],
-				  eHeader = element.children("h1"), //Header element
-				  eParagraph = element.children("p"); //Subheader element
-				  
-			  // Determine if animation should be typing or backspacing
-			  if (!isBackspacing) {
-			  	
-				// If full string hasn't yet been typed out, continue typing
-				if (i < aString.length) {
-					
-				  // If character about to be typed is a pipe, switch to second line and continue.
-				  if (aString.charAt(i) == "|") {
-				  	isParagraph = true;
-				  	eHeader.removeClass("cursor");
-				  	eParagraph.addClass("cursor");
-				  	i++;
-				  	setTimeout(function(){ typeWriter(id, ar); }, speedBetweenLines);
-				  	
-				  // If character isn't a pipe, continue typing.
-				} else {
-					// Type header or subheader depending on whether pipe has been detected
-					if (!isParagraph) {
-						eHeader.text(eHeader.text() + aString.charAt(i));
-					} else {
-						eParagraph.text(eParagraph.text() + aString.charAt(i));
-					}
-					i++;
-					setTimeout(function(){ typeWriter(id, ar); }, speedForward);
-				}
-				
-				// If full string has been typed, switch to backspace mode.
-			} else if (i == aString.length) {
-				
-				isBackspacing = true;
-				setTimeout(function(){ typeWriter(id, ar); }, speedWait);
-				
-			}
-			
-			  // If backspacing is enabled
-			} else {
-				
-				// If either the header or the paragraph still has text, continue backspacing
-				if (eHeader.text().length > 0 || eParagraph.text().length > 0) {
-					
-				  // If paragraph still has text, continue erasing, otherwise switch to the header.
-				  if (eParagraph.text().length > 0) {
-				  	eParagraph.text(eParagraph.text().substring(0, eParagraph.text().length - 1));
-				  } else if (eHeader.text().length > 0) {
-				  	eParagraph.removeClass("cursor");
-				  	eHeader.addClass("cursor");
-				  	eHeader.text(eHeader.text().substring(0, eHeader.text().length - 1));
-				  }
-				  setTimeout(function(){ typeWriter(id, ar); }, speedBackspace);
-				  
-				// If neither head or paragraph still has text, switch to next quote in array and start typing.
-			} else { 
-				
-				isBackspacing = false;
-				i = 0;
-				isParagraph = false;
-				  a = (a + 1) % ar.length; //Moves to next position in array, always looping back to 0
-				  setTimeout(function(){ typeWriter(id, ar); }, 50);
-				  
-				}
-			}
-		}
-		
-		
-		$(window).scroll(function(){
-			var banner_height = $('.banner-section').outerHeight();
-			if ($(this).scrollTop() > banner_height) {
-				$('body').addClass('display-menu');
-			} else {
-				$('body').removeClass('display-menu');
-			}
-		});
-		
-		new WOW().init();
-		
+};
+
+// Goes to next month
+Cal.prototype.nextMonth = function() {
+  if ( this.currMonth == 11 ) {
+    this.currMonth = 0;
+    this.currYear = this.currYear + 1;
+  }
+  else {
+    this.currMonth = this.currMonth + 1;
+  }
+  this.showcurr();
+};
+
+// Goes to previous month
+Cal.prototype.previousMonth = function() {
+  if ( this.currMonth == 0 ) {
+    this.currMonth = 11;
+    this.currYear = this.currYear - 1;
+  }
+  else {
+    this.currMonth = this.currMonth - 1;
+  }
+  this.showcurr();
+};
+
+// Show current month
+Cal.prototype.showcurr = function() {
+  this.showMonth(this.currYear, this.currMonth);
+};
+
+// Show month (year, month)
+Cal.prototype.showMonth = function(y, m) {
+
+  var d = new Date()
+  // First day of the week in the selected month
+  , firstDayOfMonth = new Date(y, m, 1).getDay()
+  // Last day of the selected month
+  , lastDateOfMonth =  new Date(y, m+1, 0).getDate()
+  // Last day of the previous month
+  , lastDayOfLastMonth = m == 0 ? new Date(y-1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+
+
+  var html = '<table>';
+
+  // Write selected month and year
+  html += '<thead><tr>';
+  html += '<td colspan="7">' + this.Months[m] + ' ' + y + '</td>';
+  html += '</tr></thead>';
+
+
+  // Write the header of the days of the week
+  html += '<tr class="days">';
+  for(var i=0; i < this.DaysOfWeek.length;i++) {
+    html += '<td>' + this.DaysOfWeek[i] + '</td>';
+  }
+  html += '</tr>';
+
+  // Write the days
+  var i=1;
+  do {
+
+    var dow = new Date(y, m, i).getDay();
+
+    // If Sunday, start new row
+    if ( dow == 0 ) {
+      html += '<tr>';
+    }
+    // If not Sunday but first day of the month
+    // it will write the last days from the previous month
+    else if ( i == 1 ) {
+      html += '<tr>';
+      var k = lastDayOfLastMonth - firstDayOfMonth+1;
+      for(var j=0; j < firstDayOfMonth; j++) {
+        html += '<td class="not-current">' + k + '</td>';
+        k++;
+      }
+    }
+
+    // Write the current day in the loop
+    var chk = new Date();
+    var chkY = chk.getFullYear();
+    var chkM = chk.getMonth();
+    if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
+      html += '<td class="today"><span>' + i + '</span></td>';
+    } else {
+      html += '<td class="normal">' + i + '</td>';
+    }
+    // If Saturday, closes the row
+    if ( dow == 6 ) {
+      html += '</tr>';
+    }
+    // If not Saturday, but last day of the selected month
+    // it will write the next few days from the next month
+    else if ( i == lastDateOfMonth ) {
+      var k=1;
+      for(dow; dow < 6; dow++) {
+        html += '<td class="not-current">' + k + '</td>';
+        k++;
+      }
+    }
+
+    i++;
+  }while(i <= lastDateOfMonth);
+
+  // Closes table
+  html += '</table>';
+
+  // Write HTML to the div
+  //document.getElementById(this.divId).innerHTML = html;
+};
+
+// On Load of the window
+window.onload = function() {
+
+  // Start calendar
+  var c = new Cal("divCal");			
+  c.showcurr();
+
+  // Bind next and previous button clicks
+  getId('btnNext').onclick = function() {
+    c.nextMonth();
+  };
+  getId('btnPrev').onclick = function() {
+    c.previousMonth();
+  };
+}
+
+// Get element by id
+function getId(id) {
+  return document.getElementById(id);
+}

@@ -44,11 +44,11 @@ export class DataService {
 		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
 		return this.http.post(this.base_url+'createBills',input_data,httpOptions)
 		.map((response:Response)=>{
-			console.log('createBills response',response);
+			//console.log('createBills response',response);
 			return response;
 		})
 		.catch((error:Error) => {
-			console.log('error',error);
+			//console.log('error',error);
 			return Observable.throw(error);});
 	}
 	getTeam(){ 

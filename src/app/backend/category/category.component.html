@@ -27,11 +27,11 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let category of allCategories; index as i">
+                     <tr *ngFor="let category of allCategories|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                         <th scope="row">{{ i + 1 }}</th>
                         <td>{{ category.name }}</td>
                         <td>{{ category.description }}</td>
-                         <td>{{ category.created_at }}</td>
+                         <td>{{ category.created_at | date:'medium'}}</td>
                         <td>
                            <a placement="top" ngbTooltip="Edit functionality Under Progress" class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
                            <a placement="top" ngbTooltip="Update Functionality Under Progress" class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-trash" aria-hidden="true"></i></a>
@@ -39,6 +39,7 @@
                      </tr>
                   </tbody>
                </table>
+               <pagination-controls (pageChange)="p = $event"></pagination-controls>
             </div>
          </div>
       </div>
@@ -58,7 +59,7 @@
 
                      <!-- Modal body -->
                      <div class="modal-body">
-                        <p>Category details form</p>
+                        
                         <form [formGroup]="CategoryForm" (ngSubmit)="addCategory(CategoryForm.value)" >   
                         <div class="form-group">
                               <label>Category Name:</label>
@@ -66,13 +67,13 @@
                                <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.category.errors.required">Category name is required.</span>
                               </div>
+                              <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                            </div>
                            </div>                        
                            <div class="form-group">
-                              <label>Category Description:</label>
-                               <textarea id="description" class="form-control"rows="5" cols="5" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
-                              <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.description.errors.required">Category description is required.</span>
-                              </div>
+                              <label>Category Description&nbsp;(optional):</label>
+                               <textarea id="description" class="form-control"rows="5" cols="5" formControlName="description"></textarea>
+                             
                              </div>
                              <div class="modal-footer">
                                  <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>

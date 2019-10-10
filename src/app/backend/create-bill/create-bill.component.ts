@@ -36,6 +36,7 @@ export class CreateBillComponent implements OnInit {
   userEmpty:boolean=false;
   selectEmpty:boolean=false;
   list : any =[];
+  url:any;
 
   constructor(
     private formBuilder:FormBuilder,	
@@ -65,11 +66,22 @@ export class CreateBillComponent implements OnInit {
     return this.createBillForm.controls; 
   }
   onSelectFile(event) {
-		 this.fileData = event.target.files[0].name;   
+		 this.fileData = event.target.files[0];   
+     this.preview();
   } 
- 
+  preview() {
+    var mimeType = this.fileData.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.fileData); 
+    reader.onload = (_event) => { 
+     this.url = reader.result; 
+    }
+  }
   createBill(){
-    console.log(this.createBillForm.value);
+    
       if(this.createBillForm.value['team']=="")
       {
         this.teamEmpty=true;
@@ -111,14 +123,14 @@ export class CreateBillComponent implements OnInit {
             token = sessionStorage.getItem("auth_token"); 
             }
             const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-            this.http.post(this.base_url+'createBills', formData, httpOptions).subscribe(response => {
-                console.log(response); 
-                this.toastr.successToastr('Bill Created Successfully.', 'Success!');
+            this.http.post(this.base_url+'createBills', formData, httpOptions).subscribe((response:any) => {
+                
+                this.toastr.successToastr(response.message, 'Success!');
                 this.submitted=false;
                 this.createBillForm.reset();
               },error=>{ 
-                console.log("ERROR");
-                console.log(error.error);
+                //console.log("ERROR");
+                //console.log(error.error);
             }); 
         }
   }
@@ -149,14 +161,14 @@ export class CreateBillComponent implements OnInit {
         window.scrollTo(0, 0);
       this.errorsArr = JSON.parse(error._body);
       this.toastr.errorToastr(this.errorsArr, 'Error!');
-      console.log(JSON.stringify(this.errorsArr, undefined, 2))
+      //console.log(JSON.stringify(this.errorsArr, undefined, 2))
     })
   }
 
   onTeamSelection() { 
     let tmp = [];
     let postArr = {'teamId': this.list};
-    console.log(postArr);
+   // console.log(postArr);
     this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
          this.teamuser=response.teams;
          for(let i=0; i < this.teamuser.length; i++) {
@@ -176,7 +188,7 @@ export class CreateBillComponent implements OnInit {
         window.scrollTo(0, 0);
       this.errorsArr = JSON.parse(error._body);
       this.toastr.errorToastr(this.errorsArr, 'Error!');
-      console.log(JSON.stringify(this.errorsArr, undefined, 2))
+     // console.log(JSON.stringify(this.errorsArr, undefined, 2))
     })
   
   }
@@ -195,23 +207,23 @@ export class CreateBillComponent implements OnInit {
     this.onTeamSelection();
   }
   onDeSelectAll(items: any){
-      console.log(items);
+      //console.log(items);
       this.list=[];
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
     this.userselectedItems.push(items);
-    console.log(this.userselectedItems);
+    //console.log(this.userselectedItems);
   } 
   onUserItemSelect(item:any){
       this.userselectedItems.push(item);
-      console.log(this.userselectedItems);
+      //console.log(this.userselectedItems);
   }
   OnUserItemDeSelect(item:any){
-    console.log(this.userselectedItems);
+    //console.log(this.userselectedItems);
   }
   onUserDeSelectAll(items: any){
-      console.log(items);
+     // console.log(items);
   }
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;

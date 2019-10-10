@@ -1416,6 +1416,10 @@ li.list-group-item.active-user:hover {
   text-align: center;
    background-color: rgba(0, 0, 0, 0.7);
 }
+#imagwPopUp {
+ 
+   background-color: rgba(0, 0, 0, 0.7);
+}
 
 .modaldialog12 {
   display: inline-block;

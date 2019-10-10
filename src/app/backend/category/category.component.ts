@@ -20,7 +20,9 @@ export class CategoryComponent implements OnInit {
 	   isopenAddCategoryModal:boolean=false;
 	   submitted:boolean=false;
        isSuccess : boolean = false;
-       
+       isalreadyEixst:boolean =false;
+       isalreadyEixstErr:string=''
+
 	   CategoryForm:FormGroup;
 
   constructor(
@@ -32,7 +34,6 @@ export class CategoryComponent implements OnInit {
   	) { 
          this.CategoryForm = this.formBuilder.group({
 			category: ['', Validators.required],
-			description: ['', Validators.required],
 		});
      }
 
@@ -55,6 +56,7 @@ export class CategoryComponent implements OnInit {
     closeModal(){
     	this.isopenAddCategoryModal = false;
     	this.submitted = false;     
+    	this.isalreadyEixst = false;
         this.CategoryForm.reset();
     }
     get f() { return this.CategoryForm.controls; }
@@ -78,7 +80,12 @@ export class CategoryComponent implements OnInit {
 	        },error =>{
 	          this.isError = true; 
 	          this.errorsArr = error.error;
-	          this.toastr.errorToastr(this.errorsArr,'Success');
+	          if(error.error.name) {
+	          	   this.isalreadyEixst = true;
+	               this.isalreadyEixstErr = error.error.name;
+	          }
+	        
+	          //this.toastr.errorToastr(error.error.name,'Error');
 	        });
 
 	    }
