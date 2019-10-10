@@ -16,260 +16,254 @@
                <div class="card mb-3">
                   <div class="card-header">My Account</div>
                   <div class="card-body">
-                     <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
-                     
-                     <div class="row">
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">First Name:</label>
-                              <input type="text" id="firstName" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
-                              <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
+                     <form [formGroup]="updateProfileForm">
+                        <div class="row">
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">First Name:</label>
+                                 <input type="text" id="firstName" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                                 <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Last Name:</label>
-                              <input type="text" id="lastName" class="form-control" placeholder="First Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
-                              <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Last Name:</label>
+                                 <input type="text" id="lastName" class="form-control" placeholder="First Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                 <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Email:</label>
-                              <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
-                              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Email:</label>
+                                 <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
+                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Username:</label>
-                              <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
-                              <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.userName.errors.required">Username is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Username:</label>
+                                 <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
+                                 <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.userName.errors.required">Username is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Date Of Birth:</label>
-                              <input type="text" placeholder="Date of Birth"
-                              class="form-control"
-                              #dp="bsDatepicker"
-                              bsDatepicker formControlName="dob"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
-                              <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of Birth is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Date Of Birth:</label>
+                                 <input type="text" placeholder="Date of Birth"
+                                 class="form-control"
+                                 #dp="bsDatepicker"
+                                 bsDatepicker formControlName="dob"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                                 <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of Birth is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Occupation/Timetable:</label>
-                                
-                                 <select class="custom-select form-control" formControlName="occupation" id="occupation" [ngClass]="{ 'is-invalid': submitted && f.occupation.errors }">
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Occupation/Timetable:</label>
+                                 <select class="custom-select form-control" formControlName="occuptation_tt" id="occuptation_tt" [ngClass]="{ 'is-invalid': submitted && f.occuptation_tt.errors }">
                                     <option value="" disabled>Please select one option</option>
                                     <option value="1">Full time employee</option>
                                     <option value="2">Part time employee</option>
                                     <option value="3">Part time/Full time student</option>
                                     <option value="4">Part time/Full time internship</option>
-                                </select>
-                             
-                              <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                                 </select>
+                                 <div *ngIf="submitted && f.occuptation_tt.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.occuptation_tt.errors.required">Occupation is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">What would be your typical get up time during the week days:</label>
-                              <ngb-timepicker [(ngModel)]="time" formControlName="getUptime"></ngb-timepicker>
-                              <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.occupation.errors.required">Occupation is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">What would be your typical get up time during the week days:</label>
+                                 <ngb-timepicker [(ngModel)]="time" formControlName="wakeup_time"></ngb-timepicker>
+                                 <div *ngIf="submitted && f.wakeup_time.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.wakeup_time.errors.required">WakeUp Time is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <hr>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Day of moving in/out:</label>
-                              <input type="text" placeholder="Day of moving in/out"
-                              class="form-control"
-                              #dp="bsDatepicker"
-                              bsDatepicker formControlName="inOut"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [minDate]="today">
-                              <div *ngIf="submitted && f.occupation.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.occupation.errors.required">Day of moving in/out is required.</span>
+                           <hr>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Day of moving in/out:</label>
+                                 <input type="text" placeholder="Day of moving in/out"
+                                 class="form-control"
+                                 #dp="bsDatepicker"
+                                 bsDatepicker formControlName="outing_day"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [minDate]="today">
+                                 <div *ngIf="submitted && f.outing_day.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.outing_day.errors.required">Day of moving in/out is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Price:</label>
-                              <input type="text" id="text" class="form-control" placeholder="Price" formControlName="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
-                              <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.price.errors.required">Price is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Price:</label>
+                                 <input type="text" id="text" class="form-control" placeholder="Price" formControlName="price_range" [ngClass]="{ 'is-invalid': submitted && f.price_range.errors }">
+                                 <div *ngIf="submitted && f.price_range.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.price_range.errors.required">Price is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div> 
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">How long willing to stay:</label>
-                               <input type="text"
-                                     placeholder="How long willing to stay"
-                                     class="form-control"
-                                     bsDaterangepicker formControlName="willingToStay"[minDate]="today">
-
-                              <div *ngIf="submitted && f.willingToStay.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.willingToStay.errors.required">How long willing to stay is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">How long willing to stay:</label>
+                                 <input type="text"
+                                    placeholder="How long willing to stay"
+                                    class="form-control"
+                                    bsDaterangepicker formControlName="stay_date"[minDate]="today">
+                                 <div *ngIf="submitted && f.stay_date.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.stay_date.errors.required">How long willing to stay is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Gender:</label>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Gender:</label>
                                  <select class="custom-select form-control" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                                     <option value="" disabled>Please select one option</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
-                                    
-                                </select>
-
-                              <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.gender.errors.required">Gender field is required.</span>
+                                 </select>
+                                 <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.gender.errors.required">Gender field is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Phone Number:</label>
-                              <input type="text" id="phoneNumber" class="form-control"  placeholder="Phone Number" formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" (keypress)="keyPress($event)">
-                              <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.phoneNumber.errors.required">Phone Number is required.</span>
-                              </div>
-                              <div *ngIf="this.messageDigit">
-                                 <span class="customPhoneMessage">{{this.messageDigit}}</span>
-                              </div>
-                           </div>
-                        </div>
-
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Address:</label>
-                              <input type="text" id="address" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
-                              <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.address.errors.required">Phone Number is required.</span>
-                              </div>
-                           </div>
-                        </div>
                            <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Work Place:</label>
-                              <input type="text" id="address" class="form-control" placeholder="Work Place" formControlName="workPlace" [ngClass]="{ 'is-invalid': submitted && f.workPlace.errors }" >
-                              <div *ngIf="submitted && f.workPlace.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.workPlace.errors.required">Work Place is required.</span>
+                              <div class="form-group">
+                                 <label for="team">Phone Number:</label>
+                                 <input type="text" id="phoneNo" class="form-control"  placeholder="Phone Number" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }" (keypress)="keyPress($event)">
+                                 <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
+                                 </div>
+                                 <div *ngIf="this.messageDigit">
+                                    <span class="customPhoneMessage">{{this.messageDigit}}</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Postal Code:</label>
-                              <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
-                              <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
-                              </div>
-                              <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
-                              </div>
-                              <div *ngIf="this.messageDigit1">
-                                 <span class="customPhoneMessage">{{this.messageDigit1}}</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Address:</label>
+                                 <input type="text" id="address" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
+                                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.address.errors.required">Address is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Country:</label>
-                              <select class="custom-select form-control" formControlName="country" id="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Work Place:</label>
+                                 <input type="text" id="address" class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
+                                 <div *ngIf="submitted && f.work_place.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work Place is required.</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Postal Code:</label>
+                                 <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
+                                 <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
+                                 </div>
+                                 <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
+                                 </div>
+                                 <div *ngIf="this.messageDigit1">
+                                    <span class="customPhoneMessage">{{this.messageDigit1}}</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Country:</label>
+                                 <select class="custom-select form-control" formControlName="country" id="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
                                     <option value="" disabled>Please select one option</option>
-                                   <option *ngFor="let country of allCountries" value="{{country?.id}}">
-                                        {{country?.name}} 
-                                </select>
-                              <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.country.errors.required">Country Name is required.</span>
+                                    <option *ngFor="let country of allCountries" value="{{country?.id}}">
+                                       {{country?.name}} 
+                                 </select>
                               </div>
                            </div>
-                        </div>
-                       
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                            <label for="team" class="radio-inline">Language:</label>
-                               <angular2-multiselect [data]="langdropdownList" 
-                                                            [settings]="dropdownSettingsLanguage" 
-                                                            formControlName="language" [ngClass]="{ 'is-invalid': submitted && f.language.errors }">
-                                </angular2-multiselect>
-                                <div *ngIf="languageEmpty" class="default-error-message">             Language is required.
-                            </div>
-                            <div *ngIf="atmostTwoValLang" class="default-error-message">             Atmost two values.
-                            </div>
-                           </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team" class="radio-inline">Nationality:</label>
-                                  <angular2-multiselect [data]="countrydropdownList" 
-                                                            [settings]="dropdownSettingsCountry" 
-                                                            formControlName="nationality" [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
-                                </angular2-multiselect>
-                            <div *ngIf="nationalityEmpty"  class="default-error-message">             Nationality is required.
-                            </div>
-                            <div *ngIf="atmostTwoValNat"  class="default-error-message">            Atmost two values.
-                            </div>
-                           </div>
-                        </div>
-                                                <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Short bio:</label>
-                              <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="short_bio" [ngClass]="{ 'is-invalid': submitted && f.short_bio.errors }"></textarea>
-                              <div *ngIf="submitted && f.short_bio.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.short_bio.errors.required">Short Bio is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team" class="radio-inline">Language:</label>
+                                 <angular2-multiselect [data]="langdropdownList" 
+                                 [settings]="dropdownSettingsLanguage" 
+                                 formControlName="languages" [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
+                                 </angular2-multiselect>
+                                 <div *ngIf="submitted && f.languages.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.languages.errors.required">languages is required.</span>
+                                 </div>
+                                 <!-- <div *ngIf="languageEmpty" class="default-error-message">             Language is required.
+                                    </div> -->
+                                 <div *ngIf="atmostTwoValLang" class="default-error-message">             Atmost two values.
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Interests:</label>
-                              <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interests" [ngClass]="{ 'is-invalid': submitted && f.interests.errors }"></textarea>
-                              <div *ngIf="submitted && f.interests.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.interests.errors.required">Interests is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team" class="radio-inline">Nationality:</label>
+                                 <angular2-multiselect [data]="countrydropdownList" 
+                                 [settings]="dropdownSettingsCountry" 
+                                 formControlName="nationality" [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
+                                 </angular2-multiselect>
+                                 <!-- <div *ngIf="nationalityEmpty"  class="default-error-message">             Nationality is required.
+                                    </div> -->
+                                 <div *ngIf="submitted && f.nationality.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.nationality.errors.required">nationality is required.</span>
+                                 </div>
+                                 <div *ngIf="atmostTwoValNat"  class="default-error-message">            Atmost two values.
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                          <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="team">Habits:</label>
-                              <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="habits" [ngClass]="{ 'is-invalid': submitted && f.habits.errors }"></textarea>
-                              <div *ngIf="submitted && f.habits.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.habits.errors.required">Habits field is required.</span>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Short bio:</label>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="biography" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }"></textarea>
+                                 <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.biography.errors.required">Short Bio is required.</span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
-                         <div class="col-12 col-sm-6">
-                           <div class="form-group">
-                              <label for="bill">Upload Image:</label>
-                              <input type="file" class="form-control-file border"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
-                              <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user"> <br/>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Interests:</label>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interestes" [ngClass]="{ 'is-invalid': submitted && f.interestes.errors }"></textarea>
+                                 <div *ngIf="submitted && f.interestes.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.interestes.errors.required">Interests is required.</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="team">Habits:</label>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="habits" [ngClass]="{ 'is-invalid': submitted && f.habits.errors }"></textarea>
+                                 <div *ngIf="submitted && f.habits.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.habits.errors.required">Habits field is required.</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="bill">Upload Image:</label>
+                                 <input type="file" class="form-control-file border"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
+                                 <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user"> <br/>
+                              </div>
+                           </div>
+                           <input type="hidden" formControlName="file">
+                           <div class="col-12 col-sm-12 text-center">
+                              <button type="button" (click)="updateProfile()" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
                            </div>
                         </div>
-                        <input type="hidden" formControlName="file">
-                        <div class="col-12 col-sm-12 text-center">
-                           <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
-                        </div>
-                     </div>
                      </form>
                   </div>
                </div>

@@ -341,4 +341,20 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+	upDateProfile(formData){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		console.log(JSON.stringify(formData));
+		return this.http.put(this.base_url+'user/profile',formData,httpOptions)
+		.map((response:Response)=>{
+			console.log('profile response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+		}
 }
