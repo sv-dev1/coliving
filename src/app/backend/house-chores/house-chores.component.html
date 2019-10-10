@@ -420,7 +420,7 @@
                   <div class="col-md-12">
                      <div class="assign_name">
                         <a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>Upload Photo</a>
-                        <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)">
+                        <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
                         <img [src]="url" height="200" *ngIf="url !=''"> <br/>
                         <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
