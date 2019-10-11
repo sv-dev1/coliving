@@ -5,7 +5,7 @@
 		</a>
 	</div>
 	<ul class="nav">
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" [class.active]="isMyAccount == true">
 			<a routerLink="/dashboard" routerLinkActive="active-link">
 				<i class="fas fa-tachometer-alt"></i>
 				<p>Dashboard</p>

@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
 	   response:any;
        isArrayLength:boolean =false;
        categoryEdit:string = '';
-
+        p:any;
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -114,7 +114,7 @@ export class CategoryComponent implements OnInit {
     	    	description: category.description
     	});
     }
-    closeEditModal(categoryName){
+    closeEditModal(){
 		this.isopenEditCategoryModal=false;
 		this.updateCategoryForm.reset();
 	}
