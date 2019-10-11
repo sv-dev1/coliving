@@ -143,13 +143,13 @@ window.onload = function() {
   var c = new Cal("divCal");			
   c.showcurr();
 
-  // Bind next and previous button clicks
+ /* // Bind next and previous button clicks
   getId('btnNext').onclick = function() {
     c.nextMonth();
   };
   getId('btnPrev').onclick = function() {
     c.previousMonth();
-  };
+  };*/
 }
 
 // Get element by id

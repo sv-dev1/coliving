@@ -1,4 +1,4 @@
-.zoom:hover {
+.zoom{
   -ms-transform: scale(1.5); /* IE 9 */
   -webkit-transform: scale(1.5); /* Safari 3-8 */
   transform: scale(1.5); 
@@ -6,4 +6,31 @@
 
 .nbC {
 	background: #fff !important;
+}
+
+
+#imagwPopUp .modal-body {
+    padding: 0;
+}
+#imagwPopUp .for-image img {
+        width: 100%;
+    margin: auto;
+    display: block;
+}
+#imagwPopUp .modal-header.nbC {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    background: transparent !important;
+    border-bottom: none;
+}
+#imagwPopUp button.close {
+    color: black;
+    top: 1px;
+    right: 5px;
+    position: absolute;
+    font-size: 26px;
+    font-weight: 100;
 }

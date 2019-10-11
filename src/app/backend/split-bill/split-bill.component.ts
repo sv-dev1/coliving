@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 import { environment } from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
+import { Lightbox } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-split-bill',
@@ -22,42 +23,36 @@ export class SplitBillComponent implements OnInit {
     status: boolean = false;
     isImageModal:boolean=false;
     popImage:any;
+    private _albums:any  = [];
 
   constructor(
           private data_service : DataService,
-          private datePipe: DatePipe
+          private datePipe: DatePipe,
+          private _lightbox: Lightbox
        ) { 
      this.base_url = environment.image_base_url;
   }
 
   ngOnInit() {
-  	this.getBills();
-    this.today = new Date();
-    this.currentDate = this.datePipe.transform(this.today, 'yyyy-MM-dd')
+  	  this.getBills();
+      this.today = new Date();
 
   }
-  clickEvent(){
-      this.status = !this.status;       
-  }
-  zoomImage(imgPath){
-    this.popImage = imgPath.target.currentSrc;
-    this.isImageModal =true;
-  }
-  close() {
-    this.popImage = '';
-    this.isImageModal =false;
 
-  }
   getBills(){
   	  this.data_service.getBills().subscribe((response:any) =>{   
 			this.allBills = response.bills;
-    
+ 
 			this.allBills.forEach(obj =>{
         let previous_date = obj.bill.date;
-        if(previous_date  <  this.currentDate){
+        let latest_date =this.datePipe.transform(this.today, 'yyyy-MM-dd');
+        if(previous_date  <  latest_date){
           this.backgroundColor = '#c3a9a333';
           this.dueDatemessage ='Bill due date is over.';
-        } 
+        } else {
+          this.backgroundColor = '';
+          this.dueDatemessage ='';
+        }     
         this.bills.push({
                 part: obj.amount,
                 title:obj.bill.title,
@@ -66,15 +61,30 @@ export class SplitBillComponent implements OnInit {
                 image:obj.bill.bill_Id,
                 created_by:obj.bill.userProfile.firstName+' '+obj.bill.userProfile.lastName,
                 color:this.backgroundColor,
-                message: this.dueDatemessage,
-              });
-     
+                message: this.dueDatemessage
+        });
+    
       })
-   
+      
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
+  }
+
+  clickEvent(){
+      this.status = !this.status;       
+  }
+
+  zoomImage(imgPath){
+    this.popImage = imgPath.target.currentSrc;
+    this.isImageModal =true;
+  }
+
+  close() {
+    this.popImage = '';
+    this.isImageModal =false;
+
   }
 }

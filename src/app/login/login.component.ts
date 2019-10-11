@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
       }
       this.data_service.login(input_data).subscribe((response:any) =>{
         this.res = JSON.stringify(response, undefined, 2); 
-        if(response.userQuestinaire){
+       
+        if(response.userQuestinaire !=null){
           sessionStorage.setItem("questionaire", 'true');
         }
         else{

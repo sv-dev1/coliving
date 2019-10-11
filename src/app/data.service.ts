@@ -280,7 +280,38 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
-
+    deleteCategory(inputData){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		console.log(this.base_url+'tasks/'+inputData);
+		return this.http.delete(this.base_url+'category/'+inputData,{ headers: headers })
+		.map((response:Response)=>{
+			console.log(response);
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	editCategory(input_change){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		let url = this.base_url+'category/'+input_change.category_id;	    
+    	return this.http.put(url,input_change, { headers: headers })
+    	.map((response:Response)=>{
+    		  const data = response;
+    		  return data;
+    		})
+    	.catch((error:Error) => {
+    		//console.log(error);
+    		return Observable.throw(error);});
+    	
+    } 
 	changePassword(input_change){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
