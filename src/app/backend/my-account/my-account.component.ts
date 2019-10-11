@@ -8,7 +8,6 @@ import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 
-
 @Component({
 	selector: 'app-my-account',
 	templateUrl: './my-account.component.html',
@@ -50,7 +49,8 @@ export class MyAccountComponent implements OnInit {
     atmostTwoValLang:boolean=false;
     countryEmpty:boolean=false;
     languageEmpty:boolean=false;
-    nationalityEmpty:boolean=false;
+	nationalityEmpty:boolean=false;
+	Dtime:any;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -110,19 +110,42 @@ export class MyAccountComponent implements OnInit {
 		headers = headers.set('Authorization', token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
-			//console.log('user data',this.userDataArr);
+			console.log("working fine : -------------");
+			console.log(this.userDataArr);
+			console.log(this.userDataArr.nationality);
+		let finalData;	
+			if(this.userDataArr.stay_date != 'Invalid date'){
+				let str = this.userDataArr.stay_date; 
+				let splitted = str.split(" - ", 2); 
+				 finalData = this.datePipe.transform(splitted[0],"MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
+			}
+			  
+			   let wakeUpStr = this.userDataArr.wakeup_time; 
+			   if(wakeUpStr) {
+					let wakeSplit = wakeUpStr.split(":", 3); 
+					let hours = wakeSplit[0];
+					let minutes = wakeSplit[1];
+     				const sfdsfsfs = {
+						hour :parseInt(hours),
+						minute : parseInt(minutes)
+					}
+				    this.time = sfdsfsfs;
+			   } else {
+				   this.time = this.time;
+			   }
+            
 			this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			this.updateProfileForm= this.formBuilder.group({
 				firstName: this.userDataArr.firstName,
 				lastName: this.userDataArr.lastName,
 				email: this.userDataArr.email,
 				userName: sessionStorage.getItem('user_name'),
-				dob:this.userDataArr.dob,
+				dob:this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				occuptation_tt:this.userDataArr.occuptation_tt,
-				wakeup_time:this.userDataArr.wakeup_time,
-				outing_day:this.userDataArr.outing_day,
+				wakeup_time:this.time,
+				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
 				price_range:this.userDataArr.price_range,
-				stay_date:this.userDataArr.stay_date,
+				stay_date:finalData,
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
@@ -134,12 +157,11 @@ export class MyAccountComponent implements OnInit {
 				biography:this.userDataArr.biography,
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,
-				image:[''],
-				file:[''],
-				previous_city:['atlanta']
+				previous_city:['atlanta'],
+				image:['']
 			});
 			this.email = this.userDataArr.email;
-			this.fileData=	this.userDataArr.image;
+			//console.log(this.updateProfileForm.value);
 		},error=>{ 
 			console.log("ERROR");
 			console.log(error.error);
@@ -242,25 +264,19 @@ export class MyAccountComponent implements OnInit {
 	    if(this.updateProfileForm.value['country']==""){
 	         this.countryEmpty=true;
 		}
-		// if(this.updateProfileForm.value['wakeup_time']){
-		// 	this.updateProfileForm.value['wakeup_time']=this.updateProfileForm.value['wakeup_time'].hour+":"+this.updateProfileForm.value['wakeup_time'].minute;
-  	    // }
-		// if(this.updateProfileForm.value['stay_date']){
-		// 		this.updateProfileForm.value['stay_date']=this.datePipe.transform(this.updateProfileForm.value['stay_date'][0],"dd/MM/yyyy")+"-"+this.datePipe.transform(this.updateProfileForm.value['stay_date'][1],"dd/MM/yyyy")
-		// }
-		// if(this.updateProfileForm.value['outing_day']){
-		// 	this.updateProfileForm.value['outing_day']=this.datePipe.transform(this.updateProfileForm.value['outing_day'],"yyyy-MM-dd")
-		// }
-		// if(this.updateProfileForm.value['dob']){
-		// 	this.updateProfileForm.value['dob']=this.datePipe.transform(this.updateProfileForm.value['dob'],"yyyy-MM-dd")
-		// }
-		  
+	   if(this.updateProfileForm.value['stay_date']){
+				this.updateProfileForm.value['stay_date']=this.datePipe.transform(this.updateProfileForm.value['stay_date'][0],"MM/dd/yyyy")+" - "+this.datePipe.transform(this.updateProfileForm.value['stay_date'][1],"MM/dd/yyyy")
+		}
+		if(this.updateProfileForm.value['wakeup_time']){
+			this.updateProfileForm.value['wakeup_time']=this.updateProfileForm.value['wakeup_time'].hour+":"+this.updateProfileForm.value['wakeup_time'].minute;
+	    } 
 		this.submitted = true;  
 		let dataObj=this.updateProfileForm.value;
-	
-		//   console.log(dataObj.languages);
-		//   console.log(dataObj.nationality);
-            console.log(this.fileData);
+	    
+		
+			console.log(dataObj);
+			console.log(this.fileData);
+
 		 if(this.nationalityArr.length > '2'){
 			   this.atmostTwoValNat = true;
 		  }
@@ -269,12 +285,11 @@ export class MyAccountComponent implements OnInit {
 		 }
 		this.nationalityArr.push(dataObj.nationality);
 		this.languageArr.push(dataObj.languages);
-
 		const formData = new FormData();
 			formData.append('firstName', dataObj.firstName);
 			formData.append('lastName', dataObj.lastName);
 			formData.append('email', dataObj.email);	 	   
-			formData.append('image', this.fileData.name);
+			formData.append('upload_photo', this.fileData);
 			formData.append('phoneNo', dataObj.phoneNo);
 			formData.append('postalCode', dataObj.postalCode);   
 			formData.append('country', dataObj.country);
@@ -295,13 +310,11 @@ export class MyAccountComponent implements OnInit {
 			formData.append('previous_city', dataObj.previous_city); 
 
 		this.data_service.upDateProfile(formData).subscribe((response:any) =>{
-
 			console.log(response);
 			this.toastr.successToastr('Profile Updated Successfully.', 'Success!');
-
+		//	this.getUserData();
 		}, error =>{ 
 			console.log(error);
-
 		})
 	}
 
