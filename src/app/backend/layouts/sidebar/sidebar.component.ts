@@ -8,8 +8,9 @@ import { Router , ActivatedRoute} from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
     param1 : string = '';
-	isHouse : boolean = false;
-
+	  isHouse : boolean = false;
+    isMyAccount : boolean = false;
+    
 	constructor(private router: Router,
 		private route: ActivatedRoute
 		) { 
@@ -18,7 +19,10 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
 
   	       if(this.router.url == '/task-suggestions/'+this.param1){
-           this.isHouse = true;
-          }
+            this.isHouse = true;
+            }
+            if(this.router.url == '/my-account'){
+               this.isMyAccount = true;
+            }
     }
 }
