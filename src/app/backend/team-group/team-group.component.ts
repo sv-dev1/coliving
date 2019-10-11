@@ -10,20 +10,22 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./team-group.component.css']
 })
 export class TeamGroupComponent implements OnInit {
-  showCreate:boolean=false;
-  hideCreate:boolean=false;
-  createTeamForm: FormGroup;
-  submitted = false; 
-  isError : boolean = false;
-  isSuccess : boolean = false;
-  errorsArr:any = []; 
-  teamData: any;
-  users: any;
-  usersId:any = []; 
-  IsContinue : boolean = false;
-  Isrequired : boolean = false;
-  selectedButton = {}
-  hide : boolean = true;
+    showCreate:boolean=false;
+    hideCreate:boolean=false;
+    createTeamForm: FormGroup;
+    submitted = false; 
+    isError : boolean = false;
+    isSuccess : boolean = false;
+    errorsArr:any = []; 
+    teamData: any;
+    users: any;
+    usersId:any = []; 
+    IsContinue : boolean = false;
+    Isrequired : boolean = false;
+    selectedButton = {}
+    hide : boolean = true;
+    selectUser : boolean = false;
+    validationMessage:string = '';
 
   constructor(
     private formBuilder:FormBuilder,	
@@ -31,9 +33,10 @@ export class TeamGroupComponent implements OnInit {
     private data_service : DataService,
     public toastr: ToastrManager
   ) { 
-    this.createTeamForm = this.formBuilder.group({
-      name:['', Validators.required],
-    });
+     
+     this.createTeamForm = this.formBuilder.group({
+           name:['', [Validators.required, Validators.pattern(/^\S*$/)]],
+     });
   }
   ngOnInit() {
   }
@@ -60,9 +63,15 @@ export class TeamGroupComponent implements OnInit {
   }
 
   continue(){
-    if (this.createTeamForm.invalid) {
-      this.Isrequired=true;
-      return;
+   var sdfsdf = this.createTeamForm.value;
+   if (/\S/.test(sdfsdf.name)) {
+      this.hide=false;
+      this.IsContinue =true;
+      this.getUsers();
+   }
+   if (this.createTeamForm.invalid) {
+        this.Isrequired=true;
+        return;
     }
     this.hide=false;
     this.IsContinue =true;
@@ -77,14 +86,18 @@ export class TeamGroupComponent implements OnInit {
 
   TeamSubmit(){
     let data=this.createTeamForm.value;
+   
     this.submitted = true; 
-    if (this.createTeamForm.invalid) {
-      this.Isrequired=true;
-      return;
+    
+    if(this.usersId.length == 0) {
+        this.selectUser = true;
+        this.validationMessage  = 'Please select atleast one member to team.';
+        this.toastr.errorToastr(this.validationMessage, 'Error!');
+        return;
     }
     else{ 
       const input_data = { 
-       "name" : data.name, 
+       "name" : data.name.trim(), 
        "userId" : this.usersId,
       } 
       this.data_service.createTeam(input_data).subscribe((response: any) =>{

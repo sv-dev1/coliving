@@ -14,9 +14,13 @@
     position: relative;
 }
 .mesgs {
-    padding-bottom: 60px;
-    padding-top: 60px;
+    padding-bottom: 10px;
+    padding-top: 25px;
+    position: relative;
+    top: 45px;
+     max-height: 500px;
 }
+
 .headind_srch.testing {
     position: absolute;
     top: 0;

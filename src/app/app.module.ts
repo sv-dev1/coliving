@@ -44,6 +44,7 @@ import { BlockCopyPasteDirective } from './block-copy-paste.directive';
 import {MatSliderModule} from '@angular/material/slider';
 import { CategoryComponent } from './backend/category/category.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LightboxModule } from 'ngx-lightbox';
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -106,7 +107,8 @@ export function provideConfig() {
     NgbModule,
     SocialLoginModule,
     MatSliderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    LightboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

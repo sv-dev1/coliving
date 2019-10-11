@@ -131,6 +131,7 @@ export class CreateBillComponent implements OnInit {
               },error=>{ 
                 //console.log("ERROR");
                 //console.log(error.error);
+                console.log('error', error);
             }); 
         }
   }

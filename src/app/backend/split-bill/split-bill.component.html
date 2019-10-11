@@ -59,7 +59,6 @@
 		</div>
 	</div>
 </section>
-
 <div class="container">          
             <!-- The Modal -->
            <div class="modal" id="imagwPopUp" [style.display]="isImageModal ? 'block' : 'none'" *ngIf="isImageModal" >
@@ -68,14 +67,13 @@
 
                      <!-- Modal Header -->
                      <div class="modal-header nbC">
-                        <h4 class="modal-title">Add Category</h4>
                         <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
                      </div>
 
                      <!-- Modal body -->
                      <div class="modal-body">
                         <div class="for-image">
-							<img class="img-fluid" src="{{popImage}}" />
+							<img class="img-fluid " src="{{popImage}}" />
 										    	
 						</div>
                      </div>

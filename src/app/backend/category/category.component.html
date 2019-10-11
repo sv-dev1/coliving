@@ -33,13 +33,15 @@
                         <td>{{ category.description }}</td>
                          <td>{{ category.created_at | date:'medium'}}</td>
                         <td>
-                           <a placement="top" ngbTooltip="Edit functionality Under Progress" class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                           <a placement="top" ngbTooltip="Update Functionality Under Progress" class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                           <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="editCategoryModal(category)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                           <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="deleteCategoryModal(category)"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                      </tr>
                   </tbody>
                </table>
-               <pagination-controls (pageChange)="p = $event"></pagination-controls>
+               <div *ngIf="isArrayLength">
+                  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
             </div>
          </div>
       </div>
@@ -84,4 +86,75 @@
                   </div>
                </div>
             </div>
-         </div>   
+  </div>   
+
+  <div class="container">          
+            <!-- The Modal -->
+            <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenEditCategoryModal ? 'block' : 'none'" *ngIf="isopenEditCategoryModal">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+
+                     <!-- Modal Header -->
+                     <div class="modal-header">
+                        <h4 class="modal-title">Edit Category</h4>
+                        <button type="button" class="close" data-dismiss="modal" (click)="closeEditModal()">&times;</button>
+                     </div>
+
+                     <!-- Modal body -->
+                     <div class="modal-body">
+                        
+                        <form [formGroup]="updateCategoryForm" (ngSubmit)="updateCategory(updateCategoryForm.value)" >   
+                        <div class="form-group">
+                              <label>Category Name:</label>
+                               <input type="text" formControlName="category" class="form-control" [ngClass]="{'is-invalid': submitted && g.category.errors}" />
+                               <div *ngIf="submitted && g.category.errors" class="invalid-feedback">
+                                 <span class="for-sub-name" *ngIf="g.category.errors.required">Category name is required.</span>
+                              </div>
+                              <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                            </div>
+                           </div>                        
+                           <div class="form-group">
+                              <label>Category Description&nbsp;(optional):</label>
+                               <textarea id="description" class="form-control"rows="5" cols="5" formControlName="description"></textarea>
+                             
+                             </div>
+                             <div class="modal-footer">
+                                 <button type="button" class="btn btn-outline-secondary" (click)="closeEditModal()">Cancel</button>
+                                 <button type="submit" class="btn btn-orange-sm">Yes, Add Category</button>
+                              </div>                           
+                        </form> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div> 
+
+
+<!---  Modal to delete TASK  -->
+<div class="container">
+      <!-- The Modal -->
+      <div class="modal" id="taskDel" [style.display]="isDelCategory ? 'block' : 'none'" *ngIf="isDelCategory" >
+      <div class="modal-dialog modaldialog12">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title" id="modal-title">Category deletion</h4>
+               <button type="button" class="close" aria-describedby="modal-title">
+               <span aria-hidden="true" (click)="closeDelModal(categoryName)">&times;</span>
+               </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <p><strong>Are you sure you want to delete <span class="text-primary">{{categoryName}}</span> category?</strong></p>
+               <p>All information associated to this category will be permanently deleted.
+                  <span class="text-danger">This operation can not be undone.</span>
+               </p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-outline-secondary" (click)="closeDelModal(categoryName)">Cancel</button>
+               <button type="button" class="btn btn-orange-sm" (click)="deleteCategory(categoryId)">Yes,Delete It</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

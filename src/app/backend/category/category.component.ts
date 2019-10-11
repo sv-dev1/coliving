@@ -22,8 +22,15 @@ export class CategoryComponent implements OnInit {
        isSuccess : boolean = false;
        isalreadyEixst:boolean =false;
        isalreadyEixstErr:string=''
-
 	   CategoryForm:FormGroup;
+	   updateCategoryForm:FormGroup;
+	   isopenEditCategoryModal:boolean=false;
+	   isDelCategory:boolean=false;
+       categoryName :string = '';
+	   categoryId: string = '';
+	   response:any;
+       isArrayLength:boolean =false;
+       categoryEdit:string = '';
 
   constructor(
         private formBuilder:FormBuilder,
@@ -32,18 +39,26 @@ export class CategoryComponent implements OnInit {
 		private data_service : DataService,
 		private http : HttpClient,
   	) { 
-         this.CategoryForm = this.formBuilder.group({
+        this.CategoryForm = this.formBuilder.group({
 			category: ['', Validators.required],
+			description: ['']
+		});
+		this.updateCategoryForm = this.formBuilder.group({
+			category: ['', Validators.required],
+			description: ['']
 		});
      }
 
-  ngOnInit() {
-  	   this.getCategories();
-  } 
+	ngOnInit() {
+	  	   this.getCategories();
+	} 
  	getCategories() {
 		this.data_service.getCategories().subscribe((response:any) =>{   
 			this.allCategoriesArray = response.categories;
 			this.allCategories = this.allCategoriesArray;
+		    if(this.allCategories.length > 10 ) {
+                  this.isArrayLength  = true;
+		    }
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -58,11 +73,13 @@ export class CategoryComponent implements OnInit {
     	this.submitted = false;     
     	this.isalreadyEixst = false;
         this.CategoryForm.reset();
+        
     }
+
     get f() { return this.CategoryForm.controls; }
 
     addCategory(formValue){
-    	console.log('formValue',formValue);
+    	
     	this.submitted = true;
 	    if(this.CategoryForm.invalid) {
 	        return;
@@ -87,7 +104,73 @@ export class CategoryComponent implements OnInit {
 	        
 	          //this.toastr.errorToastr(error.error.name,'Error');
 	        });
-
 	    }
     }
+    editCategoryModal(category){
+    	this.categoryEdit = category.category_id;
+    	this.isopenEditCategoryModal = true;
+    	this.updateCategoryForm.patchValue({
+    	    	category: category.name,
+    	    	description: category.description
+    	});
+    }
+    closeEditModal(categoryName){
+		this.isopenEditCategoryModal=false;
+		this.updateCategoryForm.reset();
+	}
+	get g() { return this.updateCategoryForm.controls; }
+	
+    updateCategory(formValue) {
+        
+    	this.submitted = true;
+	    if(this.updateCategoryForm.invalid) {
+	        return;
+	    }else{
+	      const input = {  
+	      	"category_id": this.categoryEdit,
+	        "name": formValue.category, 
+	        "description": formValue.description,   
+	      }
+	      
+	      this.data_service.editCategory(input).subscribe((response:any)=> { 
+	          this.toastr.successToastr(response.message,'Success');
+	          this.submitted = false;
+	          this.isopenEditCategoryModal = false;           
+	          this.updateCategoryForm.reset();
+	          this.getCategories();
+	        },error =>{
+	          this.isError = true; 
+	          this.errorsArr = error.error;
+	          if(error.error.name) {
+	          	   this.isalreadyEixst = true;
+	               this.isalreadyEixstErr = error.error.name;
+	          }
+	        });
+	    }
+    }
+    deleteCategoryModal(category) {
+    	
+    	this.categoryName = category.name;
+		this.categoryId = category.category_id;
+    	this.isDelCategory = true;
+    }
+    closeDelModal(categoryName){
+		this.toastr.infoToastr('All information associated to the category '+categoryName+' are safe.');
+		this.isDelCategory=false;
+	}
+    deleteCategory(categoryId){
+       if(categoryId){
+	        this.data_service.deleteCategory(categoryId).subscribe((response:any) =>{
+	        this.response = JSON.stringify(response, undefined, 2); 
+	        this.isDelCategory = false;
+            this.getCategories();
+	        this.toastr.successToastr(response.message,'Success');
+	        this.router.navigate(['/categories']);  
+	        this.isError = false;
+	      }, error =>{ 
+	        this.isError = true; 
+	      //  this.toastr.errorToastr('Invalid Credentials','Error');
+	      })
+       }
+	}
 }
