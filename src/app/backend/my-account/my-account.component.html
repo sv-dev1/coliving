@@ -30,7 +30,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Last Name:</label>
-                                 <input type="text" id="lastName" class="form-control" placeholder="First Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                 <input type="text" id="lastName" class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
                                  </div>
@@ -255,8 +255,8 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="bill">Upload Image:</label>
-                                 <input type="file" class="form-control-file border"  formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
-                                 <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user"> <br/>
+                                 <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
+                                 <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > <br/>
                               </div>
                            </div>
                            <input type="hidden" formControlName="file">
