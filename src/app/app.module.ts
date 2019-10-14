@@ -45,6 +45,8 @@ import {MatSliderModule} from '@angular/material/slider';
 import { CategoryComponent } from './backend/category/category.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LightboxModule } from 'ngx-lightbox';
+import { OccupationComponent } from './backend/occupation/occupation.component';
+import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -87,6 +89,8 @@ export function provideConfig() {
     TaskSuggestionsComponent,
     BlockCopyPasteDirective,
     CategoryComponent,
+    OccupationComponent,
+
 
    
   ],
@@ -108,7 +112,9 @@ export function provideConfig() {
     SocialLoginModule,
     MatSliderModule,
     NgxPaginationModule,
-    LightboxModule
+    LightboxModule,
+    InternationalPhoneNumberModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -39,6 +39,7 @@
     "ng-socket-io": "^0.2.4",
     "ng6-toastr-notifications": "^1.0.4",
     "ngx-bootstrap": "^5.1.2",
+    "ngx-international-phone-number": "^1.0.4",
     "ngx-intl-tel-input": "^2.3.1",
     "ngx-lightbox": "^2.0.0",
     "ngx-pagination": "^4.1.0",
