@@ -457,7 +457,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
-			//console.log(this.allTeam);
+			console.log(this.allTeam);
 			this.firstTeam = this.allTeam[0];
 			//console.log("firsttema", this.firstTeam);
 			this.isError = false;
@@ -522,6 +522,26 @@ export class HouseChoresComponent implements OnInit {
 			this.url = reader.result; 
 		}
 	}
+	
+	getTask() {
+		this.calendarEvents=[];
+		this.data_service.getTask().subscribe((response:any) =>{   
+			response.tasks.forEach(element => {
+				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
+				this.calendarEvents = this.calendarEvents.concat({ 
+					title: element.task_name,
+					start: element.due_date,
+					id:element.taskId
+				})
+			});
+		
+			this.isError = false;    
+		}, error =>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		})
+	}
+	
 	addTask(form){
 		//console.log('ffsdf ',form);
 		this.submitted = true;  
@@ -555,31 +575,14 @@ export class HouseChoresComponent implements OnInit {
 				this.isSuccess = true; 
 				this.submitted = false;   	
 				this.addTaskForm.reset();
-				this.getTask();
+				this.allTaskListing();
 				this.url ='';
 			},error=>{ 
 				this.toastr.errorToastr(error.error, 'Error!');
 			});   
 		}
 	}
-	getTask() {
-		this.calendarEvents=[];
-		this.data_service.getTask().subscribe((response:any) =>{   
-			response.tasks.forEach(element => {
-				this.allTask.push({id: element.taskId, name:element.task_name,date:element.due_date,notes:element.notes, });
-				this.calendarEvents = this.calendarEvents.concat({ 
-					title: element.task_name,
-					start: element.due_date,
-					id:element.taskId
-				})
-			});
-		
-			this.isError = false;    
-		}, error =>{ 
-			this.isError = true; 
-			this.errorsArr = error.error;
-		})
-	}
+
 	handleDateClick(arg) {
 		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
 		this.checkDate=arg.dateStr;

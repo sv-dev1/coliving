@@ -16,12 +16,12 @@
                <div class="card mb-3">
                   <div class="card-header">My Account</div>
                   <div class="card-body">
-                     <form [formGroup]="updateProfileForm">
+                     <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
                         <div class="row">
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">First Name:</label>
-                                 <input type="text" id="firstName" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                                 <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
                                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
                                  </div>
@@ -30,7 +30,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Last Name:</label>
-                                 <input type="text" id="lastName" class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                 <input type="text"  class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
                                  </div>
@@ -119,8 +119,8 @@
                                     placeholder="How long willing to stay"
                                     class="form-control"
                                     bsDaterangepicker formControlName="stay_date"[minDate]="today">
-                                 <div *ngIf="submitted && f.stay_date.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.stay_date.errors.required">How long willing to stay is required.</span>
+                              
+                                  <div *ngIf="stayDateEmpty"  class="default-error-message"> How long willing to stay is required.
                                  </div>
                               </div>
                            </div>
@@ -141,8 +141,10 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Phone Number:</label>
-                                 <input type="text" id="phoneNo" class="form-control"  placeholder="Phone Number" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }" (keypress)="keyPress($event)">
+                                    <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'in'" [required]="true"id="phoneNo" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+                                  
                                  <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+
                                     <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
                                  </div>
                                  <div *ngIf="this.messageDigit">
@@ -191,6 +193,9 @@
                                     <option *ngFor="let country of allCountries" value="{{country?.id}}">
                                        {{country?.name}} 
                                  </select>
+                                   <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.country.errors.required">Country field is required.</span>
+                                 </div>
                               </div>
                            </div>
                            <div class="col-12 col-sm-6">
@@ -198,14 +203,11 @@
                                  <label for="team" class="radio-inline">Language:</label>
                                  <angular2-multiselect [data]="langdropdownList" 
                                  [settings]="dropdownSettingsLanguage" 
-                                 formControlName="languages" [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
+                                 formControlName="languages" (onSelect)="onLanguageSelect($event)"  [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
                                  </angular2-multiselect>
-                                 <div *ngIf="submitted && f.languages.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.languages.errors.required">languages is required.</span>
-                                 </div>
-                                 <!-- <div *ngIf="languageEmpty" class="default-error-message">             Language is required.
-                                    </div> -->
-                                 <div *ngIf="atmostTwoValLang" class="default-error-message">             Atmost two values.
+                                 <div *ngIf="languageEmpty" class="default-error-message">Language is required.
+                                    </div>
+                                 <div *ngIf="atmostTwoValLang" class="default-error-message">You can select atmost two languages.
                                  </div>
                               </div>
                            </div>
@@ -213,15 +215,13 @@
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Nationality:</label>
                                  <angular2-multiselect [data]="countrydropdownList" 
-                                 [settings]="dropdownSettingsCountry" 
-                                 formControlName="nationality" [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
+                                 [settings]="dropdownSettingsCountry" (onSelect)="onNationalitySelect($event)" 
+                                 formControlName="nationality" [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" [disabled]="this.atmostTwoValNat.length ==true">
                                  </angular2-multiselect>
-                                 <!-- <div *ngIf="nationalityEmpty"  class="default-error-message">             Nationality is required.
-                                    </div> -->
-                                 <div *ngIf="submitted && f.nationality.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.nationality.errors.required">nationality is required.</span>
-                                 </div>
-                                 <div *ngIf="atmostTwoValNat"  class="default-error-message">            Atmost two values.
+                                 <div *ngIf="nationalityEmpty"  class="default-error-message"> Nationality is required.
+                                    </div>
+                                
+                                 <div *ngIf="atmostTwoValNat"  class="default-error-message">You can select atmost two nationalities.
                                  </div>
                               </div>
                            </div>
@@ -261,7 +261,7 @@
                            </div>
                            <input type="hidden" formControlName="file">
                            <div class="col-12 col-sm-12 text-center">
-                              <button type="button" (click)="updateProfile()" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
+                              <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
                            </div>
                         </div>
                      </form>

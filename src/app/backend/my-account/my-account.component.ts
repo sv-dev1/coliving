@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
+import { first } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-my-account',
@@ -29,27 +30,30 @@ export class MyAccountComponent implements OnInit {
 	url:any;
 	userDataArr:any;
 	email:any;
-    messageDigit:string='';
-    messageDigit1:string='';
-    time = {hour: 13, minute: 30};
-    today:any;
-    teamEmpty:boolean=false;
-    userEmpty:boolean=false;
-    allCountriesArray:any=[];
-    allCountries:any=[];
-    allLanguagesArray:any=[];
-    allLanguages:any=[];
-    countrydropdownList:any = [];
-    langdropdownList:any  = [];
-    dropdownSettingsCountry  =  {}
-    dropdownSettingsLanguage =  {}
-    nationalityArr: any = [];
-    languageArr: any=[];
-    atmostTwoValNat:boolean=false;
-    atmostTwoValLang:boolean=false;
-    countryEmpty:boolean=false;
-    languageEmpty:boolean=false;
+	messageDigit:string='';
+	messageDigit1:string='';
+	time = {hour: 13, minute: 30};
+	today:any;
+	teamEmpty:boolean=false;
+	userEmpty:boolean=false;
+	allCountriesArray:any=[];
+	allCountries:any=[];
+	allLanguagesArray:any=[];
+	allLanguages:any=[];
+	countrydropdownList:any = [];
+	langdropdownList:any  = [];
+	dropdownSettingsCountry  =  {}
+	dropdownSettingsLanguage =  {}
+	nationalityArr: any = [];
+	languageArr: any=[];
+	atmostTwoValNat:boolean=false;
+	atmostTwoValLang:boolean=false;
+	countryEmpty:boolean=false;
+	languageEmpty:boolean=false;
 	nationalityEmpty:boolean=false;
+	stayDateEmpty:boolean=false;
+	stay_date: any;
+	wakeup_time:any;
 	Dtime:any;
 
 	constructor(
@@ -61,17 +65,17 @@ export class MyAccountComponent implements OnInit {
 		calendar: NgbCalendar,
 		private datePipe: DatePipe
 		) {   
-		  
+
 		this.updateProfileForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			email: ['', Validators.required],
 			userName: ['', Validators.required],
-	   		dob:['', Validators.required],
+			dob:['', Validators.required],
 			occuptation_tt:['', Validators.required],
-            wakeup_time:['', Validators.required],
+			wakeup_time:['', Validators.required],
 			outing_day:['', Validators.required],
-		    price_range:['', Validators.required],
+			price_range:['', Validators.required],
 			stay_date:['', Validators.required],
 			gender:['', Validators.required],
 			phoneNo: ['', Validators.required],
@@ -88,13 +92,13 @@ export class MyAccountComponent implements OnInit {
 			file:[''],
 			previous_city:['atlanta']
 		});
-	
+
 
 		this.today = new Date();
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
-  
+
 	ngOnInit() {
 		this.getUserData();
 		this.getAllCountries();
@@ -109,18 +113,16 @@ export class MyAccountComponent implements OnInit {
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
-			this.userDataArr = response.users[0]; 
-			console.log("working fine : -------------");
-			console.log(this.userDataArr);
-			console.log(this.userDataArr.nationality);
-		let finalData;	
+			this.userDataArr = response.users[0];
+            console.log('this.userDataArr',this.userDataArr);
+			let finalData;	
 			if(this.userDataArr.stay_date != 'Invalid date'){
+			
 				let str = this.userDataArr.stay_date; 
-				let splitted = str.split(" - ", 2); 
-				 finalData = this.datePipe.transform(splitted[0],"MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
+				let splitted = str.split(" - ", 2); 	
+				finalData = this.datePipe.transform(splitted[0],"MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
 			}
-			  
-			   let wakeUpStr = this.userDataArr.wakeup_time; 
+			let wakeUpStr = this.userDataArr.wakeup_time; 
 			   if(wakeUpStr) {
 					let wakeSplit = wakeUpStr.split(":", 3); 
 					let hours = wakeSplit[0];
@@ -133,14 +135,15 @@ export class MyAccountComponent implements OnInit {
 			   } else {
 				   this.time = this.time;
 			   }
-            
+			   console.log('stay date',finalData);
+			    console.log('wake up',this.time);
 			this.image_url = this.image_base_url+''+this.userDataArr.userId;
-			this.updateProfileForm= this.formBuilder.group({
+			this.updateProfileForm.patchValue({
 				firstName: this.userDataArr.firstName,
 				lastName: this.userDataArr.lastName,
 				email: this.userDataArr.email,
 				userName: sessionStorage.getItem('user_name'),
-				dob:this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
+				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				occuptation_tt:this.userDataArr.occuptation_tt,
 				wakeup_time:this.time,
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
@@ -152,8 +155,8 @@ export class MyAccountComponent implements OnInit {
 				work_place:this.userDataArr.work_place,
 				postalCode: this.userDataArr.postalCode,
 				country: this.userDataArr.country,
-				languages:[''],
-			 	nationality:[''],
+				languages:'',
+				nationality:'',
 				biography:this.userDataArr.biography,
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,
@@ -168,23 +171,25 @@ export class MyAccountComponent implements OnInit {
 		});  
 	}
 	getAllCountries(){
-	     this.data_service.getCountries().subscribe((response:any) =>{   
+		this.data_service.getCountries().subscribe((response:any) =>{   
 			this.allCountriesArray = response.countries;
 			this.allCountries = this.allCountriesArray;
 			this.allCountries.forEach(ele => {
-	            let obj = {};
-	            obj['id'] = ele['id'];
-	            obj['itemName'] = ele['name'];
-	            this.countrydropdownList.push(obj);
+				let obj = {};
+				obj['id'] = ele['id'];
+				obj['itemName'] = ele['name'];
+				this.countrydropdownList.push(obj);
 			});
 
 			this.dropdownSettingsCountry = { 
-	             singleSelection: false, 
-	             text:"Select Nationality",
-	             selectAllText:'Select only two items.',
-	             unSelectAllText:'UnSelect All',
-	             classes:"myclass custom-class"
-            };
+				singleSelection: false, 
+				text:"Select Nationality",
+				selectAllText:'Select only two items.',
+				unSelectAllText:'UnSelect All',
+				classes:"myclass custom-class",
+				limitSelection: 2
+
+			};
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -192,31 +197,31 @@ export class MyAccountComponent implements OnInit {
 		})
 	}
 	getAllLanguages(){
-	     this.data_service.getLanguages().subscribe((response:any) =>{
+		this.data_service.getLanguages().subscribe((response:any) =>{
 			this.allLanguagesArray = response.languages;
 			this.allLanguages = this.allLanguagesArray;
 			this.allLanguages.forEach(ele => {
-	            let obj = {};
-	            obj['id'] = ele['id'];
-	            obj['itemName'] = ele['name'];
-	            this.langdropdownList.push(obj);
+				let obj = {};
+				obj['id'] = ele['id'];
+				obj['itemName'] = ele['name'];
+				this.langdropdownList.push(obj);
 			});
 			this.dropdownSettingsLanguage = { 
-	             singleSelection: false, 
-	             text:"Select Languages",
-	             selectAllText:'Select only two items.',
-	             unSelectAllText:'UnSelect All',
-	             classes:"myclass custom-class"
-            };
+				singleSelection: false, 
+				text:"Select Languages",
+				selectAllText:'Select only two items.',
+				unSelectAllText:'UnSelect All',
+				classes:"myclass custom-class",
+				limitSelection: 2
+				
+			};
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
 	}
-	get f() {  
-		return this.updateProfileForm.controls; 
-	}
+	
 	onSelectFile(event) {
 		this.fileData = event.target.files[0];
 		this.preview();
@@ -233,89 +238,206 @@ export class MyAccountComponent implements OnInit {
 		}
 	}
 	keyPress(event: any) {
-	this.messageDigit1 ='';
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-            console.log(inputChar, event.charCode);
-       if (!pattern.test(inputChar)) {
-         this.messageDigit = 'Only digit allowed.';
-           event.preventDefault();
-      }
-    }
-    keyPress1(event: any) {
-    this.messageDigit ='';
-    const pattern = /[0-9\+\-\ ]/;
-    let inputChar = String.fromCharCode(event.charCode);
-    // console.log(inputChar, e.charCode);
-       if (!pattern.test(inputChar)) {
-         this.messageDigit1 = 'Only digit allowed.';
-           event.preventDefault();
-      }
+		this.messageDigit1 ='';
+		const pattern = /[0-9\+\-\ ]/;
+		let inputChar = String.fromCharCode(event.charCode);
+		console.log(inputChar, event.charCode);
+		if (!pattern.test(inputChar)) {
+			this.messageDigit = 'Only digit allowed.';
+			event.preventDefault();
+		}
 	}
-	
-	updateProfile(){
+	keyPress1(event: any) {
+		this.messageDigit ='';
+		const pattern = /[0-9\+\-\ ]/;
+		let inputChar = String.fromCharCode(event.charCode);
+		// console.log(inputChar, e.charCode);
+		if (!pattern.test(inputChar)) {
+			this.messageDigit1 = 'Only digit allowed.';
+			event.preventDefault();
+		}
+	}
 
-		if(this.updateProfileForm.value['language']==""){
-	         this.languageEmpty=true;
-	    }
-	    if(this.updateProfileForm.value['nationality']==""){
-	        this.nationalityEmpty=true;
-	    }
-	    if(this.updateProfileForm.value['country']==""){
-	         this.countryEmpty=true;
-		}
-	   if(this.updateProfileForm.value['stay_date']){
-				this.updateProfileForm.value['stay_date']=this.datePipe.transform(this.updateProfileForm.value['stay_date'][0],"MM/dd/yyyy")+" - "+this.datePipe.transform(this.updateProfileForm.value['stay_date'][1],"MM/dd/yyyy")
-		}
-		if(this.updateProfileForm.value['wakeup_time']){
-			this.updateProfileForm.value['wakeup_time']=this.updateProfileForm.value['wakeup_time'].hour+":"+this.updateProfileForm.value['wakeup_time'].minute;
-	    } 
-		this.submitted = true;  
-		let dataObj=this.updateProfileForm.value;
-	    
+	get f() {  
+		return this.updateProfileForm.controls; 
+	}
+    checkLength(length){
+    	console.log('check length',length);
+    }
+
+    onLanguageSelect(item:any){
+    this.languageArr.push(item['id']);
+        if(this.languageArr.length == 2){
+        	this.toastr.infoToastr('You can select atmost two languages.');
+        }
+    }
+    onNationalitySelect(item:any){
+    this.nationalityArr.push(item['id']);
+        if(this.nationalityArr.length == 2){
+        	this.toastr.infoToastr('You can select atmost two nationalities.');
+        }
+    }
+
+	updateProfile(formValue) {
 		
-			console.log(dataObj);
-			console.log(this.fileData);
+		if(formValue.stay_date==""){
+			this.stayDateEmpty=true;
+		}
+		if(formValue.languages  ==""){
+			this.languageEmpty=true;
+		}
+		if(formValue.nationality ==""){
+			this.nationalityEmpty=true;
+		}
+		if(formValue.country==""){
+			this.countryEmpty=true;
+		}
+		if(formValue.stay_date){
+			this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd")
+		}
+		if(formValue.wakeup_time){
+			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
+		}
+		
+       
+		this.submitted = true;
+		if(this.updateProfileForm.invalid) {
+			return;
+        
+		} else {
 
-		 if(this.nationalityArr.length > '2'){
-			   this.atmostTwoValNat = true;
-		  }
-		 if(this.languageArr.length > '2'){
-			   this.atmostTwoValLang = true;
-		 }
-		this.nationalityArr.push(dataObj.nationality);
-		this.languageArr.push(dataObj.languages);
-		const formData = new FormData();
-			formData.append('firstName', dataObj.firstName);
-			formData.append('lastName', dataObj.lastName);
-			formData.append('email', dataObj.email);	 	   
+			const formData = new FormData();
+			formData.append('firstName', formValue.firstName);
+			formData.append('lastName', formValue.lastName);
+			formData.append('email', formValue.email);	 	   
 			formData.append('upload_photo', this.fileData);
-			formData.append('phoneNo', dataObj.phoneNo);
-			formData.append('postalCode', dataObj.postalCode);   
-			formData.append('country', dataObj.country);
-			formData.append('address', dataObj.address); 
-			formData.append('biography', dataObj.biography); 
-			formData.append('dob', dataObj.dob); 
-			formData.append('gender', dataObj.gender); 
-			formData.append('habits', dataObj.habits); 
-			formData.append('interestes', dataObj.interestes); 
-			formData.append('languages', dataObj.languages); 
-			formData.append('nationality',dataObj.nationality); 
-			formData.append('occuptation_tt', dataObj.occuptation_tt); 
-			formData.append('outing_day', dataObj.outing_day); 
-			formData.append('price_range', dataObj.price_range); 
-			formData.append('stay_date', dataObj.stay_date); 
-			formData.append('wakeup_time', dataObj.wakeup_time); 
-			formData.append('work_place', dataObj.work_place); 
-			formData.append('previous_city', dataObj.previous_city); 
+			formData.append('phoneNo', formValue.phoneNo);
+			formData.append('postalCode', formValue.postalCode);   
+			formData.append('country', formValue.country);
+			formData.append('address', formValue.address); 
+			formData.append('biography', formValue.biography); 
+			formData.append('dob', this.datePipe.transform(formValue.dob,"yyyy-MM-dd")); 
+			formData.append('gender', formValue.gender); 
+			formData.append('habits', formValue.habits); 
+			formData.append('interestes', formValue.interestes); 
+			formData.append('languages', this.languageArr); 
+			formData.append('nationality',this.nationalityArr); 
+			formData.append('occuptation_tt', formValue.occuptation_tt); 
+			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
+			formData.append('price_range', formValue.price_range); 
+			formData.append('stay_date', this.stay_date); 
+			formData.append('wakeup_time', this.wakeup_time); 
+			formData.append('work_place', formValue.work_place); 
+			formData.append('previous_city', formValue.previous_city); 
 
-		this.data_service.upDateProfile(formData).subscribe((response:any) =>{
-			console.log(response);
-			this.toastr.successToastr('Profile Updated Successfully.', 'Success!');
-		//	this.getUserData();
-		}, error =>{ 
-			console.log(error);
-		})
+			let token; 
+            if(sessionStorage.getItem("auth_token")!=undefined){
+            token = sessionStorage.getItem("auth_token"); 
+            }
+            const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+            this.http.put(this.base_url+'user/profile', formData, httpOptions).subscribe((response:any) => {
+				console.log('response', response);
+				this.toastr.successToastr(response.message,'Success');
+				this.submitted = false;
+				this.getUserData();
+
+			},error =>{
+				this.isError = true;
+				console.log('errors',error); 
+				this.errorsArr = error.error;
+
+			});
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	updateProfile11(formValue){
+		if(this.updateProfileForm.invalid) {
+			return;
+		} else {
+			if(this.updateProfileForm.value['language']==""){
+				this.languageEmpty=true;
+			}
+			if(this.updateProfileForm.value['nationality']==""){
+				this.nationalityEmpty=true;
+			}
+			if(this.updateProfileForm.value['country']==""){
+				this.countryEmpty=true;
+			}
+			if(this.updateProfileForm.value['stay_date']){
+				this.updateProfileForm.value['stay_date']=this.datePipe.transform(this.updateProfileForm.value['stay_date'][0],"MM/dd/yyyy")+" - "+this.datePipe.transform(this.updateProfileForm.value['stay_date'][1],"MM/dd/yyyy")
+			}
+			if(this.updateProfileForm.value['wakeup_time']){
+				this.updateProfileForm.value['wakeup_time']=this.updateProfileForm.value['wakeup_time'].hour+":"+this.updateProfileForm.value['wakeup_time'].minute;
+			} 
+			if(this.nationalityArr.length > '2'){
+				this.atmostTwoValNat = true;
+				return;
+			}
+			if(this.languageArr.length > '2'){
+				this.atmostTwoValLang = true;
+				return;
+			}
+			this.nationalityArr.push(formValue.nationality);
+			this.languageArr.push(formValue.languages);
+
+
+			const formData = new FormData();
+			formData.append('firstName', formValue.firstName);
+			formData.append('lastName', formValue.lastName);
+			formData.append('email', formValue.email);	 	   
+			formData.append('upload_photo', this.fileData);
+			formData.append('phoneNo', formValue.phoneNo);
+			formData.append('postalCode', formValue.postalCode);   
+			formData.append('country', formValue.country);
+			formData.append('address', formValue.address); 
+			formData.append('biography', formValue.biography); 
+			formData.append('dob', formValue.dob); 
+			formData.append('gender', formValue.gender); 
+			formData.append('habits', formValue.habits); 
+			formData.append('interestes', formValue.interestes); 
+			formData.append('languages', formValue.languages); 
+			formData.append('nationality',formValue.nationality); 
+			formData.append('occuptation_tt', formValue.occuptation_tt); 
+			formData.append('outing_day', formValue.outing_day); 
+			formData.append('price_range', formValue.price_range); 
+			formData.append('stay_date', formValue.stay_date); 
+			formData.append('wakeup_time', formValue.wakeup_time); 
+			formData.append('work_place', formValue.work_place); 
+			formData.append('previous_city', formValue.previous_city); 
+
+			this.data_service.upDateProfile(formData).subscribe((response:any) =>{
+				console.log(response);
+				this.toastr.successToastr('Profile Updated Successfully.', 'Success!');
+				//	this.getUserData();
+			}, error =>{ 
+				console.log(error);
+			})
+		}
+		
 	}
 
 

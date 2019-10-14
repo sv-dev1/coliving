@@ -36,7 +36,7 @@ export class CreateBillComponent implements OnInit {
   userEmpty:boolean=false;
   selectEmpty:boolean=false;
   list : any =[];
-  url:any;
+  url:any ='';
 
   constructor(
     private formBuilder:FormBuilder,	
