@@ -146,6 +146,15 @@ export class HouseChoresComponent implements OnInit {
 		this.quest=sessionStorage.getItem("questionaire");
 		if(this.quest == "true"){
 			console.log("already completed survey");
+			this.keyboard =true;
+			this.display ='none';
+			this.isWelcomeBlock =true;	
+			this.isHouse1st=true;
+			this.isProgressBlue =false;
+			const html = document.getElementsByTagName('html')[0];
+			html.classList.add('popCustomHtml');
+			const body = document.getElementsByTagName('body')[0];
+			body.classList.add('popCustomBody');
 		}
 		else{
 			this.isWelcomeModal = true;  
@@ -158,20 +167,18 @@ export class HouseChoresComponent implements OnInit {
 			html.classList.add('popCustomHtml');
 			const body = document.getElementsByTagName('body')[0];
 			body.classList.add('popCustomBody');
-		}
-		
+		}  
+
 		this.getUsers();
 		this.getCategorie();
 		this.getTeams();
 		this.getTask();
 		this.allTaskListing();
 		this.logged_in_username = sessionStorage.getItem("user_name");
-	
 	}
      
 	openChat(team,index){
 		//console.log('team',team);
-
 		this.team_id = team.teamId;
 		this.user_id = this.logged_in_id;
 		this.nickname = team.name;
@@ -181,7 +188,6 @@ export class HouseChoresComponent implements OnInit {
 		this.getMessages();
 		this.loadMyMessages();	
 		this.loadMessages();
-
 	}
 	joinChat() { 
 		if(this.user_id){
@@ -202,10 +208,9 @@ export class HouseChoresComponent implements OnInit {
 		}
 
 		
-		console.log('join chat data', this.data);
+	//	console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
-
-		this.getMessages();
+     	this.getMessages();
 		this.loadMyMessages();
 	}
 	sendMessgae() {
@@ -333,7 +338,6 @@ export class HouseChoresComponent implements OnInit {
 		}
 		console.log("ThirdChoice",this.tChoice);
 	}
-
 	FChoice(event){
 		if(event.target.checked){
 			this.fChoice.push(event.target.value);
@@ -348,7 +352,6 @@ export class HouseChoresComponent implements OnInit {
 		}
 		console.log("FourthChoice",this.fChoice);
 	}
-	
 	choose(){
 		this.party=true;
 		this.isWelcomeBlock = false;
@@ -356,7 +359,6 @@ export class HouseChoresComponent implements OnInit {
 		this.isNextStep =true;
 		this.isProgressBlue =true;
 		this.islockbgblue = false;
-	
 	}
 	back(id){
 		if(id == '1'){
@@ -366,6 +368,7 @@ export class HouseChoresComponent implements OnInit {
 			this.isNextStep1 = false;
 			this.isNextStep2 = false;
 			this.progre=true;
+			this.progOne = false;
 		}
 		if(id == '2'){
 			this.isHomeQuizStep = 1;
@@ -373,6 +376,8 @@ export class HouseChoresComponent implements OnInit {
 			this.isNextStep1 = true;
 			this.isNextStep2 = false;
 			this.progOne = true;
+			this.progTwo = false;
+
 		}
 		if(id == '3'){
 			this.isHomeQuizStep = 2;
@@ -380,13 +385,11 @@ export class HouseChoresComponent implements OnInit {
 			this.isNextStep1 = false;
 			this.isNextStep2 = true;
 			this.progTwo = true;
-
+			this.finalProg=false;
 		}
-
 	}
 	onNextStepClick(id) {
-		console.log(id);
-	
+
 		if(id == '1'){
 			this.isNextStep =false;
 			this.isNextStep1 = true;
@@ -409,13 +412,45 @@ export class HouseChoresComponent implements OnInit {
 	queSubmit(){
 		this.submitted = true;  
 		//console.log(this.welcomeform.value);
-    if(this.wf.partying.errors && this.submitted){
+        if(this.wf.partying.errors && this.submitted){
 			console.log("invalid");
-
 		}
 		if (this.welcomeform.invalid) {
-			this.welcomeError=true;
-			return;
+			if(this.welcomeform.value['alcohol']=="" || this.welcomeform.value['partying']=="" || this.welcomeform.value['smoking']==""){
+				this.isHomeQuizStep = 0;
+				this.isNextStep =true;
+				this.isNextStep1 = false;
+				this.isNextStep2 = false;
+				this.finalProg=false;
+				this.progOne=false;
+				this.progTwo=false;
+				this.progre=true;
+				this.isHouse1st=true;
+				this.party=true;
+			}
+			else if(this.welcomeform.value['apartment_clean_importance']==""){
+				this.isHomeQuizStep = 1;
+				this.isNextStep =false;
+				this.isNextStep1 = true;
+				this.isNextStep2 = false;
+				this.finalProg=false;
+				this.progOne=true;
+				this.progTwo=false;
+				this.progre=false;
+				this.isHouse1st=false;
+			}
+			else if(this.welcomeform.value['music']=="" || this.welcomeform.value['apartment_party']==""){
+				this.isHomeQuizStep = 2;
+				this.isNextStep =false;
+				this.isNextStep1 = false;
+				this.isNextStep2 = true;
+				this.finalProg=false;
+				this.progOne=false;
+				this.progTwo=true;
+				this.progre=false;
+				this.isHouse1st=false;
+			}
+		    return;
 		}
 		this.data_service.submitQuest(this.welcomeform.value).subscribe((response:any) =>{  
 	//		console.log('after submit response',response);
@@ -457,7 +492,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
-			console.log(this.allTeam);
+		//	console.log(this.allTeam);
 			this.firstTeam = this.allTeam[0];
 			//console.log("firsttema", this.firstTeam);
 			this.isError = false;

@@ -231,6 +231,8 @@
                         <a class="text-decoration-none"  id="KidBlock" (click)="choose()" >
                            <div class="kid-bx text-center p-3">
                               <h6 class="mb-3">Partying</h6>
+                              <div *ngIf="!party">
+                                    <i class="fas fa-glass-cheers fa-5x"></i>                              </div>
                               <div *ngIf="party">
                                  <p><input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> Yes</p>
                                  <p><input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> No</p>
@@ -247,6 +249,8 @@
                         <a class="text-decoration-none"  (click)="choose()">
                            <div class="kid-bx text-center p-3">
                               <h6 class="mb-3">Alcohol</h6>
+                              <div *ngIf="!party">
+                                    <i class="fas fa-wine-bottle fa-5x"></i>                              </div>
                               <div *ngIf="party" [ngClass]="{ 'is-invalid': submitted && wf.alcohol.errors }">
                               <p><input type="radio" formControlName="alcohol" value="0"> Yes</p>
                               <p><input type="radio" formControlName="alcohol" value="1"> No</p>
@@ -263,6 +267,9 @@
                      <a class="text-decoration-none"  (click)="choose()">
                         <div class="kid-bx text-center p-3">
                            <h6 class="mb-3">Smoking</h6>
+                           <div *ngIf="!party">
+                                 <i class="fas fa-smoking fa-5x"></i>
+                           </div>
                            <div *ngIf="party" [ngClass]="{ 'is-invalid': submitted && wf.smoking.errors }">
                            <p><input type="radio" formControlName="smoking" value="0"> Yes</p>
                            <p><input type="radio" formControlName="smoking" value="1"> No</p>
@@ -326,7 +333,7 @@
          <div *ngIf="welcomeError" class="welErr">
             <span class="for-sub-name">Please fill all answer.</span>
          </div>
-         <div class="next-btn"  id="SubmitWelcome">
+         <div class="next-btn btnss"  id="SubmitWelcome">
             <button type="button" class="btn btn-secondary" (click)="back('3')">Back</button>
             <button type="submit" class="btn btn-secondary">Submit</button>
          </div>
@@ -334,11 +341,11 @@
       <div class="next-btn" id="NextStep" *ngIf="isNextStep">
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('1')">Next1</button>
       </div>
-      <div class="next-btn"  id="NextStep1" *ngIf="isNextStep1">
+      <div class="next-btn btnss"  id="NextStep1" *ngIf="isNextStep1">
          <button type="button" class="btn btn-secondary" (click)="back('1')">Back</button>
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('2')">Next2</button>
       </div>
-      <div class="next-btn"  id="NextStep2" *ngIf="isNextStep2" >
+      <div class="next-btn btnss"  id="NextStep2" *ngIf="isNextStep2" >
          <button type="button" class="btn btn-secondary" (click)="back('2')">Back</button>
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('3')">Next3</button>
       </div>
