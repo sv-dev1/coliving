@@ -159,7 +159,7 @@ export class HouseChoresComponent implements OnInit {
 			html.classList.add('popCustomHtml');
 			const body = document.getElementsByTagName('body')[0];
 			body.classList.add('popCustomBody');
-		}
+		}  
 
 		this.getUsers();
 		this.getCategorie();
