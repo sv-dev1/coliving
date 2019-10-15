@@ -387,5 +387,10 @@ export class DataService {
 		.catch((error:Error) => {
 			console.log('error',error);
 			return Observable.throw(error);});
-		}
+	}
+    currentLocation(pvarIp){
+		return this.http.get('https://ipapi.co/'+pvarIp+'/json/' ) 
+		.map((response:Response)=>{const data = response;return data;})
+		.catch((error:Error) => {console.log(error);return Observable.throw(error);});
+	}
 }
