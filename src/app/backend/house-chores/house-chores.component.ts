@@ -146,7 +146,15 @@ export class HouseChoresComponent implements OnInit {
 		this.quest=sessionStorage.getItem("questionaire");
 		if(this.quest == "true"){
 			console.log("already completed survey");
-		
+			this.keyboard =true;
+			this.display ='none';
+			this.isWelcomeBlock =true;	
+			this.isHouse1st=true;
+			this.isProgressBlue =false;
+			const html = document.getElementsByTagName('html')[0];
+			html.classList.add('popCustomHtml');
+			const body = document.getElementsByTagName('body')[0];
+			body.classList.add('popCustomBody');
 		}
 		else{
 			this.isWelcomeModal = true;  
