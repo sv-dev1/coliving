@@ -326,7 +326,7 @@
          <div *ngIf="welcomeError" class="welErr">
             <span class="for-sub-name">Please fill all answer.</span>
          </div>
-         <div class="next-btn"  id="SubmitWelcome">
+         <div class="next-btn btnss"  id="SubmitWelcome">
             <button type="button" class="btn btn-secondary" (click)="back('3')">Back</button>
             <button type="submit" class="btn btn-secondary">Submit</button>
          </div>
@@ -334,11 +334,11 @@
       <div class="next-btn" id="NextStep" *ngIf="isNextStep">
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('1')">Next1</button>
       </div>
-      <div class="next-btn"  id="NextStep1" *ngIf="isNextStep1">
+      <div class="next-btn btnss"  id="NextStep1" *ngIf="isNextStep1">
          <button type="button" class="btn btn-secondary" (click)="back('1')">Back</button>
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('2')">Next2</button>
       </div>
-      <div class="next-btn"  id="NextStep2" *ngIf="isNextStep2" >
+      <div class="next-btn btnss"  id="NextStep2" *ngIf="isNextStep2" >
          <button type="button" class="btn btn-secondary" (click)="back('2')">Back</button>
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('3')">Next3</button>
       </div>

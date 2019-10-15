@@ -1355,6 +1355,18 @@ button.fc-timeGridWeek-button.fc-button.fc-button-primary.fc-button-active{
 button.fc-timeGridDay-button.fc-button.fc-button-primary{
     text-transform: capitalize;
 }
+button.fc-timeGridWeek-button.fc-button.fc-button-primary{
+    text-transform: capitalize;
+}
+button.fc-today-button.fc-button.fc-button-primary{
+    text-transform: capitalize;
+}
+.size-div {
+    padding: 15px;
+}
+.btnss button.btn.btn-secondary {
+    margin: 0 6px;
+}
  .teamError-msg {
     width: 100%;
     margin-top: 0.25rem;

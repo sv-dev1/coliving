@@ -26,7 +26,7 @@ export class TeamGroupComponent implements OnInit {
     hide : boolean = true;
     selectUser : boolean = false;
     validationMessage:string = '';
-
+    completed : boolean = false;
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -42,7 +42,7 @@ export class TeamGroupComponent implements OnInit {
   }
 
   createTeam(){
-    this.showCreate=true
+    this.showCreate=true;
   }
 
   getUsers(){
@@ -58,8 +58,21 @@ export class TeamGroupComponent implements OnInit {
   }
 
   addUser(id){
-    this.usersId.push(id);
+    var index = this.usersId.findIndex(x => x == id)
+
+    if (index === -1) {
+      this.usersId.push(id);
+    }else {
+      console.log("object already exists")
+      for (var i = 0; i < this.usersId.length; i ++) {
+        if (this.usersId[i] === id) { 
+            this.usersId.splice(i, 1);
+            break;
+        }
+      }
+    }
     this.selectedButton[id]= !this.selectedButton[id];
+    console.log(this.usersId);
   }
 
   continue(){
@@ -75,6 +88,7 @@ export class TeamGroupComponent implements OnInit {
     }
     this.hide=false;
     this.IsContinue =true;
+    this.completed=true;
     this.getUsers();
   }
 
@@ -82,11 +96,14 @@ export class TeamGroupComponent implements OnInit {
     this.hide=true;
     this.IsContinue=false;
     this.createTeamForm.reset();
+    this.completed=false;
   }
-
+  back1(){
+      this.showCreate=false;
+    }
   TeamSubmit(){
     let data=this.createTeamForm.value;
-   
+
     this.submitted = true; 
     
     if(this.usersId.length == 0) {
@@ -100,9 +117,13 @@ export class TeamGroupComponent implements OnInit {
        "name" : data.name.trim(), 
        "userId" : this.usersId,
       } 
+      console.log(input_data);
       this.data_service.createTeam(input_data).subscribe((response: any) =>{
           this.toastr.successToastr('Team Created Successfully.', 'Success!');
           this.createTeamForm.reset();
+          this.showCreate=false;
+          this.IsContinue =false;
+          this.usersId=[];    
       },
       error =>{console.log(error)}) 
     }     

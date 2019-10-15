@@ -20,6 +20,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                      if(event.status == 401){
                         this.toastr.errorToastr('Session Expired,Please Login again');
                         sessionStorage.removeItem("auth_token");
+                        sessionStorage.removeItem("userId");
+                        sessionStorage.removeItem("questionaire");
+                        sessionStorage.removeItem("user_name");
                         this.router.navigate(['/login']);
                     }
                     if(event.status == 500){
@@ -38,11 +41,17 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if(err.status == 0){
                     this.toastr.errorToastr('Service Unavailable');
                     sessionStorage.removeItem("auth_token");
+                    sessionStorage.removeItem("userId");
+                    sessionStorage.removeItem("questionaire");
+                    sessionStorage.removeItem("user_name");
                     this.router.navigate(['/login']);
                 }
                 if(err.status == 401){
                     this.toastr.errorToastr('Session Expired,Please Login again');
                     sessionStorage.removeItem("auth_token");
+                    sessionStorage.removeItem("userId");
+                    sessionStorage.removeItem("questionaire");
+                    sessionStorage.removeItem("user_name");                    
                     this.router.navigate(['/login']);
                 }
                 
@@ -64,8 +73,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                  if(err.error.newPassword2) {
                      this.toastr.errorToastr(err.error.newPassword2,'Error');
                 }
-                
- 
                 return throwError(err);
             }));
     }

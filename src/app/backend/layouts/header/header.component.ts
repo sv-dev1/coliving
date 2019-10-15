@@ -63,6 +63,10 @@ response:any;
   	if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = false;
       sessionStorage.removeItem("auth_token");
+      sessionStorage.removeItem("userId");
+      sessionStorage.removeItem("questionaire");
+      sessionStorage.removeItem("user_name");
+
       this.toastr.successToastr('Logout Successfully!','Success',);
       this.router.navigate(['']);
     }
