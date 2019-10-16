@@ -235,7 +235,6 @@ export class MyAccountComponent implements OnInit {
 				work_place:this.userDataArr.work_place,
 				postalCode: this.userDataArr.postalCode,
 				country: this.userDataArr.country,
-				
 				biography:this.userDataArr.biography,
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,

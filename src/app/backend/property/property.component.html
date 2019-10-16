@@ -1,0 +1,336 @@
+<section class="wrapper work-panel">
+	<app-header></app-header>
+	<app-sidebar></app-sidebar>
+	<div class="work-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="breadcrumb custom-breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+						<li class="breadcrumb-item active">Properties</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
+				</div>
+				<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let property of allProperties|paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
+					<img  (click)="viewFullDetail(property)"  src="{{image_base_url}}{{property.propertyId}}" class="img-responsive property-image">
+					
+					<div class="cus-tital">
+						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
+						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
+						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
+						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+					</div>
+					
+				</div>
+			</div>
+             <div class="row">
+             	<div class="col-md-12">
+             		<div *ngIf="isArrayLength" class="pagination-div ">
+                  	<pagination-controls (pageChange)="p= $event"></pagination-controls>
+                </div>
+             	</div>
+             </div>
+		</div>
+	</div>
+</section>
+<div class="container">          
+	<!-- The Modal -->
+	<div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenAddPropertyModal ? 'block' : 'none'" *ngIf="isopenAddPropertyModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Add Property</h4>
+					<button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+				</div>
+              <form [formGroup]="addPropertyForm" (ngSubmit)="addProperty()" >   
+				<!-- Modal body -->
+				<div class="modal-body">
+
+					
+						<div class="form-group">
+							<label>Propetry Name:</label>
+							<input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+							<div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+								<span class="for-sub-name" *ngIf="f.name.errors.required">Propetry name field is required.</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>City:</label>
+							<input type="text" formControlName="city" class="form-control" [ngClass]="{'is-invalid': submitted && f.city.errors}" />
+							<div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+								<span class="for-sub-name" *ngIf="f.city.errors.required">City field is required.</span>
+							</div>
+						</div>
+						<div class="form-group">
+                             <label>Property type:</label>
+                             <select class="custom-select form-control" formControlName="property_type" id="property_type" [ngClass]="{ 'is-invalid': submitted && f.property_type.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Room</option>
+                             </select>
+                             <div *ngIf="submitted && f.property_type.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.property_type.errors.required">Status field is required.</span>
+                             </div>
+                         </div>
+                         <div class="form-group">
+							<label>Floor space(per/sq ft.):</label>
+							<input type="text" formControlName="floor_space" class="form-control" [ngClass]="{'is-invalid': submitted && f.floor_space.errors}" />
+							<div *ngIf="submitted && f.floor_space.errors" class="invalid-feedback">
+								<span class="for-sub-name" *ngIf="f.floor_space.errors.required">Floor space field is required.</span>
+							</div>
+						</div>
+                         <div class="form-group">
+                             <label>No of balconies:</label>
+                             <select class="custom-select form-control" formControlName="no_of_balconies" id="no_of_balconies" [ngClass]="{ 'is-invalid': submitted && f.no_of_balconies.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                             </select>
+                             <div *ngIf="submitted && f.no_of_balconies.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.no_of_balconies.errors.required">Balconies field is required.</span>
+                             </div>
+                         </div>
+
+                         <div class="form-group">
+                             <label>No of bedrooms:</label>
+                             <select class="custom-select form-control" formControlName="no_of_bedrooms" id="no_of_bedrooms" [ngClass]="{ 'is-invalid': submitted && f.no_of_bedrooms.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                             </select>
+                             <div *ngIf="submitted && f.no_of_bedrooms.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.no_of_bedrooms.errors.required">Bedrooms field is required.</span>
+                             </div>
+                         </div>
+
+                        <div class="form-group">
+                             <label>No of bathrooms:</label>
+                             <select class="custom-select form-control" formControlName="no_of_bathrooms" id="no_of_bathrooms" [ngClass]="{ 'is-invalid': submitted && f.no_of_bathrooms.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                             </select>
+                             <div *ngIf="submitted && f.no_of_bathrooms.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.no_of_bathrooms.errors.required">Bathrooms field is required.</span>
+                             </div>
+                         </div>
+
+                        <div class="form-group">
+                             <label>No of garages:</label>
+                             <select class="custom-select form-control" formControlName="no_of_garages" id="no_of_garages" [ngClass]="{ 'is-invalid': submitted && f.no_of_garages.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                             </select>
+                             <div *ngIf="submitted && f.no_of_garages.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.no_of_garages.errors.required">Garages field is required.</span>
+                             </div>
+                         </div>
+
+                        
+                        <div class="form-group">
+                             <label>No of parking space:</label>
+                             <select class="custom-select form-control" formControlName="no_of_parking_space" id="no_of_parking_space" [ngClass]="{ 'is-invalid': submitted && f.no_of_parking_space.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                             </select>
+                             <div *ngIf="submitted && f.no_of_parking_space.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.no_of_parking_space.errors.required">Parking space field is required.</span>
+                             </div>
+                         </div> 
+
+                         <div class="form-group">
+                             <label>Pets allowed:</label>
+                             <select class="custom-select form-control" formControlName="pets_allowed" id="pets_allowed" [ngClass]="{ 'is-invalid': submitted && f.pets_allowed.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                                
+                             </select>
+                             <div *ngIf="submitted && f.pets_allowed.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.pets_allowed.errors.required">Pets allowed field is required.</span>
+                             </div>
+                         </div> 
+                         <div class="form-group">
+                             <label>Status</label>
+                             <select class="custom-select form-control" formControlName="status" id="status" [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                <option value="" disabled>Please select one option</option>
+                                <option value="1">Available</option>
+                                <option value="0">Not Available</option>
+                             </select>
+                             <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.status.errors.required">Status field is required.</span>
+                             </div>
+                         </div>
+						<div class="form-group">
+							<label>Property description:</label>
+							<textarea id="property_desc" class="form-control"rows="5" cols="5" formControlName="property_desc" [ngClass]="{ 'is-invalid': submitted && f.property_desc.errors }"></textarea>
+							 <div *ngIf="submitted && f.property_desc.errors" class="invalid-feedback">
+                                <span class="for-sub-name" *ngIf="f.property_desc.errors.required">Property description field is required.</span>
+                             </div>
+						</div>
+						<div class="form-group">
+							<label>Property Image:</label>
+							 <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
+	                        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+	                           <span class="for-sub-name" *ngIf="f.image.errors.required">Property image is required.</span>
+	                        </div>
+	                        <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+							</div>		
+				   </div>
+				<div class="modal-footer">
+							<button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+							<button type="submit" class="btn btn-orange-sm">Yes, Add Property</button>
+				</div> 
+			</form> 
+			</div>
+		</div>
+	</div>
+</div>   
+
+
+
+
+<div class="container">          
+	<!-- The Modal -->
+	<div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="ispropertyInfo ? 'block' : 'none'" *ngIf="ispropertyInfo">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">{{propertyInfo?.name}} Property Information</h4>
+					<button type="button" class="close" data-dismiss="modal" (click)="closeInfoModal()">&times;</button>
+				</div>
+              <form [formGroup]="addPropertyForm" (ngSubmit)="addProperty()" >   
+				<!-- Modal body -->
+				<div class="modal-body">
+                <img src="{{image_base_url}}{{propertyInfo?.propertyId}}" style="height: 250px;width:450px;">
+			    <table class="table">
+                  <tbody>
+                  	 <tr>
+                        <th>Status:</th>
+                        <td>{{propertyInfo?.status}}</td>
+                     </tr>
+                     <tr>
+                        <th>Property Name:</th>
+                        <td>{{propertyInfo?.name}}</td>
+                     </tr>
+                     <tr>
+                        <th>Description:</th>
+                        <td class="noteList">{{propertyInfo?.property_desc}}</td>
+                     </tr>
+                     <tr>
+                        <th>City:</th>
+                        <td>{{propertyInfo?.city}}</td>
+                     </tr>
+                     <tr *ngIf="propertyInfo?.property_type=='1'">
+                        <th>Property type:</th>
+                        <td>Flat</td>
+                     </tr>
+                     <tr *ngIf="propertyInfo?.property_type=='2'">
+                        <th>Property type:</th>
+                        <td>Room</td>
+                     </tr>
+                     <tr>
+                        <th>Floor space:</th>
+                        <td>{{propertyInfo?.floor_space}} sq/ft.</td>
+                     </tr>
+                     <tr>
+                        <th>No. of balconies:</th>
+                        <td>{{propertyInfo?.no_of_balconies}}</td>
+                     </tr>
+                     <tr>
+                        <th>No. of bathrooms:</th>
+                        <td>{{propertyInfo?.no_of_bathrooms}}</td>
+                     </tr>
+                     <tr>
+                        <th>No. of bedrooms:</th>
+                        <td>{{propertyInfo?.no_of_bedrooms}}</td>
+                     </tr>
+                     <tr>
+                        <th>No. of garages:</th>
+                        <td>{{propertyInfo?.no_of_garages}}</td>
+                     </tr>
+                      <tr>
+                        <th>No. of parking space:</th>
+                        <td>{{propertyInfo?.no_of_parking_space}}</td>
+                     </tr>
+                      <tr *ngIf="propertyInfo?.pets_allowed=='0'">
+                        <th>Pets allowed:</th>
+                        <td>No</td>
+                     </tr>
+                     <tr *ngIf="propertyInfo?.pets_allowed=='1'">
+                        <th>Pets allowed:</th>
+                        <td>Yes</td>
+                     </tr>
+                      <tr>
+                        <th>Posted On:</th>
+                        <td>{{propertyInfo?.created_at | date:'medium'}}</td>
+                     </tr>
+                      <tr>
+                        <th>Posted By:</th>
+                        <td>{{ propertyInfo.userProfile.firstName}}&nbsp;{{ propertyInfo.userProfile.lastName}}</td>
+                     </tr>
+                  </tbody>
+               </table>
+
+				 </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>
+				</div> 
+			</form> 
+			</div>
+		</div>
+	</div>
+</div>   
+<!---  Modal to delete TASK  -->
+<div class="container">
+	<!-- The Modal -->
+	<div class="modal" id="taskDel" [style.display]="isDelCategory ? 'block' : 'none'" *ngIf="isDelCategory" >
+		<div class="modal-dialog modaldialog12">
+			<div class="modal-content">
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title" id="modal-title">Category deletion</h4>
+					<button type="button" class="close" aria-describedby="modal-title">
+						<span aria-hidden="true" (click)="closeDelModal(categoryName)">&times;</span>
+					</button>
+				</div>
+				<!-- Modal body -->
+				<div class="modal-body">
+					<p><strong>Are you sure you want to delete <span class="text-primary">{{categoryName}}</span> category?</strong></p>
+					<p>All information associated to this category will be permanently deleted.
+						<span class="text-danger">This operation can not be undone.</span>
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" (click)="closeDelModal(categoryName)">Cancel</button>
+					<button type="button" class="btn btn-orange-sm" (click)="deleteCategory(categoryId)">Yes,Delete It</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

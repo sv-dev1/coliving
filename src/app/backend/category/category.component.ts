@@ -31,7 +31,9 @@ export class CategoryComponent implements OnInit {
 	   response:any;
        isArrayLength:boolean =false;
        categoryEdit:string = '';
-        p:any;
+       p:any;
+
+
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
