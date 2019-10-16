@@ -55,6 +55,8 @@ export class MyAccountComponent implements OnInit {
 	stay_date: any;
 	wakeup_time:any;
 	Dtime:any;
+	length:boolean=false;
+
 
 	ip_address : string = "";
 	current_country : string = "";
@@ -213,25 +215,6 @@ export class MyAccountComponent implements OnInit {
 				   this.time = this.time;
 			   }
 			      
-                let language = this.userDataArr.languages_map.split(",",3);
-                let first1 = language[0].split("-",3);
-                let second1 = language[1].split("-",3);
-          
-			        this.languageSelectedItems = [
-				      { "id": parseInt(first1[0]), "itemName": first1[1] },
-				      { "id": parseInt(second1[0]), "itemName": second1[1] }
-				    ];
-
-
-               let national = this.userDataArr.nationality_map.split(",",3);
-                
-
-                 	let first = national[0].split("-",3);
-                    let second = national[1].split("-",3);
-                    this.nationalitySelectedItems = [
-				      { "id": parseInt(first[0]), "itemName": first[1] },
-				      { "id": parseInt(second[0]), "itemName": second[1] }
-				    ];
               
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			  this.updateProfileForm.patchValue({

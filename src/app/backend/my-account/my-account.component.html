@@ -233,7 +233,7 @@
                                  (onSelect)="onNationalitySelect($event)" 
                                  (onDeSelect)="OnNationalityDeSelect($event)" 
                                  formControlName="nationality"
-                                  [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" [disabled]="this.atmostTwoValNat.length ==true">
+                                  [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }">
                                  </angular2-multiselect>
                                  <div *ngIf="nationalityEmpty"  class="default-error-message"> Nationality is required.
                                     </div>
