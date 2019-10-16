@@ -1,0 +1,86 @@
+
+.gallery-title
+{
+    font-size: 36px;
+    color: #42B32F;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 70px;
+}
+.gallery-title:after {
+    content: "";
+    position: absolute;
+    width: 7.5%;
+    left: 46.5%;
+    height: 45px;
+    border-bottom: 1px solid #5e5e5e;
+}
+.filter-button
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #42B32F;
+    margin-bottom: 30px;
+
+}
+.filter-button:hover
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #42B32F;
+
+}
+.btn-default:active .filter-button:active
+{
+    background-color: #42B32F;
+    color: white;
+}
+
+.port-image
+{
+    width: 100%;
+}
+
+.gallery_product
+{
+    margin-bottom: 30px;
+}
+
+
+.cus-property .modal-body {
+    overflow: auto !important;
+    height: 420px !important;
+}
+button.pull-right.btn.btn-orange-sm {
+    margin-bottom: 15px;
+}
+
+img.img-responsive.property-image {
+    width: 100%;
+    height: auto;
+    max-height: 165px;
+}
+.cus-tital {
+    border: 1px solid #f1e7e4;
+    padding: 15px;
+    border-top: none;
+}
+.cus-tital p {
+    margin: 0;
+}
+
+button.pull-right.btn.btn-orange-sm[_ngcontent-uin-c2] {
+    border-radius: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+ #read-more {
+        position: absolute;
+        bottom: 0;
+        right: 16px;
+    }

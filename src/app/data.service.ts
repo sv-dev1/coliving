@@ -393,4 +393,20 @@ export class DataService {
 		.map((response:Response)=>{const data = response;return data;})
 		.catch((error:Error) => {console.log(error);return Observable.throw(error);});
 	}
+	
+	getProperties(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'properties',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+  
 }
