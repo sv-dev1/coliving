@@ -162,7 +162,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Phone Number:</label>
-                                 <input type="text" class="form-control"  placeholder="Phone Number" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }" (keypress)="keyPress($event)">
+                                 <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'in'" [required]="true"id="phoneNo" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
                                  <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
                                  </div>
@@ -239,7 +239,6 @@
                                  <label for="team" class="radio-inline">Nationality:</label>
                                  <angular2-multiselect [data]="countrydropdownList" 
                                  [(ngModel)]="nationalitySelectedItems"
-
                                  [settings]="dropdownSettingsCountry" 
                                  formControlName="nationality" 
                                  (onSelect)="onNationalitySelect($event)" 
