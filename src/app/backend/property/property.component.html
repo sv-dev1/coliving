@@ -11,6 +11,7 @@
 					</ul>
 				</div>
 			</div>
+       
 			<div class="row">
 				<div class="col-12">
 					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
@@ -224,10 +225,11 @@
 					<h4 class="modal-title">{{propertyInfo?.name}} Property Information</h4>
 					<button type="button" class="close" data-dismiss="modal" (click)="closeInfoModal()">&times;</button>
 				</div>
-              <form [formGroup]="addPropertyForm" (ngSubmit)="addProperty()" >   
+				
+              
 				<!-- Modal body -->
 				<div class="modal-body">
-                <img src="{{image_base_url}}{{propertyInfo?.propertyId}}" style="height: 250px;width:450px;">
+                <img src="{{image_base_url}}{{propertyInfo?.propertyId}}" style="height: 250px;width:500px;">
 			    <table class="table">
                   <tbody>
                   	 <tr>
@@ -301,36 +303,8 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>
 				</div> 
-			</form> 
+			
 			</div>
 		</div>
 	</div>
 </div>   
-<!---  Modal to delete TASK  -->
-<div class="container">
-	<!-- The Modal -->
-	<div class="modal" id="taskDel" [style.display]="isDelCategory ? 'block' : 'none'" *ngIf="isDelCategory" >
-		<div class="modal-dialog modaldialog12">
-			<div class="modal-content">
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title" id="modal-title">Category deletion</h4>
-					<button type="button" class="close" aria-describedby="modal-title">
-						<span aria-hidden="true" (click)="closeDelModal(categoryName)">&times;</span>
-					</button>
-				</div>
-				<!-- Modal body -->
-				<div class="modal-body">
-					<p><strong>Are you sure you want to delete <span class="text-primary">{{categoryName}}</span> category?</strong></p>
-					<p>All information associated to this category will be permanently deleted.
-						<span class="text-danger">This operation can not be undone.</span>
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary" (click)="closeDelModal(categoryName)">Cancel</button>
-					<button type="button" class="btn btn-orange-sm" (click)="deleteCategory(categoryId)">Yes,Delete It</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>

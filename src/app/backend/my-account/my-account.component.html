@@ -217,8 +217,10 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Language:</label>
-                                 <angular2-multiselect [data]="langdropdownList" 
-                                 [(ngModel)]="languageSelectedItems"
+
+                                 <angular2-multiselect [data]="langdropdownList"
+                                 [(ngModel)]="selectedItemsLanguagess"
+
                                  [settings]="dropdownSettingsLanguage" 
                                  formControlName="languages" 
                                  (onSelect)="onLanguageSelect($event)" 
@@ -238,9 +240,12 @@
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Nationality:</label>
                                  <angular2-multiselect [data]="countrydropdownList" 
-                                 [(ngModel)]="nationalitySelectedItems"
-                                 [settings]="dropdownSettingsCountry" 
+
+                                 [(ngModel)]="selectedItemsNationalss"
+                                 [settings]="dropdownSettingsCountry"
+
                                  formControlName="nationality" 
+
                                  (onSelect)="onNationalitySelect($event)" 
                                  (onDeSelect)="OnNationalityDeSelect($event)" 
                                  [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
