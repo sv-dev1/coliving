@@ -7,7 +7,6 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
-import { first } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-my-account',
@@ -30,41 +29,38 @@ export class MyAccountComponent implements OnInit {
 	url:any;
 	userDataArr:any;
 	email:any;
-	messageDigit:string='';
-	messageDigit1:string='';
-	time = {hour: 13, minute: 30};
-	today:any;
-	teamEmpty:boolean=false;
-	userEmpty:boolean=false;
-	allCountriesArray:any=[];
-	allCountries:any=[];
-	allLanguagesArray:any=[];
-	allLanguages:any=[];
-	countrydropdownList:any = [];
-	langdropdownList:any  = [];
-	dropdownSettingsCountry  =  {}
-	dropdownSettingsLanguage =  {}
-	nationalityArr: any = [];
-	languageArr: any=[];
-	atmostTwoValNat:boolean=false;
-	atmostTwoValLang:boolean=false;
-	countryEmpty:boolean=false;
-	languageEmpty:boolean=false;
+    messageDigit:string='';
+    messageDigit1:string='';
+    time = {hour: 13, minute: 30};
+    today:any;
+    teamEmpty:boolean=false;
+    userEmpty:boolean=false;
+    allCountriesArray:any=[];
+    allCountries:any=[];
+    allLanguagesArray:any=[];
+    allLanguages:any=[];
+    countrydropdownList:any = [];
+    langdropdownList:any  = [];
+    dropdownSettingsCountry  =  {}
+    dropdownSettingsLanguage =  {}
+    nationalityArr: any = [];
+    languageArr: any=[];
+    atmostTwoValNat:boolean=false;
+    atmostTwoValLang:boolean=false;
+    countryEmpty:boolean=false;
+    languageEmpty:boolean=false;
 	nationalityEmpty:boolean=false;
-	stayDateEmpty:boolean=false;
-	stay_date: any;
-	wakeup_time:any;
 	Dtime:any;
-	length:boolean=false;
-
-
+	priceSplit:any;
+	finalData:any;
 	ip_address : string = "";
 	current_country : string = "";
 	nationalitySelectedItems = [];
 	languageSelectedItems = [];
 	languageArrMap : any = [];
 	nationalityArrMap : any = [];
-
+	langArr: boolean;
+	canViewData: boolean;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -75,15 +71,15 @@ export class MyAccountComponent implements OnInit {
 		calendar: NgbCalendar,
 		private datePipe: DatePipe
 		) {   
-
+		  
 		this.updateProfileForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
 			lastName: ['', Validators.required],
 			email: ['', Validators.required],
 			userName: ['', Validators.required],
-			dob:['', Validators.required],
+	   		dob:['', Validators.required],
 			occuptation_tt:['', Validators.required],
-			wakeup_time:['', Validators.required],
+            wakeup_time:['', Validators.required],
 			outing_day:['', Validators.required],
 			maximunPrice:['', Validators.required],
 			minimumPrice:['', Validators.required],
@@ -101,89 +97,21 @@ export class MyAccountComponent implements OnInit {
 			habits:['', Validators.required],
 			image:[''],
 			file:[''],
-			previous_city:['atlanta']
+			previous_city:['']
 		});
-
+	
 
 		this.today = new Date();
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
-
+  
 	ngOnInit() {
 		this.getUserData();
 		this.getAllCountries();
 		this.getAllLanguages();
-        this.getCurrentIP();
-		
 	}
 
-	getCurrentIP(){
-	    this.http.get('https://jsonip.com').subscribe( data => {
-	      this.ip_address = data['ip'];
-	      this.getCurrentLoaction();
-	    })
-    }
-    getCurrentLoaction(){
-		this.data_service.currentLocation(this.ip_address).subscribe(response => { 
-		this.current_country = response['country'].toLowerCase();
-
-        },error => {
-		console.log(error);
-		})
-    }
-    getAllCountries(){
-		this.data_service.getCountries().subscribe((response:any) =>{   
-			this.allCountriesArray = response.countries;
-			this.allCountries = this.allCountriesArray;
-			this.allCountries.forEach(ele => {
-				let obj = {};
-				obj['id'] = ele['id'];
-				obj['itemName'] = ele['name'];
-				this.countrydropdownList.push(obj);
-			});
-
-			this.dropdownSettingsCountry = { 
-				singleSelection: false, 
-				text:"Select Nationality",
-				selectAllText:'Select only two items.',
-				unSelectAllText:'UnSelect All',
-				classes:"myclass custom-class",
-				limitSelection: 2
-
-			};
-			this.isError = false;    
-		}, error =>{ 
-			this.isError = true; 
-			this.errorsArr = error.error;
-		})
-	}
-	getAllLanguages(){
-		this.data_service.getLanguages().subscribe((response:any) =>{
-			this.allLanguagesArray = response.languages;
-			this.allLanguages = this.allLanguagesArray;
-			this.allLanguages.forEach(ele => {
-				let obj = {};
-				obj['id'] = ele['id'];
-				obj['itemName'] = ele['name'];
-				this.langdropdownList.push(obj);
-			});
-			this.dropdownSettingsLanguage = { 
-				singleSelection: false, 
-				text:"Select Languages",
-				selectAllText:'Select only two items.',
-				unSelectAllText:'UnSelect All',
-				classes:"myclass custom-class",
-				limitSelection: 2
-				
-			};
-			this.isError = false;    
-		}, error =>{ 
-			this.isError = true; 
-			this.errorsArr = error.error;
-		})
-	}
-	
 	getUserData(){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -192,43 +120,72 @@ export class MyAccountComponent implements OnInit {
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
-			this.userDataArr = response.users[0];
-          
-			let finalData;	
-			if(this.userDataArr.stay_date != 'Invalid date'){
-			
+		this.userDataArr = response.users[0]; 
+		console.log(this.userDataArr);
+		if(this.userDataArr.languages_map){
+		//	console.log(this.userDataArr.languages_map);
+			var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
+			// console.log(res);
+			this.languageSelectedItems=JSON.parse(res);
+			this.languageArrMap=JSON.parse(res);
+		}
+		if(this.userDataArr.nationality_map){
+				var res = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
+				this.nationalitySelectedItems=JSON.parse(res);
+				this.nationalityArrMap=JSON.parse(res);
+				// console.log(this.nationalityArrMap);
+		}
+		this.languageArr=this.userDataArr.languages;
+		this.nationalityArr=this.userDataArr.nationality;
+
+		// if(this.userDataArr.nationalitySelectedItems){
+		// 	this.nationalitySelectedItems=JSON.parse(this.userDataArr.nationalitySelectedItems);
+		// }
+		
+		// if(this.userDataArr.nationality_map){
+		// 	this.nationalityArrMap=this.userDataArr.nationality_map;
+		// }
+  		if(this.userDataArr.stay_date == null){
+				this.userDataArr.stay_date=""	
+		}
+		else if(this.userDataArr.stay_date != 'Invalid date'){
 				let str = this.userDataArr.stay_date; 
-				let splitted = str.split(" - ", 2); 	
-				finalData = this.datePipe.transform(splitted[0],"MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
-			}
-			let wakeUpStr = this.userDataArr.wakeup_time; 
-			   if(wakeUpStr) {
-					let wakeSplit = wakeUpStr.split(":", 3); 
-					let hours = wakeSplit[0];
-					let minutes = wakeSplit[1];
-     				const sfdsfsfs = {
+				let splitted = str.split(" - ", 2); 
+				 this.finalData = str;
+		}
+		let wakeUpStr = this.userDataArr.wakeup_time; 
+		if(wakeUpStr) {
+			    let wakeSplit = wakeUpStr.split(":", 3); 
+				let hours = wakeSplit[0];
+				let minutes = wakeSplit[1];
+     			const sfdsfsfs = {
 						hour :parseInt(hours),
 						minute : parseInt(minutes)
-					}
-				    this.time = sfdsfsfs;
-			   } else {
+				}
+				 this.time = sfdsfsfs;
+		}
+		else {
 				   this.time = this.time;
-			   }
-			      
-              
-              this.image_url = this.image_base_url+''+this.userDataArr.userId;
-			  this.updateProfileForm.patchValue({
+		}
+		if(this.userDataArr.price_range){
+			this.priceSplit = this.userDataArr.price_range.split("-", 2); 
+		}
+
+			this.image_url = this.image_base_url+''+this.userDataArr.userId;
+			this.updateProfileForm= this.formBuilder.group({
 				firstName: this.userDataArr.firstName,
 				lastName: this.userDataArr.lastName,
 				email: this.userDataArr.email,
 				userName: sessionStorage.getItem('user_name'),
-				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
+				dob:this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				occuptation_tt:this.userDataArr.occuptation_tt,
 				wakeup_time:this.time,
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
-				maximunPrice:this.userDataArr.price_range,
-				minimumPrice:this.userDataArr.price_range,
-				stay_date:finalData,
+				maximunPrice:this.priceSplit[1],
+				minimumPrice:this.priceSplit[0],
+				languages:[''],
+				nationality:[''],
+				stay_date:this.finalData,
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
@@ -238,17 +195,67 @@ export class MyAccountComponent implements OnInit {
 				biography:this.userDataArr.biography,
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,
-				previous_city:['atlanta'],
+				previous_city:this.userDataArr.previous_city,
 				image:['']
+
 			});
 			this.email = this.userDataArr.email;
-			//console.log(this.updateProfileForm.value);
 		},error=>{ 
 			console.log("ERROR");
 			console.log(error.error);
 		});  
 	}
-	
+	getAllCountries(){
+	     this.data_service.getCountries().subscribe((response:any) =>{   
+			this.allCountriesArray = response.countries;
+			this.allCountries = this.allCountriesArray;
+			this.allCountries.forEach(ele => {
+	            let obj = {};
+	            obj['id'] = ele['id'];
+	            obj['itemName'] = ele['name'];
+	            this.countrydropdownList.push(obj);
+			});
+			this.dropdownSettingsCountry = { 
+	             singleSelection: false, 
+	             text:"Select Nationality",
+	             selectAllText:'Select only two items.',
+	             unSelectAllText:'UnSelect All',
+				 classes:"myclass custom-class",
+				 limitSelection: 2,
+				};
+			this.isError = false;    
+		}, error =>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		})
+	}
+	getAllLanguages(){
+	     this.data_service.getLanguages().subscribe((response:any) =>{
+			this.allLanguagesArray = response.languages;
+			this.allLanguages = this.allLanguagesArray;
+			this.allLanguages.forEach(ele => {
+				let obj = {};
+	            obj['id'] = ele['id'];
+	            obj['itemName'] = ele['name'];
+	            this.langdropdownList.push(obj);
+			});
+			this.dropdownSettingsLanguage = { 
+	             singleSelection: false, 
+	             text:"Select Languages",
+	             selectAllText:'Select only two items.',
+	             unSelectAllText:'UnSelect All',
+				 classes:"myclass custom-class",
+				 limitSelection: 2,
+            };
+			this.isError = false;    
+		}, error =>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		})
+	}
+	get f() {  
+		return this.updateProfileForm.controls; 
+	}
 	onSelectFile(event) {
 		this.fileData = event.target.files[0];
 		this.preview();
@@ -265,130 +272,134 @@ export class MyAccountComponent implements OnInit {
 		}
 	}
 	keyPress(event: any) {
-		this.messageDigit1 ='';
-		const pattern = /[0-9\+\-\ ]/;
-		let inputChar = String.fromCharCode(event.charCode);
-		console.log(inputChar, event.charCode);
-		if (!pattern.test(inputChar)) {
-			this.messageDigit = 'Only digit allowed.';
-			event.preventDefault();
-		}
-	}
-	keyPress1(event: any) {
-		this.messageDigit ='';
-		const pattern = /[0-9\+\-\ ]/;
-		let inputChar = String.fromCharCode(event.charCode);
-		// console.log(inputChar, e.charCode);
-		if (!pattern.test(inputChar)) {
-			this.messageDigit1 = 'Only digit allowed.';
-			event.preventDefault();
-		}
-	}
-
-	get f() {  
-		return this.updateProfileForm.controls; 
-	}
-    checkLength(length){
-    	console.log('check length',length);
+	this.messageDigit1 ='';
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+            console.log(inputChar, event.charCode);
+       if (!pattern.test(inputChar)) {
+         this.messageDigit = 'Only digit allowed.';
+           event.preventDefault();
+      }
     }
-
-    onLanguageSelect(item:any){
-
-    	 this.languageArrMap.push(item['id']+'-'+item['itemName']);
-         this.languageArr.push(item['id']);
-	     if(this.languageArr.length == 2){
-	        	this.toastr.infoToastr('You can select only maximum two languages.');
-	     }
-	     console.log(this.languageArr);
-    }
-    OnLanguageDeSelect(itemde: any) {
-    	 
-    	 this.languageArrMap.splice(this.languageArrMap.indexOf(itemde['id']+'-'+itemde['itemName']),1);
-         this.languageArr.splice(this.languageArr.indexOf(itemde['id']),1);
-     }
-
-    onNationalitySelect(itemla:any){
-	    this.nationalityArrMap.push(itemla['id']+'-'+itemla['itemName']);
-	    this.nationalityArr.push(itemla['id']);
-	      if(this.nationalityArr.length == 2){
-	        	this.toastr.infoToastr('You can select only maximum two nationalities.');
-	      }
-    }
-    OnNationalityDeSelect(itemlade: any) {
-    	
-    	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(itemlade['id']+'-'+itemlade['itemName']),1);
-        this.nationalityArr.splice(this.nationalityArr.indexOf(itemlade['id']),1);
-     }
-
-	updateProfile(formValue) {
-        
-		if(formValue.stay_date == ""){
-			this.stayDateEmpty = true;
-		}
-		if(formValue.languages  == ""){
-			this.languageEmpty = true;
-		}
-		if(formValue.nationality == ""){
-			this.nationalityEmpty = true;
-		}
-		if(formValue.country == ""){
-			this.countryEmpty = true;
-		}
-		if(formValue.stay_date){
-			this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd")
-		}
-		if(formValue.wakeup_time){
-			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
-		}
-		this.submitted = true;
-		if(this.updateProfileForm.invalid) {
-			return;
-        
-		} else {
-
-			const formData = new FormData();
-			formData.append('firstName', formValue.firstName);
-			formData.append('lastName', formValue.lastName);
-			formData.append('email', formValue.email);	 	   
-			formData.append('upload_photo', this.fileData);
-			formData.append('phoneNo', formValue.phoneNo);
-			formData.append('postalCode', formValue.postalCode);   
-			formData.append('country', formValue.country);
-			formData.append('address', formValue.address); 
-			formData.append('biography', formValue.biography); 
-			formData.append('dob', this.datePipe.transform(formValue.dob,"yyyy-MM-dd")); 
-			formData.append('gender', formValue.gender); 
-			formData.append('habits', formValue.habits); 
-			formData.append('interestes', formValue.interestes); 
-			formData.append('languages', this.languageArr); 
-			formData.append('nationality',this.nationalityArr); 
-            formData.append('languages_map', this.languageArrMap); 
-			formData.append('nationality_map',this.nationalityArrMap);
-			formData.append('occuptation_tt', formValue.occuptation_tt); 
-			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.price_range); 
-			formData.append('stay_date', this.stay_date); 
-			formData.append('wakeup_time', this.wakeup_time); 
-			formData.append('work_place', formValue.work_place); 
-			formData.append('previous_city', formValue.previous_city); 
-
-			let token; 
-            if(sessionStorage.getItem("auth_token")!=undefined){
-            token = sessionStorage.getItem("auth_token"); 
-            }
-            const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-            this.http.put(this.base_url+'user/profile', formData, httpOptions).subscribe((response:any) => {
-				console.log('response', response);
-				this.toastr.successToastr(response.message,'Success');
-				this.submitted = false;
-				this.getUserData();
-
-			},error =>{
-				this.isError = true;
-				console.log('errors',error); 
-				this.errorsArr = error.error;
-
-			});
-		}
+    keyPress1(event: any) {
+    this.messageDigit ='';
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    // console.log(inputChar, e.charCode);
+       if (!pattern.test(inputChar)) {
+         this.messageDigit1 = 'Only digit allowed.';
+           event.preventDefault();
+      }
 	}
+	
+	updateProfile(){
+	console.log(this.updateProfileForm.value);
+		if(this.updateProfileForm.value['language']==""){
+	         this.languageEmpty=true;
+	    }
+	    if(this.updateProfileForm.value['nationality']==""){
+	        this.nationalityEmpty=true;
+	    }
+	    if(this.updateProfileForm.value['country']==""){
+	         this.countryEmpty=true;
+		}
+	   if(this.updateProfileForm.value['stay_date']){
+				this.updateProfileForm.value['stay_date']=this.updateProfileForm.value['stay_date'][0]+" - "+this.updateProfileForm.value['stay_date'][1];
+		}
+		if(this.updateProfileForm.value['wakeup_time']){
+			this.updateProfileForm.value['wakeup_time']=this.updateProfileForm.value['wakeup_time'].hour+":"+this.updateProfileForm.value['wakeup_time'].minute;
+		} 
+		this.submitted = true;  
+		let dataObj=this.updateProfileForm.value;
+		let priceRange=  dataObj.minimumPrice+"-"+dataObj.maximunPrice;
+		if(dataObj.stay_date != "01/01/1970 - 01/01/1970"){
+          this.finalData=dataObj.stay_date;
+		}
+		 if(this.nationalityArr.length > '2'){
+			   this.atmostTwoValNat = true;
+		  }
+		 if(this.languageArr.length > '2'){
+			   this.atmostTwoValLang = true;
+		 }
+		
+			//   formData.forEach((key,element) => {
+			// 	  console.log(key+"-"+element);
+			//   });
+			 if(this.updateProfileForm.invalid){
+				 console.log(this.updateProfileForm.value);
+						console.log("invalid");
+			 }
+			 else{
+
+				const formData = new FormData();
+				formData.append('firstName', dataObj.firstName);
+				formData.append('lastName', dataObj.lastName);
+				formData.append('email', dataObj.email);	 	   
+				formData.append('upload_photo', this.fileData);
+				formData.append('phoneNo', dataObj.phoneNo);
+				formData.append('postalCode', dataObj.postalCode);   
+				formData.append('country', dataObj.country);
+				formData.append('address', dataObj.address); 
+				formData.append('biography', dataObj.biography); 
+				formData.append('dob', dataObj.dob); 
+				formData.append('gender', dataObj.gender); 
+				formData.append('habits', dataObj.habits); 
+				formData.append('interestes', dataObj.interestes); 
+				formData.append('languages', this.languageArr); 
+				formData.append('nationality',this.nationalityArr); 
+				formData.append('occuptation_tt', dataObj.occuptation_tt); 
+				formData.append('outing_day', dataObj.outing_day); 
+				formData.append('price_range', priceRange); 
+				formData.append('stay_date', this.finalData); 
+				formData.append('wakeup_time', dataObj.wakeup_time); 
+				formData.append('work_place', dataObj.work_place); 
+				formData.append('previous_city', dataObj.previous_city); 
+				formData.append('nationality_map', JSON.stringify(this.nationalityArrMap)); 
+				formData.append('languages_map', JSON.stringify(this.languageArrMap)); 
+
+				let token; 
+				if(sessionStorage.getItem("auth_token")!=undefined){
+				token = sessionStorage.getItem("auth_token"); 
+				}
+				const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+				this.http.put(this.base_url+'user/profile', formData, httpOptions).subscribe((response:any) => {
+					console.log('response', response);
+					this.toastr.successToastr(response.message,'Success');
+					this.submitted = false;
+					this.atmostTwoValNat = false;
+					this.atmostTwoValLang = false;
+					this.getUserData();
+
+				},error =>{
+					this.isError = true;
+					console.log('errors',error); 
+					this.errorsArr = error.error;
+				});
+			 }
+		
+	}
+
+	onLanguageSelect(item:any){
+		this.languageArrMap.push(item);
+		if(this.languageArrMap.length >= 2){
+			this.canViewData=true;
+			   this.toastr.infoToastr('You can select only maximum two languages.');
+		}
+   }
+   OnLanguageDeSelect(itemde: any) {
+		this.languageArrMap.splice(this.languageArrMap.indexOf(itemde['itemName']),1);
+	}
+
+   onNationalitySelect(itemla:any){
+	   this.nationalityArrMap.push(itemla);
+	  // this.nationalityArr.push(itemla['id']);
+		 if(this.nationalityArrMap.length == 2){
+			   this.toastr.infoToastr('You can select only maximum two nationalities.');
+		 }
+   }
+   OnNationalityDeSelect(itemlade: any) {
+	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(itemlade['itemName']),1);
+//	this.nationalityArr.splice(this.nationalityArr.indexOf(itemlade['id']),1);
+  }
+	
 }
