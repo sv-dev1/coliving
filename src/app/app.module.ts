@@ -46,6 +46,7 @@ import { CategoryComponent } from './backend/category/category.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LightboxModule } from 'ngx-lightbox';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
+import { PropertyComponent } from './backend/property/property.component';
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -88,6 +89,7 @@ export function provideConfig() {
     TaskSuggestionsComponent,
     BlockCopyPasteDirective,
     CategoryComponent,
+    PropertyComponent,
   
 
 
