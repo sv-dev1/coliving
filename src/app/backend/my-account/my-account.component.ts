@@ -65,6 +65,10 @@ export class MyAccountComponent implements OnInit {
 	languageArrMap : any = [];
 	nationalityArrMap : any = [];
 
+	maximumPrice: any = [];
+    minimumPrice : any = [];
+    selectedItemsNational: any;
+    selectedItemsLanguage: any;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -126,6 +130,7 @@ export class MyAccountComponent implements OnInit {
     }
     getCurrentLoaction(){
 		this.data_service.currentLocation(this.ip_address).subscribe(response => { 
+		 console.log('response',response);
 		this.current_country = response['country'].toLowerCase();
 
         },error => {
@@ -149,7 +154,8 @@ export class MyAccountComponent implements OnInit {
 				selectAllText:'Select only two items.',
 				unSelectAllText:'UnSelect All',
 				classes:"myclass custom-class",
-				limitSelection: 2
+				limitSelection: 2,
+				enableSearchFilter: true,
 
 			};
 			this.isError = false;    
@@ -174,7 +180,9 @@ export class MyAccountComponent implements OnInit {
 				selectAllText:'Select only two items.',
 				unSelectAllText:'UnSelect All',
 				classes:"myclass custom-class",
-				limitSelection: 2
+				limitSelection: 2,
+				enableSearchFilter: true,
+				
 				
 			};
 			this.isError = false;    
@@ -214,8 +222,25 @@ export class MyAccountComponent implements OnInit {
 			   } else {
 				   this.time = this.time;
 			   }
-			      
-              
+			   let price = this.userDataArr.price_range; 
+			   if(price) {
+			   	  let splitPrice = price.split("-", 3); 
+			   	     this.maximumPrice = splitPrice[0];
+					 this.minimumPrice = splitPrice[1];
+			   }
+
+              let nationalityMap  = this.userDataArr.nationality_map; 
+                   var res = nationalityMap.replace(/[&quot;]+/g, "");
+		           this.selectedItemsNational =  res;
+		       console.log('selectedItemsNational',this.selectedItemsNational);
+            
+              let selectedItems = [
+	            { "id": 1, "itemName": "India" },
+	            { "id": 2, "itemName": "Singapore" }
+               ];
+
+            console.log('selectedItems',selectedItems);
+
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			  this.updateProfileForm.patchValue({
 				firstName: this.userDataArr.firstName,
@@ -226,8 +251,8 @@ export class MyAccountComponent implements OnInit {
 				occuptation_tt:this.userDataArr.occuptation_tt,
 				wakeup_time:this.time,
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
-				maximunPrice:this.userDataArr.price_range,
-				minimumPrice:this.userDataArr.price_range,
+				maximunPrice:this.maximumPrice,
+				minimumPrice:this.minimumPrice,
 				stay_date:finalData,
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
@@ -242,7 +267,7 @@ export class MyAccountComponent implements OnInit {
 				image:['']
 			});
 			this.email = this.userDataArr.email;
-			//console.log(this.updateProfileForm.value);
+			
 		},error=>{ 
 			console.log("ERROR");
 			console.log(error.error);
@@ -294,34 +319,34 @@ export class MyAccountComponent implements OnInit {
 
     onLanguageSelect(item:any){
 
-    	 this.languageArrMap.push(item['id']+'-'+item['itemName']);
+    	 this.languageArrMap.push(item);
          this.languageArr.push(item['id']);
 	     if(this.languageArr.length == 2){
 	        	this.toastr.infoToastr('You can select only maximum two languages.');
 	     }
 	     console.log(this.languageArr);
     }
-    OnLanguageDeSelect(itemde: any) {
+    OnLanguageDeSelect(item: any) {
     	 
-    	 this.languageArrMap.splice(this.languageArrMap.indexOf(itemde['id']+'-'+itemde['itemName']),1);
-         this.languageArr.splice(this.languageArr.indexOf(itemde['id']),1);
+    	 this.languageArrMap.splice(this.languageArrMap.indexOf(item),1);
+         this.languageArr.splice(this.languageArr.indexOf(item['id']),1);
      }
 
-    onNationalitySelect(itemla:any){
-	    this.nationalityArrMap.push(itemla['id']+'-'+itemla['itemName']);
-	    this.nationalityArr.push(itemla['id']);
+    onNationalitySelect(item:any){
+	    this.nationalityArrMap.push(item);
+	    this.nationalityArr.push(item['id']);
 	      if(this.nationalityArr.length == 2){
 	        	this.toastr.infoToastr('You can select only maximum two nationalities.');
 	      }
     }
-    OnNationalityDeSelect(itemlade: any) {
+    OnNationalityDeSelect(item: any) {
     	
-    	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(itemlade['id']+'-'+itemlade['itemName']),1);
-        this.nationalityArr.splice(this.nationalityArr.indexOf(itemlade['id']),1);
+    	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(item),1);
+        this.nationalityArr.splice(this.nationalityArr.indexOf(item['id']),1);
      }
 
 	updateProfile(formValue) {
-        
+       
 		if(formValue.stay_date == ""){
 			this.stayDateEmpty = true;
 		}
@@ -342,6 +367,7 @@ export class MyAccountComponent implements OnInit {
 		}
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
+			this.toastr.errorToastr('Please check the form and try again.','Error');
 			return;
         
 		} else {
@@ -362,11 +388,11 @@ export class MyAccountComponent implements OnInit {
 			formData.append('interestes', formValue.interestes); 
 			formData.append('languages', this.languageArr); 
 			formData.append('nationality',this.nationalityArr); 
-            formData.append('languages_map', this.languageArrMap); 
-			formData.append('nationality_map',this.nationalityArrMap);
+            formData.append('languages_map', JSON.stringify(formValue.languages)); 
+			formData.append('nationality_map',JSON.stringify(formValue.nationality));
 			formData.append('occuptation_tt', formValue.occuptation_tt); 
 			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.price_range); 
+			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
 			formData.append('stay_date', this.stay_date); 
 			formData.append('wakeup_time', this.wakeup_time); 
 			formData.append('work_place', formValue.work_place); 

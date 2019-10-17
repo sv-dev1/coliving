@@ -211,7 +211,7 @@
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Language:</label>
                                  <angular2-multiselect [data]="langdropdownList"
-                                 [(ngModel)]="languageSelectedItems"
+                                 [(ngModel)]="selectedItemsLanguagess"
                                  [settings]="dropdownSettingsLanguage" 
                                  formControlName="languages" 
                                  (onSelect)="onLanguageSelect($event)" 
@@ -228,7 +228,7 @@
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Nationality:</label>
                                  <angular2-multiselect [data]="countrydropdownList" 
-                                 [(ngModel)]="nationalitySelectedItems"
+                                 [(ngModel)]="selectedItemsNationalss"
                                  [settings]="dropdownSettingsCountry"
                                  (onSelect)="onNationalitySelect($event)" 
                                  (onDeSelect)="OnNationalityDeSelect($event)" 

@@ -57,7 +57,8 @@ export class PropertyComponent implements OnInit {
     }
 
 	ngOnInit() {
-	  	 this.getAllProperties();	       
+	  	 this.getAllProperties();	 
+	  	       
 	}
 
    	getAllProperties() {
@@ -98,7 +99,7 @@ export class PropertyComponent implements OnInit {
 	}
     get f() { return this.addPropertyForm.controls; }
 
-    addProperty(formValue) {
+    addProperty() {
     	console.log('formValue',this.addPropertyForm.value);
       this.submitted = true;
 	    if(this.addPropertyForm.invalid) {
