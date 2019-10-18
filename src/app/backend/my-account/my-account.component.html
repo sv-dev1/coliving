@@ -18,10 +18,11 @@
                   <div class="card-body">
                      <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
                         <div class="row">
+                      
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">First Name:</label>
-                                 <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                                 <input ngx-google-places-autocomplete  type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
                                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
                                  </div>
@@ -149,11 +150,20 @@
                            </div>
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
+                                 <label for="team">Previous city:</label>
+                                 <input type="text" class="form-control" placeholder="Previous city" formControlName="previousCity" [ngClass]="{ 'is-invalid': submitted && f.previousCity.errors }" >
+                                 <div *ngIf="submitted && f.previousCity.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.previousCity.errors.required">Work Place is required.</span>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
                                  <label for="team">Phone Number:</label>
-                                    <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true"id="phoneNo" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
-                                  
+                                   
+                                 <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+                                      
                                  <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
-
                                     <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
                                  </div>
                                  <div *ngIf="this.messageDigit">
@@ -164,7 +174,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Address:</label>
-                                 <input type="text" id="address" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
+                                 <input  ngx-google-places-autocomplete type="text"  class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
                                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.address.errors.required">Address is required.</span>
                                  </div>
@@ -173,7 +183,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Work Place:</label>
-                                 <input type="text" id="address" class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
+                                 <input  type="text"  class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
                                  <div *ngIf="submitted && f.work_place.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work Place is required.</span>
                                  </div>

@@ -5,6 +5,10 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
+import {GooglePlaceDirective} from "../../ngx-google-places-autocomplete.directive";
+import {ComponentRestrictions} from "../../objects/options/componentRestrictions";
+import {Address} from "../../objects/address";
+import {AddressComponent} from "../../objects/addressComponent";
 
 @Component({
   selector: 'app-property',

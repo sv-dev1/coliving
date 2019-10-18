@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
 import { DataService } from '../../data.service';
@@ -9,12 +9,20 @@ import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 import { first } from 'rxjs/operators';
 
+import {GooglePlaceDirective} from "../../ngx-google-places-autocomplete.directive";
+import {ComponentRestrictions} from "../../objects/options/componentRestrictions";
+import {Address} from "../../objects/address";
+import {AddressComponent} from "../../objects/addressComponent";
+
 @Component({
 	selector: 'app-my-account',
 	templateUrl: './my-account.component.html',
 	styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
+      
+
+
 	msg = ''; 
 	isError : boolean = false;
 	isSuccess : boolean = false;
@@ -70,6 +78,9 @@ export class MyAccountComponent implements OnInit {
     selectedItemsNational: any;
     selectedItemsLanguage: any;
 
+    countryCode: any;
+    phoneNumber : any;
+
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -105,7 +116,7 @@ export class MyAccountComponent implements OnInit {
 			habits:['', Validators.required],
 			image:[''],
 			file:[''],
-			previous_city:['atlanta']
+			previousCity:['', Validators.required]
 		});
 
 
@@ -140,6 +151,7 @@ export class MyAccountComponent implements OnInit {
 		this.data_service.getCountries().subscribe((response:any) =>{   
 			this.allCountriesArray = response.countries;
 			this.allCountries = this.allCountriesArray;
+			
 			this.allCountries.forEach(ele => {
 				let obj = {};
 				obj['id'] = ele['id'];
@@ -226,21 +238,25 @@ export class MyAccountComponent implements OnInit {
 			   	     this.maximumPrice = splitPrice[0];
 					 this.minimumPrice = splitPrice[1];
 			   }
-               if(this.userDataArr.languages_map instanceof Array || this.userDataArr.languages_map instanceof Object ){
-					
+               if(this.userDataArr.languages_map){
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
-					if(res instanceof Array || res instanceof Object) {
+					if(res) {
                          this.languageSelectedItems = JSON.parse(res);
 					}
 				}
-				if(this.userDataArr.nationality_map instanceof Array || this.userDataArr.nationality_map instanceof Object){
-
-				    var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
-					if(res1 instanceof Array || res1 instanceof Object) {
+				if(this.userDataArr.nationality_map){
+                    var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
+					if(res1) {
 						 this.nationalitySelectedItems = JSON.parse(res1);
 					}   
 				}
+               if(this.userDataArr.phoneNo) {
+               	    let splitPhone = this.userDataArr.phoneNo.split(" ",3);
+               	     this.countryCode = splitPhone[0];
+               	     this.phoneNumber = splitPhone[1];
+               }
 
+              console.log('response',this.userDataArr);
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			  this.updateProfileForm.patchValue({
 				firstName: this.userDataArr.firstName,
@@ -255,6 +271,7 @@ export class MyAccountComponent implements OnInit {
 				minimumPrice:this.minimumPrice,
 				stay_date:finalData,
 				gender:this.userDataArr.gender,
+				
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
 				work_place:this.userDataArr.work_place,
@@ -263,7 +280,7 @@ export class MyAccountComponent implements OnInit {
 				biography:this.userDataArr.biography,
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,
-				previous_city:['atlanta'],
+				previousCity:this.userDataArr.previous_city,
 				image:['']
 			});
 			this.email = this.userDataArr.email;
@@ -311,6 +328,7 @@ export class MyAccountComponent implements OnInit {
 	}
 
 	get f() {  
+		
 		return this.updateProfileForm.controls; 
 	}
     checkLength(length){
@@ -345,7 +363,7 @@ export class MyAccountComponent implements OnInit {
      }
 
 	updateProfile(formValue) {
-      
+		
 		if(formValue.stay_date == ""){
 			this.stayDateEmpty = true;
 		}
@@ -358,14 +376,21 @@ export class MyAccountComponent implements OnInit {
 		if(formValue.country == ""){
 			this.countryEmpty = true;
 		}
-		if(formValue.stay_date){
-			this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd")
-		}
+
+		if(formValue.stay_date instanceof Object){
+            this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd"); 
+        } else {
+        	let datesplit = formValue.stay_date.split("-",3);
+            this.stay_date =  this.datePipe.transform(datesplit[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(datesplit[1],"yyyy-MM-dd")	
+        }
+
 		if(formValue.wakeup_time){
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
+
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
+          
 			return;
         
 		} else {
@@ -374,9 +399,9 @@ export class MyAccountComponent implements OnInit {
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
 			formData.append('email', formValue.email);	 	   
-			formData.append('upload_photo', this.fileData);
+			formData.append('photo', this.fileData);
 			formData.append('phoneNo', formValue.phoneNo);
-			formData.append('postalCode', formValue.postalCode);   
+			formData.append('postal_code', formValue.postalCode);   
 			formData.append('country', formValue.country);
 			formData.append('address', formValue.address); 
 			formData.append('biography', formValue.biography); 
@@ -394,7 +419,7 @@ export class MyAccountComponent implements OnInit {
 			formData.append('stay_date', this.stay_date); 
 			formData.append('wakeup_time', this.wakeup_time); 
 			formData.append('work_place', formValue.work_place); 
-			formData.append('previous_city', formValue.previous_city); 
+			formData.append('previous_city', formValue.previousCity); 
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
