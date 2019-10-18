@@ -226,17 +226,17 @@ export class MyAccountComponent implements OnInit {
 			   	     this.maximumPrice = splitPrice[0];
 					 this.minimumPrice = splitPrice[1];
 			   }
-               if(this.userDataArr.languages_map !='' || this.userDataArr.languages_map != null ){
+               if(this.userDataArr.languages_map instanceof Array || this.userDataArr.languages_map instanceof Object ){
 					
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
-					if(res != '') {
+					if(res instanceof Array || res instanceof Object) {
                          this.languageSelectedItems = JSON.parse(res);
 					}
 				}
-				if(this.userDataArr.nationality_map !='' || this.userDataArr.nationality_map != null){
+				if(this.userDataArr.nationality_map instanceof Array || this.userDataArr.nationality_map instanceof Object){
 
 				    var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
-					if(res1 != '') {
+					if(res1 instanceof Array || res1 instanceof Object) {
 						 this.nationalitySelectedItems = JSON.parse(res1);
 					}   
 				}

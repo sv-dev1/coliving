@@ -16,7 +16,7 @@
                <div class="card mb-3">
                   <div class="card-header">My Account</div>
                   <div class="card-body">
-                     <form [formGroup]="updateProfileForm">
+                     <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
                         <div class="row">
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
@@ -30,7 +30,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Last Name:</label>
-                                 <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                 <input type="text"  class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
                                  </div>
@@ -39,7 +39,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Email:</label>
-                                 <input type="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
+                                 <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
                                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
                                  </div>
@@ -48,7 +48,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Username:</label>
-                                 <input type="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" readonly="readonly">
+                                 <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
                                  <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.userName.errors.required">Username is required.</span>
                                  </div>
@@ -69,7 +69,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Occupation/Timetable:</label>
-                                 <select class="custom-select form-control" formControlName="occuptation_tt"  [ngClass]="{ 'is-invalid': submitted && f.occuptation_tt.errors }">
+                                 <select class="custom-select form-control" formControlName="occuptation_tt" id="occuptation_tt" [ngClass]="{ 'is-invalid': submitted && f.occuptation_tt.errors }">
                                     <option value="" disabled>Please select one option</option>
                                     <option value="1">Full time employee</option>
                                     <option value="2">Part time employee</option>
@@ -97,21 +97,9 @@
                                  <input type="text" placeholder="Day of moving in/out"
                                  class="form-control"
                                  #dp="bsDatepicker"
-                                 bsDatepicker formControlName="outing_day"  [ngClass]="{ 'is-invalid': submitted && f.outing_day.errors }" [minDate]="today">
+                                 bsDatepicker formControlName="outing_day"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [minDate]="today">
                                  <div *ngIf="submitted && f.outing_day.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.outing_day.errors.required">Day of moving in/out is required.</span>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col-12 col-sm-6">
-                              <div class="form-group">
-                                 <label for="team">Previous city:</label>
-                                 <input type="text" placeholder="Previous city"
-                                 class="form-control"                            
-                                  formControlName="previous_city" 
-                                   [ngClass]="{ 'is-invalid': submitted && f.previous_city.errors }">
-                                 <div *ngIf="submitted && f.previous_city.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.previous_city.errors.required">Previous city is required.</span>
                                  </div>
                               </div>
                            </div>
@@ -140,15 +128,15 @@
                                     placeholder="How long willing to stay"
                                     class="form-control"
                                     bsDaterangepicker formControlName="stay_date"[minDate]="today">
-                                 <div *ngIf="submitted && f.stay_date.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.stay_date.errors.required">How long willing to stay is required.</span>
+                              
+                                  <div *ngIf="stayDateEmpty"  class="default-error-message"> How long willing to stay is required.
                                  </div>
                               </div>
                            </div>
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Gender:</label>
-                                 <select class="custom-select form-control" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                                 <select class="custom-select form-control" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                                     <option value="" disabled>Please select one option</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -162,8 +150,10 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Phone Number:</label>
-                                 <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'in'" [required]="true"id="phoneNo" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+                                    <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true"id="phoneNo" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+                                  
                                  <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+
                                     <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
                                  </div>
                                  <div *ngIf="this.messageDigit">
@@ -174,7 +164,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Address:</label>
-                                 <input type="text"  class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
+                                 <input type="text" id="address" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
                                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.address.errors.required">Address is required.</span>
                                  </div>
@@ -183,7 +173,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Work Place:</label>
-                                 <input type="text" class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
+                                 <input type="text" id="address" class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
                                  <div *ngIf="submitted && f.work_place.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work Place is required.</span>
                                  </div>
@@ -192,7 +182,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Postal Code:</label>
-                                 <input type="text" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
+                                 <input type="text" id="postalCode" class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
                                  <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
                                  </div>
@@ -207,32 +197,30 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Country:</label>
-                                 <select class="custom-select form-control" formControlName="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                                 <select class="custom-select form-control" formControlName="country" id="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
                                     <option value="" disabled>Please select one option</option>
                                     <option *ngFor="let country of allCountries" value="{{country?.id}}">
                                        {{country?.name}} 
                                  </select>
+                                   <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                    <span class="for-sub-name" *ngIf="f.country.errors.required">Country field is required.</span>
+                                 </div>
                               </div>
                            </div>
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Language:</label>
-
                                  <angular2-multiselect [data]="langdropdownList"
-                                 [(ngModel)]="selectedItemsLanguagess"
-
+                                 [(ngModel)]="languageSelectedItems"
                                  [settings]="dropdownSettingsLanguage" 
                                  formControlName="languages" 
                                  (onSelect)="onLanguageSelect($event)" 
-                                 (onDeSelect)="OnLanguageDeSelect($event)"
+                                 (onDeSelect)="OnLanguageDeSelect($event)" 
                                  [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
                                  </angular2-multiselect>
-                                 <div *ngIf="submitted && f.languages.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.languages.errors.required">languages is required.</span>
-                                 </div>
-                                 <!-- <div *ngIf="languageEmpty" class="default-error-message">             Language is required.
-                                    </div> -->
-                                 <div *ngIf="atmostTwoValLang" class="default-error-message">             Atmost two values.
+                                 <div *ngIf="languageEmpty" class="default-error-message">Language is required.
+                                    </div>
+                                 <div *ngIf="atmostTwoValLang" class="default-error-message">You can select atmost two languages.
                                  </div>
                               </div>
                            </div>
@@ -240,29 +228,24 @@
                               <div class="form-group">
                                  <label for="team" class="radio-inline">Nationality:</label>
                                  <angular2-multiselect [data]="countrydropdownList" 
-
-                                 [(ngModel)]="selectedItemsNationalss"
+                                 [(ngModel)]="nationalitySelectedItems"
                                  [settings]="dropdownSettingsCountry"
-
-                                 formControlName="nationality" 
-
                                  (onSelect)="onNationalitySelect($event)" 
                                  (onDeSelect)="OnNationalityDeSelect($event)" 
-                                 [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
+                                 formControlName="nationality"
+                                  [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
                                  </angular2-multiselect>
-                                 <!-- <div *ngIf="nationalityEmpty"  class="default-error-message">             Nationality is required.
-                                    </div> -->
-                                 <div *ngIf="submitted && f.nationality.errors" class="invalid-feedback">
-                                    <span class="for-sub-name" *ngIf="f.nationality.errors.required">nationality is required.</span>
-                                 </div>
-                                 <div *ngIf="atmostTwoValNat"  class="default-error-message">            Atmost two values.
+                                 <div *ngIf="nationalityEmpty"  class="default-error-message"> Nationality is required.
+                                    </div>
+                                
+                                 <div *ngIf="atmostTwoValNat"  class="default-error-message">You can select atmost two nationalities.
                                  </div>
                               </div>
                            </div>
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Short bio:</label>
-                                 <textarea class="form-control"rows="5" cols="5" formControlName="biography" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }"></textarea>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="biography" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }"></textarea>
                                  <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.biography.errors.required">Short Bio is required.</span>
                                  </div>
@@ -271,7 +254,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Interests:</label>
-                                 <textarea class="form-control"rows="5" cols="5" formControlName="interestes" [ngClass]="{ 'is-invalid': submitted && f.interestes.errors }"></textarea>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interestes" [ngClass]="{ 'is-invalid': submitted && f.interestes.errors }"></textarea>
                                  <div *ngIf="submitted && f.interestes.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.interestes.errors.required">Interests is required.</span>
                                  </div>
@@ -280,7 +263,7 @@
                            <div class="col-12 col-sm-6">
                               <div class="form-group">
                                  <label for="team">Habits:</label>
-                                 <textarea class="form-control"rows="5" cols="5" formControlName="habits" [ngClass]="{ 'is-invalid': submitted && f.habits.errors }"></textarea>
+                                 <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="habits" [ngClass]="{ 'is-invalid': submitted && f.habits.errors }"></textarea>
                                  <div *ngIf="submitted && f.habits.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.habits.errors.required">Habits field is required.</span>
                                  </div>
@@ -290,19 +273,12 @@
                               <div class="form-group">
                                  <label for="bill">Upload Image:</label>
                                  <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
-                              
-                              </div>
-                           </div>
-                           <div class="col-12 col-sm-6">
-                              <div class="form-group">
-                                 <label for="bill"></label>
-                                
                                  <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > <br/>
                               </div>
                            </div>
                            <input type="hidden" formControlName="file">
                            <div class="col-12 col-sm-12 text-center">
-                              <button type="button" (click)="updateProfile()" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
+                              <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
                            </div>
                         </div>
                      </form>
