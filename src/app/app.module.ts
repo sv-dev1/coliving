@@ -47,6 +47,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LightboxModule } from 'ngx-lightbox';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { PropertyComponent } from './backend/property/property.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
+
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -90,8 +94,8 @@ export function provideConfig() {
     BlockCopyPasteDirective,
     CategoryComponent,
     PropertyComponent,
-  
-
+    
+   
 
    
   ],
@@ -114,9 +118,13 @@ export function provideConfig() {
     MatSliderModule,
     NgxPaginationModule,
     LightboxModule,
-    InternationalPhoneNumberModule
+    InternationalPhoneNumberModule,
+    GooglePlaceModule,
+    NgxIntlTelInputModule
+    
 
   ],
+  
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },

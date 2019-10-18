@@ -30,10 +30,11 @@
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/ngx-lightbox/lightbox.css",
               "src/themes/default.theme.scss",
-
               "src/styles.css"
             ],
-            "scripts": ["src/assets/js/wow.min.js"]
+            "scripts": [
+              "src/assets/js/wow.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -102,7 +103,9 @@
               "./node_modules/ngx-lightbox/lightbox.css",
               "src/styles.css"
             ],
-            "scripts": ["src/assets/js/wow.min.js"]
+            "scripts": [
+              "src/assets/js/wow.min.js"
+            ]
           }
         },
         "lint": {
