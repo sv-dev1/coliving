@@ -130,7 +130,6 @@ export class MyAccountComponent implements OnInit {
     }
     getCurrentLoaction(){
 		this.data_service.currentLocation(this.ip_address).subscribe(response => { 
-		 console.log('response',response);
 		this.current_country = response['country'].toLowerCase();
 
         },error => {
@@ -182,8 +181,7 @@ export class MyAccountComponent implements OnInit {
 				classes:"myclass custom-class",
 				limitSelection: 2,
 				enableSearchFilter: true,
-				
-				
+
 			};
 			this.isError = false;    
 		}, error =>{ 
@@ -204,10 +202,10 @@ export class MyAccountComponent implements OnInit {
           
 			let finalData;	
 			if(this.userDataArr.stay_date != 'Invalid date'){
-			
+			    
 				let str = this.userDataArr.stay_date; 
-				let splitted = str.split(" - ", 2); 	
-				finalData = this.datePipe.transform(splitted[0],"MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
+				let splitted = str.split(" - ", 2);
+				finalData = this.datePipe.transform(splitted[0], "MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
 			}
 			let wakeUpStr = this.userDataArr.wakeup_time; 
 			   if(wakeUpStr) {
@@ -228,18 +226,20 @@ export class MyAccountComponent implements OnInit {
 			   	     this.maximumPrice = splitPrice[0];
 					 this.minimumPrice = splitPrice[1];
 			   }
+               if(this.userDataArr.languages_map instanceof Array || this.userDataArr.languages_map instanceof Object ){
+					
+					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
+					if(res instanceof Array || res instanceof Object) {
+                         this.languageSelectedItems = JSON.parse(res);
+					}
+				}
+				if(this.userDataArr.nationality_map instanceof Array || this.userDataArr.nationality_map instanceof Object){
 
-              let nationalityMap  = this.userDataArr.nationality_map; 
-                   var res = nationalityMap.replace(/[&quot;]+/g, "");
-		           this.selectedItemsNational =  res;
-		       console.log('selectedItemsNational',this.selectedItemsNational);
-            
-              let selectedItems = [
-	            { "id": 1, "itemName": "India" },
-	            { "id": 2, "itemName": "Singapore" }
-               ];
-
-            console.log('selectedItems',selectedItems);
+				    var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
+					if(res1 instanceof Array || res1 instanceof Object) {
+						 this.nationalitySelectedItems = JSON.parse(res1);
+					}   
+				}
 
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
 			  this.updateProfileForm.patchValue({
@@ -324,7 +324,6 @@ export class MyAccountComponent implements OnInit {
 	     if(this.languageArr.length == 2){
 	        	this.toastr.infoToastr('You can select only maximum two languages.');
 	     }
-	     console.log(this.languageArr);
     }
     OnLanguageDeSelect(item: any) {
     	 
@@ -346,7 +345,7 @@ export class MyAccountComponent implements OnInit {
      }
 
 	updateProfile(formValue) {
-       
+      
 		if(formValue.stay_date == ""){
 			this.stayDateEmpty = true;
 		}
@@ -367,11 +366,10 @@ export class MyAccountComponent implements OnInit {
 		}
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
-			this.toastr.errorToastr('Please check the form and try again.','Error');
 			return;
         
 		} else {
-
+               
 			const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
