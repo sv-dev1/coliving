@@ -2412,6 +2412,10 @@ button.close {
     opacity: 1;
     color: white;
 }
+div#BrightNestBlock button.close {
+    opacity: 1;
+    color: black;
+}
 h5.modal-title-1 {
     margin-top: 6px;
 }

@@ -246,12 +246,18 @@ export class MyAccountComponent implements OnInit {
 
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
 					if(res) {
+
+				           var res1 = res.replace(/&#x2F;/g,'/');
+                   this.languageSelectedItems = JSON.parse(res1);
 						this.languageSelectedItems = JSON.parse(res);
+
 					}
+					console.log(res.replace(/&#x2F;/g,'/'));
 				}
 				if(this.userDataArr.nationality_map){
                     var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
 					if(res1) {
+                              
 						 this.nationalitySelectedItems = JSON.parse(res1);
 					}   
 				}
@@ -404,11 +410,10 @@ export class MyAccountComponent implements OnInit {
 		}
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
-          
+				 console.log("invalid");
+				 console.log(this.updateProfileForm);
 			return;
-        
 		} else {
-               
 			const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);

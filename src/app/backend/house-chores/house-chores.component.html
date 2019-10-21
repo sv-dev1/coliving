@@ -13,7 +13,7 @@
                         <a class="nav-link" data-toggle="tab" href="#create-event">Calendar</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#completed-booking">Team</a>
+                        <a class="nav-link" data-toggle="tab" href="#completed-booking">Group</a>
                      </li>
                      <li class="nav-item1">
                         <div class="add-btn-top pl-2 mt-1"><button type="button" class="close" (click)="openaddTask()" placement="right" ngbTooltip="Add task."><span>+</span></button> </div>
@@ -120,7 +120,7 @@
                                        <div class="inbox_people">
                                           <div class="headind_srch">
                                              <div class="recent_heading">
-                                                <h4>Teams</h4>
+                                                <h4>Groups</h4>
                                              </div>
                                           </div>
                                           <div class="inbox_chat" >
@@ -376,6 +376,7 @@
                   <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
                   <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
                      <span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
+                     <span class="for-sub-name" *ngIf="f.taskName.errors.pattern">  There should be no space in Task Name.</span>
                   </div>
                </div>
                  <div class="row">

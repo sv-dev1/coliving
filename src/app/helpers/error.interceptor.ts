@@ -39,7 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 console.log('err',err);
                 const error = err.error.message || err.statusText;
                 if(err.status == 0){
-                    this.toastr.errorToastr('Service Unavailable');
+                    this.toastr.errorToastr('Network is Unavailable');
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
