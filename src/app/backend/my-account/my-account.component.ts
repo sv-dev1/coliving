@@ -80,15 +80,18 @@ export class MyAccountComponent implements OnInit {
 
     countryCode: any;
     phoneNumber : any;
+    maxPriceValue : any;
+    minPriceValue : any;
+
 
 	constructor(
-		private formBuilder:FormBuilder,
-		private router: Router,
-		public toastr: ToastrManager,
-		private data_service : DataService,
-		private http : HttpClient,
-		calendar: NgbCalendar,
-		private datePipe: DatePipe
+			private formBuilder:FormBuilder,
+			private router: Router,
+			public toastr: ToastrManager,
+			private data_service : DataService,
+			private http : HttpClient,
+			calendar: NgbCalendar,
+			private datePipe: DatePipe
 		) {   
 
 		this.updateProfileForm = this.formBuilder.group({
@@ -116,7 +119,8 @@ export class MyAccountComponent implements OnInit {
 			habits:['', Validators.required],
 			image:[''],
 			file:[''],
-			previousCity:['', Validators.required]
+			previousCity:['', Validators.required],
+			rentalDescription:['', Validators.required]
 		});
 
 
@@ -134,7 +138,7 @@ export class MyAccountComponent implements OnInit {
 	}
 
 	getCurrentIP(){
-	    this.http.get('https://jsonip.com').subscribe( data => {
+	      this.http.get('https://jsonip.com').subscribe( data => {
 	      this.ip_address = data['ip'];
 	      this.getCurrentLoaction();
 	    })
@@ -281,6 +285,7 @@ export class MyAccountComponent implements OnInit {
 				interestes:this.userDataArr.interestes,
 				habits:this.userDataArr.habits,
 				previousCity:this.userDataArr.previous_city,
+				rentalDescription:this.userDataArr.rental_desc,
 				image:['']
 			});
 			this.email = this.userDataArr.email;
@@ -377,7 +382,7 @@ export class MyAccountComponent implements OnInit {
 			this.countryEmpty = true;
 		}
 
-		if(formValue.stay_date instanceof Object){
+		if(formValue.stay_date instanceof Object ||  formValue.stay_date instanceof Array){
             this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd"); 
         } else {
         	let datesplit = formValue.stay_date.split("-",3);
@@ -388,6 +393,10 @@ export class MyAccountComponent implements OnInit {
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
 
+		if(formValue.maximunPrice <=  formValue.minimumPrice) {
+			this.updateProfileForm.controls['minimumPrice'].reset()
+            this.toastr.warningToastr('Maximum value must be greater than minimum value.');
+		} 
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
           
@@ -420,6 +429,7 @@ export class MyAccountComponent implements OnInit {
 			formData.append('wakeup_time', this.wakeup_time); 
 			formData.append('work_place', formValue.work_place); 
 			formData.append('previous_city', formValue.previousCity); 
+			formData.append('rental_desc', formValue.rentalDescription); 
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
@@ -440,4 +450,6 @@ export class MyAccountComponent implements OnInit {
 			});
 		}
 	}
+
+	
 }
