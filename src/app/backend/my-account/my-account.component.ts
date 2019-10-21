@@ -243,10 +243,14 @@ export class MyAccountComponent implements OnInit {
 					 this.minimumPrice = splitPrice[1];
 			   }
                if(this.userDataArr.languages_map){
+
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
 					if(res) {
-						var res1 = res.replace(/&#x2F;/g,'/');
-                         this.languageSelectedItems = JSON.parse(res1);
+
+				           var res1 = res.replace(/&#x2F;/g,'/');
+                   this.languageSelectedItems = JSON.parse(res1);
+						this.languageSelectedItems = JSON.parse(res);
+
 					}
 					console.log(res.replace(/&#x2F;/g,'/'));
 				}
@@ -395,11 +399,15 @@ export class MyAccountComponent implements OnInit {
 		if(formValue.wakeup_time){
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
+         console.log('formValue.maximunPrice',formValue.maximunPrice);
+                  console.log('formValue.minimumPrice',formValue.minimumPrice);
 
-		if(formValue.maximunPrice <=  formValue.minimumPrice) {
+		if(parseInt(formValue.maximunPrice) < parseInt(formValue.minimumPrice)) {
 			this.updateProfileForm.controls['minimumPrice'].reset()
-            this.toastr.warningToastr('Maximum value must be greater than minimum value.');
-		} 
+            this.toastr.errorToastr('Maximum value must be greater than minimum value.');
+		} else {
+			console.log();
+		}
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
 				 console.log("invalid");

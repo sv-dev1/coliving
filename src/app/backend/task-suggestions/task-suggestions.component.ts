@@ -5,6 +5,7 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-task-suggestions',
@@ -27,6 +28,7 @@ export class TaskSuggestionsComponent implements OnInit {
 	errorsArrUser:any =[]; 
     demo:any=[];
     isSuggestion : boolean = false;
+    image_base_url : any;
     
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -39,6 +41,7 @@ export class TaskSuggestionsComponent implements OnInit {
 		this.addSuggestionForm = this.formBuilder.group({
 			suggestion: ['', Validators.required],
 		});
+		 this.image_base_url = environment.image_base_url;
 		 
 	}
 
@@ -47,6 +50,7 @@ export class TaskSuggestionsComponent implements OnInit {
 		this.task_id = url[1];
 		this.getTaskSuggestionByTaskId(this.task_id); 
 		//console.log('teamId',this.task_id);
+
 		
 	}
 
@@ -65,7 +69,7 @@ export class TaskSuggestionsComponent implements OnInit {
 		this.data_service.getTaskSuggestionByTeamId(taskID).subscribe((response:any) =>{   
 			this.suggestionsArray = response.suggestionList.suggestionArr;
 			this.suggestions = this.suggestionsArray;
-			//console.log('suggestions',this.suggestions);
+			console.log('suggestions',this.suggestions);
 			this.taskDetailArray = this.taskDetailArray.concat(response.suggestionList.taskArr);
 			this.taskDetail= this.taskDetailArray;
 
