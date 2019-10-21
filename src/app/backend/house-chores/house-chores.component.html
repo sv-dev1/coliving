@@ -381,7 +381,7 @@
                  <div class="row">
                   <div class="col-md-12">
                      <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i>Assign To</a>
+                        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Assign To
                         <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
                            <option value="" disabled>Please select one option</option>
                            <option *ngFor="let users of allUsers" value="{{users?.userId}}">
@@ -397,7 +397,7 @@
                <div class="row">
                   <div class="col-md-12">
                      <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-calendar" aria-hidden="true"></i>Due Date</a>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Due Date
                         <input type="text"
                         placeholder="Datepicker"
                         class="form-control"
@@ -411,7 +411,7 @@
                <div class="row">
                   <div class="col-md-12">
                      <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-edit" aria-hidden="true"></i>Category:Communal</a>
+                        <i class="fa fa-edit" aria-hidden="true"></i>&nbsp;Category:Communal
                         <select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
                            <option value="" disabled>Please select one option</option>
                            <option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
@@ -427,7 +427,7 @@
                <div class="row">
                   <div class="col-md-12">
                      <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-image" aria-hidden="true"></i>Upload Photo</a>
+                        <i class="fa fa-image" aria-hidden="true"></i>&nbsp;Upload Photo
                         <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
                         <img [src]="url" height="200" *ngIf="url !=''"> <br/>
                         <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
@@ -439,7 +439,7 @@
                <div class="row">
                   <div class="col-md-12">
                      <div class="assign_name">
-                        <a href="javascript:void(0)"><i class="fa fa-notes" aria-hidden="true"></i>Notes</a>
+                        <i class="fa fa-notes" aria-hidden="true"></i>&nbsp;Notes
                         <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
                         <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
@@ -462,13 +462,8 @@
 </div>
 
 
-
 <!----- End Add task Modal -->
-
-
-
-
-   <!---  Modal to delete TASK  -->
+<!---  Modal to delete TASK  -->
 <div class="container">
       <!-- The Modal -->
       <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >

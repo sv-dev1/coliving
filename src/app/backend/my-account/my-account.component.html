@@ -117,7 +117,7 @@
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
                               <label for="team">Maximun Price:</label>
-                              <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }" (change)="checkMaximumPrice($event)">
+                              <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
                               <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun Price is required.</span>
                               </div>
@@ -126,7 +126,7 @@
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
                               <label for="team">Minimum Price:</label>
-                              <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }" #minimumPrice (change)="checkMinimumPrice($event)">
+                              <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }"  >
                               <div *ngIf="submitted && f.minimumPrice.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum Price is required.</span>
                               </div>
