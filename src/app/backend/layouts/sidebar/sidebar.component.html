@@ -35,10 +35,10 @@
 			      <p>House Chores</p>
 			</a>
 		</li>
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" [class.active]="isBills == true">
 			<a routerLink="/split-bill" routerLinkActive="active-link">
 				<i class="fas fa-usd"></i>
-				<p>Split Bill</p>
+				<p>Split House Expenses</p>
 			</a>
 		</li>
 		<li routerLinkActive="active">

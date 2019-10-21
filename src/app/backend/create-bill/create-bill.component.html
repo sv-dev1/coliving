@@ -7,7 +7,7 @@
                     <div class="col-12">
                         <ul class="breadcrumb custom-breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Create Bill</li>
+                            <li class="breadcrumb-item active">Create House Expenses</li>
                         </ul>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-3">
-                            <div class="card-header">Create Bill</div>
+                            <div class="card-header">Create House Expenses</div>
                             <div class="card-body">
                                 <form [formGroup]="createBillForm" (ngSubmit)="createBill()">
                                     <div class="row">
@@ -48,15 +48,17 @@
                                         </div>
                                        
                                       <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="amount">Amount:</label>
+                                            <div class="input-group input-group-sm mb-3">
+                                                <label for="amount">Amount:</label>  
                                                 <input type="text" class="form-control" id="amount" (keypress)="numberOnly($event)" formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                                                <div class="input-group-prepend ">
+                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa fa-eur"></i></span>
+                                                  </div>
                                                 <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
                                                     <div *ngIf="f.amount.errors.required">Amount is required</div>
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="date">Date:</label>
@@ -84,7 +86,23 @@
                                             </div>
 
                                         </div>
-                                        
+                                        <div class="col-12 col-sm-6">
+                                            <div class="form-group">
+                                                <label for="who_pay">who (payed):</label>
+                                                <angular2-multiselect [data]="userdropdownList" 
+                                                            [settings]="userdropdownSettings" 
+                                                            (onSelect)="onPayedSelectAll($event)" 
+                                                            (onDeSelect)="OnPayedItemDeSelect($event)"
+                                                            (onSelectAll)="onPayedSelectAll($event)"
+                                                            (onDeSelectAll)="onPayedDeSelectAll($event)"
+                                                            formControlName="who_pay" [ngClass]="{ 'is-invalid': submitted && f.who_pay.errors }">
+                                                </angular2-multiselect>
+                                                
+                                            </div>
+                                            <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
+                                            </div>
+
+                                        </div>
                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="bill">Upload Bill:</label>
