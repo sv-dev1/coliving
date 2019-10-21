@@ -37,6 +37,9 @@ export class CreateBillComponent implements OnInit {
   selectEmpty:boolean=false;
   list : any =[];
   url:any ='';
+  payerselectedItems:any =[];
+  whoPayEmpty:boolean=false;
+  assignWhoPayed:any =[];
 
   constructor(
     private formBuilder:FormBuilder,	
@@ -52,7 +55,8 @@ export class CreateBillComponent implements OnInit {
         amount: ['', Validators.required],
         date:['', Validators.required],
         bill:['', Validators.required],
-        assign_to:['', Validators.required]
+        assign_to:['', Validators.required],
+        who_pay:['', Validators.required]
     });
     this.base_url = environment.base_url;
 
@@ -81,7 +85,7 @@ export class CreateBillComponent implements OnInit {
     }
   }
   createBill(){
-    
+   
       if(this.createBillForm.value['team']=="")
       {
         this.teamEmpty=true;
@@ -90,8 +94,13 @@ export class CreateBillComponent implements OnInit {
       {
         this.userEmpty=true;
       }
+      if(this.createBillForm.value['who_pay']=="")
+      {
+        this.whoPayEmpty=true;
+      }
       this.submitted = true;
         if (this.createBillForm.invalid) {
+
           return;
         }
         else{
@@ -103,21 +112,26 @@ export class CreateBillComponent implements OnInit {
             data.assign_to.forEach(element => {
               this.assignUser.push(element.id);
             });
+            data.who_pay.forEach(element => {
+              this.assignWhoPayed.push(element.id);
+            });
             const input_data = {
               "team" : data.team,
               "title" : data.title,      
               "amount" : data.amount,
               "date" : this.datePipe.transform(data.date, 'yyyy-MM-dd'),
               "bill" : this.fileData,
-              "assign_to" : data.assign_to
+              "assign_to" : data.assign_to,
+              "who_pay" : data.who_pay
             }
             const formData = new FormData();
-            formData.append('title', input_data.title);
-            formData.append('files', this.fileData);	   
-            formData.append('team', this.teamName);
-            formData.append('amount', input_data.amount);
-            formData.append('date', input_data.date);
-            formData.append('userId', this.assignUser);   
+                formData.append('title', input_data.title);
+                formData.append('files', this.fileData);	   
+                formData.append('team', this.teamName);
+                formData.append('amount', input_data.amount);
+                formData.append('date', input_data.date);
+                formData.append('userId', this.assignUser);
+                formData.append('who_pay', this.assignWhoPayed);   
             let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
             token = sessionStorage.getItem("auth_token"); 
@@ -226,6 +240,22 @@ export class CreateBillComponent implements OnInit {
   onUserDeSelectAll(items: any){
      // console.log(items);
   }
+
+  onPayedSelectAll(items: any){
+    this.payerselectedItems.push(items);
+    //console.log(this.userselectedItems);
+  } 
+  onPayedItemSelect(item:any){
+      this.payerselectedItems.push(item);
+      //console.log(this.userselectedItems);
+  }
+  OnPayedItemDeSelect(item:any){
+    //console.log(this.userselectedItems);
+  }
+  onPayedDeSelectAll(items: any){
+     // console.log(items);
+  }
+
   numberOnly(event): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {

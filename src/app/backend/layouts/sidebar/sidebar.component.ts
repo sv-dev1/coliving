@@ -10,6 +10,7 @@ export class SidebarComponent implements OnInit {
     param1 : string = '';
 	  isHouse : boolean = false;
     isMyAccount : boolean = false;
+    isBills: boolean = false;
     
 	constructor(private router: Router,
 		private route: ActivatedRoute
@@ -23,6 +24,9 @@ export class SidebarComponent implements OnInit {
             }
             if(this.router.url == '/my-account'){
                this.isMyAccount = true;
+            }
+             if(this.router.url == '/create-bill'){
+               this.isBills = true;
             }
     }
 }
