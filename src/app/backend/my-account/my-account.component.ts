@@ -241,12 +241,15 @@ export class MyAccountComponent implements OnInit {
                if(this.userDataArr.languages_map){
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
 					if(res) {
-                         this.languageSelectedItems = JSON.parse(res);
+						var res1 = res.replace(/&#x2F;/g,'/');
+                         this.languageSelectedItems = JSON.parse(res1);
 					}
+					console.log(res.replace(/&#x2F;/g,'/'));
 				}
 				if(this.userDataArr.nationality_map){
                     var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
 					if(res1) {
+                              
 						 this.nationalitySelectedItems = JSON.parse(res1);
 					}   
 				}
@@ -376,7 +379,6 @@ export class MyAccountComponent implements OnInit {
 		if(formValue.country == ""){
 			this.countryEmpty = true;
 		}
-
 		if(formValue.stay_date instanceof Object){
             this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd"); 
         } else {
@@ -390,11 +392,10 @@ export class MyAccountComponent implements OnInit {
 
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
-          
+				 console.log("invalid");
+				 console.log(this.updateProfileForm);
 			return;
-        
 		} else {
-               
 			const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);

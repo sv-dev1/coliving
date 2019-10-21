@@ -118,7 +118,7 @@ export class HouseChoresComponent implements OnInit {
 		private renderer: Renderer2
 		) { 
 		this.addTaskForm = this.formBuilder.group({
-			taskName: ['', Validators.required],
+			taskName: ['', Validators.required,Validators.pattern(/^\S*$/)],
 			assignTo: ['', Validators.required],
 			dueDate: ['', Validators.required],
 			category: ['', Validators.required],
