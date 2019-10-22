@@ -95,7 +95,7 @@
                         <div class="calendar-wrapper custm_calender">
                            <div class='app-calendar'>
                               <full-calendar
-                              defaultView="timeGridDay"
+                              defaultView="dayGridMonth"
                               [header]="{
                               left: 'prev,next today',
                               center: 'title',
@@ -126,7 +126,7 @@
                                           <div class="inbox_chat" >
                                              <div class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
                                              <div class="chat_people">
-                                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                                <div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                                                 <div class="chat_ib" (click)="openChat(team,index)">
                                                    <h5>
                                                       {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->

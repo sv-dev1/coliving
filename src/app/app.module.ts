@@ -47,6 +47,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LightboxModule } from 'ngx-lightbox';
 import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { PropertyComponent } from './backend/property/property.component';
+import { OccupationComponent } from './backend/occupation/occupation.component';
+import { ProfileComponent } from './backend/profile/profile.component';
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -90,6 +92,8 @@ export function provideConfig() {
     BlockCopyPasteDirective,
     CategoryComponent,
     PropertyComponent,
+    OccupationComponent,
+    ProfileComponent,
   
 
 

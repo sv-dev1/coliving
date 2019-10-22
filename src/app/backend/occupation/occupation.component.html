@@ -1,0 +1,159 @@
+<section class="wrapper work-panel">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="work-block">
+        <div class="container">
+            <h2>Category Table</h2>
+            <div class="add">
+            	<button class="pull-right btn btn-orange-sm" (click)="ADDModal()"><i class="fa fa-plus"></i>Add Occupation</button>
+               <!--  <a href="javascript:void(0)" (click)="ADDModal()">
+                    <button class="pull-right btn btn-orange-sm"><i class="fa fa-plus"></i>Add Occupation</button>
+                </a> -->
+            </div>
+            <br>
+            <div class="table-responsive-sm">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    	<tr>
+                    		<td>1</td>
+                    		<td>full time employee</td>
+                    		<td>part time employee</td>                    		
+                    		<td>
+                    			<a>
+                    				<button type="submit" (click)="EDITModal()"><i class="fas fa-pen-square cha"></i></button>
+                    			</a>&nbsp;
+                    			    <button type="submit" (click)="DELETEModal()"><i class="fas fa-trash cha"></i></button>            			
+                    		</td>
+                    	</tr>
+                    	<tr>
+                    		<td>2</td>
+                    		<td>part time student</td>
+                    		<td> full time student</td>
+                    		<td>
+                    			<a>
+                    				<button type="submit" (click)="EDITModal()"><i class="fas fa-pen-square cha"></i></button>
+                    			</a>&nbsp;
+                    			<button type="submit" (click)="DELETEModal()"><i class="fas fa-trash cha"></i></button>                    		
+                    		</td>
+                    	</tr>
+                    	<tr>
+                    		<td>3</td>
+                    		<td>part time internship</td>
+                    		<td> full time internship</td>
+                    		<td>
+                    			<a>
+                    				<button type="submit" (click)="EDITModal()"><i class="fas fa-pen-square cha"></i></button>
+                    			</a>&nbsp;
+                    			<button type="submit" (click)="DELETEModal()"><i class="fas fa-trash cha"></i></button>
+                    		</td>
+                    	</tr>
+                    </tbody>
+                </table>
+<!--                 <pagination-controls (pageChange)="p = $event"></pagination-controls> -->   
+          </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="ADDoccupation ? 'block' : 'none'" *ngIf="ADDoccupation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Occupation</h4>
+                    <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="ADDForm" (ngSubmit)="ADDoccu(ADDForm.value)">
+                        <div class="form-group">
+                            <label>Occupation Name</label>
+                            <input type="text" formControlName="occupation_name" class="form-control" [ngClass]="{'is-invalid': submitted && f.occupation_name.errors}" />
+                            <div *ngIf="submitted && f.occupation_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.occupation_name.errors.required">Occupation name is required. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Occupation Description</label>
+                            <textarea class="form-control" rows="5" id="comment" formControlName="occupation_desc" [ngClass]="{ 'is-invalid': submitted && f.occupation_desc.errors}"></textarea>
+                            <div *ngIf="submitted && f.occupation_desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.occupation_desc.errors.required">Occupation description is required. </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+                            <button type="submit" class="btn btn-orange-sm">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">   
+    <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="EDIToccupation ? 'block' : 'none'" *ngIf="EDIToccupation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Occupation</h4>
+                    <button type="button" class="close" data-dismiss="modal" (click)="closeModal1()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="EDITForm" (ngSubmit)="EDIToccu(EDITForm.value)">
+                        <div class="form-group">
+                            <label>Occupation Name</label>
+                            <input type="text" formControlName="edit_occupation_name" class="form-control" [ngClass]="{'is-invalid': submitted && Ef.edit_occupation_name.errors}" />
+                            <div *ngIf="submitted && Ef.edit_occupation_name.errors" class="invalid-feedback">
+                                <div *ngIf="Ef.edit_occupation_name.errors.required">Occupation name is required. </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Occupation Description</label>
+                            <textarea class="form-control" rows="5" id="comment" formControlName="edit_occupation_desc" [ngClass]="{ 'is-invalid': submitted && Ef.edit_occupation_desc.errors}"></textarea>
+                            <div *ngIf="submitted && Ef.edit_occupation_desc.errors" class="invalid-feedback">
+                                <div *ngIf="Ef.edit_occupation_desc.errors.required">Occupation description is required. </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" (click)="closeModal1()">Cancel</button>
+                            <button type="submit" class="btn btn-orange-sm">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">   
+    <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="DELETEoccupation ? 'block' : 'none'" *ngIf="DELETEoccupation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Occupation</h4>
+                    <button type="button" class="close" data-dismiss="modal" (click)="closeModal2()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h4>Do You Want To Delete Occupation </h4><br>                 
+                    <div class="modal-footer">
+                       <button type="submit" class="btn btn-outline-secondary" (click)="deleteOccupation()">Yes</button>&nbsp;
+                     <button type="button" class="btn btn-outline-secondary" (click)="closeModal2()">No</button>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

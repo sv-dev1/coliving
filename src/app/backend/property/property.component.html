@@ -14,7 +14,7 @@
        
 			<div class="row">
 				<div class="col-12">
-					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
+					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal()" id="read-more"><i class="fa fa-plus"></i>Add Property</button>                
 				</div>
 				<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let property of allProperties|paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
 					<img  (click)="viewFullDetail(property)"  src="{{image_base_url}}{{property.propertyId}}" class="img-responsive property-image">
@@ -23,7 +23,8 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
-						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>
+                        &nbsp;View full detail</button>
 					</div>
 					
 				</div>

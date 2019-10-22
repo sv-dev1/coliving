@@ -23,12 +23,12 @@
 				<p>Property</p>
 			</a>
 		</li>
-		<!-- <li routerLinkActive="active">
+		<li routerLinkActive="active">
 			<a routerLink="/occupation" routerLinkActive="active-link">
 				<i class="fa fa-building-o" aria-hidden="true"></i>
 				<p>Occupation</p>
 			</a>
-		</li> -->
+		</li> 
 		<li routerLinkActive="active" [class.active]="isHouse == true">
 		   <a routerLink="/house-chores" routerLinkActive="active-link">
 			    <i class="fas fa-home"></i>
@@ -63,6 +63,12 @@
 			<a routerLink="/settings"  routerLinkActive="active-link">
 				<i class="far fa fa-cog"></i>
 				<p>Settings</p>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/profile"  routerLinkActive="active-link">
+				<i class="fas fa-id-badge"></i>
+				<p>Public Profile</p>
 			</a>
 		</li>
 	</ul>

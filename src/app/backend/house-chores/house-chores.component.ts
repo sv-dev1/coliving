@@ -23,7 +23,7 @@ export class HouseChoresComponent implements OnInit {
 	calendarVisible = true;
 	calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 	calendarWeekends = true;
-	calendarEvents: EventInput[] = [	{ title: '', start: "" , id:'' }];
+	calendarEvents: EventInput[] = [	{ title: '', start: "dayGridMonth" , id:'' }];
 	isSuccess = false;
 	isLoading = false;
 	display='none';
@@ -548,7 +548,8 @@ export class HouseChoresComponent implements OnInit {
 	preview() {
 
 		var mimeType = this.fileData.type;
-		if (mimeType.match(/image\/*/) == null) {
+		if (mimeType.match(/image\//) 
+		== null) {
 			return;
 		}
 		var reader = new FileReader();      

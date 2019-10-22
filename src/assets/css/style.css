@@ -1704,6 +1704,13 @@ button.msg_send_btn.add_member_btn {
 
 }
 
+tbody.fc-body {
+    display: block !important;
+}
+.fc-scroller {
+    height: auto !important;
+}
+
 
 
 

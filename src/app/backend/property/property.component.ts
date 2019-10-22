@@ -5,6 +5,7 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
+import { HostListener }from '@angular/core';
 
 @Component({
   selector: 'app-property',
@@ -56,12 +57,21 @@ export class PropertyComponent implements OnInit {
 		this.base_url = environment.base_url;
     }
 
-	ngOnInit() {
-	  	 this.getAllProperties();	 
-	  	       
+	ngOnInit() 
+	{
+	  	 this.getAllProperties();  	       
 	}
 
-   	getAllProperties() {
+	@HostListener('document:keydown', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+		if(event)
+		{
+			this.isopenAddPropertyModal = false;
+			this.ispropertyInfo = false;
+		}
+    console.log(event);
+    }
+
+  	getAllProperties() {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
 			if(this.allProperties.length > 9 ) {
@@ -80,7 +90,6 @@ export class PropertyComponent implements OnInit {
     	this.isopenAddPropertyModal = false;
     	this.submitted = false;     
         this.addPropertyForm.reset();
-        
     }
     onSelectFile(event) {
 		this.fileData = event.target.files[0];

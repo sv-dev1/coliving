@@ -280,7 +280,7 @@ export class MyAccountComponent implements OnInit {
 	}
 	preview() {
 		var mimeType = this.fileData.type;
-		if (mimeType.match(/image\/*/) == null) {
+		if (mimeType.match(/image\//) == null) {
 			return;
 		}
 		var reader = new FileReader();      

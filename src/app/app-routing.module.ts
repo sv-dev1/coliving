@@ -20,6 +20,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TaskSuggestionsComponent } from './backend/task-suggestions/task-suggestions.component';
 import { CategoryComponent } from './backend/category/category.component';
 import { PropertyComponent } from './backend/property/property.component';
+import { OccupationComponent } from './backend/occupation/occupation.component';
+import { ProfileComponent } from './backend/profile/profile.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -41,6 +44,8 @@ const routes: Routes = [
   { path: 'task-suggestions/:p1', component: TaskSuggestionsComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'properties', component: PropertyComponent, canActivate: [AuthGuard] },
+  { path: 'occupation', component: OccupationComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {path: '**', redirectTo: '/'},
  
 ];
