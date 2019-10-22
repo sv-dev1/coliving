@@ -1,0 +1,16 @@
+.register-as {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    height: 50px !important;
+    font-size: 14px !important;
+    border-bottom: solid 2px #cecece !important;
+    padding: 0 !important;
+}
+.register-as:hover{
+	border-bottom: solid 2px #ed502d !important;
+}
+.register-as:focus{
+	outline: none !important;
+	box-shadow: none !important;
+}

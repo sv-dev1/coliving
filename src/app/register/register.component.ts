@@ -47,7 +47,8 @@ messahecczcz:string='';
       confPassword: ['', [Validators.required, Validators.minLength(8)]],
       phoneNumber:['', [Validators.required, Validators.minLength(8),Validators.maxLength(15)]],
       agree: ['false', Validators.requiredTrue],
-      referralCode: ['']
+      referralCode: [''],
+      registerAs: ['', Validators.required]
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     }
@@ -94,7 +95,7 @@ messahecczcz:string='';
         "password2" : form.confPassword,
         "phoneNo": form.phoneNumber,
         "ref_code":form.referralCode,
-        "roleId" :4    
+        "roleId" :form.registerAs    
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  

@@ -106,6 +106,7 @@ export class HouseChoresComponent implements OnInit {
     logged_in_id : string = "";
     valMessage: boolean = false;
     msgData:any=[];
+    last_element:any;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -188,6 +189,8 @@ export class HouseChoresComponent implements OnInit {
 		this.getMessages();
 		this.loadMessages();
 		this.loadMyMessages();	
+
+		
 		
 	}
 	joinChat() { 
@@ -249,16 +252,15 @@ export class HouseChoresComponent implements OnInit {
 		  }
 		}
 
-		console.log('data',this.data);
+		
 		this.socket.emit('newMessage', this.data);
 		this.message = '';
-		this.getMessages()
+		//this.getMessages()
 		//this.loadMyMessages();
 		//this.loadMessages();
 	}
 	getMessages() {
 		this.socket.on('getMessage', (data) => {
-			console.log('getMessage',data);
 			this.gruopMessages.push(data);	
 		   	//console.log('this.gruopMessages',this.gruopMessages);
 			//this.msgData = data;
@@ -266,9 +268,10 @@ export class HouseChoresComponent implements OnInit {
 		
 	} 
 	loadMyMessages() {
-		console.log('loadMyMessages');
+		
 		this.socket.on('messages', (data) => {
 			this.gruopMessages = data.messages; 
+			
 			
 		});
 	}
@@ -470,6 +473,7 @@ export class HouseChoresComponent implements OnInit {
 		}
 		this.data_service.submitQuest(this.welcomeform.value).subscribe((response:any) =>{  
 	//		console.log('after submit response',response);
+	        sessionStorage.setItem("questionaire", 'true');
 			this.toastr.successToastr('Survey Completed.', 'Success!');
 			this.submitted=false;
 			this.isWelcomeModal = false;

@@ -117,6 +117,17 @@
 											</div>
 										</div>
 										<div class="form-group form-parts">
+											<select class="form-control register-as" formControlName="registerAs" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+												<option>Please choose option</option>
+												<option value="4">Tenant</option>
+												<option value="3">Landlord</option>
+											</select>
+
+											<div *ngIf="submitted && f.registerAs.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.registerAs.errors.required">This field is required.</span>
+											</div>
+										</div>
+										<div class="form-group form-parts">
 											<input type="text" class="form-control" placeholder="Referral Code (optional)" formControlName="referralCode">
 										</div>
 										<div class="form-group">
