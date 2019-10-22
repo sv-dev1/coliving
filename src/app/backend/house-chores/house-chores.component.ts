@@ -23,7 +23,7 @@ export class HouseChoresComponent implements OnInit {
 	calendarVisible = true;
 	calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
 	calendarWeekends = true;
-	calendarEvents: EventInput[] = [	{ title: '', start: "" , id:'' }];
+	calendarEvents: EventInput[] = [	{ title: '', start: "dayGridMonth" , id:'' }];
 	isSuccess = false;
 	isLoading = false;
 	display='none';
@@ -186,8 +186,9 @@ export class HouseChoresComponent implements OnInit {
 		this.indexCheck = index;	
 		this.joinChat();
 		this.getMessages();
-		this.loadMyMessages();	
 		this.loadMessages();
+		this.loadMyMessages();	
+		
 	}
 	joinChat() { 
 		if(this.user_id){
@@ -210,8 +211,8 @@ export class HouseChoresComponent implements OnInit {
 		
 	//	console.log('join chat data', this.data);
 		this.socket.emit('set-nickname', this.data);	
-     	this.getMessages();
-		this.loadMyMessages();
+  		//this.getMessages();
+		//this.loadMyMessages();
 	}
 	sendMessgae() {
 		if(this.message == '') {
@@ -226,6 +227,12 @@ export class HouseChoresComponent implements OnInit {
 				"username": sessionStorage.getItem("user_name"),
 				"msg": this.message
 			}
+			this.gruopMessages.push({
+				"from_id": this.logged_in_id,
+				"teamId": this.by_default_team.teamId,
+				"username": sessionStorage.getItem("user_name"),
+				"message": this.message
+			});
 		} else {
 			this.data = {
 				"userId": this.logged_in_id,
@@ -233,27 +240,36 @@ export class HouseChoresComponent implements OnInit {
 				"username":this.logged_in_username,
 				"msg": this.message
 			}
+			this.gruopMessages.push({
+				"from_id": this.logged_in_id,
+				"teamId": this.team_id,
+				"username":this.logged_in_username,
+				"message": this.message
+			});
 		  }
 		}
+
 		console.log('data',this.data);
 		this.socket.emit('newMessage', this.data);
 		this.message = '';
 		this.getMessages()
-		this.loadMyMessages();
-		this.loadMessages();
+		//this.loadMyMessages();
+		//this.loadMessages();
 	}
 	getMessages() {
 		this.socket.on('getMessage', (data) => {
 			console.log('getMessage',data);
 			this.gruopMessages.push(data);	
-			this.msgData = data;
+		   	//console.log('this.gruopMessages',this.gruopMessages);
+			//this.msgData = data;
 		});  
 		
 	} 
 	loadMyMessages() {
+		console.log('loadMyMessages');
 		this.socket.on('messages', (data) => {
 			this.gruopMessages = data.messages; 
-		//	console.log('gruopMessages',this.gruopMessages);
+			
 		});
 	}
 	loadMessages() {
@@ -271,7 +287,7 @@ export class HouseChoresComponent implements OnInit {
 		}
 		this.nickname = this.nickname;
 		this.socket.emit('load-messages', this.data);
-         this.getMessages();
+       	//this.getMessages();
 	}
 
 	@HostListener('document:keypress', ['$event'])
@@ -293,7 +309,7 @@ export class HouseChoresComponent implements OnInit {
 		body.classList.remove('popCustomBody');
 	}
 	openNextTabModal(id) {
-		console.log("firstSelect",id);
+		//console.log("firstSelect",id);
 		if(id == 1){
 			this.IsKid=true;
 		}
@@ -497,7 +513,7 @@ export class HouseChoresComponent implements OnInit {
 			//console.log("firsttema", this.firstTeam);
 			this.isError = false;
 			this.joinChat();
-			this.loadMessages();    
+			//this.loadMessages();    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
