@@ -246,18 +246,12 @@ export class MyAccountComponent implements OnInit {
 
 					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
 					if(res) {
-
-				           var res1 = res.replace(/&#x2F;/g,'/');
-                   this.languageSelectedItems = JSON.parse(res1);
 						this.languageSelectedItems = JSON.parse(res);
-
 					}
-					console.log(res.replace(/&#x2F;/g,'/'));
 				}
 				if(this.userDataArr.nationality_map){
                     var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
 					if(res1) {
-                              
 						 this.nationalitySelectedItems = JSON.parse(res1);
 					}   
 				}
@@ -399,21 +393,18 @@ export class MyAccountComponent implements OnInit {
 		if(formValue.wakeup_time){
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
-         console.log('formValue.maximunPrice',formValue.maximunPrice);
-                  console.log('formValue.minimumPrice',formValue.minimumPrice);
-
+        
 		if(parseInt(formValue.maximunPrice) < parseInt(formValue.minimumPrice)) {
 			this.updateProfileForm.controls['minimumPrice'].reset()
             this.toastr.errorToastr('Maximum value must be greater than minimum value.');
-		} else {
-			console.log();
-		}
+		} 
+		
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
-				 console.log("invalid");
-				 console.log(this.updateProfileForm);
 			return;
+        
 		} else {
+               
 			const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
@@ -455,6 +446,7 @@ export class MyAccountComponent implements OnInit {
 			},error =>{
 				this.isError = true;
 				console.log('errors',error); 
+				this.toastr.errorToastr(error.error.status,'Error');
 				this.errorsArr = error.error;
 
 			});

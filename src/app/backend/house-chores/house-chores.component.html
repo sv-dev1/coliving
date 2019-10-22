@@ -95,7 +95,7 @@
                         <div class="calendar-wrapper custm_calender">
                            <div class='app-calendar'>
                               <full-calendar
-                              defaultView="timeGridDay"
+                              defaultView="dayGridMonth"
                               [header]="{
                               left: 'prev,next today',
                               center: 'title',
@@ -128,10 +128,11 @@
                                              <div class="chat_people">
                                                 <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                                                 <div class="chat_ib" (click)="openChat(team,index)">
-                                                   <h5>
+                                                   <h5 >
                                                       {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
                                                    </h5>
-                                                   <p>Click to open chatroom with team {{team?.name}}.
+                                                   <p>
+                                                    
                                                    </p>
                                                 </div>
                                              </div>
@@ -160,6 +161,7 @@
                                              </div>
                                           </div>
                                        </div>
+                                      
                                       
                                     </div>
                                     <div class="type_msg">
