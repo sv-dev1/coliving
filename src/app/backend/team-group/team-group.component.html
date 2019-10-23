@@ -15,28 +15,6 @@
                     </div>
                     <div class="row">
                        <div class="col-12">
-                          <!-- <ul class="space-list">
-                             <li>
-                                 <a href="" data-toggle="modal" data-target="#exampleModal">
-                                     <span class="step-number">1</span>
-                                     <p>Choose Team Name</p>
-                                 </a>
-                             </li>
-                             
-                             <li>
-                                 <a href="" data-toggle="modal" data-target="#MembersModal">
-                                     <span class="step-number">2</span>
-                                     <p>Add Members</p>
-                                 </a>
-                             </li>
-                             
-                             <li>
-                                 <a href="#">
-                                     <span class="step-number">3</span>
-                                     <p>Submit</p>
-                                 </a>
-                             </li>
-                             </ul> -->
                           <div class="progress-bar__circles">
                              <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
                                 <span class="number">1</span>
@@ -79,48 +57,22 @@
                                 <thead>
                                    <tr>
                                       <th>Group Name</th>
-                                      <th>Location</th>
-                                      <th>Privacy</th>
+                                      <th></th>
                                    </tr>
                                 </thead>
                                 <tbody>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
+                                   <tr *ngFor="let team of allTeam; let i = index">
+                                      <td>{{team.name}}</td>
+                                      <td>Group Info <i class="far fa-plus-square add-icon" (click)="openUser(team.teamId)"></i></td>
                                    </tr>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
-                                   </tr>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
-                                   </tr>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
-                                   </tr>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
-                                   </tr>
-                                   <tr>
-                                      <td>Patiala House</td>
-                                      <td>Mohali</td>
-                                      <td>Open to join <i data-toggle="modal" data-target="#myModal" class="far fa-plus-square add-icon"></i></td>
-                                   </tr>
+                                  
                                 </tbody>
                              </table>
                           </div>
                        </div>
                        <div class="col-12">
                           <div class="btn-center">
-                             <button type="button" class="btn btn-colored">View More Teams</button>
+                             <button type="button" class="btn btn-colored" (click)="getTeam()">Load More Teams</button>
                           </div>
                        </div>
                     </div>
@@ -365,3 +317,49 @@
         </div>
     </div>
 </section>
+
+<!-- Model for TeamUserInfo -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openUserModel ? 'block' : 'none'" *ngIf="openUserModel" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Group User Info</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeInfoModal()">&times;</span>
+            </button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+         <table class="table">
+            <thead>
+               <tr>
+                     <th></th>
+ 
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+
+               </tr>
+            </thead>
+              <tbody>
+                  <tr *ngFor="let user of teamUser;let i = index ">
+                    <td>{{i+1}}</td>
+                    <td> {{user.userProfile?.firstName}}   </td>
+                    <td>{{user.userProfile?.lastName}}</td>
+                    <td>{{user.userProfile?.email}}</td>
+                 </tr>
+               
+              </tbody>
+           </table>
+
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Ok</button>
+         </div> 
+      </div>
+   </div>
+</div>
+</div>

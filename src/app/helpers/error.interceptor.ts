@@ -7,6 +7,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+    executing:boolean=false;
     constructor(
         private router: Router,
         public toastr: ToastrManager,
@@ -17,7 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     // /console.log('event--->>>', event);
-                     if(event.status == 401){
+                     if(event.status == 401 && !this.executing){
+                        this.executing=true;
                         this.toastr.errorToastr('Session Expired,Please Login again');
                         sessionStorage.removeItem("auth_token");
                         sessionStorage.removeItem("userId");
@@ -28,7 +30,8 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if(event.status == 500){
                         this.toastr.errorToastr('Internal server Error');
                     }
-                    if(event.status == 503){
+                    if(event.status == 503 && !this.executing){
+                        this.executing=true;
                         this.toastr.errorToastr('Service Unavailable');                       
                     }
 
@@ -38,16 +41,19 @@ export class ErrorInterceptor implements HttpInterceptor {
             catchError((err: HttpErrorResponse) => {
                 console.log('err',err);
                 const error = err.error.message || err.statusText;
-                if(err.status == 0){
-                    this.toastr.errorToastr('Network is Unavailable');
+                if(err.status == 0 && !this.executing){
+                   
+                    this.toastr.errorToastr('Service Unavailable');
+                    this.executing=true;
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
                     sessionStorage.removeItem("user_name");
                     this.router.navigate(['/login']);
                 }
-                if(err.status == 401){
+                if(err.status == 401 && !this.executing){
                     this.toastr.errorToastr('Session Expired,Please Login again');
+                    this.executing=true;
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
