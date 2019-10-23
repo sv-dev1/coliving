@@ -2583,9 +2583,12 @@ cursor: pointer;
 }
 /* End House chores */
 
-
-
-
+@media (min-width: 576px)
+{
+.modal-dialog.modaldialog12 {
+    max-width: 525px !important;
+}
+}
 
 
 

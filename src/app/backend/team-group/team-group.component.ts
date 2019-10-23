@@ -27,6 +27,11 @@ export class TeamGroupComponent implements OnInit {
     selectUser : boolean = false;
     validationMessage:string = '';
     completed : boolean = false;
+    allTeam: any =[];
+    list:any=[];
+    openUserModel : boolean = false;
+    teamUser:any=[];
+    teamLength:number = 0;
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -39,8 +44,44 @@ export class TeamGroupComponent implements OnInit {
      });
   }
   ngOnInit() {
+    this.getTeam();
   }
 
+  getTeam(){
+    this.teamLength =  this.teamLength+5;
+    this.allTeam=[];
+    this.data_service.getTeam().subscribe((response: any) =>{
+      for(var i=0;i < this.teamLength;i++){
+        this.allTeam.push(response.teams[i]);
+      }
+    })
+  }
+  openUser(id){
+    this.teamUser=[];
+    this.list=[]
+    this.openUserModel=true;
+    this.list.push(id);
+    let postArr = {'teamId': this.list};
+    console.log(postArr);
+    this.data_service.getTeamUsers(postArr).subscribe((response: any) =>{
+    //this.teamUser=response.teams;
+    this.teamUser=[];
+       let team=[];
+      team=response.teams;
+      for(var i=0;i < team.length;i++){
+        if(response.teams[i]['userProfile'] != null){
+        this.teamUser.push(response.teams[i]);
+       }
+      }
+      console.log(this.teamUser);
+
+     })
+ 
+  }
+  closeInfoModal(){
+    this.openUserModel=false;
+
+  }
   createTeam(){
     this.showCreate=true;
   }
