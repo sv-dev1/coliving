@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
   submitted: boolean =false;
   firstName:string='';
   lastName:string='';
+  status: boolean = false;
 
 response:any;
   constructor(
@@ -125,4 +126,17 @@ response:any;
     this.submitted = false;     
     this.ConPass.reset();
   }
+  toggleClassOnImageClick(event:any) {
+ 
+      if(event == false) {
+          this.status = true;
+          const body = document.getElementsByTagName('body')[0];
+          body.classList.add('custom-body-class');
+      } else if(event ==true) {
+          this.status = false;
+          const body = document.getElementsByTagName('body')[0];
+          body.classList.remove('custom-body-class');
+      }
+       
+   }
 }

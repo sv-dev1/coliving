@@ -1530,16 +1530,91 @@ tbody.fc-body {
   height: auto !important;
 }
 
+.flagInput span.arrow-down {
+    position: absolute !important;
+    top: 12px !important;
+    right: 17px;
+    transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+}
+.flagInput button.dropbtn.btn {
+    border: 1px solid #ced4da;
+    margin-right: 10px;
+    padding: 6px 20px 6px 10px;
+    border-radius: 2px;
+}
+
+.validate-red{
+    color: red;
+    position: relative;
+    left: 2px
+}
 
 
-
-
-
-
-
-
-
-
+.isWelcomeModal .mat-slider-horizontal {
+    min-width: 65% !important;
+    margin: auto;
+}
+.isWelcomeModal .next-btn button.btn.btn-secondary {
+    background: #ed502d !important;
+    border: 1px solid #ed502d !important;
+    padding: 3px 15px !important;
+}
+.isWelcomeModal .next-btn button.btn.btn-secondary:hover{
+    background: #b83619 !important;
+    border: 1px solid #b83619 !important; 
+}
+.isWelcomeModal .row.mt-2.sliderpos {
+    margin: 15px 0 !important;
+}
+.isWelcomeModal .house-text.text-center h3 {
+    margin: 0;
+}
+.isWelcomeModal .welErr {
+    width: 100%;
+    font-size: 80%;
+    color: #dc3545;
+    max-width: 65%;
+    margin: auto;
+    position: relative;
+    top: -12px;
+}
+.cus-create-bill .input-group-prepend {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    height: 38px;
+}
+.cus-create-bill input#amount {
+    height: 38px;
+}
+img.TOG {
+    max-width: 25px;
+    margin-right: 15px;
+}
+.sidebar {
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear  0.5s;
+    -ms-transition: all linear  0.5s;
+    -o-transition: all linear  0.5s;
+    transition: all linear 0.5s;
+ }   
+.custom-body-class .sidebar {
+    left: -260px;   
+}
+.work-panel{
+ -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -ms-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.custom-body-class .work-panel {
+    padding-left: 0;
+}
 
 @media screen and (min-width: 768px) { 
  #taskDel:before {
