@@ -155,12 +155,10 @@
                                           <div class="outgoing_msg" *ngIf="message.from_id == logged_in_id">
                                              <div class="sent_msg">
                                                 <p> {{ message.message}} </p>
-
                                                 <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
                                              </div>
                                           </div>
                                        </div>
-                                      
                                     </div>
                                     <div class="type_msg">
                                           <div class="input_msg_write">
@@ -170,9 +168,7 @@
                                           </div>
                                       </div>
                                      <div _ngcontent-dsn-c2="" class="headind_srch testing"><div _ngcontent-dsn-c2="" class="recent_heading"><h4 _ngcontent-dsn-c2=""> Team </h4></div></div>
-                                 </div>
-                                 
-                                   
+                                 </div>  
                               </div>
                            </div>
                            <!--- Chat HTML START End-------->
@@ -401,7 +397,10 @@
                         <input type="text"
                         placeholder="Datepicker"
                         class="form-control"
-                        bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
+                        bsDatepicker                       
+                        formControlName="dueDate" 
+                        [minDate]="today"                       
+                        [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
                         <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
                         </div>
@@ -447,9 +446,6 @@
                      </div>
                   </div>
                </div>
-                  
-
-
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>

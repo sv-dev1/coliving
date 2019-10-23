@@ -106,7 +106,6 @@ export class HouseChoresComponent implements OnInit {
     logged_in_id : string = "";
     valMessage: boolean = false;
     msgData:any=[];
-
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -139,7 +138,7 @@ export class HouseChoresComponent implements OnInit {
 		 this.today = new Date();
          this.socket.connect(); 
          this.logged_in_id = sessionStorage.getItem("userId");
-       // console.log(this.logged_in_id);
+     
 	}
 
 	ngOnInit() {
@@ -206,9 +205,7 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
-
-		
-	//	console.log('join chat data', this.data);
+	
 		this.socket.emit('set-nickname', this.data);	
      	this.getMessages();
 		this.loadMyMessages();
@@ -308,7 +305,6 @@ export class HouseChoresComponent implements OnInit {
 		this.isNextStep =true;
 		this.isProgressBlue =true;
 		this.islockbgblue = false;
-
 	}
 	otherPro(event){
 		if(event.target.checked){
@@ -453,7 +449,6 @@ export class HouseChoresComponent implements OnInit {
 		    return;
 		}
 		this.data_service.submitQuest(this.welcomeform.value).subscribe((response:any) =>{  
-	//		console.log('after submit response',response);
 			this.toastr.successToastr('Survey Completed.', 'Success!');
 			this.submitted=false;
 			this.isWelcomeModal = false;
@@ -578,15 +573,14 @@ export class HouseChoresComponent implements OnInit {
 		})
 	}
 	
-	addTask(form){
-		//console.log('ffsdf ',form);
+	addTask(form){		
 		this.submitted = true;  
 		if (this.addTaskForm.invalid) {
 			return;
 		}else{  
 			const input_data = { 
 				"task_name" : form.taskName, 
-				"assign_to" : form.assignTo,
+				"assign_to" : form.assignTo,				
 				"due_date" : this.datePipe.transform(form.dueDate, 'yyyy-MM-dd'),
 				"photo" :    this.fileData,
 				"category" : form.category,
@@ -612,32 +606,30 @@ export class HouseChoresComponent implements OnInit {
 				this.submitted = false;   	
 				this.addTaskForm.reset();
 				this.allTaskListing();
-				this.url ='';
+				this.url ='';				
 			},error=>{ 
 				this.toastr.errorToastr(error.error, 'Error!');
 			});   
 		}
 	}
 
-	handleDateClick(arg) {
+	handleDateClick(arg) {		
+		this.addTaskForm.patchValue({dueDate:this.datePipe.transform(arg.dateStr,'MM/dd/yyyy')});
 		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
 		this.checkDate=arg.dateStr;
-
 	    if(this.checkDate < this.currDate)
       {
 		         //	console.log("previous");  
       }
-      else {
-	     	//console.log("next");
+      else {	     	
 			this.eventInfo=true;
 			this.addTaskModal=true;
-			this.renderer.addClass(document.body, 'modal-open');
-      }
- 
+			this.renderer.addClass(document.body, 'modal-open');			
+      } 
 	}
 	openaddTask(){
 		this.addTaskModal=true;
-		this.renderer.addClass(document.body, 'modal-open');
+		this.renderer.addClass(document.body, 'modal-open');		
 	}
 	close(){
 		this.addTaskModal=false;
@@ -652,32 +644,30 @@ export class HouseChoresComponent implements OnInit {
 	}
 	event(event){
 		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
-		this.checkDate=this.datePipe.transform(event.event._instance.range.start, 'yyyy-MM-dd');
+		this.checkDate=this.datePipe.transform(event.event._instance.range.start, 'yyyy-MM-dd');		
 		if(this.checkDate < this.currDate)
 		{
-			console.log("previous");  
+			console.log("previous");  			
 		}
 		else {
-			 this.taskInfo=true;
+			 this.taskInfo=true;			
 			 let event_id=event.event._def.publicId;
 			 this.data_service.getTaskById(event_id).subscribe((response:any) =>{   
-				this.singleTaskData=response.suggestionList.taskArr;
+			 this.singleTaskData=response.suggestionList.taskArr;			
 		 }, error =>{ 
 			 this.isError = true; 
 			 this.errorsArr = error.error;
 		 })
 		}
-
 	}
 	allTaskListing() {
 		this.allTask = [];
 		this.allTaskArray = [];
 		this.pending_length = [];
-		this.complete_length = [];
+		this.complete_length = [];		
 		this.data_service.getTask().subscribe((response:any) =>{   
 			this.allTaskArray = response.tasks;
-			this.allTask = this.allTaskArray;
-			//console.log('All Task',this.allTask);
+			this.allTask = this.allTaskArray;			
 			this.allTask.forEach(obj =>{
 				if(obj.status == 'PENDING'){
 					this.pending_length.push({id: obj.taskId,task_name:obj.task_name,photo:obj.photo,userId:obj.userId});
