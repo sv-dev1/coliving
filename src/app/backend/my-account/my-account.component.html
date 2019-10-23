@@ -21,7 +21,7 @@
                      <div class="row">
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">First Name:</label>
+                              <label for="team">First Name<span class="validate-red">*</span></label>
                               <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
                               <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Last Name:</label>
+                              <label for="team">Last Name<span class="validate-red">*</span></label>
                               <input type="text"  class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                               <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Email:</label>
+                              <label for="team">Email</label>
                               <input type="email" id="email" class="form-control" placeholder="Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
                               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Username:</label>
+                              <label for="team">Username</label>
                               <input type="email" id="text" class="form-control" placeholder="Username" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" readonly="readonly">
                               <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.userName.errors.required">Username is required.</span>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Date Of Birth:</label>
+                              <label for="team">Date Of Birth<span class="validate-red">*</span></label>
                               <input type="text" placeholder="Date of Birth"
                               class="form-control"
                               #dp="bsDatepicker"
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Occupation/Timetable:</label>
+                              <label for="team">Occupation/Timetable<span class="validate-red">*</span></label>
                               <select class="custom-select form-control" formControlName="occuptation_tt" id="occuptation_tt" [ngClass]="{ 'is-invalid': submitted && f.occuptation_tt.errors }">
                                  <option value="" disabled>Please select one option</option>
                                  <option value="1">Full time employee</option>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">What would be your typical get up time during the week days:</label>
+                              <label for="team">What would be your typical get up time during the week days<span class="validate-red">*</span></label>
                               <ngb-timepicker [(ngModel)]="time" formControlName="wakeup_time"></ngb-timepicker>
                               <div *ngIf="submitted && f.wakeup_time.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.wakeup_time.errors.required">WakeUp Time is required.</span>
@@ -94,7 +94,7 @@
                         <hr>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Day of moving in/out:</label>
+                              <label for="team">Day of moving in/out<span class="validate-red">*</span></label>
                               <input type="text" placeholder="Day of moving in/out"
                               class="form-control"
                               #dp="bsDatepicker"
@@ -107,7 +107,7 @@
                         <hr>
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
-                              <label for="team">Rental Description:</label>
+                              <label for="team">Rental Description<span class="validate-red">*</span></label>
                               <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="rentalDescription" [ngClass]="{ 'is-invalid': submitted && f.rentalDescription.errors }"></textarea>
                               <div *ngIf="submitted && f.rentalDescription.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.rentalDescription.errors.required">Rental Description field is required.</span>
@@ -116,7 +116,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Maximun Price:</label>
+                              <label for="team">Maximun Price<span class="validate-red">*</span></label>
                               <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
                               <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun Price is required.</span>
@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Minimum Price:</label>
+                              <label for="team">Minimum Price<span class="validate-red">*</span></label>
                               <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }"  >
                               <div *ngIf="submitted && f.minimumPrice.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum Price is required.</span>
@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">How long willing to stay:</label>
+                              <label for="team">How long willing to stay<span class="validate-red">*</span></label>
                               <input type="text"
                                  placeholder="How long willing to stay"
                                  class="form-control"
@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Gender:</label>
+                              <label for="team">Gender<span class="validate-red">*</span></label>
                               <select class="custom-select form-control" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                                  <option value="" disabled>Please select one option</option>
                                  <option value="Male">Male</option>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Previous city:</label>
+                              <label for="team">Previous city<span class="validate-red">*</span></label>
                               <input type="text" class="form-control" placeholder="Previous city" formControlName="previousCity" [ngClass]="{ 'is-invalid': submitted && f.previousCity.errors }" >
                               <div *ngIf="submitted && f.previousCity.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.previousCity.errors.required">Work Place is required.</span>
@@ -170,7 +170,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Phone Number:</label>
+                              <label for="team">Phone Number<span class="validate-red">*</span></label>
                               <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
                               <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Address:</label>
+                              <label for="team">Address<span class="validate-red">*</span></label>
                               <input ngx-google-places-autocomplete type="text" class="form-control" placeholder="Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" >
                               <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.address.errors.required">Address is required.</span>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Work Place:</label>
+                              <label for="team">Work Place<span class="validate-red">*</span></label>
                               <input  type="text"  class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
                               <div *ngIf="submitted && f.work_place.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work Place is required.</span>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Postal Code:</label>
+                              <label for="team">Postal Code<span class="validate-red">*</span></label>
                               <input type="text"  class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
                               <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
@@ -215,7 +215,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Country:</label>
+                              <label for="team">Country<span class="validate-red">*</span></label>
                               <select class="custom-select form-control" formControlName="country" id="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
                                  <option value="" disabled>Please select one option</option>
                                  <option *ngFor="let country of allCountries" value="{{country?.id}}">
@@ -228,7 +228,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team" class="radio-inline">Language:</label>
+                              <label for="team" class="radio-inline">Language<span class="validate-red">*</span></label>
                               <angular2-multiselect [data]="langdropdownList"
                               [(ngModel)]="languageSelectedItems"
                               [settings]="dropdownSettingsLanguage" 
@@ -245,7 +245,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team" class="radio-inline">Nationality:</label>
+                              <label for="team" class="radio-inline">Nationality<span class="validate-red">*</span></label>
                               <angular2-multiselect [data]="countrydropdownList" 
                               [(ngModel)]="nationalitySelectedItems"
                               [settings]="dropdownSettingsCountry"
@@ -262,7 +262,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Short bio:</label>
+                              <label for="team">Short bio<span class="validate-red">*</span></label>
                               <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="biography" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }"></textarea>
                               <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.biography.errors.required">Short Bio is required.</span>
@@ -271,7 +271,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Interests:</label>
+                              <label for="team">Interests<span class="validate-red">*</span></label>
                               <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interestes" [ngClass]="{ 'is-invalid': submitted && f.interestes.errors }"></textarea>
                               <div *ngIf="submitted && f.interestes.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.interestes.errors.required">Interests is required.</span>
@@ -280,7 +280,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Habits:</label>
+                              <label for="team">Habits<span class="validate-red">*</span></label>
                               <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="habits" [ngClass]="{ 'is-invalid': submitted && f.habits.errors }"></textarea>
                               <div *ngIf="submitted && f.habits.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.habits.errors.required">Habits field is required.</span>
@@ -289,7 +289,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="bill">Upload Image:</label>
+                              <label for="bill">Upload Image<span class="validate-red">*</span></label>
                               <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
                               <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > <br/>
                            </div>

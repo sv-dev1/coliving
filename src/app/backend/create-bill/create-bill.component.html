@@ -13,7 +13,7 @@
                 </div>
                 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 cus-create-bill">
                         <div class="card mb-3">
                             <div class="card-header">Create House Expenses</div>
                             <div class="card-body">
@@ -48,7 +48,7 @@
                                         </div>
                                        
                                       <div class="col-12 col-sm-6">
-                                            <div class="input-group input-group-sm mb-3">
+                                            <div class="form-group input-group-sm mb-3">
                                                 <label for="amount">Amount:</label>  
                                                 <input type="text" class="form-control" id="amount" (keypress)="numberOnly($event)" formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
                                                 <div class="input-group-prepend ">

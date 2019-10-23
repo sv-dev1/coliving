@@ -107,6 +107,7 @@ export class HouseChoresComponent implements OnInit {
     valMessage: boolean = false;
     msgData:any=[];
     last_element:any;
+    dateToCalendar:any;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -146,7 +147,7 @@ export class HouseChoresComponent implements OnInit {
 	ngOnInit() {
 		this.quest=sessionStorage.getItem("questionaire");
 		if(this.quest == "true"){
-			console.log("already completed survey");
+			//console.log("already completed survey");
 			this.keyboard =true;
 			this.display ='none';
 			this.isWelcomeBlock =true;	
@@ -189,9 +190,6 @@ export class HouseChoresComponent implements OnInit {
 		this.getMessages();
 		this.loadMessages();
 		this.loadMyMessages();	
-
-		
-		
 	}
 	joinChat() { 
 		if(this.user_id){
@@ -341,7 +339,7 @@ export class HouseChoresComponent implements OnInit {
 				}
 			}
 		}
-		console.log("SecondChoice",this.OtherProd);
+		//console.log("SecondChoice",this.OtherProd);
 	}
 	TChoice(event){
 		if(event.target.checked){
@@ -355,7 +353,7 @@ export class HouseChoresComponent implements OnInit {
 				}
 			}
 		}
-		console.log("ThirdChoice",this.tChoice);
+		//console.log("ThirdChoice",this.tChoice);
 	}
 	FChoice(event){
 		if(event.target.checked){
@@ -369,7 +367,7 @@ export class HouseChoresComponent implements OnInit {
 				}
 			}
 		}
-		console.log("FourthChoice",this.fChoice);
+		//console.log("FourthChoice",this.fChoice);
 	}
 	choose(){
 		this.party=true;
@@ -432,7 +430,7 @@ export class HouseChoresComponent implements OnInit {
 		this.submitted = true;  
 		//console.log(this.welcomeform.value);
         if(this.wf.partying.errors && this.submitted){
-			console.log("invalid");
+			//console.log("invalid");
 		}
 		if (this.welcomeform.invalid) {
 			if(this.welcomeform.value['alcohol']=="" || this.welcomeform.value['partying']=="" || this.welcomeform.value['smoking']==""){
@@ -482,7 +480,7 @@ export class HouseChoresComponent implements OnInit {
 			const body = document.getElementsByTagName('body')[0];
 			body.classList.remove('popCustomBody');
 		}, error =>{
-			console.log(error);
+			//console.log(error);
 			this.toastr.errorToastr(error.error);
  		})
 	}
@@ -639,20 +637,24 @@ export class HouseChoresComponent implements OnInit {
 	}
 
 	handleDateClick(arg) {
+		
 		this.currDate=this.datePipe.transform(this.curr, 'yyyy-MM-dd');
-		this.checkDate=arg.dateStr;
-
-	    if(this.checkDate < this.currDate)
-      {
-		         //	console.log("previous");  
-      }
-      else {
-	     	//console.log("next");
-			this.eventInfo=true;
-			this.addTaskModal=true;
-			this.renderer.addClass(document.body, 'modal-open');
-      }
- 
+		this.checkDate =  arg.dateStr;
+        this.dateToCalendar = this.datePipe.transform(this.checkDate, 'MM/dd/yyyy');
+        this.addTaskForm.patchValue({
+             dueDate: this.dateToCalendar
+        })
+		if(this.checkDate < this.currDate)
+	      {
+			         //	console.log("previous");  
+	      }
+	      else {
+		     	//console.log("next");
+				this.eventInfo=true;
+				this.addTaskModal=true;
+				this.renderer.addClass(document.body, 'modal-open');
+	      }
+	 
 	}
 	openaddTask(){
 		this.addTaskModal=true;
@@ -674,7 +676,7 @@ export class HouseChoresComponent implements OnInit {
 		this.checkDate=this.datePipe.transform(event.event._instance.range.start, 'yyyy-MM-dd');
 		if(this.checkDate < this.currDate)
 		{
-			console.log("previous");  
+			//console.log("previous");  
 		}
 		else {
 			 this.taskInfo=true;
@@ -686,9 +688,9 @@ export class HouseChoresComponent implements OnInit {
 			 this.errorsArr = error.error;
 		 })
 		}
-
 	}
 	allTaskListing() {
+
 		this.allTask = [];
 		this.allTaskArray = [];
 		this.pending_length = [];
