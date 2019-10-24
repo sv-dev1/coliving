@@ -2582,7 +2582,13 @@ cursor: pointer;
     word-break: break-all;
 }
 /* End House chores */
-
+.row.team-info {
+    padding: 10px;
+}
+.mat-badge-content {
+    color: #fff;
+    background: #ed502d !important;
+}
 @media (min-width: 576px)
 {
 .modal-dialog.modaldialog12 {
