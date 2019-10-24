@@ -62,7 +62,7 @@
                                 </thead>
                                 <tbody>
                                    <tr *ngFor="let team of allTeam; let i = index">
-                                      <td>{{team.name}}</td>
+                                      <td>{{team?.name}}</td>
                                       <td>Group Info <i class="far fa-plus-square add-icon" (click)="openUser(team.teamId)"></i></td>
                                    </tr>
                                   

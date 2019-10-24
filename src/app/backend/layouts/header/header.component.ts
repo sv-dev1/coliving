@@ -32,8 +32,8 @@ export class HeaderComponent implements OnInit {
   firstName:string='';
   lastName:string='';
   status: boolean = false;
-
-response:any;
+  badgeNumber : number;
+  response:any;
   constructor(
         private router: Router,
         public toastr: ToastrManager,
@@ -57,6 +57,7 @@ response:any;
       this.session_key = true;
     } 
     this.getUserData();  
+    this.badgeNumber = 2;
   }
 
   systemLogout($event){ 
@@ -138,5 +139,9 @@ response:any;
           body.classList.remove('custom-body-class');
       }
        
+   }
+   teamInfo(id :number){
+     console.log(id);
+    this.router.navigate(['/team-Info/:'+id]);
    }
 }

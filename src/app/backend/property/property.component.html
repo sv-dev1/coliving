@@ -23,6 +23,7 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
+                       <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Send Team CV</a>
 						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
 					</div>
 					
