@@ -2599,7 +2599,7 @@ button.pull-right.btn.btn-orange-sm.orange-btn {
     width: 48%;
     float: left;
     background: #ed502d;
-    color: #fff;
+    color: #fff !important;
     border: 1px solid #ed502d;
     font-size: 15px !important;
     padding: 5px !important;
@@ -2643,7 +2643,9 @@ button.pull-right.btn.btn-orange-sm.orange-btn {
     left: 0;
 }
 
-
+span.for-sub-name {
+    color: red;
+}
 
 @media (min-width: 576px)
 {
