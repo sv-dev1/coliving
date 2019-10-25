@@ -108,6 +108,8 @@ export class HouseChoresComponent implements OnInit {
     msgData:any=[];
     last_element:any;
     dateToCalendar:any;
+    teamIdRc :any;
+    inviteLink :any;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -180,7 +182,10 @@ export class HouseChoresComponent implements OnInit {
 	}
      
 	openChat(team,index){
-		//console.log('team',team);
+		
+		this.teamIdRc = team.teamId;
+        this.inviteLink = location.origin+'/'+'sign-up?rc='+this.logged_in_id+'/'+this.teamIdRc;
+		console.log('this.inviteLink',this.inviteLink);
 		this.team_id = team.teamId;
 		this.user_id = this.logged_in_id;
 		this.nickname = team.name;

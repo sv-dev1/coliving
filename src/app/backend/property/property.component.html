@@ -23,7 +23,9 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
-						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)" ngbTooltip="View full details."><i class="fa fa-eye"></i>&nbsp;</button>
+                        <button id="read-more" class="btn-orange-sm" (click)="sendCV(property)" ngbTooltip="Send CV"><i class="fa fa-refresh"></i>&nbsp;</button>
+                        <button id="read-more" class="btn-orange-sm" (click)="sendCVModal(property)" ngbTooltip="Invite a tenant to team"><i class="fas  fa-share"></i>&nbsp;</button>
 					</div>
 					
 				</div>
@@ -308,3 +310,36 @@
 		</div>
 	</div>
 </div>   
+
+
+<div class="container">          
+    <!-- The Modal -->
+    <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenSendCVModal ? 'block' : 'none'" *ngIf="isopenSendCVModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Invite Tenant to {{propertyInfo?.name}}</h6>
+                    <button type="button" class="close" data-dismiss="modal" (click)="closeCvModal()">&times;</button>
+                </div>
+                
+              
+                <!-- Modal body -->
+                <div class="modal-body">
+                
+                <table class="table">
+                  <tbody>
+              
+                  </tbody>
+               </table>
+
+                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>
+                </div> 
+            
+            </div>
+        </div>
+    </div>
+</div> 

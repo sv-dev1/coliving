@@ -51,6 +51,7 @@ export class TeamGroupComponent implements OnInit {
     this.teamLength =  this.teamLength+5;
     this.allTeam=[];
     this.data_service.getTeam().subscribe((response: any) =>{
+      console.log('all teams',response);
       for(var i=0;i < this.teamLength;i++){
         this.allTeam.push(response.teams[i]);
       }

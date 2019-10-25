@@ -79,11 +79,7 @@ button.pull-right.btn.btn-orange-sm[_ngcontent-uin-c2] {
     margin-bottom: 15px;
     font-size: 13px;
 }
- #read-more {
-        position: absolute;
-        bottom: 0;
-        right: 16px;
-}
+
 
 .table th {
     width: 50% !important;

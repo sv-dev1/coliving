@@ -49,6 +49,7 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { PropertyComponent } from './backend/property/property.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { PropertyrequestsComponent } from './backend/propertyrequests/propertyrequests.component';
 
 
 
@@ -94,6 +95,7 @@ export function provideConfig() {
     BlockCopyPasteDirective,
     CategoryComponent,
     PropertyComponent,
+    PropertyrequestsComponent,
     
    
 

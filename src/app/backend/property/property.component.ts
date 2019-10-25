@@ -33,6 +33,7 @@ export class PropertyComponent implements OnInit {
       isArrayLength:boolean =false;
       ispropertyInfo:boolean =false;
       propertyInfo:any = [];
+      isopenSendCVModal:boolean =false;
 
   constructor(
         private formBuilder:FormBuilder,
@@ -158,7 +159,7 @@ export class PropertyComponent implements OnInit {
 	    }
     }
     viewFullDetail(property){
-    	console.log('property',property);
+    	
            this.ispropertyInfo =true;
            this.propertyInfo = property;
     }
@@ -166,5 +167,14 @@ export class PropertyComponent implements OnInit {
     	this.ispropertyInfo = false;
     }
 		
+	sendCVModal(property) {
+		this.isopenSendCVModal = true;
+		this.propertyInfo = property;
+	}
 
+    closeCvModal() {
+    	this.isopenSendCVModal = false;
+    }
 }
+	
+    
