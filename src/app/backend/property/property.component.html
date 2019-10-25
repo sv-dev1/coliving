@@ -4,17 +4,17 @@
 	<div class="work-block">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12 abs-bar">
 					<ul class="breadcrumb custom-breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-						<li class="breadcrumb-item active">Properties</li>
-					</ul>
+                  <li class="breadcrumb-item active">Properties</li>
+               </ul>
+                    <button class="pull-right btn btn-orange-sm orange-btn" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
 				</div>
 			</div>
        
 			<div class="row">
 				<div class="col-12">
-					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
 				</div>
 				<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let property of allProperties|paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
 					<img  (click)="viewFullDetail(property)"  src="{{image_base_url}}{{property.propertyId}}" class="img-responsive property-image">
@@ -23,9 +23,13 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
-                       <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Send Team CV</a>
-						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
-					</div>
+                  <a class="btn lft-b" role="button" href="http://www.jquery2dotnet.com/">Send Team CV</a>
+   
+                  <a class="btn rgt-b" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</a>
+					<!-- <button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+             -->
+             <div class="clearfix"></div>
+            </div>
 					
 				</div>
 			</div>
