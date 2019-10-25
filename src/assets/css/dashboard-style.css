@@ -2589,6 +2589,64 @@ cursor: pointer;
     color: #fff;
     background: #ed502d !important;
 }
+button.pull-right.btn.btn-orange-sm.orange-btn {
+    position: absolute;
+    top: 0;
+    right: 17px;
+    height: 48px;
+}
+.lft-b {
+    width: 48%;
+    float: left;
+    background: #ed502d;
+    color: #fff !important;
+    border: 1px solid #ed502d;
+    font-size: 15px !important;
+    padding: 5px !important;
+    margin-top: 7px;
+}
+.rgt-b {
+    width: 48%;
+    float: right;
+    background: #ed502d;
+    color: #fff !important;
+    border: 1px solid #ed502d;
+    font-size: 15px !important;
+    padding: 5px !important;
+    margin-top: 7px;
+}
+.lft-b:hover,.rgt-b:hover{
+    background: #b83619 !important;
+    color: #fff !important;
+}
+.mobile-side-bar {
+    background: #ed502d;
+    position: fixed;
+    left: -40px;
+    top: 0;
+    height: 100%;
+    z-index: 99;
+    width: 40px;
+    -webkit-transition: all linear 0.5s;
+    -moz-transition: all linear 0.5s;
+    -ms-transition: all linear 0.5s;
+    -o-transition: all linear 0.5s;
+    transition: all linear 0.5s;
+}
+.mobile-side-bar ul li {
+    padding: 5px 10px;
+}
+.mobile-side-bar ul li a i {
+    color: white;
+}
+.custom-body-class .mobile-side-bar{
+    left: 0;
+}
+
+span.for-sub-name {
+    color: red;
+}
+
 @media (min-width: 576px)
 {
 .modal-dialog.modaldialog12 {

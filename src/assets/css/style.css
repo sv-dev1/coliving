@@ -1613,7 +1613,7 @@ img.TOG {
     transition: all linear 0.5s;
 }
 .custom-body-class .work-panel {
-    padding-left: 0;
+    padding-left: 40px;
 }
 
 @media screen and (min-width: 768px) { 

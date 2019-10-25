@@ -18,6 +18,7 @@ import {AddressComponent} from "../../objects/addressComponent";
 export class PropertyComponent implements OnInit {
 
 	  addPropertyForm : FormGroup;
+  	  teamForm : FormGroup;
 	  allPropertyArray : any =[];
 	  allProperties : any =[];
       isError:boolean = false;
@@ -33,7 +34,9 @@ export class PropertyComponent implements OnInit {
       isArrayLength:boolean =false;
       ispropertyInfo:boolean =false;
       propertyInfo:any = [];
-
+	  openTeam:boolean =false;
+	  allteam:any=[];
+	  prop_id:any;
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -58,6 +61,9 @@ export class PropertyComponent implements OnInit {
 		});
 		this.image_base_url = environment.image_base_url;
 		this.base_url = environment.base_url;
+		this.teamForm = this.formBuilder.group({
+		    team_id: ['', Validators.required],
+		}); 
     }
 
 	ngOnInit() {
@@ -102,6 +108,7 @@ export class PropertyComponent implements OnInit {
 		}
 	}
     get f() { return this.addPropertyForm.controls; }
+    get tF() { return this.teamForm.controls; }
 
     addProperty() {
     	console.log('formValue',this.addPropertyForm.value);
@@ -157,14 +164,33 @@ export class PropertyComponent implements OnInit {
 	            });
 	    }
     }
+
     viewFullDetail(property){
     	console.log('property',property);
            this.ispropertyInfo =true;
            this.propertyInfo = property;
     }
     closeInfoModal() {
-    	this.ispropertyInfo = false;
+    	this.ispropertyInfo = false;  
+    	this.openTeam=false;
     }
-		
+	sendCV(property){
+	   this.prop_id=property.propertyId;
+        this.openTeam=true;
+	    this.data_service.getTeam().subscribe((response: any) =>{
+        this.allteam=response.teams;
+             console.log(this.allteam);
+   	  })
+	}
+    teamFormSubmit(){
+    this.submitted=true;
+    if(this.teamForm.invalid){
+             return;
+     }
+       console.log(this.teamForm.value);
+	   console.log(this.prop_id);
+       	this.openTeam=false;
+       	this.teamForm.reset();
+    }
 
 }

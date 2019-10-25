@@ -4,17 +4,17 @@
 	<div class="work-block">
 		<div class="container">
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12 abs-bar">
 					<ul class="breadcrumb custom-breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-						<li class="breadcrumb-item active">Properties</li>
-					</ul>
+                  <li class="breadcrumb-item active">Properties</li>
+               </ul>
+                    <button class="pull-right btn btn-orange-sm orange-btn" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
 				</div>
 			</div>
        
 			<div class="row">
 				<div class="col-12">
-					<button class="pull-right btn btn-orange-sm" (click)="openAddPropertyModal();" id="read-more"><i class="fa fa-plus"></i>Add Property</button>
 				</div>
 				<div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let property of allProperties|paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
 					<img  (click)="viewFullDetail(property)"  src="{{image_base_url}}{{property.propertyId}}" class="img-responsive property-image">
@@ -23,9 +23,13 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
-                       <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Send Team CV</a>
-						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
-					</div>
+                  <a class="btn lft-b" (click)="sendCV(property)">Send Team CV</a>
+                  <a class="btn rgt-b" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</a>
+
+					<!-- <button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+              -->
+             <div class="clearfix"></div>
+            </div>
 					
 				</div>
 			</div>
@@ -302,10 +306,43 @@
 
 				 </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>
+					<button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Ok</button>
 				</div> 
 			
 			</div>
 		</div>
 	</div>
 </div>   
+
+<!-- Model for Selecting Team -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openTeam ? 'block' : 'none'" *ngIf="openTeam" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Select Team</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeInfoModal()">&times;</span>
+            </button>
+         </div>
+         <!-- Modal body -->
+                  <form [formGroup]="teamForm" (ngSubmit)="teamFormSubmit()">
+
+         <div class="modal-body">
+              <p *ngFor="let team of allteam">
+                 <input type="radio" value="{{team.teamId}}" formControlName="team_id" [ngClass]="{'is-invalid': submitted && tF.team_id.errors}"> {{team.name}}
+              </p>
+              <div *ngIf="submitted && tF.team_id.errors">
+                     <span class="for-sub-name" *ngIf="tF.team_id.errors.required">Select Your team</span>
+              </div>
+         </div>
+         <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-secondary">Ok</button>
+         </div> 
+         </form> 
+
+      </div>
+   </div>
+</div>
