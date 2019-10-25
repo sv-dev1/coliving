@@ -8,6 +8,21 @@
 		</span>
 	</div>
 	<div class="right-blk">
+			
+			<mat-icon matBadge="{{badgeNumber}}" matBadgePosition="above after" [matMenuTriggerFor]="menu">notification_important
+				</mat-icon>
+				<mat-menu #menu="matMenu">
+						<button mat-menu-item (click)="teamInfo('Td50327d9-59ea-4472-8e05-a9f2f42d3b35')">
+						  <mat-icon >navigate_next</mat-icon>
+						  <span>Team 1 invited you</span>
+						</button>
+						<button mat-menu-item>
+								<mat-icon>navigate_next</mat-icon>
+								<span>Team 2 invited you</span>
+						</button>
+					  </mat-menu>
+			
+			
 		<div class="parts">
 			<button type="submit" class="btn btn-orange-sm" routerLink="/teams"><i class="fa fa-bell"></i></button>
 		</div>
@@ -19,7 +34,7 @@
 			<img class="money" src="assets/images/money.png">
 			<span class="balance"> 0.00 USD</span>
 		</div>
-		
+	
 		<div class="parts profile-drop">
 			<span class="dd-parent">
 				<img class="money2" src="{{image_url}}" onError="this.src='assets/images/no-image-available.png';"  alt="user"/>

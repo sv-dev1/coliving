@@ -50,6 +50,10 @@ import { PropertyComponent } from './backend/property/property.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { PropertyrequestsComponent } from './backend/propertyrequests/propertyrequests.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatIconModule} from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
+import { TeamInfoComponent } from './backend/team-info/team-info.component';
 
 
 
@@ -96,10 +100,8 @@ export function provideConfig() {
     CategoryComponent,
     PropertyComponent,
     PropertyrequestsComponent,
-    
-   
-
-   
+    TeamInfoComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -122,9 +124,9 @@ export function provideConfig() {
     LightboxModule,
     InternationalPhoneNumberModule,
     GooglePlaceModule,
-    NgxIntlTelInputModule
-    
-
+    NgxIntlTelInputModule,
+    MatBadgeModule,
+    MatIconModule,MatMenuModule
   ],
   
   providers: [

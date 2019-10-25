@@ -1,0 +1,22 @@
+<section class="wrapper work-panel">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <div class="row team-info">
+        <div class="col-md-6" *ngFor="let info of teamUser">
+           <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+              <div class="card-body d-flex flex-column align-items-start">
+                 <strong class="d-inline-block mb-2 text-primary">{{info.userProfile.firstName}} {{info.userProfile.lastName}}</strong>
+                 <!-- <h6 class="mb-0">
+                    <a class="text-dark" href="#">40 Percent of People Can’t Afford Basics</a>
+                 </h6> -->
+                 <div class="mb-1 text-muted small">Nov 12</div>
+                 <p class="card-text mb-auto">{{info.userProfile.biography}}<span *ngIf="info.userProfile.biography == null">No Info</span></p>
+                 <a class="btn btn-outline-primary btn-sm" role="button" href="http://www.jquery2dotnet.com/">Continue reading</a>
+              </div>
+              <!-- <img class="card-img-right flex-auto d-none d-lg-block" alt="userPic" src="{{image_base_url}}+''+{{info.userId}};" style="width: 200px; height: 250px;"> -->
+              <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="assets/images/user.png" style="width: 150px; height: 200px;">
+           </div>
+        </div>
+     </div>
+</section>
+

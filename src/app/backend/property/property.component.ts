@@ -18,6 +18,7 @@ import {AddressComponent} from "../../objects/addressComponent";
 export class PropertyComponent implements OnInit {
 
 	  addPropertyForm : FormGroup;
+  	  teamForm : FormGroup;
 	  allPropertyArray : any =[];
 	  allProperties : any =[];
       isError:boolean = false;
@@ -33,8 +34,14 @@ export class PropertyComponent implements OnInit {
       isArrayLength:boolean =false;
       ispropertyInfo:boolean =false;
       propertyInfo:any = [];
+<<<<<<< HEAD
       isopenSendCVModal:boolean =false;
 
+=======
+	  openTeam:boolean =false;
+	  allteam:any=[];
+	  prop_id:any;
+>>>>>>> d2f7dac7a1ae8d859bb9d130561418a2a9cdf20d
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -59,6 +66,9 @@ export class PropertyComponent implements OnInit {
 		});
 		this.image_base_url = environment.image_base_url;
 		this.base_url = environment.base_url;
+		this.teamForm = this.formBuilder.group({
+		    team_id: ['', Validators.required],
+		}); 
     }
 
 	ngOnInit() {
@@ -103,6 +113,7 @@ export class PropertyComponent implements OnInit {
 		}
 	}
     get f() { return this.addPropertyForm.controls; }
+    get tF() { return this.teamForm.controls; }
 
     addProperty() {
     	console.log('formValue',this.addPropertyForm.value);
@@ -158,15 +169,34 @@ export class PropertyComponent implements OnInit {
 	            });
 	    }
     }
+
     viewFullDetail(property){
     	
            this.ispropertyInfo =true;
            this.propertyInfo = property;
     }
     closeInfoModal() {
-    	this.ispropertyInfo = false;
+    	this.ispropertyInfo = false;  
+    	this.openTeam=false;
     }
-		
+	sendCV(property){
+	   this.prop_id=property.propertyId;
+        this.openTeam=true;
+	    this.data_service.getTeam().subscribe((response: any) =>{
+        this.allteam=response.teams;
+             console.log(this.allteam);
+   	  })
+	}
+    teamFormSubmit(){
+    this.submitted=true;
+    if(this.teamForm.invalid){
+             return;
+     }
+       console.log(this.teamForm.value);
+	   console.log(this.prop_id);
+       	this.openTeam=false;
+       	this.teamForm.reset();
+    }	
 	sendCVModal(property) {
 		this.isopenSendCVModal = true;
 		this.propertyInfo = property;
