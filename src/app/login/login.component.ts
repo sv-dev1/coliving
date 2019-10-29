@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
         else{
           sessionStorage.setItem("questionaire", 'false');
         }
+        sessionStorage.setItem("roleId", response.roleId);
         sessionStorage.setItem("auth_token", response.token);
         sessionStorage.setItem("user_name", response.username);
         sessionStorage.setItem("userId", response.userId);

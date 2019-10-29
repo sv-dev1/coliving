@@ -2651,6 +2651,8 @@ span.for-sub-name {
 {
 .modal-dialog.modaldialog12 {
     max-width: 525px !important;
+    min-width: 250px;
+
 }
 }
 
