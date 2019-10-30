@@ -140,7 +140,7 @@ export class HeaderComponent implements OnInit {
       }
        
    }
-   teamInfo(id :number){
+   teamInfo(id :any){
      console.log(id);
     this.router.navigate(['/team-Info/:'+id]);
    }

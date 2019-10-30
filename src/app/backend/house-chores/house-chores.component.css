@@ -36,4 +36,14 @@
     border: solid 1px #ed502d;
     padding: 5px 0 5px 0px !important;
 }
+a.mat-menu-trigger{
+    float: right;
+    background-color: #ed502d;
+    color: white;
+}
+a.mat-menu-trigger :hover{
+    float: right;
+    background-color: #ed502d;
+    color: white;
+}
 

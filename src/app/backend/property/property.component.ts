@@ -66,6 +66,11 @@ export class PropertyComponent implements OnInit {
 		this.base_url = environment.base_url;
 		this.teamForm = this.formBuilder.group({
 		    team_id: ['', Validators.required],
+		    gchat: ['', Validators.required],
+		    landlord_id: ['', Validators.required],
+		    property_id: ['', Validators.required],
+		    agree: ['', Validators.required],
+
 		}); 
     }
 

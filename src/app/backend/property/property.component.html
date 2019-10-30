@@ -344,11 +344,11 @@
               <div>
                     <label>Add Landlord to GroupChat</label>
                       <p>
-                     <input type="radio" value="Yes">Yes
-                     <input type="radio" value="No">No
+                     <input type="radio" formControlName="gchat">Yes
+                     <input type="radio" formControlName="gchat">No
                   </p>
               </div>
-                <a><input type="checkbox" [checked]="false">I agree to the privacy policy</a> 
+                <a class="prop-policy"><input type="checkbox" [checked]="false" formControlaame="agree">I agree to the privacy policy</a> 
          </div>
          <div class="modal-footer">
             <button type="submit" class="btn btn-outline-secondary">Ok</button>

@@ -12,6 +12,8 @@ import timeGrigPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction'; // for dateClick
 import { Socket } from 'ng-socket-io';
 
+declare var jsPDF: any;
+
 @Component({
 	selector: 'app-house-chores',
 	templateUrl: './house-chores.component.html',
@@ -108,7 +110,9 @@ export class HouseChoresComponent implements OnInit {
     msgData:any=[];
     last_element:any;
     dateToCalendar:any;
-
+	teamUser: any= [];
+ 	 list: any= [];
+ 	 teamRecord:any=[];
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -147,16 +151,7 @@ export class HouseChoresComponent implements OnInit {
 	ngOnInit() {
 		this.quest=sessionStorage.getItem("questionaire");
 		if(this.quest == "true"){
-			//console.log("already completed survey");
-			this.keyboard =true;
-			this.display ='none';
-			this.isWelcomeBlock =true;	
-			this.isHouse1st=true;
-			this.isProgressBlue =false;
-			const html = document.getElementsByTagName('html')[0];
-			html.classList.add('popCustomHtml');
-			const body = document.getElementsByTagName('body')[0];
-			body.classList.add('popCustomBody');
+			console.log("already completed survey");
 		}
 		else{
 			this.isWelcomeModal = true;  
@@ -170,7 +165,6 @@ export class HouseChoresComponent implements OnInit {
 			const body = document.getElementsByTagName('body')[0];
 			body.classList.add('popCustomBody');
 		}  
-
 		this.getUsers();
 		this.getCategorie();
 		this.getTeams();
@@ -180,7 +174,7 @@ export class HouseChoresComponent implements OnInit {
 	}
      
 	openChat(team,index){
-		//console.log('team',team);
+		
 		this.team_id = team.teamId;
 		this.user_id = this.logged_in_id;
 		this.nickname = team.name;
@@ -510,9 +504,8 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
 			this.allTeam = this.allTeamArray;
-		//	console.log(this.allTeam);
 			this.firstTeam = this.allTeam[0];
-			//console.log("firsttema", this.firstTeam);
+            this.openChat(this.allTeam[0],0);
 			this.isError = false;
 			this.joinChat();
 			//this.loadMessages();    
@@ -522,6 +515,7 @@ export class HouseChoresComponent implements OnInit {
 		})
 
 	}
+
 	deleteTaskDailog(task){
 		 //console.log('task',task);
 		   this.taskName = task.task_name;
@@ -715,5 +709,56 @@ export class HouseChoresComponent implements OnInit {
 	navigateToSuggestions(task){
 		this.router.navigate(['/task-suggestions',task]);
 	}	
+	addmember(){
+      console.log("add Member");
+	}
+	getTeamUser(){
+
+	}
+	viewteamCV(){
+	      console.log(this.team_id);
+	         this.list.push(this.team_id);
+	         this.teamRecord=[];
+		    let postArr = {'teamId': this.list};
+		    this.data_service.getTeamUsers(postArr).subscribe((response: any) =>{
+		      this.teamRecord=response.teams;
+		      this.list=[];
+		      console.log(this.teamRecord);
+
+                  if(this.teamRecord.length  != 0){
+		            var doc = new jsPDF();
+			        var col = ["FirstName", "LastName"];
+			        var col1 = ["FirstName", "LastName"];
+
+			        var rows = [];
+			        var rows1 = [];
+
+
+			  /* The following array of object as response from the API req  */
+
+			    
+		       this.teamRecord.forEach(element => {      
+			        var temp = [element.userProfile.firstName,element.userProfile.lastName,element.userProfile.firstName,element.userProfile.lastName];
+			        rows.push(temp);
+			        rows1.push(temp);
+
+			    });        
+var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
+
+			      doc.autoTable(col, rows,{
+			      theme: 'grid', 
+			      styles: {rowHeight: 11}, 
+
+			     
+			      });
+
+			      doc.autoTable(col1, rows1);
+			      doc.save('txt.pdf');
+		          }
+		    })
+
+      
+	      
+	}
 	
 }

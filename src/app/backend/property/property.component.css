@@ -1,4 +1,9 @@
-
+a.prop-policy {
+    color: #007bff;
+}
+a.prop-policy : hover{
+    color: #007bff;
+}
 .gallery-title
 {
     font-size: 36px;
