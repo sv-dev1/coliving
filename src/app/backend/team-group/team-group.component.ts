@@ -54,6 +54,7 @@ export class TeamGroupComponent implements OnInit {
       for(var i=0;i < this.teamLength;i++){
         this.allTeam.push(response.teams[i]);
       }
+      console.log(this.allTeam);
     })
   }
   openUser(id){

@@ -37,6 +37,9 @@ export class PropertyComponent implements OnInit {
 	  openTeam:boolean =false;
 	  allteam:any=[];
 	  prop_id:any;
+	  roleId:any;
+	  tenant:boolean = false;
+	  landLord:boolean = false;
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -63,17 +66,32 @@ export class PropertyComponent implements OnInit {
 		this.base_url = environment.base_url;
 		this.teamForm = this.formBuilder.group({
 		    team_id: ['', Validators.required],
+		    gchat: ['', Validators.required],
+		    landlord_id: ['', Validators.required],
+		    property_id: ['', Validators.required],
+		    agree: ['', Validators.required],
+
 		}); 
     }
 
 	ngOnInit() {
 	  	 this.getAllProperties();	 
-	  	       
+	  	 this.roleId=sessionStorage.getItem("roleId");
+         if(this.roleId == 4){
+    	     // console.log(this.roleId);
+    	      this.tenant=true;
+         }
+          if(this.roleId == 3){
+    	     // console.log(this.roleId);
+    	      this.landLord=true;
+         }
+
 	}
 
    	getAllProperties() {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
+
 			if(this.allProperties.length > 9 ) {
                   this.isArrayLength  = true;
 		    }
@@ -166,7 +184,7 @@ export class PropertyComponent implements OnInit {
     }
 
     viewFullDetail(property){
-    	console.log('property',property);
+    	//console.log('property',property);
            this.ispropertyInfo =true;
            this.propertyInfo = property;
     }
@@ -179,18 +197,18 @@ export class PropertyComponent implements OnInit {
         this.openTeam=true;
 	    this.data_service.getTeam().subscribe((response: any) =>{
         this.allteam=response.teams;
-             console.log(this.allteam);
+            // console.log(this.allteam);
    	  })
 	}
     teamFormSubmit(){
-    this.submitted=true;
-    if(this.teamForm.invalid){
-             return;
-     }
-       console.log(this.teamForm.value);
-	   console.log(this.prop_id);
-       	this.openTeam=false;
-       	this.teamForm.reset();
+	    this.submitted=true;
+	    if(this.teamForm.invalid){
+	             return;
+	     }
+	       console.log(this.teamForm.value);
+		   console.log(this.prop_id);
+	       this.openTeam=false;
+	       this.teamForm.reset();
     }
 
 }

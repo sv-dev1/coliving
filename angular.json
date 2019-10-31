@@ -29,6 +29,7 @@
               "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/ngx-lightbox/lightbox.css",
+             
               "src/themes/default.theme.scss",
               "src/styles.css"
             ],
