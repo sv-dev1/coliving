@@ -727,38 +727,67 @@ export class HouseChoresComponent implements OnInit {
 
                   if(this.teamRecord.length  != 0){
 		            var doc = new jsPDF();
-			        var col = ["FirstName", "LastName"];
-			        var col1 = ["FirstName", "LastName"];
-
+				    var col = ["Fields", "Inputs"];
 			        var rows = [];
-			        var rows1 = [];
+					var rows1 = [];
 
-
+       		        var a = 13;
+          
 			  /* The following array of object as response from the API req  */
-
-			    
+			  //  console.log( this.teamRecord[0].userProfile);
 		       this.teamRecord.forEach(element => {      
-			        var temp = [element.userProfile.firstName,element.userProfile.lastName,element.userProfile.firstName,element.userProfile.lastName];
-			        rows.push(temp);
-			        rows1.push(temp);
+			       var temp = ["FirstName",element.userProfile.firstName];
+	               rows.push(temp);
+	               var temp = ["LastName",element.userProfile.lastName];
+	              rows.push(temp);
+	              var temp = ["Gender",element.userProfile.gender];
+	              rows.push(temp);
+	              var temp = ["Date Of Birth",element.userProfile.dob];
+	              rows.push(temp);
+			       var temp = ["Address",element.userProfile.address];
+	               rows.push(temp);
+	               var temp = ["Country",element.userProfile.country];
+	              rows.push(temp);
+	              var temp = ["Email",element.userProfile.email];
+	              rows.push(temp);
+	              var temp = ["Biography",element.userProfile.biography];
+	              rows.push(temp);
+			       var temp = ["Interests",element.userProfile.interestes];
+	               rows.push(temp);
+	               var temp = ["Habits",element.userProfile.habits];
+	              rows.push(temp);
+	              var temp = ["Occupation",element.userProfile.occuptation_tt];
+	              rows.push(temp);
+	              var temp = ["PhoneNumber",element.userProfile.phoneNo];
+	              rows.push(temp);
+	              var temp = ["WorkPlace",element.userProfile.work_place];
+	               rows.push(temp);
+	           });        
 
-			    });        
-var startingPage = doc.internal.getCurrentPageInfo().pageNumber;
+					for(var i = 0;i < a;i++){
+                         rows1.push(rows[i]);
+       					 console.log(rows1);
+       					  doc.autoTable(col, rows1,{
+       					   theme: 'grid',  
+       					   styles: {rowHeight: 11,overflow: 'linebreak'}, 
+       					    columnStyles: { 0: {columnWidth: 75},   1: {columnWidth: 110}},
+                            margin: { top: 20, left: 20, right: 20, bottom: 0 },
+							 });
+       					  if(i+1 == a)
+       					  {
+      					        doc.addPage();
+      					        rows1=[];
+							//	console.log("-----------");
+      					  		if(a < rows.length){
+ 									  a=a+13;
+      					  		}
+       					  		
+       					  }
 
-			      doc.autoTable(col, rows,{
-			      theme: 'grid', 
-			      styles: {rowHeight: 11}, 
-
-			     
-			      });
-
-			      doc.autoTable(col1, rows1);
+					}
 			      doc.save('txt.pdf');
 		          }
 		    })
-
-      
-	      
 	}
 	
 }
