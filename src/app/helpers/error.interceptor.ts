@@ -41,10 +41,14 @@ export class ErrorInterceptor implements HttpInterceptor {
             catchError((err: HttpErrorResponse) => {
                 console.log('err',err);
                 const error = err.error.message || err.statusText;
-                if(err.status == 0 && !this.executing){
+                                     console.log(this.executing);
+
+                if(err.status == 0 && this.executing == false){
                    
                     this.toastr.errorToastr('Service Unavailable');
-                    this.executing=true;
+                    setTimeout(()=>{    
+                          this.executing = true;
+                     }, 20000);    
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
@@ -53,7 +57,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 if(err.status == 401 && !this.executing){
                     this.toastr.errorToastr('Session Expired,Please Login again');
-                    this.executing=true;
+                     this.executing = true;
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");

@@ -86,24 +86,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="who_pay">who (payed):</label>
-                                                <angular2-multiselect [data]="userdropdownList" 
-                                                            [settings]="userdropdownSettings" 
-                                                            (onSelect)="onPayedSelectAll($event)" 
-                                                            (onDeSelect)="OnPayedItemDeSelect($event)"
-                                                            (onSelectAll)="onPayedSelectAll($event)"
-                                                            (onDeSelectAll)="onPayedDeSelectAll($event)"
-                                                            formControlName="who_pay" [ngClass]="{ 'is-invalid': submitted && f.who_pay.errors }">
-                                                </angular2-multiselect>
-                                                
-                                            </div>
-                                            <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
-                                            </div>
-
-                                        </div>
-                                        <div class="col-12 col-sm-6">
+                                         <div class="col-12 col-sm-6">
                                             <div class="form-group">
                                                 <label for="bill">Upload Bill:</label>
                                                 <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
@@ -113,6 +96,51 @@
                                                  </div>
                                             </div>
                                         </div>
+                                        <div class="row" *ngFor="let number of repeatRows;let i =index">
+                                            <div class="col-12 col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="who_pay">Select Payee:</label>
+                                                   <select  class='form-control' (change)="selected($event.target.value)"
+                                                       [ngClass]="{ 'is-invalid': submitted && f.who_pay.errors }">
+                                                         <option *ngIf="noData">No Data</option>
+                                                           <option *ngFor="let payee of userselectedItems">{{payee.itemName}}</option>
+                                              
+                                                </select>
+
+                                                </div>
+                                                <div *ngIf="whoPayEmpty"  class="error-msg">Please select bill payers.
+                                                </div>
+                                            </div>
+                                             <div class="col-12 col-sm-3">
+                                                <div class="form-group">
+                                                    <label for="who_pay">Enter amount:</label>
+                                                       <input type="number" class="form-control" placeholder="Price"> 
+                                                </div>
+                                                <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-3">
+                                                <div class="button-user">
+                                                      <label for="who_pay"></label>
+
+                                                     <div class="bill-btn">
+                                                         <a (click)="addmore(i)"> Add More </a>
+                                                     </div>
+                                                                                                      
+                                                    </div>
+                                            </div>
+                                             <div class="col-12 col-sm-3">
+                                                <div class="button-user">
+                                                      <label for="who_pay"></label>
+
+                                                    <!--  <div class="bill-btn">
+                                                         <a (click)="delete(i)"> Delete </a>
+                                                     </div> -->
+                                                                                                      
+                                                    </div>
+                                            </div>
+                                        </div>
+                                       
                                         
                                        
                                         

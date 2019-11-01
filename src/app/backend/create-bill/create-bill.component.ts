@@ -40,7 +40,9 @@ export class CreateBillComponent implements OnInit {
   payerselectedItems:any =[];
   whoPayEmpty:boolean=false;
   assignWhoPayed:any =[];
-
+  noData:boolean=true;
+  addPayee:boolean=true;
+  repeatRows:any= [1];
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -227,27 +229,24 @@ export class CreateBillComponent implements OnInit {
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
+    this.noData=false;
     this.userselectedItems.push(items);
-    //console.log(this.userselectedItems);
   } 
   onUserItemSelect(item:any){
       this.userselectedItems.push(item);
-      //console.log(this.userselectedItems);
+      this.noData=false;
   }
   OnUserItemDeSelect(item:any){
-    //console.log(this.userselectedItems);
+
   }
   onUserDeSelectAll(items: any){
-     // console.log(items);
   }
 
   onPayedSelectAll(items: any){
     this.payerselectedItems.push(items);
-    //console.log(this.userselectedItems);
   } 
   onPayedItemSelect(item:any){
       this.payerselectedItems.push(item);
-      //console.log(this.userselectedItems);
   }
   OnPayedItemDeSelect(item:any){
     //console.log(this.userselectedItems);
@@ -263,5 +262,21 @@ export class CreateBillComponent implements OnInit {
     }
     return true;
 
+  }
+  addmore(i){
+    
+      if(this.userselectedItems.length <= this.repeatRows.length){
+                alert("exceed");
+      }
+      else
+      {
+                this.repeatRows.push(i+1);
+      }
+  }
+  delete(){
+      this.repeatRows.splice(0,1);
+  }
+  selected(info){
+     console.log(info);
   }
 }

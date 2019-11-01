@@ -47,3 +47,8 @@ a.mat-menu-trigger :hover{
     color: white;
 }
 
+.to_do_list-popup {
+    height: 350px;
+    overflow-y: scroll;
+    width: 500px;
+}
