@@ -42,7 +42,7 @@ export class SplitBillComponent implements OnInit {
   getBills(){
   	  this.data_service.getBills().subscribe((response:any) =>{   
 			this.allBills = response.bills;
-     
+     console.log(this.allBills);
 			this.allBills.forEach(obj =>{
         let previous_date = obj.bill.date;
         let latest_date =this.datePipe.transform(this.today, 'yyyy-MM-dd');
@@ -63,9 +63,7 @@ export class SplitBillComponent implements OnInit {
                 color:this.backgroundColor,
                 message: this.dueDatemessage
         });
-    
       })
-     
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 

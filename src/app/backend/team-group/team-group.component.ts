@@ -153,7 +153,7 @@ export class TeamGroupComponent implements OnInit {
    var sdfsdf = this.createTeamForm.value;
    if (/\S/.test(sdfsdf.name)) {
       this.hide=false;
-      this.IsContinue =true;
+      this.IsContinue =true; 
       this.getUsers();
    }
    if (this.createTeamForm.invalid) {

@@ -140,6 +140,7 @@
       </div>
    </div>
 </section>
+<!-- ONLoad Modal -->
 <div class="onload-popup">
    <div class="modal isWelcomeModal" role="dialog" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isWelcomeModal ? 'block' : 'none'" *ngIf="isWelcomeModal"  aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -163,7 +164,6 @@
                </div>
             </div>
             <div class="progress-blue" *ngIf="isProgressBlue">
-               <!-- <div class="progress-25"></div> -->
                <div [ngClass]="{
                   'progress-25': progre,
                   'progress-25N': progOne,
@@ -313,18 +313,15 @@
 </div>
 <!-- Add Task Modal--->
 <div class="container">
-   <!-- The Modal -->
    <div class="modal" id="taskDel" [style.display]="addTaskModal ? 'block' : 'none'" *ngIf="addTaskModal" >
    <div class="modal-dialog modaldialog12">
       <div class="modal-content">
-         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Add Task</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="close()">&times;</span>
             </button>
          </div>
-         <!-- Modal body -->
          <form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
          <div class="modal-body">
             <div class="form-group">
@@ -415,18 +412,15 @@
 </div>
 <!---  Modal to delete TASK  -->
 <div class="container">
-   <!-- The Modal -->
    <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >
    <div class="modal-dialog modaldialog12">
       <div class="modal-content">
-         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Task deletion</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
             </button>
          </div>
-         <!-- Modal body -->
          <div class="modal-body">
             <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
             <p>All information associated to this task will be permanently deleted.
@@ -443,18 +437,15 @@
 </div>
 <!---  Modal to  TASK Info  -->
 <div class="container">
-   <!-- The Modal -->
    <div class="modal" id="taskInfo" [style.display]="taskInfo ? 'block' : 'none'" *ngIf="taskInfo" >
    <div class="modal-dialog modaldialog12">
       <div class="modal-content">
-         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">{{singleTaskData?.task_name}} Task Information</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="close()">&times;</span>
             </button>
          </div>
-         <!-- Modal body -->
          <div class="modal-body">
             <table class="table">
                <tbody>
@@ -491,18 +482,15 @@
 </div>
 <!---  Modal for TeamInfo  -->
 <div class="container">
-   <!-- The Modal -->
    <div class="modal" id="taskInfo" [style.display]="addTeamMember ? 'block' : 'none'" *ngIf="addTeamMember" >
    <div class="modal-dialog modaldialog12">
       <div class="modal-content">
-         <!-- Modal Header -->
          <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Add Member</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="close()">&times;</span>
             </button>
          </div>
-         <!-- Modal body -->
          <div class="modal-body">
              <div class="custm_to-do mb-4">
                         <div class="to-do_heading">
@@ -521,8 +509,7 @@
                                  </span>
                                  <span class="badge badge-primary badge-pill"></span>
                                 <div class="admin-btn">
-                                     <a> Add <!-- {{selectedButton[user.userId] ? 'Remove' : '+ Add'}} -->
-                                                </a>
+                                     <a (click)="addMember(users.login?.userId)" [class.disabled]="isDisabled(users.login?.userId)" > {{isDisabled(users.login?.userId) ? 'Added' :'Add'}}  </a>
                                  </div>
                               </li>
                            </ul>

@@ -113,7 +113,9 @@ export class HouseChoresComponent implements OnInit {
 	teamUser: any= [];
  	list: any= [];
  	teamRecord:any=[];
- 	addTeamMember:boolean=false;
+	 addTeamMember:boolean=false;
+	 selectedButton = [];
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -480,7 +482,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getUsers().subscribe((response:any) =>{   
 			this.allUsersArray = this.allUsersArray.concat(response.users);
 			this.allUsers = this.allUsersArray;
-			console.log(this.allUsers);
+			//console.log(this.allUsers);
 			//console.log('allUsers',this.allUsers[0].login.username);
 			this.isError = false;    
 		}, error =>{ 
@@ -713,9 +715,7 @@ export class HouseChoresComponent implements OnInit {
 	addmember(){
       console.log("add Member");
 	}
-	getTeamUser(){
-
-	}
+	
 	viewteamCV(){
 	      console.log(this.team_id);
 	         this.list.push(this.team_id);
@@ -800,8 +800,22 @@ export class HouseChoresComponent implements OnInit {
 		    })
 	}
 	addUser(team){
-      //  console.log(team);
-        this.addTeamMember=true;
+		this.addTeamMember=true;
+		this.list.push(team.teamId);
+		this.teamRecord=[];
+	   let postArr = {'teamId': this.list};
+	    this.data_service.getTeamUsers(postArr).subscribe((response: any) =>{
+		let resp=response.teams;
+		 resp.forEach(element => {
+			 this.selectedButton.push(element.userId);
+		 });
+	   });
 	}
-	
+	isDisabled(id: any):boolean{
+		// if it exists... disabled == true;
+		return this.selectedButton.includes(id); 
+	}
+	addMember(id){
+           console.log(id);
+	}
 }

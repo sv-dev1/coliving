@@ -96,14 +96,13 @@
                                                  </div>
                                             </div>
                                         </div>
-                                        <div class="row" *ngFor="let number of repeatRows;let i =index">
-                                            <div class="col-12 col-sm-3">
+                                        <div class="row" formArrayName="items"*ngFor="let item of createBillForm.controls['items'].controls; let i = index" >
+                                            <div class="col-12 col-sm-3" [formGroupName]="i">
                                                 <div class="form-group">
                                                     <label for="who_pay">Select Payee:</label>
-                                                   <select  class='form-control' (change)="selected($event.target.value)"
-                                                       [ngClass]="{ 'is-invalid': submitted && f.who_pay.errors }">
+                                                   <select  class='form-control' formControlName="user" (change)="selected($event.target.value)">
                                                          <option *ngIf="noData">No Data</option>
-                                                           <option *ngFor="let payee of userselectedItems">{{payee.itemName}}</option>
+                                                           <option *ngFor="let payee of userselectedItems" [value]="payee.id" [disabled]="selectedInfo.includes(payee.id)">{{payee.itemName}}</option>
                                               
                                                 </select>
 
@@ -111,15 +110,16 @@
                                                 <div *ngIf="whoPayEmpty"  class="error-msg">Please select bill payers.
                                                 </div>
                                             </div>
-                                             <div class="col-12 col-sm-3">
+                                             <div class="col-12 col-sm-3" [formGroupName]="i">
                                                 <div class="form-group">
                                                     <label for="who_pay">Enter amount:</label>
-                                                       <input type="number" class="form-control" placeholder="Price"> 
+                                                       <input type="text" 
+                                                       formControlName="price"class="form-control" placeholder="Price" (keypress)="numberOnly($event)"> 
                                                 </div>
                                                 <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-3">
+                                            <div class="col-12 col-sm-3" [formGroupName]="i">
                                                 <div class="button-user">
                                                       <label for="who_pay"></label>
 
@@ -129,7 +129,7 @@
                                                                                                       
                                                     </div>
                                             </div>
-                                             <div class="col-12 col-sm-3">
+                                             <div class="col-12 col-sm-3" [formGroupName]="i">
                                                 <div class="button-user">
                                                       <label for="who_pay"></label>
 
