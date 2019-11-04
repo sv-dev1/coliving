@@ -81,7 +81,7 @@ export class DataService {
 		const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
 		return this.http.post(this.base_url+'team/users',postArr,httpOptions)
 		.map((response:Response)=>{
-			console.log('TeamUser response',response);
+		//	console.log('TeamUser response',response);
 			return response;
 		})
 		.catch((error:Error) => {

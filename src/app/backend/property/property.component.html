@@ -23,20 +23,22 @@
 						<p>Property:&nbsp;&nbsp;{{property.name}} </p>
 						<p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
 						<p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
-<<<<<<< HEAD
+
 						<button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)" ngbTooltip="View full details."><i class="fa fa-eye"></i>&nbsp;</button>
                         <button id="read-more" class="btn-orange-sm" (click)="sendCV(property)" ngbTooltip="Send CV"><i class="fa fa-refresh"></i>&nbsp;</button>
                         <button id="read-more" class="btn-orange-sm" (click)="sendCVModal(property)" ngbTooltip="Invite a tenant to team"><i class="fas  fa-share"></i>&nbsp;</button>
 					</div>
-=======
+
                   <a class="btn lft-b" (click)="sendCV(property)">Send Team CV</a>
+                  <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a>
+                  <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a>
                   <a class="btn rgt-b" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</a>
 
-					<!-- <button id="read-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
+					<!-- <button id="re
+                    ad-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
               -->
              <div class="clearfix"></div>
             </div>
->>>>>>> d2f7dac7a1ae8d859bb9d130561418a2a9cdf20d
 					
 				</div>
 			</div>
@@ -50,6 +52,8 @@
 		</div>
 	</div>
 </section>
+<!-- Model for Add Property -->
+
 <div class="container">          
 	<!-- The Modal -->
 	<div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenAddPropertyModal ? 'block' : 'none'" *ngIf="isopenAddPropertyModal" >
@@ -223,8 +227,7 @@
 	</div>
 </div>   
 
-
-
+<!-- Model for Property  Info-->
 
 <div class="container">          
 	<!-- The Modal -->
@@ -371,12 +374,21 @@
                   <form [formGroup]="teamForm" (ngSubmit)="teamFormSubmit()">
 
          <div class="modal-body">
+             <label>Select Team</label>
               <p *ngFor="let team of allteam">
                  <input type="radio" value="{{team.teamId}}" formControlName="team_id" [ngClass]="{'is-invalid': submitted && tF.team_id.errors}"> {{team.name}}
               </p>
               <div *ngIf="submitted && tF.team_id.errors">
                      <span class="for-sub-name" *ngIf="tF.team_id.errors.required">Select Your team</span>
               </div>
+              <div>
+                    <label>Add Landlord to GroupChat</label>
+                      <p>
+                     <input type="radio" formControlName="gchat">Yes
+                     <input type="radio" formControlName="gchat">No
+                  </p>
+              </div>
+                <a class="prop-policy"><input type="checkbox" [checked]="false" formControlaame="agree">I agree to the privacy policy</a> 
          </div>
          <div class="modal-footer">
             <button type="submit" class="btn btn-outline-secondary">Ok</button>
