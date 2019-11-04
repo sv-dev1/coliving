@@ -74,8 +74,7 @@ export class CategoryComponent implements OnInit {
     	this.isopenAddCategoryModal = false;
     	this.submitted = false;     
     	this.isalreadyEixst = false;
-        this.CategoryForm.reset();
-        
+        this.CategoryForm.reset(); 
     }
 
     get f() { return this.CategoryForm.controls; }

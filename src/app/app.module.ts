@@ -49,10 +49,12 @@ import { InternationalPhoneNumberModule } from 'ngx-international-phone-number';
 import { PropertyComponent } from './backend/property/property.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { PropertyrequestsComponent } from './backend/propertyrequests/propertyrequests.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatIconModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
+import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 
 
 
@@ -98,8 +100,10 @@ export function provideConfig() {
     BlockCopyPasteDirective,
     CategoryComponent,
     PropertyComponent,
+    PropertyrequestsComponent,
     TeamInfoComponent,
-  
+    FlatmateIssuesComponent,
+ 
   ],
   imports: [
     BrowserModule,

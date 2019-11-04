@@ -21,6 +21,7 @@ import { TaskSuggestionsComponent } from './backend/task-suggestions/task-sugges
 import { CategoryComponent } from './backend/category/category.component';
 import { PropertyComponent } from './backend/property/property.component';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
+import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'categories', component: CategoryComponent, canActivate: [AuthGuard] },
   { path: 'properties', component: PropertyComponent, canActivate: [AuthGuard] },
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
+  { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
   {path: '**', redirectTo: '/'},
  
 ];

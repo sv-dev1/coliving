@@ -20,7 +20,7 @@
 							</span>
 							</div>
 						<div class="card-body" id="demo" *ngIf="isSuggestion == true">
-							<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
+						<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
 								<div class="row">
 									<div class="col-12 col-sm-12">
 										<div class="form-group">
@@ -35,8 +35,6 @@
 								<div class="col-12 col-sm-12 text-center">
 									<button type="submit" class="btn btn-orange-sm pull-left">Submit</button>
 									<button type="button" class="btn btn-orange-sm pull-right" (click)="navigateToTaskList()">Go Back</button>
-									
-									
 								</div>
 							</form>
 						</div>

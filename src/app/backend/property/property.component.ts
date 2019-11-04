@@ -34,6 +34,9 @@ export class PropertyComponent implements OnInit {
       isArrayLength:boolean =false;
       ispropertyInfo:boolean =false;
       propertyInfo:any = [];
+
+      isopenSendCVModal:boolean =false;
+
 	  openTeam:boolean =false;
 	  allteam:any=[];
 	  prop_id:any;
@@ -85,13 +88,11 @@ export class PropertyComponent implements OnInit {
     	     // console.log(this.roleId);
     	      this.landLord=true;
          }
-
 	}
 
    	getAllProperties() {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
-
 			if(this.allProperties.length > 9 ) {
                   this.isArrayLength  = true;
 		    }
@@ -129,7 +130,7 @@ export class PropertyComponent implements OnInit {
     get tF() { return this.teamForm.controls; }
 
     addProperty() {
-    	console.log('formValue',this.addPropertyForm.value);
+    	
       this.submitted = true;
 	    if(this.addPropertyForm.invalid) {
 	        return;
@@ -184,13 +185,15 @@ export class PropertyComponent implements OnInit {
     }
 
     viewFullDetail(property){
+
     	//console.log('property',property);
+
            this.ispropertyInfo =true;
            this.propertyInfo = property;
     }
     closeInfoModal() {
     	this.ispropertyInfo = false;  
-    	this.openTeam=false;
+    	this.openTeam = false;
     }
 	sendCV(property){
 	   this.prop_id=property.propertyId;
@@ -200,7 +203,11 @@ export class PropertyComponent implements OnInit {
             // console.log(this.allteam);
    	  })
 	}
-    teamFormSubmit(){
+
+	sendCVModal(property) {
+		this.isopenSendCVModal = true;
+		this.propertyInfo = property;
+	
 	    this.submitted=true;
 	    if(this.teamForm.invalid){
 	             return;
@@ -210,5 +217,17 @@ export class PropertyComponent implements OnInit {
 	       this.openTeam=false;
 	       this.teamForm.reset();
     }
-
+    closeCvModal() {
+    	this.isopenSendCVModal = false;
+    }
+    teamFormSubmit(){
+	    this.submitted=true;
+	    if(this.teamForm.invalid){
+	         return;
+	    }
+	   	this.openTeam=false;
+	   	this.teamForm.reset();
+    }	
 }
+	
+    
