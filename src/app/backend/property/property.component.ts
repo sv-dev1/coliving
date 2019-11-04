@@ -34,14 +34,12 @@ export class PropertyComponent implements OnInit {
       isArrayLength:boolean =false;
       ispropertyInfo:boolean =false;
       propertyInfo:any = [];
-<<<<<<< HEAD
+
       isopenSendCVModal:boolean =false;
 
-=======
 	  openTeam:boolean =false;
 	  allteam:any=[];
 	  prop_id:any;
->>>>>>> d2f7dac7a1ae8d859bb9d130561418a2a9cdf20d
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
