@@ -4,6 +4,8 @@ import { FormGroup,FormBuilder,Validators} from '@angular/forms';
 import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { first } from 'rxjs/operators';
+import { Socket } from 'ng-socket-io';
+
 @Component({
   selector: 'app-team-group',
   templateUrl: './team-group.component.html',
@@ -28,33 +30,63 @@ export class TeamGroupComponent implements OnInit {
     validationMessage:string = '';
     completed : boolean = false;
     allTeam: any =[];
+    teamArr : any =[];
     list:any=[];
     openUserModel : boolean = false;
     teamUser:any=[];
     teamLength:number = 0;
-  constructor(
-    private formBuilder:FormBuilder,	
-    private router: Router,
-    private data_service : DataService,
-    public toastr: ToastrManager
-  ) { 
+    moreTeam:boolean=false;
+    socket_url:string = '';
+    data:any=[];
+    team_id : string = "";
+    user_id : string = "";
+    nickname: string = "";
+    logged_in_username : string = "";
+    logged_in_id : string = "";
+    valMessage: boolean = false;
+    indexCheck = 0;
+    firstTeam:any;
+    by_default_team : any = [];
+    gruopMessages : any = [];
+    status: boolean = false;
+    message: string = "";
+
+    constructor(
+      private formBuilder:FormBuilder,	
+      private router: Router,
+      private data_service : DataService,
+      public toastr: ToastrManager,   private socket: Socket, 
+
+    ) { 
      
      this.createTeamForm = this.formBuilder.group({
            name:['', [Validators.required, Validators.pattern(/^\S*$/)]],
      });
+      this.socket.connect(); 
+       this.logged_in_id = sessionStorage.getItem("userId");
+
   }
   ngOnInit() {
     this.getTeam();
+    this.logged_in_username = sessionStorage.getItem("user_name");
   }
 
   getTeam(){
     this.teamLength =  this.teamLength+5;
     this.allTeam=[];
     this.data_service.getTeam().subscribe((response: any) =>{
-      for(var i=0;i < this.teamLength;i++){
-        this.allTeam.push(response.teams[i]);
-      }
-      console.log(this.allTeam);
+       this.teamArr=response.teams;
+       this.openChat(this.teamArr[0],0);
+       console.log(this.teamArr[0]);
+       if(this.teamArr.length > 5){
+          this.moreTeam=true;
+          this.teamArr=[];
+             for(var i=0;i < this.teamLength;i++){
+             this.teamArr.push(response.teams[i]);
+          }
+       }
+     
+      console.log(this.teamArr);
     })
   }
   openUser(id){
@@ -121,7 +153,7 @@ export class TeamGroupComponent implements OnInit {
    var sdfsdf = this.createTeamForm.value;
    if (/\S/.test(sdfsdf.name)) {
       this.hide=false;
-      this.IsContinue =true;
+      this.IsContinue =true; 
       this.getUsers();
    }
    if (this.createTeamForm.invalid) {
@@ -171,4 +203,113 @@ export class TeamGroupComponent implements OnInit {
     }     
   }
 
+  openChat(team,index){
+   // console.log(team.teamId);
+    this.team_id = team.teamId;
+    this.user_id = this.logged_in_id;
+    this.nickname = team.name;
+    this.status = !this.status;
+    this.indexCheck = index;  
+    this.joinChat();
+    this.getMessages();
+    this.loadMessages();
+    this.loadMyMessages();  
+  }
+  
+  joinChat() { 
+    if(this.user_id){
+      this.data = {
+        "nickname": this.nickname,
+        "from_id": this.logged_in_id,
+        "username": this.logged_in_username,
+        "to_id": this.team_id,      
+      }
+    } else {
+      this.by_default_team = this.firstTeam;
+      this.data = { 
+        "nickname": this.by_default_team.name,
+        "from_id": this.logged_in_id,
+        "username": this.logged_in_username,
+        "to_id": this.by_default_team.teamId,
+      }
+    }
+        this.socket.emit('set-nickname', this.data);  
+      //this.getMessages();
+      //this.loadMyMessages();
+  }
+  sendMessgae() {
+    if(this.message == '') {
+         this.valMessage = true;
+         return;
+    } else {
+      if(this.user_id ==''){
+      this.by_default_team = this.firstTeam;
+      this.data = {
+        "userId": this.logged_in_id,
+        "teamId": this.by_default_team.teamId,
+        "username": sessionStorage.getItem("user_name"),
+        "msg": this.message
+      }
+      this.gruopMessages.push({
+        "from_id": this.logged_in_id,
+        "teamId": this.by_default_team.teamId,
+        "username": sessionStorage.getItem("user_name"),
+        "message": this.message
+      });
+    } else {
+      this.data = {
+        "userId": this.logged_in_id,
+        "teamId": this.team_id,
+        "username":this.logged_in_username,
+        "msg": this.message
+      }
+      this.gruopMessages.push({
+        "from_id": this.logged_in_id,
+        "teamId": this.team_id,
+        "username":this.logged_in_username,
+        "message": this.message
+      });
+      }
+    }
+
+    
+    this.socket.emit('newMessage', this.data);
+    this.message = '';
+    //this.getMessages()
+    //this.loadMyMessages();
+    //this.loadMessages();
+  }
+  getMessages() {
+    this.socket.on('getMessage', (data) => {
+      this.gruopMessages.push(data);  
+        //console.log('this.gruopMessages',this.gruopMessages);
+      //this.msgData = data;
+    });  
+    
+  } 
+  loadMyMessages() {
+    
+    this.socket.on('messages', (data) => {
+      this.gruopMessages = data.messages; 
+      
+      
+    });
+  }
+  loadMessages() {
+    if(this.user_id){
+      this.data = {
+        "userId": this.user_id,
+        "teamId": this.team_id,
+      }
+    } else {
+      this.by_default_team = this.firstTeam;
+      this.data = {
+        "userId": this.by_default_team.userId,
+        "teamId": this.by_default_team.teamId,
+      }
+    }
+    this.nickname = this.nickname;
+    this.socket.emit('load-messages', this.data);
+        //this.getMessages();
+  }
 }

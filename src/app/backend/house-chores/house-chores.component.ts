@@ -111,8 +111,11 @@ export class HouseChoresComponent implements OnInit {
     last_element:any;
     dateToCalendar:any;
 	teamUser: any= [];
- 	 list: any= [];
- 	 teamRecord:any=[];
+ 	list: any= [];
+ 	teamRecord:any=[];
+	 addTeamMember:boolean=false;
+	 selectedButton = [];
+
 	constructor(
 		private formBuilder:FormBuilder,	
 		private router: Router,
@@ -174,7 +177,6 @@ export class HouseChoresComponent implements OnInit {
 	}
      
 	openChat(team,index){
-		
 		this.team_id = team.teamId;
 		this.user_id = this.logged_in_id;
 		this.nickname = team.name;
@@ -185,6 +187,7 @@ export class HouseChoresComponent implements OnInit {
 		this.loadMessages();
 		this.loadMyMessages();	
 	}
+
 	joinChat() { 
 		if(this.user_id){
 			this.data = {
@@ -202,10 +205,7 @@ export class HouseChoresComponent implements OnInit {
 				"to_id": this.by_default_team.teamId,
 			}
 		}
-
-		
-	//	console.log('join chat data', this.data);
-		this.socket.emit('set-nickname', this.data);	
+        this.socket.emit('set-nickname', this.data);	
   		//this.getMessages();
 		//this.loadMyMessages();
 	}
@@ -482,6 +482,7 @@ export class HouseChoresComponent implements OnInit {
 		this.data_service.getUsers().subscribe((response:any) =>{   
 			this.allUsersArray = this.allUsersArray.concat(response.users);
 			this.allUsers = this.allUsersArray;
+			//console.log(this.allUsers);
 			//console.log('allUsers',this.allUsers[0].login.username);
 			this.isError = false;    
 		}, error =>{ 
@@ -503,6 +504,7 @@ export class HouseChoresComponent implements OnInit {
 	getTeams() {
 		this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeamArray = this.allTeamArray.concat(response.teams);
+			//console.log(this.allTeamArray);
 			this.allTeam = this.allTeamArray;
 			this.firstTeam = this.allTeam[0];
             this.openChat(this.allTeam[0],0);
@@ -659,6 +661,7 @@ export class HouseChoresComponent implements OnInit {
 		this.submitted = false;   
 		this.taskInfo=false;	
 		this.addTaskForm.reset();
+		this.addTeamMember=false;
 		this.renderer.removeClass(document.body, 'modal-open');
 		const html = document.getElementsByTagName('html')[0];
 		html.classList.remove('popCustomHtml');
@@ -712,9 +715,7 @@ export class HouseChoresComponent implements OnInit {
 	addmember(){
       console.log("add Member");
 	}
-	getTeamUser(){
-
-	}
+	
 	viewteamCV(){
 	      console.log(this.team_id);
 	         this.list.push(this.team_id);
@@ -730,38 +731,47 @@ export class HouseChoresComponent implements OnInit {
 				    var col = ["Fields", "Inputs"];
 			        var rows = [];
 					var rows1 = [];
-
-       		        var a = 13;
-          
+					var temp = [];
+       		        var a = 17;
+                    
 			  /* The following array of object as response from the API req  */
 			  //  console.log( this.teamRecord[0].userProfile);
 		       this.teamRecord.forEach(element => {      
-			       var temp = ["FirstName",element.userProfile.firstName];
+			        temp = ["UserName",element.userProfile.firstName + " "+element.userProfile.lastName];
 	               rows.push(temp);
-	               var temp = ["LastName",element.userProfile.lastName];
+	               temp = ["Date Of Birth",element.userProfile.dob];
+	              rows.push(temp); 
+	                temp = ["Email",element.userProfile.email];
 	              rows.push(temp);
-	              var temp = ["Gender",element.userProfile.gender];
+	               temp = ["Gender",element.userProfile.gender];
 	              rows.push(temp);
-	              var temp = ["Date Of Birth",element.userProfile.dob];
+	                temp = ["Nationality",element.userProfile.phoneNo];
 	              rows.push(temp);
-			       var temp = ["Address",element.userProfile.address];
+	                temp = ["PhoneNumber",element.userProfile.phoneNo];
+	              rows.push(temp);
+			        temp = ["Contact Address",element.userProfile.address+" "+element.userProfile.country+" "+element.userProfile.postalCode];
 	               rows.push(temp);
-	               var temp = ["Country",element.userProfile.country];
-	              rows.push(temp);
-	              var temp = ["Email",element.userProfile.email];
-	              rows.push(temp);
-	              var temp = ["Biography",element.userProfile.biography];
-	              rows.push(temp);
-			       var temp = ["Interests",element.userProfile.interestes];
+	               temp = ["Occupation",element.userProfile.occuptation_tt];
 	               rows.push(temp);
-	               var temp = ["Habits",element.userProfile.habits];
+	               temp = ["WorkPlace",element.userProfile.work_place];
+	               rows.push(temp); 
+	                temp = ["Languages",element.userProfile.occuptation_tt];
 	              rows.push(temp);
-	              var temp = ["Occupation",element.userProfile.occuptation_tt];
-	              rows.push(temp);
-	              var temp = ["PhoneNumber",element.userProfile.phoneNo];
-	              rows.push(temp);
-	              var temp = ["WorkPlace",element.userProfile.work_place];
+	               temp = ["PriceRange",element.userProfile.work_place];
 	               rows.push(temp);
+	                temp = ["Rental Description",element.userProfile.occuptation_tt];
+	              rows.push(temp);
+	               temp = ["StayDate",element.userProfile.work_place];
+	               rows.push(temp);
+	                temp = ["WakeUp Time",element.userProfile.occuptation_tt];
+	              rows.push(temp);
+	               temp = ["Biography",element.userProfile.biography];
+	              rows.push(temp);
+			        temp = ["Interests",element.userProfile.interestes];
+	               rows.push(temp);
+	                temp = ["Habits",element.userProfile.habits];
+	              rows.push(temp);
+	              
 	           });        
 
 					for(var i = 0;i < a;i++){
@@ -769,7 +779,7 @@ export class HouseChoresComponent implements OnInit {
        					 console.log(rows1);
        					  doc.autoTable(col, rows1,{
        					   theme: 'grid',  
-       					   styles: {rowHeight: 11,overflow: 'linebreak'}, 
+       					   styles: {rowHeight: 10,overflow: 'linebreak'}, 
        					    columnStyles: { 0: {columnWidth: 75},   1: {columnWidth: 110}},
                             margin: { top: 20, left: 20, right: 20, bottom: 0 },
 							 });
@@ -779,15 +789,33 @@ export class HouseChoresComponent implements OnInit {
       					        rows1=[];
 							//	console.log("-----------");
       					  		if(a < rows.length){
- 									  a=a+13;
+ 									  a=a+17;
       					  		}
        					  		
        					  }
 
 					}
-			      doc.save('txt.pdf');
+			      doc.save(this.nickname+'.pdf');
 		          }
 		    })
 	}
-	
+	addUser(team){
+		this.addTeamMember=true;
+		this.list.push(team.teamId);
+		this.teamRecord=[];
+	   let postArr = {'teamId': this.list};
+	    this.data_service.getTeamUsers(postArr).subscribe((response: any) =>{
+		let resp=response.teams;
+		 resp.forEach(element => {
+			 this.selectedButton.push(element.userId);
+		 });
+	   });
+	}
+	isDisabled(id: any):boolean{
+		// if it exists... disabled == true;
+		return this.selectedButton.includes(id); 
+	}
+	addMember(id){
+           console.log(id);
+	}
 }

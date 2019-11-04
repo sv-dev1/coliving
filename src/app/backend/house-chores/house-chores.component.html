@@ -1,197 +1,136 @@
 <section class="wrapper work-panel">
-      <app-header></app-header>
-      <app-sidebar></app-sidebar>
-      <div class="work-block">
-         <div class="container">
-            <div class="row">
-               <div class="col-12">
-                  <ul class="nav nav-tabs custom-tabs">
-                     <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#active-booking">All</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#create-event">Calendar</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#completed-booking">Group</a>
-                     </li>
-                     <li class="nav-item1">
-                        <div class="add-btn-top pl-2 mt-1"><button type="button" class="close" (click)="openaddTask()" placement="right" ngbTooltip="Add task."><span>+</span></button> </div>
-                     </li>
-                  </ul>
-                  <!-- Tab panes -->
-                  <div class="tab-content">
-                     <div class="tab-pane fade active show" id="active-booking">
-                        <div class="custm_to-do mb-4">
-                           <div class="to-do_heading">
-                              <h2>To-do</h2>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">{{ pending_length ? pending_length.length : '0' }}
-                              </span>
-                              </button>
-                           </div>
-                           <div class="to_do_list">
-                              <ul class="list-group" *ngFor="let task of pending_length,index as i">
-                                 <li class="list-group-item active-user" >
-                                    <span (click)="navigateToSuggestions(task.id)" placement="right" ngbTooltip="Click On {{task.task_name}} To Add Or View Suggestions." >{{task.task_name}}
-                                    </span>
-                                    <span class="badge badge-primary badge-pill"></span>
-                                    <span class="delete" ngbTooltip="Click To Delete The Task {{task.task_name}}" (click)="deleteTaskDailog(task)">&times;</span>
-                                 </li>
-                              </ul>
-                              <p class="text-center zero-length" *ngIf="pending_length.length=='0'">No pending task available at moment.</p>
-                           </div>
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="work-block">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <ul class="nav nav-tabs custom-tabs">
+                  <li class="nav-item">
+                     <a class="nav-link active" data-toggle="tab" href="#active-booking">All</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#create-event">Calendar</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" data-toggle="tab" href="#completed-booking">Group</a>
+                  </li>
+                  <li class="nav-item1">
+                     <div class="add-btn-top pl-2 mt-1"><button type="button" class="close" (click)="openaddTask()" placement="right" ngbTooltip="Add task."><span>+</span></button> </div>
+                  </li>
+               </ul>
+               <!-- Tab panes -->
+               <div class="tab-content">
+                  <div class="tab-pane fade active show" id="active-booking">
+                     <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>To-do</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">{{ pending_length ? pending_length.length : '0' }}
+                           </span>
+                           </button>
                         </div>
-                        <div class="custm_to-do mb-4">
-                           <div class="to-do_heading">
-                              <h2>Complete</h2>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">{{complete_length ? complete_length.length : '0' }}</span>
-                              </button>
-                           </div>
-                           <div class="to_do_list">
-                              <ul class="list-group" *ngFor="let task of complete_length,index as i">
-                                 <li class="list-group-item active-user">{{task.task_name}}
-                                    <span class="badge badge-primary badge-pill"></span>
-                                 </li>
-                              </ul>
-                               <p class="text-center zero-length" *ngIf="complete_length.length=='0'">No completed task available at moment.</p>
-                           </div>
-                        </div>
-                        <div class="custm_to-do mb-4">
-                           <div class="to-do_heading">
-                              <h2>Suggestions</h2>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">5</span>
-                              </button>
-                           </div>
-                           <div class="to_do_list">
-                              <ul class="list-group">
-                                 <li class="list-group-item active-plus">
-                                    Clean outside of fridge
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Tidy desk
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Clean drawers
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Fold towels
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                                 <li class="list-group-item active-plus">
-                                    Clean drawers
-                                    <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                 </li>
-                              </ul>
-                           </div>
+                        <div class="to_do_list">
+                           <ul class="list-group" *ngFor="let task of pending_length,index as i">
+                              <li class="list-group-item active-user" >
+                                 <span (click)="navigateToSuggestions(task.id)" placement="right" ngbTooltip="Click On {{task.task_name}} To Add Or View Suggestions." >{{task.task_name}}
+                                 </span>
+                                 <span class="badge badge-primary badge-pill"></span>
+                                 <span class="delete" ngbTooltip="Click To Delete The Task {{task.task_name}}" (click)="deleteTaskDailog(task)">&times;</span>
+                              </li>
+                           </ul>
+                           <p class="text-center zero-length" *ngIf="pending_length.length=='0'">No pending task available at moment.</p>
                         </div>
                      </div>
-                     <div class="tab-pane fade" id="create-event">
-                        <div class="calendar-wrapper custm_calender">
-                           <div class='app-calendar'>
-                              <full-calendar
-                              defaultView="dayGridMonth"
-                              [header]="{
-                              left: 'prev,next today',
-                              center: 'title',
-                              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                              }"
-                              [plugins]="calendarPlugins"
-                              [weekends]="calendarWeekends"
-                              [events]="calendarEvents"
-                              (dateClick)="handleDateClick($event)"
-                              (eventClick)="event($event)"
-                              ></full-calendar>
-                           </div>
+                     <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>Complete</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">{{complete_length ? complete_length.length : '0' }}</span>
+                           </button>
+                        </div>
+                        <div class="to_do_list">
+                           <ul class="list-group" *ngFor="let task of complete_length,index as i">
+                              <li class="list-group-item active-user">{{task.task_name}}
+                                 <span class="badge badge-primary badge-pill"></span>
+                              </li>
+                           </ul>
+                           <p class="text-center zero-length" *ngIf="complete_length.length=='0'">No completed task available at moment.</p>
                         </div>
                      </div>
-                     <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
-                        <div class="team-member">
-                           <div class="custom_member">
-                              <!--- Chat HTML START -------->
-                              <div class="container">
-                                 <div class="messaging">
-                                    <div class="inbox_msg">
-                                       <div class="inbox_people">
-                                          <div class="headind_srch">
-                                             <div class="recent_heading">
-                                                <h4>Groups</h4>
-                                             </div>
-                                          </div>
-                                          <div class="inbox_chat" >
-                                             <div class="chat_list" *ngFor="let team of allTeam; let index = index" [class.active_chat]="index == this.indexCheck">
-                                             <div class="chat_people">
-                                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                                <div class="chat_ib" (click)="openChat(team,index)">
-                                                   <h5 >
-                                                      {{team?.name}} <!-- <span class="chat_date">Dec 25</span> -->
-                                                   </h5>
-                                                   <p>
-                                                    
-                                                   </p>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="mesgs">
-                                       <div class="msg_history" *ngFor="let message of gruopMessages,index as i">
-                                          <div class="incoming_msg" *ngIf="message.from_id != logged_in_id">
-                                             <div class="incoming_msg_img">
-                                                <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
-                                             </div>
-                                             <div class="received_msg" >
-                                                <div class="received_withd_msg">
-                                                   <p> {{ message.message}} </p>
-                                                   <span class="time_date"> {{message.userName}}</span>
-                                                   <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="outgoing_msg" *ngIf="message.from_id == logged_in_id">
-                                             <div class="sent_msg">
-                                                <p> {{ message.message}} </p>
-
-                                                <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
-                                             </div>
-                                          </div>
-                                       </div>  
-                                    </div>
-                                    <div class="type_msg">
-                                          <div class="input_msg_write">
-                                             <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''">
-                                             <button class="msg_send_btn add_member_btn" type="button" (click)="sendMessgae()" ngbTooltip="Send Message"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                             <button class="msg_send_btn" type="button" ngbTooltip="Add Member To Group"> <i class="fa fa-user" aria-hidden="true"></i></button>
-                                          </div>
-                                      </div>
-                                     <div _ngcontent-dsn-c2="" class="headind_srch testing"><div _ngcontent-dsn-c2="" class="recent_heading"><h4 _ngcontent-dsn-c2=""> Team </h4>
-
-                                     </div>
-                                     <a mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                                      <mat-icon>more_vert</mat-icon>
-                                    </a>
-                                    <mat-menu #menu="matMenu">
-                                      <button mat-menu-item (click)="addmember()">
-                                        <mat-icon>group_add</mat-icon>
-                                        <span>Add Member</span>
-                                      </button>
-                                      <button mat-menu-item (click)="viewteamCV()">
-                                        <mat-icon>group</mat-icon>
-                                        <span>View Team CV</span>
-                                      </button>
-                                    </mat-menu>
-                                  </div>
-                                 </div>
-                                 
-                                   
-                              </div>
-                           </div>
-                           <!--- Chat HTML START End-------->
+                     <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>Suggestions</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">5</span>
+                           </button>
+                        </div>
+                        <div class="to_do_list">
+                           <ul class="list-group">
+                              <li class="list-group-item active-plus">
+                                 Clean outside of fridge
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Tidy desk
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Clean drawers
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Fold towels
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                              <li class="list-group-item active-plus">
+                                 Clean drawers
+                                 <span class="badge badge-primary badge-pill"><i class="fa fa-times" aria-hidden="true"></i></span>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="create-event">
+                     <div class="calendar-wrapper custm_calender">
+                        <div class='app-calendar'>
+                           <full-calendar
+                           defaultView="dayGridMonth"
+                           [header]="{
+                           left: 'prev,next today',
+                           center: 'title',
+                           right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                           }"
+                           [plugins]="calendarPlugins"
+                           [weekends]="calendarWeekends"
+                           [events]="calendarEvents"
+                           (dateClick)="handleDateClick($event)"
+                           (eventClick)="event($event)"
+                           ></full-calendar>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade custm_plus col-md-12" id="completed-booking">
+                     <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>Group Listing</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">{{ allTeamArray ? allTeamArray.length : '0' }}
+                           </span>
+                           </button>
+                        </div>
+                        <div class="to_do_list">
+                           <ul class="list-group" *ngFor="let team of allTeamArray,index as i">
+                              <li class="list-group-item active-user" >
+                                 <span (click)="navigateToSuggestions(team.id)" placement="right">{{team.name}}
+                                 </span>
+                                 <span class="badge badge-primary badge-pill"></span>
+                                 <span class="delete" (click)="addUser(team)" ngbTooltip="Click To Add User in {{team.name}}">
+                                 <i class="material-icons">playlist_add</i>
+                                 </span>
+                              </li>
+                           </ul>
+                           <p class="text-center zero-length" *ngIf="allTeamArray.length=='0'">No Team available at moment.</p>
                         </div>
                      </div>
                   </div>
@@ -199,10 +138,11 @@
             </div>
          </div>
       </div>
-      </div>
+   </div>
 </section>
+<!-- ONLoad Modal -->
 <div class="onload-popup">
-      <div class="modal isWelcomeModal" role="dialog" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isWelcomeModal ? 'block' : 'none'" *ngIf="isWelcomeModal"  aria-hidden="true">
+   <div class="modal isWelcomeModal" role="dialog" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isWelcomeModal ? 'block' : 'none'" *ngIf="isWelcomeModal"  aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
          <div class="modal-content">
             <div class="modal-header-center p-3 " id="isWelcomeBlock" *ngIf="isWelcomeBlock">
@@ -224,7 +164,6 @@
                </div>
             </div>
             <div class="progress-blue" *ngIf="isProgressBlue">
-               <!-- <div class="progress-25"></div> -->
                <div [ngClass]="{
                   'progress-25': progre,
                   'progress-25N': progOne,
@@ -248,7 +187,8 @@
                            <div class="kid-bx text-center p-3">
                               <h6 class="mb-3">Partying</h6>
                               <div *ngIf="!party">
-                                    <i class="fas fa-glass-cheers fa-5x"></i>                              </div>
+                                 <i class="fas fa-glass-cheers fa-5x"></i>                              
+                              </div>
                               <div *ngIf="party">
                                  <p><input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> Yes</p>
                                  <p><input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> No</p>
@@ -266,7 +206,8 @@
                            <div class="kid-bx text-center p-3">
                               <h6 class="mb-3">Alcohol</h6>
                               <div *ngIf="!party">
-                                    <i class="fas fa-wine-bottle fa-5x"></i>                              </div>
+                                 <i class="fas fa-wine-bottle fa-5x"></i>                              
+                              </div>
                               <div *ngIf="party" [ngClass]="{ 'is-invalid': submitted && wf.alcohol.errors }">
                               <p><input type="radio" formControlName="alcohol" value="0"> Yes</p>
                               <p><input type="radio" formControlName="alcohol" value="1"> No</p>
@@ -284,7 +225,7 @@
                         <div class="kid-bx text-center p-3">
                            <h6 class="mb-3">Smoking</h6>
                            <div *ngIf="!party">
-                                 <i class="fas fa-smoking fa-5x"></i>
+                              <i class="fas fa-smoking fa-5x"></i>
                            </div>
                            <div *ngIf="party" [ngClass]="{ 'is-invalid': submitted && wf.smoking.errors }">
                            <p><input type="radio" formControlName="smoking" value="0"> Yes</p>
@@ -365,197 +306,222 @@
          <button type="button" class="btn btn-secondary" (click)="back('2')">Back</button>
          <button type="button" class="btn btn-secondary" (click)="onNextStepClick('3')">Next</button>
       </div>
-      </form>
-   </div>
-   </div>
+   </form>
    </div>
 </div>
- 
+</div>
+</div>
 <!-- Add Task Modal--->
-
 <div class="container">
-      <!-- The Modal -->
-      <div class="modal" id="taskDel" [style.display]="addTaskModal ? 'block' : 'none'" *ngIf="addTaskModal" >
-      <div class="modal-dialog modaldialog12">
-         <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-               <h4 class="modal-title" id="modal-title">Add Task</h4>
-               <button type="button" class="close" aria-describedby="modal-title">
-               <span aria-hidden="true" (click)="close()">&times;</span>
-               </button>
-            </div>
-            <!-- Modal body -->
-             <form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
-               <div class="modal-body">
-                  <div class="form-group">
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
-                  <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
-                     <span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
-                     <span class="for-sub-name" *ngIf="f.taskName.errors.pattern">  There should be no space in Task Name.</span>
-                  </div>
-               </div>
-                 <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Assign To
-                        <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
-                           <option value="" disabled>Please select one option</option>
-                           <option *ngFor="let users of allUsers" value="{{users?.userId}}">
-                              {{users.login?.username}}
-                           </option>
-                        </select>
-                        <div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.assignTo.errors.required">Assign user to this task.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Due Date
-                        <input type="text"
-                        placeholder="Datepicker"
-                        class="form-control"
-                        bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
-                        <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <i class="fa fa-edit" aria-hidden="true"></i>&nbsp;Category:Communal
-                        <select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
-                           <option value="" disabled>Please select one option</option>
-                           <option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
-                              {{categories?.name}} 
-                           </option>
-                        </select>
-                        <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <i class="fa fa-image" aria-hidden="true"></i>&nbsp;Upload Photo
-                        <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
-                        <img [src]="url" height="200" *ngIf="url !=''"> <br/>
-                        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="assign_name">
-                        <i class="fa fa-notes" aria-hidden="true"></i>&nbsp;Notes
-                        <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
-                        <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-                  
-
-
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
-                  <button type="submit" class="btn btn-orange-sm">Yes,Insert It</button>
-               </div>
-          </form>
+   <div class="modal" id="taskDel" [style.display]="addTaskModal ? 'block' : 'none'" *ngIf="addTaskModal" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Add Task</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="close()">&times;</span>
+            </button>
          </div>
+         <form [formGroup]="addTaskForm" (ngSubmit)="addTask(addTaskForm.value)">
+         <div class="modal-body">
+            <div class="form-group">
+               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task name" formControlName="taskName" [ngClass]="{ 'is-invalid': submitted && f.taskName.errors }">
+               <div *ngIf="submitted && f.taskName.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="f.taskName.errors.required">Task Name is required.</span>
+                  <span class="for-sub-name" *ngIf="f.taskName.errors.pattern">  There should be no space in Task Name.</span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <i class="fa fa-user" aria-hidden="true"></i>&nbsp;Assign To
+                     <select class="custom-select form-control" formControlName="assignTo" [ngClass]="{ 'is-invalid': submitted && f.assignTo.errors }">
+                        <option value="" disabled>Please select one option</option>
+                        <option *ngFor="let users of allUsers" value="{{users?.userId}}">
+                           {{users.login?.username}}
+                        </option>
+                     </select>
+                     <div *ngIf="submitted && f.assignTo.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.assignTo.errors.required">Assign user to this task.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;Due Date
+                     <input type="text"
+                     placeholder="Datepicker"
+                     class="form-control"
+                     bsDatepicker formControlName="dueDate" [minDate]="today" [ngClass]="{ 'is-invalid': submitted && f.dueDate.errors }" >
+                     <div *ngIf="submitted && f.dueDate.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.dueDate.errors.required">Due Date is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <i class="fa fa-edit" aria-hidden="true"></i>&nbsp;Category:Communal
+                     <select class="custom-select form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                        <option value="" disabled>Please select one option</option>
+                        <option *ngFor="let categories of allCategories" value="{{categories?.category_id}}">
+                           {{categories?.name}} 
+                        </option>
+                     </select>
+                     <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <i class="fa fa-image" aria-hidden="true"></i>&nbsp;Upload Photo
+                     <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
+                     <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+                     <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="assign_name">
+                     <i class="fa fa-notes" aria-hidden="true"></i>&nbsp;Notes
+                     <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="notes" [ngClass]="{ 'is-invalid': submitted && f.notes.errors }"></textarea>
+                     <div *ngIf="submitted && f.notes.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.notes.errors.required">Notes is required.</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+            <button type="submit" class="btn btn-orange-sm">Yes,Insert It</button>
+         </div>
+         </form>
       </div>
    </div>
 </div>
-
-
-<!----- End Add task Modal -->
+</div>
 <!---  Modal to delete TASK  -->
 <div class="container">
-      <!-- The Modal -->
-      <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >
-      <div class="modal-dialog modaldialog12">
-         <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-               <h4 class="modal-title" id="modal-title">Task deletion</h4>
-               <button type="button" class="close" aria-describedby="modal-title">
-               <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
-               </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-               <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
-               <p>All information associated to this task will be permanently deleted.
-                  <span class="text-danger">This operation can not be undone.</span>
-               </p>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-outline-secondary" (click)="closeDeleteTaskModal(taskName)">Cancel</button>
-               <button type="button" class="btn btn-orange-sm" (click)="deleteTask(taskId)">Yes,Delete It</button>
-            </div>
+   <div class="modal" id="taskDel" [style.display]="deleteTaskModal ? 'block' : 'none'" *ngIf="deleteTaskModal" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Task deletion</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeDeleteTaskModal(taskName)">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">{{taskName}}</span> task?</strong></p>
+            <p>All information associated to this task will be permanently deleted.
+               <span class="text-danger">This operation can not be undone.</span>
+            </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeDeleteTaskModal(taskName)">Cancel</button>
+            <button type="button" class="btn btn-orange-sm" (click)="deleteTask(taskId)">Yes,Delete It</button>
          </div>
       </div>
    </div>
 </div>
-
-
-   <!---  Modal to delete TASK  -->
+</div>
+<!---  Modal to  TASK Info  -->
 <div class="container">
-      <!-- The Modal -->
-      <div class="modal" id="taskInfo" [style.display]="taskInfo ? 'block' : 'none'" *ngIf="taskInfo" >
-      <div class="modal-dialog modaldialog12">
-         <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-               <h4 class="modal-title" id="modal-title">{{singleTaskData?.task_name}} Task Information</h4>
-               <button type="button" class="close" aria-describedby="modal-title">
-               <span aria-hidden="true" (click)="close()">&times;</span>
-               </button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-               <table class="table">
-                  <tbody>
-                     <tr>
-                        <th>Task:</th>
-                        <td>{{singleTaskData?.task_name}}</td>
-                     </tr>
-                     <tr>
-                        <th>More Info:</th>
-                        <td class="noteList">{{singleTaskData?.notes}}</td>
-                     </tr>
-                     <tr>
-                        <th>AssignTo:</th>
-                        <td>{{singleTaskData?.assignTo}}</td>
-                     </tr>
-                     <tr>
-                        <th>DueDate:</th>
-                        <td>{{singleTaskData?.due_date}}</td>
-                     </tr>
-                     <tr>
-                        <th>Status:</th>
-                        <td>{{singleTaskData?.status}}</td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
-               <button type="button" class="btn btn-orange-sm" (click)="navigateToSuggestions(singleTaskData?.taskId)">Go to view suggestions</button>
-            </div>
+   <div class="modal" id="taskInfo" [style.display]="taskInfo ? 'block' : 'none'" *ngIf="taskInfo" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">{{singleTaskData?.task_name}} Task Information</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="close()">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <table class="table">
+               <tbody>
+                  <tr>
+                     <th>Task:</th>
+                     <td>{{singleTaskData?.task_name}}</td>
+                  </tr>
+                  <tr>
+                     <th>More Info:</th>
+                     <td class="noteList">{{singleTaskData?.notes}}</td>
+                  </tr>
+                  <tr>
+                     <th>AssignTo:</th>
+                     <td>{{singleTaskData?.assignTo}}</td>
+                  </tr>
+                  <tr>
+                     <th>DueDate:</th>
+                     <td>{{singleTaskData?.due_date}}</td>
+                  </tr>
+                  <tr>
+                     <th>Status:</th>
+                     <td>{{singleTaskData?.status}}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+            <button type="button" class="btn btn-orange-sm" (click)="navigateToSuggestions(singleTaskData?.taskId)">Go to view suggestions</button>
          </div>
       </div>
    </div>
 </div>
+</div>
+<!---  Modal for TeamInfo  -->
+<div class="container">
+   <div class="modal" id="taskInfo" [style.display]="addTeamMember ? 'block' : 'none'" *ngIf="addTeamMember" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Add Member</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="close()">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+             <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                           <h2>Group Listing</h2>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">{{ allUsers ? allUsers.length : '0' }}
+                           </span>
+                           </button>
+                        </div>
+                        <div class="to_do_list-popup">
+                           <ul class="list-group" *ngFor="let users of allUsers,index as i">
 
+                              <li class="list-group-item active-user" >
+                                 <span placement="right">                        {{users.login?.username}}
+
+                                 </span>
+                                 <span class="badge badge-primary badge-pill"></span>
+                                <div class="admin-btn">
+                                     <a (click)="addMember(users.login?.userId)" [class.disabled]="isDisabled(users.login?.userId)" > {{isDisabled(users.login?.userId) ? 'Added' :'Add'}}  </a>
+                                 </div>
+                              </li>
+                           </ul>
+                           <p class="text-center zero-length" *ngIf="allTeamArray.length=='0'">No Team available at moment.</p>
+                        </div>
+                     </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="close()">Cancel</button>
+            <button type="button" class="btn btn-orange-sm">OK</button>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
