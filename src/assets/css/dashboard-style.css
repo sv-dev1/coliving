@@ -2336,7 +2336,23 @@ h5.size {
     font-weight: 500;
     cursor: pointer;
 }
-.admin-btn a{ background: #09f;}
+.admin-btn a{ background: #ed502d;}
+.bill-btn  {
+    position: relative;
+    right: 0;
+    top: 10px;
+}
+.bill-btn a{
+    background: #09f;
+    color: #fff !important;
+    display: inline-block;
+    padding: 4px 15px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.bill-btn a{ background: #ed502d;}
 .remove-btn a { background: #ed502d;   
 }
 

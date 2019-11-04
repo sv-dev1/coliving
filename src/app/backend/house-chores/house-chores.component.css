@@ -1,6 +1,8 @@
 .msg_history {height: none !important;}
 
-
+.disabled {
+    cursor: not-allowed;
+  }
 .type_msg {
     border-top: 1px solid #c4c4c4;
     position: absolute;
@@ -47,3 +49,8 @@ a.mat-menu-trigger :hover{
     color: white;
 }
 
+.to_do_list-popup {
+    height: 350px;
+    overflow-y: scroll;
+    width: 500px;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-import { FormGroup,FormBuilder,Validators} from '@angular/forms';
+import { FormGroup,FormBuilder,Validators, FormArray} from '@angular/forms';
 import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { first } from 'rxjs/operators';
@@ -40,7 +40,13 @@ export class CreateBillComponent implements OnInit {
   payerselectedItems:any =[];
   whoPayEmpty:boolean=false;
   assignWhoPayed:any =[];
-
+  noData:boolean=true;
+  addPayee:boolean=true;
+  repeatRows:any= [1];
+  payeeNameArr = [];
+  payeePriceArr = [];
+  PayeeList: any=[];
+  selectedInfo: any =[];
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -56,7 +62,9 @@ export class CreateBillComponent implements OnInit {
         date:['', Validators.required],
         bill:['', Validators.required],
         assign_to:['', Validators.required],
-        who_pay:['', Validators.required]
+        items: this.formBuilder.array([this.createItem()])
+        //  payees:this.formBuilder.array([this.formBuilder.group({user:['', Validators.required],price:['', Validators.required]})]),      //upload_bill: new FormControl(''),
+
     });
     this.base_url = environment.base_url;
 
@@ -66,6 +74,12 @@ export class CreateBillComponent implements OnInit {
     this.getTeam();
   }
 
+  createItem() {
+    return this.formBuilder.group({
+      user: [''],
+      price: ['']
+    })
+  }
   get f() {  
     return this.createBillForm.controls; 
   }
@@ -85,7 +99,8 @@ export class CreateBillComponent implements OnInit {
     }
   }
   createBill(){
-   
+      console.log(this.createBillForm.value);
+     
       if(this.createBillForm.value['team']=="")
       {
         this.teamEmpty=true;
@@ -94,27 +109,28 @@ export class CreateBillComponent implements OnInit {
       {
         this.userEmpty=true;
       }
-      if(this.createBillForm.value['who_pay']=="")
+      if(this.createBillForm.value['items']=="")
       {
         this.whoPayEmpty=true;
       }
       this.submitted = true;
         if (this.createBillForm.invalid) {
-
           return;
         }
         else{
           let data=this.createBillForm.value;
-          // console.log(data.team);
+           console.log(data.items);
+           data.items.forEach(obj => {
+            this.payeeNameArr.push(obj.user);
+            this.payeePriceArr.push(obj.price);
+            });
             data.team.forEach(element => {
                 this.teamName.push(element.id);
             });
             data.assign_to.forEach(element => {
               this.assignUser.push(element.id);
             });
-            data.who_pay.forEach(element => {
-              this.assignWhoPayed.push(element.id);
-            });
+           
             const input_data = {
               "team" : data.team,
               "title" : data.title,      
@@ -122,7 +138,6 @@ export class CreateBillComponent implements OnInit {
               "date" : this.datePipe.transform(data.date, 'yyyy-MM-dd'),
               "bill" : this.fileData,
               "assign_to" : data.assign_to,
-              "who_pay" : data.who_pay
             }
             const formData = new FormData();
                 formData.append('title', input_data.title);
@@ -131,7 +146,8 @@ export class CreateBillComponent implements OnInit {
                 formData.append('amount', input_data.amount);
                 formData.append('date', input_data.date);
                 formData.append('userId', this.assignUser);
-                formData.append('who_pay', this.assignWhoPayed);   
+                formData.append('payee_name', (this.payeeNameArr).toString());
+                formData.append('payee_price',(this.payeePriceArr).toString());                  
             let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
             token = sessionStorage.getItem("auth_token"); 
@@ -212,6 +228,7 @@ export class CreateBillComponent implements OnInit {
     this.onTeamSelection();
     }
   OnItemDeSelect(item:any){
+    console.log(item);
     this.list.splice(this.list.indexOf(this.list), 1);
     this.onTeamSelection();
   }
@@ -227,27 +244,24 @@ export class CreateBillComponent implements OnInit {
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
+    this.noData=false;
     this.userselectedItems.push(items);
-    //console.log(this.userselectedItems);
   } 
   onUserItemSelect(item:any){
       this.userselectedItems.push(item);
-      //console.log(this.userselectedItems);
+      this.noData=false;
   }
   OnUserItemDeSelect(item:any){
-    //console.log(this.userselectedItems);
+
   }
   onUserDeSelectAll(items: any){
-     // console.log(items);
   }
 
   onPayedSelectAll(items: any){
     this.payerselectedItems.push(items);
-    //console.log(this.userselectedItems);
   } 
   onPayedItemSelect(item:any){
       this.payerselectedItems.push(item);
-      //console.log(this.userselectedItems);
   }
   OnPayedItemDeSelect(item:any){
     //console.log(this.userselectedItems);
@@ -264,4 +278,24 @@ export class CreateBillComponent implements OnInit {
     return true;
 
   }
+  addmore(i){
+    
+      if(this.userselectedItems.length <= this.repeatRows.length){
+                alert("exceed");
+      }
+      else
+      {
+          this.repeatRows.push(i+1);
+          (this.createBillForm.controls['items'] as FormArray).push(this.createItem());
+      }
+    //  console.log(this.createBillForm.controls['items']);
+ 
+  }
+  delete(){
+      this.repeatRows.splice(0,1);
+  }
+  selected(info){
+    this.selectedInfo.push(info);
+   }
+      
 }

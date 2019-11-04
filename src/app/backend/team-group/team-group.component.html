@@ -61,7 +61,7 @@
                                    </tr>
                                 </thead>
                                 <tbody>
-                                   <tr *ngFor="let team of allTeam; let i = index">
+                                   <tr *ngFor="let team of teamArr; let i = index">
                                       <td>{{team?.name}}</td>
                                       <td>Group Info <i class="far fa-plus-square add-icon" (click)="openUser(team.teamId)"></i></td>
                                    </tr>
@@ -72,7 +72,7 @@
                        </div>
                        <div class="col-12">
                           <div class="btn-center">
-                             <button type="button" class="btn btn-colored" (click)="getTeam()">Load More Teams</button>
+                             <button type="button" class="btn btn-colored" (click)="getTeam()" *ngIf="moreTeam">Load More Teams</button>
                           </div>
                        </div>
                     </div>
@@ -131,106 +131,92 @@
                           </div>
                        </div>
                     </div>
-                    <div class="model-inside-text">
-                       <!-- Modal -->
-                       <div class="modal fade" id="group-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                             <div class="modal-content">
-                                <div class="modal-header">
-                                   <h5 class="modal-title" id="exampleModalLabel">My Group</h5>
-                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                   <span aria-hidden="true">&times;</span>
-                                   </button>
-                                </div>
-                                <div class="modal-body">
-                                   <div class="group-member">
-                                      <div class="media">
-                                         <img class="mr-3" src="assets/images/avatar.png">
-                                         <div class="media-body">
-                                            <h6 class="mt-0">Member 1<span><i class="fas fa-pencil-alt"></i></span></h6>
-                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
-                                         </div>
-                                      </div>
-                                   </div>
-                                   <div class="group-member">
-                                      <div class="media">
-                                         <img class="mr-3" src="assets/images/avatar.png">
-                                         <div class="media-body">
-                                            <h6 class="mt-0">Member 2<span><i class="fas fa-pencil-alt"></i></span></h6>
-                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
-                                         </div>
-                                      </div>
-                                   </div>
-                                   <div class="group-member">
-                                      <div class="media">
-                                         <img class="mr-3" src="assets/images/avatar.png">
-                                         <div class="media-body">
-                                            <h6 class="mt-0">Member 3<span><i class="fas fa-pencil-alt"></i></span></h6>
-                                            <p>Lorem ipsum, or lipsum as it is sometimes known</p>
-                                         </div>
-                                      </div>
-                                   </div>
-                                </div>
-                                <div class="modal-footer">
-                                   <button type="button" class="btn btn-colored">Update</button>
-                                </div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
+                 
                  </div>
               </div>
-              <!----- Chat Block HTML ------>
-              <section class="chat-block">
-                 <div class="container-fluid chat-container">
-                    <div class="row chat-row">
-                       <div class="wrap-chat-block">
-                          <section class="left">
-                             <div class="profile">
-                                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1089577/user.jpg">
-                                <div class="icons">
-                                   <i class="fa fa-commenting fa-lg"></i>
-                                   <i class="fa fa-bars fa-lg"></i>
+              <div class="col-md-12">
+                 <div class="team-member">
+                    <div class="custom_member">
+                       <!--- Chat HTML START -------->
+                       <div class="container">
+                          <div class="messaging">
+                             <div class="inbox_msg">
+                                <div class="inbox_people">
+                                   <div class="headind_srch">
+                                      <div class="recent_heading">
+                                         <h4>Groups</h4>
+                                      </div>
+                                   </div>
+                                   <div class="inbox_chat" >
+                                      <div class="chat_list" *ngFor="let team of teamArr; let index = index" [class.active_chat]="index == this.indexCheck">
+                                         <div class="chat_people">
+                                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                            <div class="chat_ib" (click)="openChat(team,index)">
+                                               <h5 >
+                                                  {{team?.name}} 
+                                               </h5>
+                                               <p>
+                                               </p>
+                                            </div>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="mesgs">
+                                   <div class="msg_history" *ngFor="let message of gruopMessages,index as i">
+                                      <div class="incoming_msg" *ngIf="message.from_id != logged_in_id">
+                                         <div class="incoming_msg_img">
+                                            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
+                                         </div>
+                                         <div class="received_msg" >
+                                            <div class="received_withd_msg">
+                                               <p> {{ message.message}} </p>
+                                               <span class="time_date"> {{message.userName}}</span>
+                                               <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
+                                            </div>
+                                         </div>
+                                      </div>
+                                      <div class="outgoing_msg" *ngIf="message.from_id == logged_in_id">
+                                         <div class="sent_msg">
+                                            <p> {{ message.message}} </p>
+                                            <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
+                                         </div>
+                                      </div>
+                                   </div>
+                                </div>
+                                <div class="type_msg">
+                                   <div class="input_msg_write">
+                                      <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''">
+                                      <button class="msg_send_btn add_member_btn" type="button" (click)="sendMessgae()" ngbTooltip="Send Message"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                      <button class="msg_send_btn" type="button" ngbTooltip="Add Member To Group"> <i class="fa fa-user" aria-hidden="true"></i></button>
+                                   </div>
+                                </div>
+                                <div _ngcontent-dsn-c2="" class="headind_srch testing">
+                                   <div _ngcontent-dsn-c2="" class="recent_heading">
+                                      <h4 _ngcontent-dsn-c2=""> Team </h4>
+                                   </div>
+                                   <a mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                      <mat-icon>more_vert</mat-icon>
+                                   </a>
+                                   <mat-menu #menu="matMenu">
+                                      <button mat-menu-item (click)="addmember()">
+                                         <mat-icon>group_add</mat-icon>
+                                         <span>Add Member</span>
+                                      </button>
+                                      <button mat-menu-item (click)="viewteamCV()">
+                                         <mat-icon>group</mat-icon>
+                                         <span>View Team CV</span>
+                                      </button>
+                                   </mat-menu>
                                 </div>
                              </div>
-                             <div class="wrap-search">
-                                <div class="search">
-                                   <i class="fa fa-search fa" aria-hidden="true"></i>
-                                   <input type="text" class="input-search" placeholder="Suchen oder neuen Chat beginnen">
-                                </div>
-                             </div>
-                             <div class="contact-list"></div>
-                          </section>
-                          <section class="right">
-                             <div class="chat-head">
-                                <img alt="profilepicture">
-                                <div class="chat-name">
-                                   <h1 class="font-name"></h1>
-                                   <p class="font-online"></p>
-                                </div>
-                                <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-                                <i class="fa fa-paperclip fa-lg" aria-hidden="true"></i>
-                                <i class="fa fa-bars fa-lg" aria-hidden="true" id="show-contact-information"></i>
-                                <i class="fa fa-times fa-lg" aria-hidden="true" id="close-contact-information"></i>
-                             </div>
-                             <div class="wrap-chat">
-                                <div class="chat"></div>
-                                <div class="information"></div>
-                             </div>
-                             <div class="wrap-message">
-                                <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
-                                <div class="message">
-                                   <input type="text" class="input-message" placeholder="Schreibe eine Nachricht">
-                                </div>
-                                <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
-                             </div>
-                          </section>
+                         </div>
                        </div>
-                    </div>
+                     </div>
                  </div>
-              </section>
-              <!----- End Chat html  ------>
-        </div>
+              </div>
+           
+          </div>
         <div class="team-part-2" *ngIf="showCreate">
               <div class="team-creation">
                  <div class="container dashboard-container">
