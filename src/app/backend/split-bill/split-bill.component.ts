@@ -12,6 +12,7 @@ import { Lightbox } from 'ngx-lightbox';
 export class SplitBillComponent implements OnInit {
   
     bills:any=[];
+    billsCount : any;
     isError:boolean=false;
 	  errorsArr:string ='';
     base_url:string = '';
@@ -42,7 +43,8 @@ export class SplitBillComponent implements OnInit {
   getBills(){
   	  this.data_service.getBills().subscribe((response:any) =>{   
 			this.allBills = response.bills;
-     
+      this.billsCount = this.allBills.length;
+      
 			this.allBills.forEach(obj =>{
         let previous_date = obj.bill.date;
         let latest_date =this.datePipe.transform(this.today, 'yyyy-MM-dd');

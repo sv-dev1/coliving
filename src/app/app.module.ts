@@ -54,6 +54,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatIconModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
+import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 
 
 
@@ -101,6 +102,7 @@ export function provideConfig() {
     PropertyComponent,
     PropertyrequestsComponent,
     TeamInfoComponent,
+    FlatmateIssuesComponent,
  
   ],
   imports: [

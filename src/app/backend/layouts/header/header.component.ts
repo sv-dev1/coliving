@@ -142,6 +142,6 @@ export class HeaderComponent implements OnInit {
    }
    teamInfo(id :any){
      console.log(id);
-    this.router.navigate(['/team-Info/:'+id]);
+    this.router.navigate(['/team-Info/'+id]);
    }
 }
