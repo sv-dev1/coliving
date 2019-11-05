@@ -69,15 +69,69 @@
 </div>
 
 <div class="mobile-side-bar">
+	<div class="top-side-logo">
+		<img class="money-side" src="assets/images/money.png">
+	</div>
 	<ul>
-		<li><a href="#"><i class="fas fa-tachometer-alt"></i></a></li>
-		<li><a href="#"><i class="fas fa-shopping-basket"></i></a></li>
-		<li><a href="#"><i class="fas fa-globe"></i></a></li>
-		<li><a href="#"><i class="fas fa-home"></i></a></li>
-		<li><a href="#"><i class="fas fa-usd"></i></a></li>
-		<li><a href="#"><i class="fas fa-calendar-alt"></i></a></li>
-		<li><a href="#"><i class="fas fa-share"></i></a></li>
-		<li><a href="#"><i class="fas fa fa-cog"></i></a></li>
-
+		<li routerLinkActive="active">
+			<a routerLink="/settings" routerLinkActive="active-link">
+				<i class="fas fa-tachometer-alt"></i>
+				<span class="span-tog">Dashboard</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/categories" routerLinkActive="active-link">
+				<i class="fas fa-shopping-basket"></i>
+				<span class="span-tog">Categories</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/properties" routerLinkActive="active-link">
+				<i class="fas fa-globe"></i>
+				<span class="span-tog">Property</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/house-chores" routerLinkActive="active-link">
+				<i class="fas fa-home"></i>
+				<span class="span-tog">House Chores</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/split-bill" routerLinkActive="active-link">
+				<i class="fas fa-usd"></i>
+				<span class="span-tog">Split House Expenses</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/booking" routerLinkActive="active-link">
+				<i class="far fa-calendar-alt"></i>
+				<span class="span-tog">Booking</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/team-group" routerLinkActive="active-link">
+				<i class="fas fa-users"></i>
+				<span class="span-tog">Team Group</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/flatmate-issues" routerLinkActive="active-link">
+				<i class="far fa fa-flask"></i>
+				<span class="span-tog">Flatmate Issues</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/refer-a-friend" routerLinkActive="active-link">
+				<i class="fas fa-share"></i>
+				<span class="span-tog">Refer a friend</span>
+			</a>
+		</li>
+		<li routerLinkActive="active">
+			<a routerLink="/settings" routerLinkActive="active-link">
+				<i class="fas fa fa-cog"></i>
+				<span class="span-tog">Settings</span>
+			</a>
+		</li>
 	</ul>
 </div>

@@ -248,9 +248,11 @@ img.menu-arrow {
 	color:#fff;
 }
 
-.sidebar .nav li a i{
-	font-size:16px;
-	margin-right:8px;
+.sidebar .nav li a i {
+    font-size: 16px;
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
 }
 
 .sidebar .nav li a p{
@@ -1600,11 +1602,11 @@ ul.requirement-list li:before{
     bottom: 0;
     background: #f3f3f3;
     z-index: 9999;
-	-webkit-transition: left 0.3s ease;
-	-moz-transition: left 0.3s ease;
-	-ms-transition: left 0.3s ease;
-	-o-transition: left 0.3s ease;
-    transition: left 0.3s ease;
+	-webkit-transition: left 0.2s ease;
+	-moz-transition: left 0.2s ease;
+	-ms-transition: left 0.2s ease;
+	-o-transition: left 0.2s ease;
+    transition: left 0.2s ease;
 }
 
 .chat-block .left-part .part-two .heading {
@@ -2641,19 +2643,51 @@ button.pull-right.btn.btn-orange-sm.orange-btn {
     left: -40px;
     top: 0;
     height: 100%;
-    z-index: 99;
+    z-index: 9999;
     width: 40px;
-    -webkit-transition: all linear 0.5s;
-    -moz-transition: all linear 0.5s;
-    -ms-transition: all linear 0.5s;
-    -o-transition: all linear 0.5s;
-    transition: all linear 0.5s;
+    -webkit-transition: all linear 0.2s;
+    -moz-transition: all linear 0.2s;
+    -ms-transition: all linear 0.2s;
+    -o-transition: all linear 0.2s;
+    transition: all linear 0.2s;
+
+}
+.top-side-logo {
+    background: #fff;
+    height: 80px;
+    padding-top: 27px;
+    border-right: 1px solid #ddd;
+}
+img.money-side {
+    max-width: 25px;
+    margin: auto;
+    display: block;
+}
+.span-tog {
+    background: #ed502e;
+    color: #fff;
+    position: absolute;
+    left: 40px;
+    padding: 7px;
+    top: 0;
+    font-size: 15px;
+    display: none;
+    width: max-content;
+}
+.mobile-side-bar ul li a:hover .span-tog{
+    display: block;
 }
 .mobile-side-bar ul li {
-    padding: 5px 10px;
+    position: relative;
+}
+.mobile-side-bar ul li a {
+    display: block;
+    padding: 10px 10px;
 }
 .mobile-side-bar ul li a i {
     color: white;
+    text-align: center;
+    width: 20px;
 }
 .custom-body-class .mobile-side-bar{
     left: 0;

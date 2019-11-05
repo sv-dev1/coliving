@@ -20,16 +20,13 @@
                   <div class="card-header">Flatmate Issues</div>
                   <div class="card-body pb-0">
                      <div class="row">
-                        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let issues of allIssues|paginate: { itemsPerPage: 9, currentPage: p }; let i = index">
+                        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe" *ngFor="let issues of allIssues, let i = index">
                            <img src="{{image_base_url}}{{issues.issueId}}" class="img-responsive property-image">
                            <div class="cus-tital">
                              <p>Title : Title </p>
                               <p>Description : Description </p>
                            </div>
                            <div class="clearfix"></div>
-                        </div>
-                        <div *ngIf="isArrayLength">
-                           <pagination-controls (pageChange)="p= $event"></pagination-controls>
                         </div>
                      </div>
                   </div>
