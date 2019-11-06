@@ -180,3 +180,15 @@ button.pull-right.btn.btn-orange-sm[_ngcontent-uin-c2] {
   -webkit-transition-delay: .2s;
   transition-delay: .2s;
 }
+
+a.btn.btn-orange-sm {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+button.pull-right.btn.btn-orange-sm {
+    border-radius: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
