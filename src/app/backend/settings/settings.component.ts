@@ -16,10 +16,11 @@ export class SettingsComponent implements OnInit {
 	base_url :any;
 	userInfo:any;
 	color = 'accent';
-    checked :false;
-    on_off:string='';
-    message:string;
-
+    checked :boolean = false;
+    on_off: any;
+    message:any;
+    isError: any;
+    errorsArr: any;
 
   constructor(
         private formBuilder:FormBuilder,

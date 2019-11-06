@@ -39,6 +39,7 @@ export class RefferalCodeComponent implements OnInit {
 		}
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
+		console.log('headers', headers);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
 			this.referralCodeForm.patchValue({
