@@ -66,12 +66,7 @@ export class LoginComponent implements OnInit {
       }
       this.data_service.login(input_data).subscribe((response:any) =>{
         this.res = JSON.stringify(response, undefined, 2); 
-        if(response.userQuestinaire !=null){
-          sessionStorage.setItem("questionaire", 'true');
-        }
-        else{
-          sessionStorage.setItem("questionaire", 'false');
-        }
+     
         sessionStorage.setItem("roleId", response.roleId);
         sessionStorage.setItem("auth_token", response.token);
         sessionStorage.setItem("user_name", response.username);
@@ -124,12 +119,7 @@ export class LoginComponent implements OnInit {
         //    this.toastr.errorToastr('Invalid Credentials','Error');
           })
        }
-    })
-    
-    
-    
-    
-    
+     })
     });
   } 
   signInWithTwitter(){
