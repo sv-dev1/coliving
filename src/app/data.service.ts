@@ -422,5 +422,19 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+	setNotification(input){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'user/settings',input,httpOptions)
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+		  return Observable.throw(error);});
+	}
   
 }

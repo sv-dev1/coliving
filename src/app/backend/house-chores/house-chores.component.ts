@@ -153,22 +153,7 @@ export class HouseChoresComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.quest=sessionStorage.getItem("questionaire");
-		if(this.quest == "true"){
-			console.log("already completed survey");
-		}
-		else{
-			this.isWelcomeModal = true;  
-			this.keyboard =true;
-			this.display ='none';
-			this.isWelcomeBlock =true;	
-			this.isHouse1st=true;
-			this.isProgressBlue =false;
-			const html = document.getElementsByTagName('html')[0];
-			html.classList.add('popCustomHtml');
-			const body = document.getElementsByTagName('body')[0];
-			body.classList.add('popCustomBody');
-		}  
+		this.getUserData();
 		this.getUsers();
 		this.getCategorie();
 		this.getTeams();
@@ -176,7 +161,33 @@ export class HouseChoresComponent implements OnInit {
 		this.allTaskListing();
 		this.logged_in_username = sessionStorage.getItem("user_name");
 	}
-     
+    getUserData(){ 
+   
+	    let token; 
+	    if(sessionStorage.getItem("auth_token")!=undefined){
+	      token = sessionStorage.getItem("auth_token"); 
+	    }
+	    let headers = new HttpHeaders();
+	    headers = headers.set('Authorization', token);
+	    this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
+	        this.quest = response.users[0].userQuestionnaire;
+		    if(this.quest == null) {
+				this.isWelcomeModal = true;  
+				this.keyboard =true;
+				this.display ='none';
+				this.isWelcomeBlock =true;	
+				this.isHouse1st=true;
+				this.isProgressBlue =false;
+				const html = document.getElementsByTagName('html')[0];
+				html.classList.add('popCustomHtml');
+				const body = document.getElementsByTagName('body')[0];
+				body.classList.add('popCustomBody');
+			}
+	    },error=>{ 
+	      this.isError = true; 
+	      this.errorsArr = error.error;
+	    });  
+    }
 	openChat(team,index){
         this.teamIdRc = team.teamId;
         this.inviteLink = location.origin+'/'+'sign-up?rc='+this.logged_in_id+'/'+this.teamIdRc;
@@ -299,6 +310,7 @@ export class HouseChoresComponent implements OnInit {
 			this.close_welcome();
 		}
 	}
+	
 	close_welcome(){
 		//console.log(this.welcomeform.value);
 		this.isWelcomeModal = false;
@@ -426,7 +438,7 @@ export class HouseChoresComponent implements OnInit {
 	}
 	queSubmit(){
 		this.submitted = true;  
-		//console.log(this.welcomeform.value);
+	    //console.log(this.welcomeform.value);
         if(this.wf.partying.errors && this.submitted){
 			//console.log("invalid");
 		}

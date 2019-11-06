@@ -514,7 +514,10 @@ ul.custom-tabs li.nav-item a.active{
 }
 
 .to_do_list ul li.active-user:before {
-    content: "\F5E1";
+    /*content: "\F5E1";*/
+    content: "\f0a4";
+    font: normal normal normal 14px/1 FontAwesome;
+    color:#ed502d;;
     
 }
 .to_do_list .badge-primary {
@@ -2664,7 +2667,7 @@ img.money-side {
     display: block;
 }
 .span-tog {
-    background: #ed502e;
+    background: #b83619;
     color: #fff;
     position: absolute;
     left: 40px;
@@ -2674,15 +2677,19 @@ img.money-side {
     display: none;
     width: max-content;
 }
+.mobile-side-bar ul li a:hover {
+    background: #b83619;
+}
 .mobile-side-bar ul li a:hover .span-tog{
     display: block;
 }
 .mobile-side-bar ul li {
     position: relative;
+    margin: 5px 0;
 }
 .mobile-side-bar ul li a {
     display: block;
-    padding: 10px 10px;
+    padding: 6px 10px;
 }
 .mobile-side-bar ul li a i {
     color: white;
