@@ -24,7 +24,7 @@
                   <div class="tab-pane fade active show" id="active-booking">
                      <div class="custm_to-do mb-4">
                         <div class="to-do_heading">
-                           <h2>To-do</h2>
+                           <h2>To-do&nbsp;<small>(Click on task to add or view suggestions.)</small></h2>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                            <span aria-hidden="true">{{ pending_length ? pending_length.length : '0' }}
                            </span>
@@ -33,10 +33,10 @@
                         <div class="to_do_list">
                            <ul class="list-group" *ngFor="let task of pending_length,index as i">
                               <li class="list-group-item active-user" >
-                                 <span (click)="navigateToSuggestions(task.id)" placement="right" ngbTooltip="Click On {{task.task_name}} To Add Or View Suggestions." >{{task.task_name}}
+                                 <span (click)="navigateToSuggestions(task.id)">{{task.task_name}}
                                  </span>
                                  <span class="badge badge-primary badge-pill"></span>
-                                 <span class="delete" ngbTooltip="Click To Delete The Task {{task.task_name}}" (click)="deleteTaskDailog(task)">&times;</span>
+                                 <span class="delete" ngbTooltip="Delete task" (click)="deleteTaskDailog(task)">&times;</span>
                               </li>
                            </ul>
                            <p class="text-center zero-length" *ngIf="pending_length.length=='0'">No pending task available at moment.</p>

@@ -32,6 +32,7 @@ export class CategoryComponent implements OnInit {
        isArrayLength:boolean =false;
        categoryEdit:string = '';
        p:any;
+       categoryCount:any;
 
 
   constructor(
@@ -58,6 +59,7 @@ export class CategoryComponent implements OnInit {
 		this.data_service.getCategories().subscribe((response:any) =>{   
 			this.allCategoriesArray = response.categories;
 			this.allCategories = this.allCategoriesArray;
+			this.categoryCount = this.allCategories.length;
 		    if(this.allCategories.length > 10 ) {
                   this.isArrayLength  = true;
 		    }

@@ -27,12 +27,9 @@
                               <p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
                               <p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
                            </div>
-                           <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a>
-                           <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a>
-                           <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
-                           <!-- <button id="re
-                              ad-more" class="btn-orange-sm" (click)="viewFullDetail(property)"><i class="fa fa-eye"></i>&nbsp;View full detail</button>
-                              -->
+                              <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a>
+                              <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a>
+                              <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
                            <div class="clearfix"></div>
 
                         </div>
