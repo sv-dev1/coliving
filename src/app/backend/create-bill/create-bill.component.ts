@@ -48,7 +48,7 @@ export class CreateBillComponent implements OnInit {
   PayeeList: any=[];
   selectedInfo: any =[];
   constructor(
-    private formBuilder:FormBuilder,	
+    private formBuilder:FormBuilder,  
     private router: Router,
     private data_service : DataService,
     public toastr: ToastrManager,
@@ -84,7 +84,7 @@ export class CreateBillComponent implements OnInit {
     return this.createBillForm.controls; 
   }
   onSelectFile(event) {
-		 this.fileData = event.target.files[0];   
+     this.fileData = event.target.files[0];   
      this.preview();
   } 
   preview() {
@@ -141,7 +141,7 @@ export class CreateBillComponent implements OnInit {
             }
             const formData = new FormData();
                 formData.append('title', input_data.title);
-                formData.append('files', this.fileData);	   
+                formData.append('files', this.fileData);     
                 formData.append('team', this.teamName);
                 formData.append('amount', input_data.amount);
                 formData.append('date', input_data.date);

@@ -96,7 +96,7 @@
                                                  </div>
                                             </div>
                                         </div>
-                                        <div class="row" formArrayName="items"*ngFor="let item of createBillForm.controls['items'].controls; let i = index" >
+                                        <div class="row" formArrayName="items"*ngFor="let item of createBillForm.controls['items']['controls']; let i = index" >
                                             <div class="col-12 col-sm-3" [formGroupName]="i">
                                                 <div class="form-group">
                                                     <label for="who_pay">Select Payee:</label>
@@ -140,9 +140,6 @@
                                                     </div>
                                             </div>
                                         </div>
-                                       
-                                        
-                                       
                                         
                                         <div class="col-12 col-sm-12 text-center">
                                             <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
@@ -156,4 +153,3 @@
             </div>
         </div>
 </section>
-
