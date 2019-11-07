@@ -18,7 +18,7 @@
 							<span class="pull-right delete" (click)="navigateToTaskList()" *ngIf="isSuggestion == false">
 							   <i class="fa fa-arrow-left" style="color:black;" placement="left" ngbTooltip="Go Back"></i>
 							</span>
-							</div>
+						</div>
 						<div class="card-body" id="demo" *ngIf="isSuggestion == true">
 						<form [formGroup]="addSuggestionForm" (ngSubmit)="addSuggestion(addSuggestionForm.value)">
 								<div class="row">

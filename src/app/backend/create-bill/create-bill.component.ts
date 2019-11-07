@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {  Router } from '@angular/router';
 import { FormGroup,FormBuilder,Validators, FormArray} from '@angular/forms';
 import { DataService } from '../../data.service';
@@ -47,6 +47,10 @@ export class CreateBillComponent implements OnInit {
   payeePriceArr = [];
   PayeeList: any=[];
   selectedInfo: any =[];
+  amount:any;
+  isVisible:boolean=false;
+  lessAmount:any;
+  
   constructor(
     private formBuilder:FormBuilder,  
     private router: Router,
@@ -59,9 +63,9 @@ export class CreateBillComponent implements OnInit {
         team: ['', Validators.required], 
         title: ['', Validators.required],
         amount: ['', Validators.required],
-        date:['', Validators.required],
-        bill:['', Validators.required],
-        assign_to:['', Validators.required],
+        date:  ['', Validators.required],
+        bill: ['', Validators.required],
+        assign_to: ['', Validators.required],
         items: this.formBuilder.array([this.createItem()])
         //  payees:this.formBuilder.array([this.formBuilder.group({user:['', Validators.required],price:['', Validators.required]})]),      //upload_bill: new FormControl(''),
 
@@ -69,9 +73,12 @@ export class CreateBillComponent implements OnInit {
     this.base_url = environment.base_url;
 
   }
+  @Input() editable: boolean = false; // doesn't have to be an @Input
+
 
   ngOnInit() {
     this.getTeam();
+    
   }
 
   createItem() {
@@ -244,8 +251,10 @@ export class CreateBillComponent implements OnInit {
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
+
     this.noData=false;
     this.userselectedItems.push(items);
+
   } 
   onUserItemSelect(item:any){
       this.userselectedItems.push(item);
@@ -271,12 +280,15 @@ export class CreateBillComponent implements OnInit {
   }
 
   numberOnly(event): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
+    console.log('amount',event.srcElement.value);
+    if(event.srcElement.value != '') {
+        this.amount = event.srcElement.value;
+        this.isVisible = true;
+    } 
+    if(event.srcElement.value == '' || event.srcElement.value == null) {
+           this.isVisible = false;
     }
     return true;
-
   }
   addmore(i){
     
@@ -295,7 +307,17 @@ export class CreateBillComponent implements OnInit {
       this.repeatRows.splice(0,1);
   }
   selected(info){
+    this.editable = true;
     this.selectedInfo.push(info);
-   }
-      
+  }
+
+  checkAmountIsValid(event: any) {
+           let totalAmount = parseFloat(this.amount).toFixed(2);
+           let amountPerUser = parseFloat(event.srcElement.value).toFixed(2);
+           this.lessAmount = totalAmount - amountPerUser;
+           if(this.lessAmount < 0 ) {
+             this.toastr.errorToastr('Amount limit exceeded', 'info!');
+                this.createBillForm.reset();
+           }
+        }     
 }

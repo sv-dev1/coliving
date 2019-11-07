@@ -41,6 +41,7 @@ export class MyAccountComponent implements OnInit {
 	messageDigit:string='';
 	messageDigit1:string='';
 	time = {hour: 13, minute: 30};
+	weekend_time = {hour: 13, minute: 30};
 	today:any;
 	teamEmpty:boolean=false;
 	userEmpty:boolean=false;
@@ -62,22 +63,19 @@ export class MyAccountComponent implements OnInit {
 	stayDateEmpty:boolean=false;
 	stay_date: any;
 	wakeup_time:any;
+	weekend_wakeup_time:any;
 	Dtime:any;
 	length:boolean=false;
-
-
 	ip_address : string = "";
 	current_country : string = "";
 	nationalitySelectedItems = [];
 	languageSelectedItems = [];
 	languageArrMap : any = [];
 	nationalityArrMap : any = [];
-
 	maximumPrice: any = [];
     minimumPrice : any = [];
     selectedItemsNational: any;
     selectedItemsLanguage: any;
-
     countryCode: any;
     phoneNumber : any;
     maxPriceValue : any;
@@ -119,6 +117,7 @@ export class MyAccountComponent implements OnInit {
 			habits:['', Validators.required],
 			image:[''],
 			file:[''],
+			weekend_wakeup_time:['', Validators.required],
 			previousCity:['', Validators.required],
 			rentalDescription:['', Validators.required]
 		});
@@ -236,6 +235,20 @@ export class MyAccountComponent implements OnInit {
 			   } else {
 				   this.time = this.time;
 			   }
+			let WeekendWakeUpStr = this.userDataArr.wakeup_time; 
+			   if(WeekendWakeUpStr) {
+					let wakeSplit = WeekendWakeUpStr.split(":", 3); 
+					let hours = wakeSplit[0];
+					let minutes = wakeSplit[1];
+     				const sfdsfsfs = {
+						hour :parseInt(hours),
+						minute : parseInt(minutes)
+					}
+				    this.weekend_time = sfdsfsfs;
+			   } else {
+				   this.weekend_time = this.weekend_time;
+			   }
+			 
 			   let price = this.userDataArr.price_range; 
 			   if(price) {
 			   	  let splitPrice = price.split("-", 3); 
@@ -271,12 +284,12 @@ export class MyAccountComponent implements OnInit {
 				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				occuptation_tt:this.userDataArr.occuptation_tt,
 				wakeup_time:this.time,
+				weekend_wakeup_time:this.weekend_time,
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
 				maximunPrice:this.maximumPrice,
 				minimumPrice:this.minimumPrice,
 				stay_date:finalData,
 				gender:this.userDataArr.gender,
-				
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
 				work_place:this.userDataArr.work_place,
@@ -393,6 +406,9 @@ export class MyAccountComponent implements OnInit {
 		if(formValue.wakeup_time){
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
+	    if(formValue.weekend_wakeup_time){
+			this.weekend_wakeup_time = formValue.weekend_wakeup_time.hour+":"+formValue.weekend_wakeup_time.minute;
+		}
         
 		if(parseInt(formValue.maximunPrice) < parseInt(formValue.minimumPrice)) {
 			this.updateProfileForm.controls['minimumPrice'].reset()
@@ -427,7 +443,8 @@ export class MyAccountComponent implements OnInit {
 			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
 			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
 			formData.append('stay_date', this.stay_date); 
-			formData.append('wakeup_time', this.wakeup_time); 
+			formData.append('wakeup_time', this.wakeup_time);
+			formData.append('wakeup_time', this.weekend_wakeup_time); 			
 			formData.append('work_place', formValue.work_place); 
 			formData.append('previous_city', formValue.previousCity); 
 			formData.append('rental_desc', formValue.rentalDescription); 
