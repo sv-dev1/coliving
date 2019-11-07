@@ -1,157 +1,157 @@
 <section class="wrapper work-panel">
     <app-header></app-header>
     <app-sidebar></app-sidebar>
-        <div class="work-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="breadcrumb custom-breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Create House Expenses</li>
-                        </ul>
-                    </div>
+    <div class="work-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="breadcrumb custom-breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Create House Expenses</li>
+                    </ul>
                 </div>
-                
-                <div class="row">
-                    <div class="col-12 cus-create-bill">
-                        <div class="card mb-3">
-                            <div class="card-header">Create House Expenses</div>
-                            <div class="card-body">
-                                <form [formGroup]="createBillForm" (ngSubmit)="createBill()">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="team">Choose Team to Assign:</label>
-                                                <angular2-multiselect [data]="dropdownList" 
-                                                            [settings]="dropdownSettings" 
-                                                            (onSelect)="onItemSelect($event)" 
-                                                            (onDeSelect)="OnItemDeSelect($event)"
-                                                            (onSelectAll)="onSelectAll($event)"
-                                                            (onDeSelectAll)="onDeSelectAll($event)"
-                                                            formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }">
-                                            </angular2-multiselect>
-                                               
+            </div>
 
-                                            </div>
-                                            <div *ngIf="teamEmpty"  class="error-msg">            Please select Team Name.
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="title">Title:</label>
-                                                <input type="text" class="form-control" id="title"  formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                                                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.title.errors.required">Title is required</div>
-                                                 </div>
-                                            </div>
-                                        </div>
-                                       
-                                      <div class="col-12 col-sm-6">
-                                            <div class="form-group input-group-sm mb-3">
-                                                <label for="amount">Amount:</label>  
-                                                <input type="text" class="form-control" id="amount" (keypress)="numberOnly($event)" formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
-                                                <div class="input-group-prepend ">
-                                                    <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa fa-eur"></i></span>
-                                                  </div>
-                                                <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.amount.errors.required">Amount is required</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="date">Date:</label>
-                                                <input type="text" class="form-control" id="date"  formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" bsDatepicker>
-                                                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.title.errors.required">Date is required</div>
-                                                 </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="assign_to">Assign To:</label>
-                                                <angular2-multiselect [data]="userdropdownList" 
-                                                            [settings]="userdropdownSettings" 
-                                                            (onSelect)="onUserItemSelect($event)" 
-                                                            (onDeSelect)="OnUserItemDeSelect($event)"
-                                                            (onSelectAll)="onUserSelectAll($event)"
-                                                            (onDeSelectAll)="onUserDeSelectAll($event)"
-                                                            formControlName="assign_to" [ngClass]="{ 'is-invalid': submitted && f.assign_to.errors }">
-                                                </angular2-multiselect>
-                                                
-                                            </div>
-                                            <div *ngIf="userEmpty"  class="error-msg">            Please select Users to assign.
-                                            </div>
+            <div class="row">
+                <div class="col-12 cus-create-bill">
+                    <div class="card mb-3">
+                        <div class="card-header">Create House Expenses</div>
+                        <div class="card-body">
+                            <form [formGroup]="createBillForm" (ngSubmit)="createBill()">
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group">
+                                            <label for="team">Choose Team to Assign:</label>
+                                            <angular2-multiselect [data]="dropdownList" 
+                                            [settings]="dropdownSettings" 
+                                            (onSelect)="onItemSelect($event)" 
+                                            (onDeSelect)="OnItemDeSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onDeSelectAll($event)"
+                                            formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }">
+                                        </angular2-multiselect>
 
+
+                                    </div>
+                                    <div *ngIf="teamEmpty"  class="error-msg">            Please select Team Name.
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="title">Title:</label>
+                                        <input type="text" class="form-control" id="title"  formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">Title is required</div>
                                         </div>
-                                         <div class="col-12 col-sm-6">
-                                            <div class="form-group">
-                                                <label for="bill">Upload Bill:</label>
-                                                <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
-                                                <img [src]="url" height="200" *ngIf="url !=''"> <br/>
-                                                <div *ngIf="submitted && f.bill.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.bill.errors.required">Please Upload bill</div>
-                                                 </div>
-                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group input-group-sm mb-3">
+                                        <label for="amount">Amount:</label>  
+                                        <input type="text" class="form-control" id="amount" (change)="numberOnly($event)" formControlName="amount" [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                                        <div class="input-group-prepend ">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fa fa-eur"></i></span>
                                         </div>
+                                        <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+                                            <div *ngIf="f.amount.errors.required">Amount is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="date">Date:</label>
+                                        <input type="text" class="form-control" id="date"  formControlName="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }" bsDatepicker>
+                                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                            <div *ngIf="f.title.errors.required">Date is required</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                        <div class="row" formArrayName="items"*ngFor="let item of createBillForm.controls['items']['controls']; let i = index" >
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="assign_to">Assign To:</label>
+                                        <angular2-multiselect [data]="userdropdownList" 
+                                        [settings]="userdropdownSettings" 
+                                        (onSelect)="onUserItemSelect($event)" 
+                                        (onDeSelect)="OnUserItemDeSelect($event)"
+                                        (onSelectAll)="onUserSelectAll($event)"
+                                        (onDeSelectAll)="onUserDeSelectAll($event)"
+                                        formControlName="assign_to" [ngClass]="{ 'is-invalid': submitted && f.assign_to.errors }">
+                                    </angular2-multiselect>
 
-                                            <div class="col-12 col-sm-3" [formGroupName]="i">
-                                                <div class="form-group">
-                                                    <label for="who_pay">Select Payee:</label>
-                                                   <select  class='form-control' formControlName="user" (change)="selected($event.target.value)">
-                                                         <option *ngIf="noData">No Data</option>
-                                                           <option *ngFor="let payee of userselectedItems" [value]="payee.id" [disabled]="selectedInfo.includes(payee.id)">{{payee.itemName}}</option>
-                                              
-                                                </select>
+                                </div>
+                                <div *ngIf="userEmpty"  class="error-msg">            Please select Users to assign.
+                                </div>
 
-                                                </div>
-                                                <div *ngIf="whoPayEmpty"  class="error-msg">Please select bill payers.
-                                                </div>
-                                            </div>
-                                             <div class="col-12 col-sm-3" [formGroupName]="i">
-                                                <div class="form-group">
-                                                    <label for="who_pay">Enter amount:</label>
-                                                       <input type="text" 
-                                                       formControlName="price"class="form-control" placeholder="Price" (keypress)="numberOnly($event)"> 
-                                                </div>
-                                                <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
-                                                </div>
-                                            </div>
-                                            <div class="col-12 col-sm-3" [formGroupName]="i">
-                                                <div class="button-user">
-                                                      <label for="who_pay"></label>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <label for="bill">Upload Bill:</label>
+                                    <input type="file" class="form-control-file border"  formControlName="bill" [ngClass]="{ 'is-invalid': submitted && f.bill.errors }" (change)="onSelectFile($event)">
+                                    <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+                                    <div *ngIf="submitted && f.bill.errors" class="invalid-feedback">
+                                        <div *ngIf="f.bill.errors.required">Please Upload bill</div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                                     <div class="bill-btn">
-                                                         <a (click)="addmore(i)"> Add More </a>
-                                                     </div>
-                                                                                                      
-                                                    </div>
-                                            </div>
-                                             <div class="col-12 col-sm-3" [formGroupName]="i">
-                                                <div class="button-user">
-                                                      <label for="who_pay"></label>
+                            <div class="row cust-amount" [style.display]="isVisible ? 'block' : 'none'" *ngIf="isVisible">
+                             <div class="row" formArrayName="items"*ngFor="let item of createBillForm.controls['items']['controls']; let i = index">
+                                <div class="col-12 col-sm-3" [formGroupName]="i">
+                                    <div class="form-group">
+                                        <label for="who_pay">Select Payee:</label>
+                                        <select  class='form-control' formControlName="user" (change)="selected($event.target.value)">
+                                           <option *ngIf="noData">No Data</option>
+                                           <option *ngFor="let payee of userselectedItems" [value]="payee.id" [disabled]="selectedInfo.includes(payee.id)">{{payee.itemName}}</option>
+
+                                       </select>
+
+                                   </div>
+                                   <div *ngIf="whoPayEmpty"  class="error-msg">Please select bill payers.
+                                   </div>
+                               </div>
+                               <div class="col-12 col-sm-3" [formGroupName]="i">
+                                <div class="form-group">
+                                    <label for="who_pay">Enter amount:</label>
+                                    <input type="text" 
+                                    formControlName="price"class="form-control" placeholder="Price" (change)="checkAmountIsValid($event)" [readonly]="!editable"> 
+                                </div>
+                                <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-3" [formGroupName]="i">
+                                <div class="button-user">
+                                  <label for="who_pay"></label>
+
+                                  <div class="bill-btn">
+                                   <a (click)="addmore(i)"> Add More </a>
+                               </div>
+
+                           </div>
+                       </div>
+                       <div class="col-12 col-sm-3" [formGroupName]="i">
+                        <div class="button-user">
+                          <label for="who_pay"></label>
 
                                                     <!--  <div class="bill-btn">
                                                          <a (click)="delete(i)"> Delete </a>
                                                      </div> -->
-                                                                                                      
-                                                    </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-12 col-sm-12 text-center">
-                                            <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
-                                        </div>
+
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-12 col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>

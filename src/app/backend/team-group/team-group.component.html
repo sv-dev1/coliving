@@ -199,11 +199,11 @@
                                       <mat-icon>more_vert</mat-icon>
                                    </a>
                                    <mat-menu #menu="matMenu">
-                                      <button mat-menu-item >
+                                      <button mat-menu-item (click)="addmember()">
                                          <mat-icon>group_add</mat-icon>
                                          <span>Add Member</span>
                                       </button>
-                                      <button mat-menu-item >
+                                      <button mat-menu-item (click)="viewteamCV()">
                                          <mat-icon>group</mat-icon>
                                          <span>View Team CV</span>
                                       </button>

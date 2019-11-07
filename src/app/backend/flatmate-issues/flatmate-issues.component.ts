@@ -64,7 +64,6 @@ export class FlatmateIssuesComponent implements OnInit {
 
 	openAddIssueModal(){
 		this.isAddIssueModal = true;
-
 	}
 
 	closeModal(){
@@ -244,7 +243,7 @@ export class FlatmateIssuesComponent implements OnInit {
         console.log('response',response.issues);  
 			this.allIssues = response.issues;
 			this.issuesCount = this.allIssues.length;
-			
+			console.log('this.allIssues',this.allIssues);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 

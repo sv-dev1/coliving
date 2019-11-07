@@ -91,6 +91,15 @@
                               </div>
                            </div>
                         </div>
+                        <div class="col-12 col-sm-6">
+                           <div class="form-group">
+                              <label for="team">Weekend Wake up time.<span class="validate-red">*</span></label>
+                              <ngb-timepicker [(ngModel)]="weekend_wakeup_time" formControlName="weekend_wakeup_time"></ngb-timepicker>
+                              <div *ngIf="submitted && f.weekend_wakeup_time.errors" class="invalid-feedback">
+                                 <span class="for-sub-name" *ngIf="f.weekend_wakeup_time.errors.required">Weekend wake-up time is required.</span>
+                              </div>
+                           </div>
+                        </div>
                         <hr>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
