@@ -50,14 +50,16 @@ export class CreateBillComponent implements OnInit {
   amount:any;
   isVisible:boolean=false;
   lessAmount:any;
-  
+  totalAmount :any;
+  amountPerUser:any;
+
   constructor(
-    private formBuilder:FormBuilder,  
-    private router: Router,
-    private data_service : DataService,
-    public toastr: ToastrManager,
-    private datePipe: DatePipe,
-    private http : HttpClient,
+        private formBuilder:FormBuilder,  
+        private router: Router,
+        private data_service : DataService,
+        public toastr: ToastrManager,
+        private datePipe: DatePipe,
+        private http : HttpClient,
   ) { 
     this.createBillForm = this.formBuilder.group({
         team: ['', Validators.required], 
@@ -251,19 +253,24 @@ export class CreateBillComponent implements OnInit {
       this.onTeamSelection();
   }
   onUserSelectAll(items: any){
-
-    this.noData=false;
-    this.userselectedItems.push(items);
-
+    
+    this.noData = false;
+    items.forEach(element => {
+         this.userselectedItems.push(element);
+     });
   } 
   onUserItemSelect(item:any){
       this.userselectedItems.push(item);
-      this.noData=false;
+      this.noData = false;
   }
   OnUserItemDeSelect(item:any){
-
+       console.log(item);
+      this.userselectedItems.splice(this.userselectedItems.indexOf(item),1);
+      console.log(this.userselectedItems);
   }
   onUserDeSelectAll(items: any){
+   
+        this.userselectedItems = [];   
   }
 
   onPayedSelectAll(items: any){
@@ -312,12 +319,8 @@ export class CreateBillComponent implements OnInit {
   }
 
   checkAmountIsValid(event: any) {
-           let totalAmount = parseFloat(this.amount).toFixed(2);
-           let amountPerUser = parseFloat(event.srcElement.value).toFixed(2);
-           this.lessAmount = totalAmount - amountPerUser;
-           if(this.lessAmount < 0 ) {
-             this.toastr.errorToastr('Amount limit exceeded', 'info!');
-                this.createBillForm.reset();
-           }
-        }     
+        
+         console.log('event',event); 
+         
+     }     
 }

@@ -22,9 +22,11 @@ import { CategoryComponent } from './backend/category/category.component';
 import { PropertyComponent } from './backend/property/property.component';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
+import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'download/:param1', component: AppDwonloadPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
