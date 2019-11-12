@@ -22,13 +22,15 @@ import { CategoryComponent } from './backend/category/category.component';
 import { PropertyComponent } from './backend/property/property.component';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
+import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'app.download', component: AppDwonloadPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'forgot-passwornd', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent },

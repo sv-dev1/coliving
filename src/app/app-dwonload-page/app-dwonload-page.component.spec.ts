@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlatmateIssuesComponent } from './flatmate-issues.component';
+import { AppDwonloadPageComponent } from './app-dwonload-page.component';
 
-describe('FlatmateIssuesComponent', () => {
-  let component: FlatmateIssuesComponent;
-  let fixture: ComponentFixture<FlatmateIssuesComponent>;
+describe('AppDwonloadPageComponent', () => {
+  let component: AppDwonloadPageComponent;
+  let fixture: ComponentFixture<AppDwonloadPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlatmateIssuesComponent ]
+      declarations: [ AppDwonloadPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FlatmateIssuesComponent);
+    fixture = TestBed.createComponent(AppDwonloadPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

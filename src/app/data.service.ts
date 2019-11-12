@@ -28,6 +28,15 @@ export class DataService {
 			return Observable.throw(error);
 		});
 	}
+    apiRegister(input_data){
+		return this.http.post(this.base_url+'apiregister',input_data)
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);
+		});
+	}
 	login(input_data){
 		return this.http.post(this.base_url+'login',input_data)
 		.map((response:Response)=>{
@@ -436,5 +445,5 @@ export class DataService {
 			console.log('error',error);
 		  return Observable.throw(error);});
 	}
-  
+ 
 }

@@ -1,0 +1,124 @@
+<div class="container register">
+   <div class="row">
+      <div class="col-md-3 register-left">
+         <img src="assets/images/Logo-colive.png" alt=""/>
+         <h3>Welcome</h3>
+         <p>You are 30 seconds away from earning your own money!</p>
+         <!-- <input type="submit" name="" value="Login"/><br/> -->
+      </div>
+      <div class="col-md-9 register-right">
+         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+            <li class="nav-item">
+               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tenant</a>
+            </li>
+         </ul>
+         <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+               <h3 class="register-heading">Complete the Questionare</h3>
+               <div class="row register-form">
+                  <form [formGroup]="questionareform" (ngSubmit)="questionareSubmit()">
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <label>Partying:</label>
+                        <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  wf.partying.errors }"> Yes
+                        <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> No
+                        <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> Sometimes
+                        <input type="radio" formControlName="partying" value="3" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }"> Strictly Against
+                        <div *ngIf="submitted && wf.partying.errors"  class="welErr">
+                           <div *ngIf="wf.partying.errors.required">Choose from partying</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Alcohol:</label>
+                        <input type="radio" formControlName="alcohol" value="0"> Yes
+                        <input type="radio" formControlName="alcohol" value="1"> No
+                        <p> <input type="radio" formControlName="alcohol" value="2"> Sometimes 
+                           <input type="radio" formControlName="alcohol" value="3"> Strictly Against  
+                        <div *ngIf="submitted && wf.alcohol.errors"  class="welErr">
+                           <div *ngIf="wf.alcohol.errors.required">Choose from Alcohol</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Smoking:</label>
+                        <input type="radio" formControlName="smoking" value="0"> Yes
+                        <input type="radio" formControlName="smoking" value="1"> No
+                        <input type="radio" formControlName="smoking" value="2"> Sometimes 
+                        <input type="radio" formControlName="smoking" value="3"> Strictly Against 
+                     </div>
+                     <div class="form-group">
+                        <h3>How important is it to you to live in a clean and tidy apartment generally?</h3>
+                        <p>(Please choose range)</p>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_clean_importance" [ngClass]="{ 'is-invalid': submitted && wf.apartment_clean_importance.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && wf.apartment_clean_importance.errors"  class="welErr">
+                           <div *ngIf="wf.apartment_clean_importance.errors.required">Select valid range</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>How much do you like a music in your apartment.</h3>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="music" [ngClass]="{ 'is-invalid': submitted && wf.music.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && wf.music.errors"  class="welErr">
+                           <div *ngIf="wf.music.errors.required">Select valid range</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>Party in your apartment</h3>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_party" [ngClass]="{ 'is-invalid': submitted && wf.apartment_party.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && wf.apartment_party.errors"  class="welErr">
+                           <div *ngIf="wf.apartment_party.errors.required">Select valid range</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Instagram/Facebook/LinkedIn account</label>
+                        <input type="text" class="form-control" placeholder="Social account address*" formControlName="social_account" />
+                        <div *ngIf="submitted && wf.social_account.errors"  class="welErr">
+                           <div *ngIf="wf.social_account.errors.required">Field is required</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Religion</label>
+                        <input type="text" class="form-control" placeholder="Religion *" formControlName="religion" />
+                        <div *ngIf="submitted && wf.religion.errors"  class="welErr">
+                           <div *ngIf="wf.religion.errors.required">Field is required</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" placeholder="Valid email address *" formControlName="email" />
+                        <div *ngIf="submitted && wf.email.errors"  class="welErr">
+                           <div *ngIf="wf.email.errors.required">Field is required</div>
+                        </div>
+                     </div>
+                     <input type="hidden" formControlName="ref_code">
+                     <button type="submit" class="btn btn-orange-sm">Submit</button>
+                     
+                  </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!---  Modal to delete TASK  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openFileDownloadModal ? 'block' : 'none'" *ngIf="openFileDownloadModal" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Download Application</h4>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <p><strong>Click on link to download the application</strong></p>
+              <a href="assets/uploads/app-debug.apk" download (click)="closeModal()"><span class="text-danger">Download File</span></a>
+         </div>
+         <div class="modal-footer">
+
+         </div>
+      </div>
+   </div>
+</div>
+</div>

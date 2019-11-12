@@ -55,6 +55,7 @@ import {MatIconModule, MatSlideToggleModule} from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
+import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 
 
 
@@ -103,6 +104,7 @@ export function provideConfig() {
     PropertyrequestsComponent,
     TeamInfoComponent,
     FlatmateIssuesComponent,
+    AppDwonloadPageComponent,
  
   ],
   imports: [
