@@ -53,6 +53,8 @@ export class CreateBillComponent implements OnInit {
   totalAmount :any;
   amountPerUser:any;
 
+  amountSplit: any = [];
+
   constructor(
         private formBuilder:FormBuilder,  
         private router: Router,
@@ -167,6 +169,7 @@ export class CreateBillComponent implements OnInit {
                 this.toastr.successToastr(response.message, 'Success!');
                 this.submitted=false;
                 this.createBillForm.reset();
+                this.router.navigate['/split-bill'];
               },error=>{ 
                 //console.log("ERROR");
                 //console.log(error.error);
@@ -185,10 +188,7 @@ export class CreateBillComponent implements OnInit {
             obj['itemName'] = ele['name'];
             this.dropdownList.push(obj);
           });
-        //  console.log(this.dropdownList);
-          // for(let i=0; i < this.teamData.length; i++) {
-          //   this.dropdownList.push({ "id": this.teamData[i]['teamId'], "itemName": this.teamData[i]['name'] });
-          // }
+      
           this.dropdownSettings = { 
              singleSelection: false, 
              text:"Select Team",
@@ -201,7 +201,7 @@ export class CreateBillComponent implements OnInit {
         window.scrollTo(0, 0);
       this.errorsArr = JSON.parse(error._body);
       this.toastr.errorToastr(this.errorsArr, 'Error!');
-      //console.log(JSON.stringify(this.errorsArr, undefined, 2))
+     
     })
   }
 
@@ -237,7 +237,7 @@ export class CreateBillComponent implements OnInit {
     this.onTeamSelection();
     }
   OnItemDeSelect(item:any){
-    console.log(item);
+   
     this.list.splice(this.list.indexOf(this.list), 1);
     this.onTeamSelection();
   }
@@ -264,9 +264,9 @@ export class CreateBillComponent implements OnInit {
       this.noData = false;
   }
   OnUserItemDeSelect(item:any){
-       console.log(item);
+       
       this.userselectedItems.splice(this.userselectedItems.indexOf(item),1);
-      console.log(this.userselectedItems);
+      
   }
   onUserDeSelectAll(items: any){
    
@@ -287,7 +287,7 @@ export class CreateBillComponent implements OnInit {
   }
 
   numberOnly(event): boolean {
-    console.log('amount',event.srcElement.value);
+
     if(event.srcElement.value != '') {
         this.amount = event.srcElement.value;
         this.isVisible = true;
@@ -298,12 +298,10 @@ export class CreateBillComponent implements OnInit {
     return true;
   }
   addmore(i){
-    
       if(this.userselectedItems.length <= this.repeatRows.length){
-                alert("exceed");
+             this.toastr.infoToastr('Selected users exceeded.', 'Information!');
       }
-      else
-      {
+      else   {
           this.repeatRows.push(i+1);
           (this.createBillForm.controls['items'] as FormArray).push(this.createItem());
       }
@@ -319,8 +317,18 @@ export class CreateBillComponent implements OnInit {
   }
 
   checkAmountIsValid(event: any) {
-        
-         console.log('event',event); 
-         
+         var amount = event.srcElement.value;
+         this.amountSplit.push(amount);
+         let totalAmount = eval(this.amountSplit.join('+'));
+         if(totalAmount  > this.amount) {
+           console.log('length', this.amountSplit.length);
+           let i;
+           for(i = 0; i < this.amountSplit.length; i++ ) {
+                  (this.createBillForm.controls['items'] as FormArray).removeAt(i);  
+           } 
+           i++ ;
+           this.addmore(i);
+           this.toastr.warningToastr('Split amount should not be greater than total amount.', 'Warning!');
+         }
      }     
 }

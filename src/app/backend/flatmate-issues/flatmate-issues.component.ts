@@ -141,6 +141,8 @@ export class FlatmateIssuesComponent implements OnInit {
 				this.url = '';
 				this.addIssueForm.reset();
 				this.isAddIssueModal = false;
+                 
+
 			},error=>{ 
 				this.errorsArr =error;
 
@@ -191,7 +193,10 @@ export class FlatmateIssuesComponent implements OnInit {
 					text:"Select User",
 					selectAllText:'Select All',
 					unSelectAllText:'UnSelect All',
-					classes:"myclass custom-class"
+					classes:"myclass custom-class",
+					limitSelection: 2,
+				    enableSearchFilter: true,
+
 				};
 			}, error =>{
 				this.isError = true;   

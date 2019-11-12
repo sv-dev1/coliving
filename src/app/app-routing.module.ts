@@ -26,11 +26,11 @@ import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'download/:param1', component: AppDwonloadPageComponent },
+  { path: 'app.download', component: AppDwonloadPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'forgot-passwornd', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent },

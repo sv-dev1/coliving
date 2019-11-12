@@ -22,6 +22,8 @@ export class AppDwonloadPageComponent implements OnInit {
 	isSuccess : boolean = false;
 	errorsArr:any = []; 
 	referralCode : any;
+	downloadUrl : string = '';
+	openFileDownloadModal: boolean = false;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -46,25 +48,26 @@ export class AppDwonloadPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		 
-		  let url = this.route.snapshot.url.join().split(',')
-		  this.referralCode = url[1];
-		  this.questionareform.patchValue({
-		        ref_code : this.referralCode,
-		     }); 
-		 
+		  const referralCode: string = this.route.snapshot.queryParamMap.get('rc');
+		  console.log(referralCode);
+			    if(referralCode) {
+			      this.questionareform.patchValue({
+			        ref_code : referralCode,
+			    });  
+		   }
 	}
 
-   
 	openEmailModal() {
 		this.isEmailModal = true;
 	}
+
 	get wf() { return this.questionareform.controls; }
-
-
+	
 	questionareSubmit(){
+        
 		this.submitted = true;
-		if(this.questionareform.value['ref_code']) {
+		if(this.questionareform.value['ref_code'] == undefined || this.questionareform.value['ref_code'] ==null) {
+			console.log('first');
 			this.toastr.errorToastr('Missing referral code.', 'Error!');
 			this.router.navigate(['/login']); 
 			return;
@@ -72,6 +75,7 @@ export class AppDwonloadPageComponent implements OnInit {
 		if(this.questionareform.invalid) {
 			return;
 		}else{
+			
 			const input_data = {     
 				"email" : this.questionareform.value['email'],
 				"alcohol" : this.questionareform.value['alcohol'],
@@ -84,11 +88,12 @@ export class AppDwonloadPageComponent implements OnInit {
 				"religion" : this.questionareform.value['religion'],
 				"ref_code" : this.questionareform.value['ref_code']
 			}
-
 			this.data_service.apiRegister(input_data).subscribe((response:any)=> { 
+				this.toastr.successToastr(response.message, 'Success!');
 				this.submitted = false;
                 this.questionareform.reset();
-                 
+                this.openFileDownloadModal = true;
+
 			},error =>{
 				this.isError = true; 
 				this.errorsArr = error.error;
@@ -96,7 +101,9 @@ export class AppDwonloadPageComponent implements OnInit {
 			});
 		}
 	}
-	
+	closeModal() {
+		this.openFileDownloadModal = false;
+	}
 }
 
 

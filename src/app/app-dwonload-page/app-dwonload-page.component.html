@@ -99,3 +99,26 @@
       </div>
    </div>
 </div>
+
+<!---  Modal to delete TASK  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openFileDownloadModal ? 'block' : 'none'" *ngIf="openFileDownloadModal" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Download Application</h4>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <p><strong>Click on link to download the application</strong></p>
+              <a href="assets/uploads/app-debug.apk" download (click)="closeModal()"><span class="text-danger">Download File</span></a>
+         </div>
+         <div class="modal-footer">
+
+         </div>
+      </div>
+   </div>
+</div>
+</div>

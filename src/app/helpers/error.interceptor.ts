@@ -65,21 +65,18 @@ export class ErrorInterceptor implements HttpInterceptor {
                 
                 if(err.error.username) {
                     this.toastr.errorToastr(err.error.username,'Error');
-                }
-                if(err.error.email) {
+                } if(err.error.email) {
                     this.toastr.errorToastr(err.error.email,'Error');
-                }
-                if(err.error.password) {
+                } if(err.error.password) {
                     this.toastr.errorToastr(err.error.password,'Error');
-                }
-                if(err.error.referalCode) {
+                } if(err.error.referalCode) {
                     this.toastr.errorToastr(err.error.referalCode,'Error');
-                }
-                if(err.error.newPassword) {
+                } if(err.error.newPassword) {
                      this.toastr.errorToastr(err.error.newPassword,'Error');
-                }
-                 if(err.error.newPassword2) {
+                } if(err.error.newPassword2) {
                      this.toastr.errorToastr(err.error.newPassword2,'Error');
+                } if(err.error.ref_code) {
+                     this.toastr.errorToastr(err.error.ref_code,'Error');
                 }
                 return throwError(err);
             }));
