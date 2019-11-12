@@ -102,8 +102,10 @@ export class AppDwonloadPageComponent implements OnInit {
 		}
 	}
 	closeModal() {
-		this.openFileDownloadModal = false;
-	}
+		setTimeout(() => {
+            this.openFileDownloadModal = false;
+		}, 3000);
+    } 
 }
 
 

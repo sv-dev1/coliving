@@ -58,6 +58,40 @@ import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issu
 import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 
 
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+
+
+const cookieConfig:NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'localhost'// it is recommended to set your domain, for cookies to work properly
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#f1d600'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+  layout: 'my-custom-layout',
+  layouts: {
+    "my-custom-layout": '{{messagelink}}{{compliance}}'
+  },
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}} 
+      <a aria-label="learn more about our privacy policy" tabindex="1" class="cc-link" href="{{privacyPolicyHref}}" target="_blank">{{privacyPolicyLink}}</a>
+    </span>
+    `,
+  },
+  content:{
+      message: 'By using our site, you acknowledge that you have read and understand our ',
+      privacyPolicyLink: 'Privacy Policy',
+      privacyPolicyHref: 'https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066',
+  }
+};
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -130,7 +164,9 @@ export function provideConfig() {
     GooglePlaceModule,
     NgxIntlTelInputModule,
     MatBadgeModule,
-    MatIconModule,MatMenuModule,MatSlideToggleModule
+    MatIconModule,MatMenuModule,MatSlideToggleModule,
+    NgcCookieConsentModule.forRoot(cookieConfig)
+    
   ],
   
   providers: [

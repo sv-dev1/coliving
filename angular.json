@@ -29,13 +29,15 @@
               "./node_modules/intl-tel-input/build/css/intlTelInput.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/ngx-lightbox/lightbox.css",
-             
+              "./node_modules/cookieconsent/build/cookieconsent.min.css",
               "src/themes/default.theme.scss",
               "src/styles.css",
                "./node_modules/aos/dist/aos.css"
             ],
             "scripts": [
-              "src/assets/js/wow.min.js"
+              "src/assets/js/wow.min.js",
+               "./node_modules/cookieconsent/build/cookieconsent.min.js"
+              
             ]
           },
           "configurations": {

@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="assign_to">Assign To:</label>
+                              <label for="assign_to">Assign To: {{this.itemsCount}}</label>
                               <angular2-multiselect [data]="userdropdownList" 
                               [settings]="userdropdownSettings" 
                               (onSelect)="onUserItemSelect($event)" 
@@ -128,6 +128,28 @@
                            </div>
                         </div>
                      </div>
+                     <div class="col-12 col-sm-6">
+                        <div class="form-group">   
+                            <table>
+                                <thead>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let row of userselectedItems;let index = index;">
+                                    <td>
+                                        Username :  <select  class='form-control'              formControlName="user" (change)           ="selected($event.target.value)">
+                                                    <option *ngIf="noData">No Data</option>
+                                                    <option *ngFor="let payee of userselectedItems" [value]="payee.id">{{payee.itemName}}</option>
+                                             </select>
+                                    </td>
+                                    <td>
+                                        Amount : <input type="text" 
+                                                formControlName="price" class="form-control" placeholder="Price" >
+                                    </td>
+                              </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                      <div class="col-12 col-sm-12 text-center">
                         <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
                      </div>

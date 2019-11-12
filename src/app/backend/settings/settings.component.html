@@ -7,7 +7,7 @@
 			 <div class="col-12">
 				<ul class="breadcrumb custom-breadcrumb">
 				   <li class="breadcrumb-item"><a routerLink='/dashboard'>Home</a></li>
-				   <li class="breadcrumb-item active">Setting Page</li>
+				   <li class="breadcrumb-item active">Settings</li>
 				</ul>
 			 </div>
 		  </div>
@@ -15,7 +15,7 @@
 			 <div class="col-12">
 				<nav class="sssss">
 				   <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-					  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Notification</a>
+					  <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Notifications</a>
 					  <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
 					  <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
 					  <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
@@ -23,7 +23,8 @@
 				</nav>
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 				   <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-				   	<h4>Set notification On/Off:</h4>
+                   
+               <!--     	<h4>Set notification On/Off:</h4>
                     <mat-slide-toggle
 						   [(ngModel)]="checked"
 						   class="example-margin"
@@ -31,7 +32,48 @@
 						   (change)="changed($event)"
 						   [checked] = this.on_off>
 						   {{ this.message }} 
-					</mat-slide-toggle>
+					</mat-slide-toggle> -->
+				   <div class="custm_to-do mb-4">
+                        <div class="to-do_heading">
+                        </div>
+                        <form [formGroup]="notificationForm" (ngSubmit)="updateNotifications()" >
+	                        <div class="to_do_list">
+	                           <ul class="list-group">
+	                              <li class="list-group-item active-plus">
+	                                All Notifications
+	                                 <span class="badge badge-primary badge-pill">
+	                                 	<input type="checkbox" formControlName="notification" [checked] = this.on_off>
+	                                 </span>
+	                              </li>
+	                              <li class="list-group-item active-plus">
+	                                 Bill Notifications
+	                                 <span class="badge badge-primary badge-pill">
+	                                    <input type="checkbox" formControlName="b_notification" [checked] = this.on_off1>
+	                                 </span>
+	                              </li>
+	                              <li class="list-group-item active-plus">
+	                                 Chat Messages Notifications
+	                                 <span class="badge badge-primary badge-pill">
+	                                 	<input type="checkbox" formControlName="cm_notification" [checked] = this.on_off2>
+	                                 </span>
+	                              </li>
+	                              <li class="list-group-item active-plus">
+	                                 Group Join Notifications
+	                                 <span class="badge badge-primary badge-pill">
+	                                 	<input type="checkbox" formControlName="g_notification" [checked] = this.on_off3>
+	                                 </span>
+	                              </li>
+	                              <li class="list-group-item active-plus">
+	                                 House Chores Shift Notifications
+	                                 <span class="badge badge-primary badge-pill">
+	                                 	<input type="checkbox" formControlName="hcs_notification" [checked] = this.on_off4>
+	                                 </span>
+	                              </li>
+	                           </ul>
+	                        </div>
+	                        <button type="submit" class="btn btn-orange-sm pull-right">Save changes</button>
+                        </form>
+                     </div>
 					     
 				   </div>
 				   <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">

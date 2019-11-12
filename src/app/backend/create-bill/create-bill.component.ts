@@ -52,26 +52,29 @@ export class CreateBillComponent implements OnInit {
   lessAmount:any;
   totalAmount :any;
   amountPerUser:any;
-
   amountSplit: any = [];
 
+  itemsCount: any;
+
   constructor(
-        private formBuilder:FormBuilder,  
-        private router: Router,
-        private data_service : DataService,
-        public toastr: ToastrManager,
-        private datePipe: DatePipe,
-        private http : HttpClient,
-  ) { 
+    private formBuilder:FormBuilder,  
+    private router: Router,
+    private data_service : DataService,
+    public toastr: ToastrManager,
+    private datePipe: DatePipe,
+    private http : HttpClient,
+    ) { 
     this.createBillForm = this.formBuilder.group({
-        team: ['', Validators.required], 
-        title: ['', Validators.required],
-        amount: ['', Validators.required],
-        date:  ['', Validators.required],
-        bill: ['', Validators.required],
-        assign_to: ['', Validators.required],
-        items: this.formBuilder.array([this.createItem()])
-        //  payees:this.formBuilder.array([this.formBuilder.group({user:['', Validators.required],price:['', Validators.required]})]),      //upload_bill: new FormControl(''),
+      team: ['', Validators.required], 
+      title: ['', Validators.required],
+      amount: ['', Validators.required],
+      date:  ['', Validators.required],
+      bill: ['', Validators.required],
+      assign_to: ['', Validators.required],
+      //items: this.formBuilder.array([this.createItem()])
+      user : [''],
+      price :['']
+      //  payees:this.formBuilder.array([this.formBuilder.group({user:['', Validators.required],price:['', Validators.required]})]),      //upload_bill: new FormControl(''),
 
     });
     this.base_url = environment.base_url;
@@ -95,8 +98,8 @@ export class CreateBillComponent implements OnInit {
     return this.createBillForm.controls; 
   }
   onSelectFile(event) {
-     this.fileData = event.target.files[0];   
-     this.preview();
+    this.fileData = event.target.files[0];   
+    this.preview();
   } 
   preview() {
     var mimeType = this.fileData.type;
@@ -106,114 +109,114 @@ export class CreateBillComponent implements OnInit {
     var reader = new FileReader();      
     reader.readAsDataURL(this.fileData); 
     reader.onload = (_event) => { 
-     this.url = reader.result; 
+      this.url = reader.result; 
     }
   }
   createBill(){
-      console.log(this.createBillForm.value);
-     
-      if(this.createBillForm.value['team']=="")
-      {
-        this.teamEmpty=true;
+    console.log(this.createBillForm.value);
+
+    if(this.createBillForm.value['team']=="")
+    {
+      this.teamEmpty=true;
+    }
+    if(this.createBillForm.value['assign_to']=="")
+    {
+      this.userEmpty=true;
+    }
+    if(this.createBillForm.value['items']=="")
+    {
+      this.whoPayEmpty=true;
+    }
+    this.submitted = true;
+    if (this.createBillForm.invalid) {
+      return;
+    }
+    else{
+      let data=this.createBillForm.value;
+      console.log(data.items);
+      data.items.forEach(obj => {
+        this.payeeNameArr.push(obj.user);
+        this.payeePriceArr.push(obj.price);
+      });
+      data.team.forEach(element => {
+        this.teamName.push(element.id);
+      });
+      data.assign_to.forEach(element => {
+        this.assignUser.push(element.id);
+      });
+
+      const input_data = {
+        "team" : data.team,
+        "title" : data.title,      
+        "amount" : data.amount,
+        "date" : this.datePipe.transform(data.date, 'yyyy-MM-dd'),
+        "bill" : this.fileData,
+        "assign_to" : data.assign_to,
       }
-      if(this.createBillForm.value['assign_to']=="")
-      {
-        this.userEmpty=true;
+      const formData = new FormData();
+      formData.append('title', input_data.title);
+      formData.append('files', this.fileData);     
+      formData.append('team', this.teamName);
+      formData.append('amount', input_data.amount);
+      formData.append('date', input_data.date);
+      formData.append('userId', this.assignUser);
+      formData.append('payee_name', (this.payeeNameArr).toString());
+      formData.append('payee_price',(this.payeePriceArr).toString());                  
+      let token; 
+      if(sessionStorage.getItem("auth_token")!=undefined){
+        token = sessionStorage.getItem("auth_token"); 
       }
-      if(this.createBillForm.value['items']=="")
-      {
-        this.whoPayEmpty=true;
-      }
-      this.submitted = true;
-        if (this.createBillForm.invalid) {
-          return;
-        }
-        else{
-          let data=this.createBillForm.value;
-           console.log(data.items);
-           data.items.forEach(obj => {
-            this.payeeNameArr.push(obj.user);
-            this.payeePriceArr.push(obj.price);
-            });
-            data.team.forEach(element => {
-                this.teamName.push(element.id);
-            });
-            data.assign_to.forEach(element => {
-              this.assignUser.push(element.id);
-            });
-           
-            const input_data = {
-              "team" : data.team,
-              "title" : data.title,      
-              "amount" : data.amount,
-              "date" : this.datePipe.transform(data.date, 'yyyy-MM-dd'),
-              "bill" : this.fileData,
-              "assign_to" : data.assign_to,
-            }
-            const formData = new FormData();
-                formData.append('title', input_data.title);
-                formData.append('files', this.fileData);     
-                formData.append('team', this.teamName);
-                formData.append('amount', input_data.amount);
-                formData.append('date', input_data.date);
-                formData.append('userId', this.assignUser);
-                formData.append('payee_name', (this.payeeNameArr).toString());
-                formData.append('payee_price',(this.payeePriceArr).toString());                  
-            let token; 
-            if(sessionStorage.getItem("auth_token")!=undefined){
-            token = sessionStorage.getItem("auth_token"); 
-            }
-            const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-            this.http.post(this.base_url+'createBills', formData, httpOptions).subscribe((response:any) => {
-                
-                this.toastr.successToastr(response.message, 'Success!');
-                this.submitted=false;
-                this.createBillForm.reset();
-                this.router.navigate['/split-bill'];
-              },error=>{ 
-                //console.log("ERROR");
-                //console.log(error.error);
-                console.log('error', error);
-            }); 
-        }
+      const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+      this.http.post(this.base_url+'createBills', formData, httpOptions).subscribe((response:any) => {
+
+        this.toastr.successToastr(response.message, 'Success!');
+        this.submitted=false;
+        this.createBillForm.reset();
+        this.router.navigate['/split-bill'];
+      },error=>{ 
+        //console.log("ERROR");
+        //console.log(error.error);
+        console.log('error', error);
+      }); 
+    }
   }
 
   getTeam(){        
-        this.data_service.getTeam().subscribe((response:any) =>{  
-          this.teamData=response['teams'];
-         // console.log(this.teamData);
-          this.teamData.forEach(ele => {
-            let obj = {};
-            obj['id'] = ele['teamId'];
-            obj['itemName'] = ele['name'];
-            this.dropdownList.push(obj);
-          });
+    this.data_service.getTeam().subscribe((response:any) =>{  
+      this.teamData=response['teams'];
+      // console.log(this.teamData);
+      this.teamData.forEach(ele => {
+        let obj = {};
+        obj['id'] = ele['teamId'];
+        obj['itemName'] = ele['name'];
+        this.dropdownList.push(obj);
+      });
       
-          this.dropdownSettings = { 
-             singleSelection: false, 
-             text:"Select Team",
-             selectAllText:'Select All',
-             unSelectAllText:'UnSelect All',
-             classes:"myclass custom-class"
-          };
+      this.dropdownSettings = { 
+        singleSelection: false, 
+        text:"Select Team",
+        selectAllText:'Select All',
+        unSelectAllText:'UnSelect All',
+        classes:"myclass custom-class"
+      };
     }, error =>{
-        this.isError = true;   
-        window.scrollTo(0, 0);
+      this.isError = true;   
+      window.scrollTo(0, 0);
       this.errorsArr = JSON.parse(error._body);
       this.toastr.errorToastr(this.errorsArr, 'Error!');
-     
+
     })
   }
 
   onTeamSelection() { 
     let tmp = [];
     let postArr = {'teamId': this.list};
-   // console.log(postArr);
+    // console.log(postArr);
     this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
-         this.teamuser=response.teams;
-         for(let i=0; i < this.teamuser.length; i++) {
-         if(this.teamuser[i].userProfile){
-             tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].userProfile['firstName']});
+      this.teamuser=response.teams;
+      for(let i=0; i < this.teamuser.length; i++) {
+        if(this.teamuser[i].userProfile){
+          tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].userProfile['firstName']});
         }}
         this.userdropdownList = tmp;
         this.userdropdownSettings = { 
@@ -222,94 +225,94 @@ export class CreateBillComponent implements OnInit {
           selectAllText:'Select All',
           unSelectAllText:'UnSelect All',
           classes:"myclass custom-class"
-       };
-    }, error =>{
+        };
+      }, error =>{
         this.isError = true;   
         window.scrollTo(0, 0);
-      this.errorsArr = JSON.parse(error._body);
-      this.toastr.errorToastr(this.errorsArr, 'Error!');
-     // console.log(JSON.stringify(this.errorsArr, undefined, 2))
-    })
-  
+        this.errorsArr = JSON.parse(error._body);
+        this.toastr.errorToastr(this.errorsArr, 'Error!');
+        // console.log(JSON.stringify(this.errorsArr, undefined, 2))
+      })
+
   }
   onItemSelect(item:any){
     this.list.push(item['id']);
     this.onTeamSelection();
-    }
+  }
   OnItemDeSelect(item:any){
-   
+
     this.list.splice(this.list.indexOf(this.list), 1);
     this.onTeamSelection();
   }
   onSelectAll(items: any){
     items.forEach(element => {
-       this.list.push(element['id']);
-     });
+      this.list.push(element['id']);
+    });
     this.onTeamSelection();
   }
   onDeSelectAll(items: any){
-      //console.log(items);
-      this.list=[];
-      this.onTeamSelection();
+    //console.log(items);
+    this.list=[];
+    this.onTeamSelection();
   }
   onUserSelectAll(items: any){
-    
+
     this.noData = false;
     items.forEach(element => {
-         this.userselectedItems.push(element);
-     });
+      this.userselectedItems.push(element);
+    });
   } 
   onUserItemSelect(item:any){
-      this.userselectedItems.push(item);
-      this.noData = false;
+    this.userselectedItems.push(item);
+    this.noData = false;
   }
   OnUserItemDeSelect(item:any){
-       
-      this.userselectedItems.splice(this.userselectedItems.indexOf(item),1);
-      
+
+    this.userselectedItems.splice(this.userselectedItems.indexOf(item),1);
+
   }
   onUserDeSelectAll(items: any){
-   
-        this.userselectedItems = [];   
+
+    this.userselectedItems = [];   
   }
 
   onPayedSelectAll(items: any){
     this.payerselectedItems.push(items);
   } 
   onPayedItemSelect(item:any){
-      this.payerselectedItems.push(item);
+    this.payerselectedItems.push(item);
   }
   OnPayedItemDeSelect(item:any){
     //console.log(this.userselectedItems);
   }
   onPayedDeSelectAll(items: any){
-     // console.log(items);
+    // console.log(items);
   }
 
   numberOnly(event): boolean {
 
     if(event.srcElement.value != '') {
-        this.amount = event.srcElement.value;
-        this.isVisible = true;
+      this.amount = event.srcElement.value;
+      this.isVisible = true;
     } 
     if(event.srcElement.value == '' || event.srcElement.value == null) {
-           this.isVisible = false;
+      this.isVisible = false;
     }
     return true;
   }
   addmore(i){
-      if(this.userselectedItems.length <= this.repeatRows.length){
-             this.toastr.infoToastr('Selected users exceeded.', 'Information!');
-      }
-      else   {
-          this.repeatRows.push(i+1);
-          (this.createBillForm.controls['items'] as FormArray).push(this.createItem());
-      }
+    if(this.userselectedItems.length <= this.repeatRows.length){
+      this.toastr.infoToastr('Selected users exceeded.', 'Information!');
+    }
+    else   {
+      this.repeatRows.push(i+1);
+      (this.createBillForm.controls['items'] as FormArray).push(this.createItem());
+    }
     //  console.log(this.createBillForm.controls['items']);
- 
+
   }
   delete(){
-      this.repeatRows.splice(0,1);
+    this.repeatRows.splice(0,1);
   }
   selected(info){
     this.editable = true;
@@ -317,18 +320,12 @@ export class CreateBillComponent implements OnInit {
   }
 
   checkAmountIsValid(event: any) {
-         var amount = event.srcElement.value;
-         this.amountSplit.push(amount);
-         let totalAmount = eval(this.amountSplit.join('+'));
-         if(totalAmount  > this.amount) {
-           console.log('length', this.amountSplit.length);
-           let i;
-           for(i = 0; i < this.amountSplit.length; i++ ) {
-                  (this.createBillForm.controls['items'] as FormArray).removeAt(i);  
-           } 
-           i++ ;
-           this.addmore(i);
-           this.toastr.warningToastr('Split amount should not be greater than total amount.', 'Warning!');
-         }
-     }     
+    var amount = event.srcElement.value;
+    this.amountSplit.push(amount);
+    let totalAmount = eval(this.amountSplit.join('+'));
+    if(totalAmount  > this.amount) {
+      console.log('length', this.amountSplit.length);
+      this.toastr.warningToastr('Split amount should not be greater than total amount.', 'Warning!');
+    }
+  }     
 }
