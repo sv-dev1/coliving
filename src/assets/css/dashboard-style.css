@@ -532,7 +532,9 @@ ul.custom-tabs li.nav-item a.active{
 	right:15px;
 }
 .to_do_list ul li.active-plus:before {
-    content: "\F419";
+    /*content: "\F419";*/
+    content:"\f11d";
+    color:#ed502e;
    
 }
 .to-do_heading {

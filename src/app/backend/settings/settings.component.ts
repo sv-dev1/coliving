@@ -7,75 +7,164 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+	selector: 'app-settings',
+	templateUrl: './settings.component.html',
+	styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
 
-	base_url :any;
-	userInfo:any;
+	base_url : any;
+	userInfo : any;
 	color = 'accent';
-    checked :boolean = false;
-    on_off: any;
-    message:any;
-    isError: any;
-    errorsArr: any;
+	checked : boolean = false;
+	on_off : any;
+	on_off1 : any;
+	on_off2 : any;
+	on_off3 : any;
+	on_off4 : any;
+	message :any;
+	isError : any;
+	errorsArr : any;
+    notificationForm : FormGroup;
 
-  constructor(
-        private formBuilder:FormBuilder,
+	constructor(
+		private formBuilder:FormBuilder,
 		private router: Router,
 		public toastr: ToastrManager,
 		private data_service : DataService,
 		private http : HttpClient,
-  ) { 
-    this.base_url = environment.base_url;
-  }
+		) { 
+		  this.base_url = environment.base_url;
+		  this.notificationForm = this.formBuilder.group({
+		 	   notification : [''],
+		 	   b_notification : [''],
+		 	   cm_notification : [''],
+		 	   g_notification : [''],
+		 	   hcs_notification : ['']
+		  });
+	}
 
-  ngOnInit() {
-    this.getUserData();
-  }
+	ngOnInit() {
+		this.getUserData();
+	}
 
 	changed(event){		
-		    if(event){
-		    	 let notification;
-		    	 if(event.checked == true) {
-			            notification = 1;
-					} else if(event.checked == false) {
-			            notification = 0;
-				 }
-				 const input = {
-                        "notification":notification
-				  }
-		         this.data_service.setNotification(input).subscribe((response:any)=> { 
-	                this.toastr.successToastr(response.message,'Success'); 
-		        },error =>{
-		          this.isError = true; 
-		          this.errorsArr = error.error;
-		        });
-		 }
+		if(event){
+			let notification;
+			if(event.checked == true) {
+				notification = 1;
+			} else if(event.checked == false) {
+				notification = 0;
+			}
+			const input = {
+				"notification":notification,
+			}
+			this.data_service.setNotification(input).subscribe((response:any)=> { 
+				this.toastr.successToastr(response.message,'Success'); 
+			},error =>{
+				this.isError = true; 
+				this.errorsArr = error.error;
+			});
+		}
 	}
-	 getUserData(){ 
-   
-	    let token; 
-	    if(sessionStorage.getItem("auth_token")!=undefined){
-	      token = sessionStorage.getItem("auth_token"); 
-	    }
-	    let headers = new HttpHeaders();
-	    headers = headers.set('Authorization', token);
-	       this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
-	         if(response.users[0].setting.notification ==1) {
-                 this.on_off = true;
-                 this.message = 'Notification On';
-	         } else if(response.users[0].setting.notification ==0) {
-	         	 this.on_off = false;
-	         	 this.message = 'Notification Off';
-	         }
+	getUserData(){ 
 
-	    },error=>{ 
-	      this.isError = true; 
-	      this.errorsArr = error.error;
-	    });  
-    }
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
+			
+			if(response.users[0].setting.notification ==1) {
+				this.on_off = true;
+			} else if(response.users[0].setting.notification ==0) {
+				this.on_off = false;
+			}
+
+			if(response.users[0].setting.b_notification ==1) {
+				this.on_off1 = true;	
+			} else if(response.users[0].setting.b_notification ==0) {
+				this.on_off1 = false;	
+			}
+
+			if(response.users[0].setting.cm_notification ==1) {
+				this.on_off2 = true;	
+			} else if(response.users[0].setting.cm_notification ==0) {
+				this.on_off2 = false;	
+			}
+
+			if(response.users[0].setting.g_notification ==1) {
+				this.on_off3 = true;	
+			} else if(response.users[0].setting.g_notification ==0) {
+				this.on_off3 = false;	
+			}
+
+			if(response.users[0].setting.hcs_notification ==1) {
+				this.on_off4 = true;	
+			} else if(response.users[0].setting.hcs_notification ==0) {
+				this.on_off4 = false;	
+			}
+
+			
+		},error=>{ 
+			this.isError = true; 
+			this.errorsArr = error.error;
+		});  
+	}
+
+	updateNotifications() {
+            let notification;
+            let b_notification;
+            let cm_notification;
+            let g_notification;
+            let hcs_notification;
+
+			if(this.notificationForm.value['notification'] == true) {
+				notification = 1;
+			} else if(this.notificationForm.value['notification']== false) {
+				notification = 0;
+			}
+
+			if(this.notificationForm.value['b_notification'] == true) {
+				b_notification = 1;
+			} else if(this.notificationForm.value['b_notification'] == false) {
+				b_notification = 0;
+			}
+
+		    if(this.notificationForm.value['cm_notification'] == true) {
+				cm_notification = 1;
+			} else if(this.notificationForm.value['cm_notification'] == false) {
+				cm_notification = 0;
+			}
+
+			if(this.notificationForm.value['g_notification'] == true) {
+				g_notification = 1;
+			} else if(this.notificationForm.value['g_notification'] == false) {
+				g_notification = 0;
+			}
+
+			if(this.notificationForm.value['hcs_notification'] == true) {
+				hcs_notification = 1;
+			} else if(this.notificationForm.value['hcs_notification'] == false) {
+				hcs_notification = 0;
+			}
+
+			const input = {
+				 "notification" : notification ,
+		 	     "b_notification" : b_notification,
+		 	     "cm_notification" : cm_notification ,
+		 	     "g_notification" : g_notification,
+		 	     "hcs_notification" : hcs_notification
+			}
+			console.log()
+			this.data_service.setNotification(input).subscribe((response:any)=> { 
+				this.toastr.successToastr(response.message,'Success'); 
+			},error =>{
+				this.isError = true; 
+				this.errorsArr = error.error;
+			});
+	}
 	
 }
