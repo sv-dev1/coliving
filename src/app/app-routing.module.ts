@@ -23,14 +23,16 @@ import { PropertyComponent } from './backend/property/property.component';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'app.download', component: AppDwonloadPageComponent },
+  { path: 'email.verify', component: EmailVerificationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forgot-passwornd', component: ForgotPasswordComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'booking', component: BookingComponent },

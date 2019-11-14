@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
   private rc: string;
   res:any = [];
   messageDigit:string='';
-  color : string='green';
-  child : boolean=true;
+  color : string = 'green';
+  child : boolean = true;
   messahecczcz:string='';
   
   constructor(	
@@ -93,14 +93,14 @@ export class RegisterComponent implements OnInit {
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  
-        this.toastr.successToastr('Registered Successfully.', 'Success!');
+        this.toastr.successToastr(response.message, 'Success!');
         this.router.navigate(['/login']); 
         this.isError = false;
         this.isSuccess = true;            
       }, error =>{
         this.isError = true;   
         window.scrollTo(0, 0);
-        console.log('errror',error);
+       // console.log('errror',error);
         this.errorsArrUser = error.error.username;
         //this.toastr.errorToastr(this.errorsArr, 'Error!');
         //console.log('dffsdfsd',JSON.stringify(this.errorsArr, undefined, 2))
@@ -124,8 +124,6 @@ export class RegisterComponent implements OnInit {
         "roleId" :4    
       }
       this.data_service.register(input_data).subscribe((response:any) =>{
-        console.log('after register response');
-        console.log(response);
         sessionStorage.setItem("auth_token", response.token);
         location.href = "/dashboard"; 
       }, error =>{
@@ -174,8 +172,8 @@ export class RegisterComponent implements OnInit {
         "roleId" :4    
       }
       this.data_service.register(input_data).subscribe((response:any) =>{
-        console.log('after register response');
-        console.log(response);
+       /* console.log('after register response');
+        console.log(response);*/
         sessionStorage.setItem("auth_token", response.token);
         location.href = "/dashboard"; 
       }, error =>{

@@ -32,7 +32,7 @@ import { ChatService } from './chat.service';
 import { NgxUiLoaderModule } from  'ngx-ui-loader';
 import { LoaderInterceptor } from './helpers/loader.interceptor';
 import { environment } from '../environments/environment';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
@@ -41,7 +41,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { TaskSuggestionsComponent } from './backend/task-suggestions/task-suggestions.component';
 import { Socket } from 'ng-socket-io';
 import { BlockCopyPasteDirective } from './block-copy-paste.directive';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule} from '@angular/material/slider';
 import { CategoryComponent } from './backend/category/category.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LightboxModule } from 'ngx-lightbox';
@@ -50,15 +50,14 @@ import { PropertyComponent } from './backend/property/property.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { PropertyrequestsComponent } from './backend/propertyrequests/propertyrequests.component';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatIconModule, MatSlideToggleModule} from '@angular/material';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatBadgeModule} from '@angular/material/badge';
+import { MatIconModule, MatSlideToggleModule} from '@angular/material';
+import { MatMenuModule} from '@angular/material/menu';
 import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
-
-
-import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+import { NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -139,6 +138,7 @@ export function provideConfig() {
     TeamInfoComponent,
     FlatmateIssuesComponent,
     AppDwonloadPageComponent,
+    EmailVerificationComponent,
  
   ],
   imports: [

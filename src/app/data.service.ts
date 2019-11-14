@@ -478,4 +478,21 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-}
+     verifyEmailAddress(data){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		let url = this.base_url+'verify/email/'+data.userId+'/'+data.token;
+		return this.http.post(url,{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+
+	}
+
+} 

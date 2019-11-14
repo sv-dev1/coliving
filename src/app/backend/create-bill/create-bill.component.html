@@ -105,7 +105,7 @@
                               <div class="form-group">
                                  <label for="who_pay">Enter amount:</label>
                                  <input type="text" 
-                                 formControlName="price"class="form-control" placeholder="Price" (change)="checkAmountIsValid($event)" [readonly]="!editable"> 
+                                 formControlName="price"class="form-control" placeholder="Price" (change)="checkAmountIsValid($event)" > 
                               </div>
                               <div *ngIf="whoPayEmpty"  class="error-msg">     Please select bill payers.
                               </div>
@@ -118,17 +118,17 @@
                                  </div>
                               </div>
                            </div>
-                           <div class="col-12 col-sm-3" [formGroupName]="i">
+                        <!--    <div class="col-12 col-sm-3" [formGroupName]="i">
                               <div class="button-user">
                                  <label for="who_pay"></label>
-                                 <!--  <div class="bill-btn">
+                                  <div class="bill-btn">
                                     <a (click)="delete(i)"> Delete </a>
-                                    </div> -->
+                                    </div>
                               </div>
-                           </div>
+                           </div> -->
                         </div>
                      </div>
-                     <div class="col-12 col-sm-6">
+              <!--        <div class="col-12 col-sm-6">
                         <div class="form-group">   
                             <table>
                                 <thead>
@@ -149,7 +149,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> -->
                      <div class="col-12 col-sm-12 text-center">
                         <button type="submit" class="btn btn-orange-sm" style="padding: 15px 30px;">Submit</button>
                      </div>
