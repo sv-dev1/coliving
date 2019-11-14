@@ -18,6 +18,7 @@ export class FlatmateIssuesComponent implements OnInit {
 	isAddIssueModal:boolean =false;
 	submitted:boolean =false;
 	addIssueForm:FormGroup;
+	addIssueReplyForm:FormGroup;
 	fileData:any;
 	isError : boolean = false;
 	isSuccess : boolean = false;
@@ -33,11 +34,14 @@ export class FlatmateIssuesComponent implements OnInit {
 	teamName: any = [];
 	assignUser: any=[];
 	base_url : string = "";
-	teamEmpty:boolean=false;
-    userEmpty:boolean=false;
-    allIssues: any = [];
+	teamEmpty : boolean = false;
+    userEmpty : boolean = false;
+    allIssues : any = [];
     issuesCount : any;
     image_base_url:any;
+    threads : any = [];
+    logged_in_id : string = "";
+    isOpenthreadModal : boolean = false;
 
 	constructor(
 		private formBuilder:FormBuilder,	
@@ -55,22 +59,28 @@ export class FlatmateIssuesComponent implements OnInit {
 		});
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
+		this.logged_in_id = sessionStorage.getItem("userId");
+		this.base_url = environment.image_base_url;
+
+		this.addIssueReplyForm = this.formBuilder.group({
+			message: ['', Validators.required],
+			issueId: ['']
+		})
 	}
 
 	ngOnInit() {
 		this.getTeam();
 		this.getIssues();
+
 	}
 
 	openAddIssueModal(){
 		this.isAddIssueModal = true;
 	}
-
 	closeModal(){
 		this.isAddIssueModal = false;
 		this.submitted = false;    
 		this.addIssueForm.reset(); 
-		
 	}
 	onSelectFile(event) {
 		this.fileData = event.target.files[0];
@@ -94,7 +104,6 @@ export class FlatmateIssuesComponent implements OnInit {
 	}
 
 	addIssue(){
-		
 		if(this.addIssueForm.value['team']=="") {
 			this.teamEmpty=true;
 		}
@@ -106,7 +115,7 @@ export class FlatmateIssuesComponent implements OnInit {
 			return;
 		}
 		else{
-			let data=this.addIssueForm.value;
+			let data = this.addIssueForm.value;
 			data.team.forEach(element => {
 				this.teamName.push(element.id);
 			});
@@ -135,14 +144,12 @@ export class FlatmateIssuesComponent implements OnInit {
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
 			this.http.post(this.base_url+'issues/create', formData, httpOptions).subscribe((response:any) => {
-				console.log('response', response);
 				this.toastr.successToastr(response.message, 'Success!');
 				this.submitted = false;
 				this.url = '';
 				this.addIssueForm.reset();
 				this.isAddIssueModal = false;
-                 
-
+                this.getIssues();
 			},error=>{ 
 				this.errorsArr =error;
 
@@ -182,10 +189,9 @@ export class FlatmateIssuesComponent implements OnInit {
 		let postArr = {'teamId': this.list};
 		this.data_service.getTeamUsers(postArr).subscribe((response:any) =>{  
 			this.teamuser = response.teams;
-			console.log('users', this.teamuser);
 			for(let i=0; i < this.teamuser.length; i++) {
 				if(this.teamuser[i].userProfile){
-					tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].userProfile['firstName']+' '+this.teamuser[i].userProfile['lastName']});
+					tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].login.username});
 				}}
 				this.userdropdownList = tmp;
 				this.userdropdownSettings = { 
@@ -196,7 +202,6 @@ export class FlatmateIssuesComponent implements OnInit {
 					classes:"myclass custom-class",
 					limitSelection: 2,
 				    enableSearchFilter: true,
-
 				};
 			}, error =>{
 				this.isError = true;   
@@ -245,14 +250,63 @@ export class FlatmateIssuesComponent implements OnInit {
 
     getIssues() {
         this.data_service.getAllIssues().subscribe((response:any) =>{ 
-        console.log('response',response.issues);  
 			this.allIssues = response.issues;
 			this.issuesCount = this.allIssues.length;
-			console.log('this.allIssues',this.allIssues);
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
+    }
+
+    openIssueThread(element) {
+    	if(element) {
+    		console.log(element);
+    		this.isOpenthreadModal = true;
+            this.data_service.getAllMessagesByIssueId(element.issueId).subscribe((response:any) =>{ 
+			this.threads = response.issues;
+			this.isError = false;    
+			this.addIssueReplyForm.patchValue({
+				issueId: element.issueId
+			});
+			console.log('this.thread', this.threads);
+			}, error =>{ 
+				this.isError = true; 
+				this.errorsArr = error.error;
+			})
+    	}
+    }
+    close(){
+        this.isOpenthreadModal = false;
+    }
+
+    get g() { return this.addIssueReplyForm.controls; }
+
+    addIssueReply() {
+        this.submitted = true;
+		if (this.addIssueReplyForm.invalid) {
+			return;
+		}
+		else{
+			let data = this.addIssueReplyForm.value;
+            const inputs = {
+            	"userId" : this.logged_in_id,
+            	"message" : data.message,
+            	"issueId" : data.issueId,
+            	"createdAt" : new Date() 
+            }
+            this.data_service.addReply(inputs).subscribe((response:any)=> { 
+	          //this.toastr.successToastr(response.message,'Success');
+	          this.submitted = false;
+	          this.addIssueReplyForm.reset();
+	          const inputIssueId = {
+	          	 "issueId" : data.issueId
+	          } 
+	          this.openIssueThread(inputIssueId);
+	        },error =>{
+	          this.isError = true; 
+	          this.errorsArr = error.error;
+	        });
+		}
     }
 }

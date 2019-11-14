@@ -17,11 +17,11 @@ export class SettingsComponent implements OnInit {
 	userInfo : any;
 	color = 'accent';
 	checked : boolean = false;
-	on_off : any;
-	on_off1 : any;
-	on_off2 : any;
-	on_off3 : any;
-	on_off4 : any;
+	on_off : boolean = false;
+	on_off1 : boolean = false;
+	on_off2 : boolean = false;
+	on_off3 : boolean = false;
+	on_off4 : boolean = false;
 	message :any;
 	isError : any;
 	errorsArr : any;
@@ -76,13 +76,13 @@ export class SettingsComponent implements OnInit {
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
-			
-			if(response.users[0].setting.notification ==1) {
+			console.log(response);
+			if(response.users[0].setting.notification == 1) {
 				this.on_off = true;
-			} else if(response.users[0].setting.notification ==0) {
+			} else if(response.users[0].setting.notification == 0) {
 				this.on_off = false;
 			}
-
+          
 			if(response.users[0].setting.b_notification ==1) {
 				this.on_off1 = true;	
 			} else if(response.users[0].setting.b_notification ==0) {
@@ -106,8 +106,15 @@ export class SettingsComponent implements OnInit {
 			} else if(response.users[0].setting.hcs_notification ==0) {
 				this.on_off4 = false;	
 			}
-
 			
+			this.notificationForm.patchValue({
+				'notification': this.on_off,
+				'b_notification': this.on_off1,
+				'cm_notification': this.on_off2,
+                'g_notification': this.on_off3,
+                'hcs_notification': this.on_off4,
+			})
+
 		},error=>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
@@ -120,7 +127,7 @@ export class SettingsComponent implements OnInit {
             let cm_notification;
             let g_notification;
             let hcs_notification;
-
+           	
 			if(this.notificationForm.value['notification'] == true) {
 				notification = 1;
 			} else if(this.notificationForm.value['notification']== false) {
@@ -158,7 +165,7 @@ export class SettingsComponent implements OnInit {
 		 	     "g_notification" : g_notification,
 		 	     "hcs_notification" : hcs_notification
 			}
-			console.log()
+			
 			this.data_service.setNotification(input).subscribe((response:any)=> { 
 				this.toastr.successToastr(response.message,'Success'); 
 			},error =>{
