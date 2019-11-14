@@ -445,5 +445,37 @@ export class DataService {
 			console.log('error',error);
 		  return Observable.throw(error);});
 	}
- 
+    getAllMessagesByIssueId(id){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		const postArr = {
+			'issueId' : id
+		};
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.post(this.base_url+'issues/thread/', postArr,{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+    addReply(formData){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.post(this.base_url+'issues/thread/addreply', formData,{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
 }

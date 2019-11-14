@@ -13,32 +13,58 @@
          </div>
          <div class="row">
             <div class="col-12">
-               <button class="pull-right btn btn-orange-sm" (click)="openAddIssueModal();"><i class="fa fa-plus"></i>&nbsp;Report</button>
+               <button class="pull-right btn btn-orange-sm" (click)="openAddIssueModal();"><i class="fa fa-plus"></i>&nbsp;Add Issue</button>
             </div>
             <div class="col-12">
                <div class="card mb-5">
-                  <div class="card-header">Flatmate Issues Against You</div>
+                  <div class="card-header">Flatmate Issues</div>
                   <div class="card-body pb-0">
                      <div class="row">
-                        <div class="col-12 col-sm-6" *ngFor = "let issue of allIssues">
-                           <div class="bill-parts">
-                              <div class="for-image">
-                                 <img  class="img-fluid" src="{{base_url}}{{issue.flatemateIssue?.photo}}" onerror="this.src='assets/images/no-image-available.png'"/>
-                              </div>
-                              <div class="for-detail">
-                                 <div class="name-box">
-                                    <p class="name">{{issue.flatemateIssue?.title}}</p>
+                        <div class="col-xs-12 col-sm-6 col-md-4" *ngFor = "let issue of allIssues">
+                           <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                              <div class="mainflip">
+                                 <div class="frontside">
+                                    <div class="card">
+                                       <div class="card-body text-center">
+                                          <p><img class=" img-fluid" src="{{image_base_url}}{{issue.photo}}" onerror="this.src='assets/images/no-image-available.png'"></p>
+                                          <h4 class="card-title">{{issue?.title}}</h4>
+                                          <p class="card-text">{{issue?.desc}}</p>
+                                          <a href="javascript:void(0)" (click)="openIssueThread(issue)" class="btn btn-primary btn-sm"><i class="fa fa-comments"></i></a>
+                                       </div>
+                                    </div>
                                  </div>
-                                 <div class="name-box2">
-                                    <span class="name2">Description:</span>
-                                    <span class="price">{{issue.flatemateIssue?.desc}}</span>
+                                 <div class="backside">
+                                    <div class="card">
+                                       <div class="card-body text-center mt-4">
+                                          <h4 class="card-title">{{issue?.title}}</h4>
+                                          <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                          <ul class="list-inline">
+                                             <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-facebook"></i>
+                                                </a>
+                                             </li>
+                                             <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-twitter"></i>
+                                                </a>
+                                             </li>
+                                             <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-skype"></i>
+                                                </a>
+                                             </li>
+                                             <li class="list-inline-item">
+                                                <a class="social-icon text-xs-center" target="_blank" href="#">
+                                                <i class="fa fa-google"></i>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
                                  </div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6" *ngIf="this.issuesCount=='0'">
-                           <p class="text-center">No record found.
-                           <p>
                         </div>
                      </div>
                   </div>
@@ -86,33 +112,32 @@
             </div>
             <div class="form-group">
                <label for="team">Choose Team to Assign:</label>
-                  <angular2-multiselect [data]="dropdownList" 
-                    [settings]="dropdownSettings" 
-                    (onSelect)="onItemSelect($event)" 
-                    (onDeSelect)="OnItemDeSelect($event)"
-                    (onSelectAll)="onSelectAll($event)"
-                    (onDeSelectAll)="onDeSelectAll($event)"
-                    formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }">
-                  </angular2-multiselect>  
+               <angular2-multiselect [data]="dropdownList" 
+               [settings]="dropdownSettings" 
+               (onSelect)="onItemSelect($event)" 
+               (onDeSelect)="OnItemDeSelect($event)"
+               (onSelectAll)="onSelectAll($event)"
+               (onDeSelectAll)="onDeSelectAll($event)"
+               formControlName="team" [ngClass]="{ 'is-invalid': submitted && f.team.errors }">
+               </angular2-multiselect>  
             </div>
             <div *ngIf="teamEmpty"  class="error-msg">          
-                Please select Team Name.
+               Please select Team Name.
             </div>
             <div class="form-group">
                <label for="assign_to">Assign To:</label>
-                  <angular2-multiselect [data]="userdropdownList" 
-                      [settings]="userdropdownSettings" 
-                      (onSelect)="onUserItemSelect($event)" 
-                      (onDeSelect)="OnUserItemDeSelect($event)"
-                      (onSelectAll)="onUserSelectAll($event)"
-                      (onDeSelectAll)="onUserDeSelectAll($event)"
-                      formControlName="assign_to" [ngClass]="{ 'is-invalid': submitted && f.assign_to.errors }">
-                  </angular2-multiselect>
+               <angular2-multiselect [data]="userdropdownList" 
+               [settings]="userdropdownSettings" 
+               (onSelect)="onUserItemSelect($event)" 
+               (onDeSelect)="OnUserItemDeSelect($event)"
+               (onSelectAll)="onUserSelectAll($event)"
+               (onDeSelectAll)="onUserDeSelectAll($event)"
+               formControlName="assign_to" [ngClass]="{ 'is-invalid': submitted && f.assign_to.errors }">
+               </angular2-multiselect>
             </div>
             <div *ngIf="userEmpty"  class="error-msg">  
                Please select Users to assign.
             </div>
-                                
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
@@ -123,3 +148,71 @@
    </div>
 </div>
 </div> 
+<!-- Model for Add Isseu -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isOpenthreadModal ? 'block' : 'none'" *ngIf="isOpenthreadModal" >
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Messages</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="close()">&times;</button>
+         </div>
+         <form [formGroup]="addIssueForm" (ngSubmit)="addIssue()" >   
+         <!-- Modal body -->
+         <div class="modal-body">
+             <div class="panel-body">
+                    <ul class="chat" *ngFor="let message of threads,index as i">
+                        <li class="left clearfix" *ngIf="message?.userId != logged_in_id">
+                           <span class="chat-img pull-left">
+                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{message.login.username}}</strong> <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
+                                </div>
+                                <p>
+                                   {{message?.message}}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="right clearfix" *ngIf="message?.userId == logged_in_id">
+                            <span class="chat-img pull-right">
+                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                        </span>
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
+                                    <strong class="pull-right primary-font">{{message.login.username}}</strong>
+                                </div>
+                                <p>
+                                    {{message?.message}}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+               
+         </div>
+         <div class="modal-footer">
+          <form [formGroup]="addIssueReplyForm" (ngSubmit)="addIssueReply()" class="custom-form"> 
+              <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" [ngClass]="{'is-invalid': submitted && g.message.errors}" placeholder="Type your message here..." formControlName="message"/>
+                        <div *ngIf="submitted && g.message.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="g.message.errors.required">Write something in text box.</span>
+                        </div>
+                    </div>
+                    <input type="hidden" formControlName="issueId" />
+                </div>
+             <button type="submit" class="btn btn-orange-sm reply-btn">Reply</button>
+          </form>
+         </div>
+         </form> 
+      </div>
+   </div>
+</div>
+</div>

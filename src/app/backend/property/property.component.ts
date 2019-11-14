@@ -21,28 +21,28 @@ export class PropertyComponent implements OnInit {
   	  teamForm : FormGroup;
 	  allPropertyArray : any =[];
 	  allProperties : any =[];
-      isError:boolean = false;
-	  errorsArr:string ='';
+      isError : boolean = false;
+	  errorsArr : string = '';
 	  isopenAddPropertyModal : boolean = false;
-	  propertyForm:FormGroup;
-	  submitted:boolean=false;
-	  url :any  = []; 
-	  fileData:any;
-	  p :any;
+	  propertyForm : FormGroup;
+	  submitted : boolean=false;
+	  url : any  = []; 
+	  fileData : any;
+	  p : any;
 	  base_url : string = '';
 	  image_base_url: string = '';
-      isArrayLength:boolean =false;
-      ispropertyInfo:boolean =false;
-      propertyInfo:any = [];
-
-      isopenSendCVModal:boolean =false;
-
-	  openTeam:boolean =false;
-	  allteam:any=[];
-	  prop_id:any;
-	  roleId:any;
-	  tenant:boolean = false;
-	  landLord:boolean = false;
+      isArrayLength : boolean = false;
+      ispropertyInfo : boolean = false;
+      propertyInfo : any = [];
+      isopenSendCVModal : boolean = false;
+	  openTeam : boolean = false;
+	  allteam : any = [];
+	  prop_id : any;
+	  roleId : any;
+	  tenant : boolean = false;
+	  landLord : boolean = false;
+      propertyLength : boolean = false;
+      
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -93,7 +93,8 @@ export class PropertyComponent implements OnInit {
    	getAllProperties() {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
-			if(this.allProperties.length > 9 ) {
+			this.propertyLength = this.allProperties.length;
+			if(this.allProperties.length  > 9 ) {
                   this.isArrayLength  = true;
 		    }
 		    this.isError = false;    

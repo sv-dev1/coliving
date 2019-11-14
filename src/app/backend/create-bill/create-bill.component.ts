@@ -216,7 +216,7 @@ export class CreateBillComponent implements OnInit {
       this.teamuser=response.teams;
       for(let i=0; i < this.teamuser.length; i++) {
         if(this.teamuser[i].userProfile){
-          tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].userProfile['firstName']});
+          tmp.push({ id: this.teamuser[i].userProfile['userId'], itemName: this.teamuser[i].login.username});
         }}
         this.userdropdownList = tmp;
         this.userdropdownSettings = { 
