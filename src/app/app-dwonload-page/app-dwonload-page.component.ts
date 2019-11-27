@@ -40,8 +40,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			apartment_clean_importance: ['', Validators.required],
 			apartment_party: ['', Validators.required],
 			music: ['', Validators.required],
-			social_account: ['', Validators.required],
-			religion: ['', Validators.required],
+			social_account: [''],
 			email: ['', Validators.required],
 			ref_code: ['', Validators.required]
 		});
@@ -85,15 +84,17 @@ export class AppDwonloadPageComponent implements OnInit {
 				"apartment_party" : this.questionareform.value['apartment_party'],
 				"music" : this.questionareform.value['music'],
 				"social_account" : this.questionareform.value['social_account'],
-				"religion" : this.questionareform.value['religion'],
 				"ref_code" : this.questionareform.value['ref_code']
 			}
-			this.data_service.apiRegister(input_data).subscribe((response:any)=> { 
-				this.toastr.successToastr(response.message, 'Success!');
-				this.submitted = false;
-                this.questionareform.reset();
-                this.openFileDownloadModal = true;
-
+			this.data_service.apiRegister(input_data).subscribe((response:any)=> {
+				if(response.error ==true) {
+                     this.toastr.errorToastr(response.message, 'Error');
+				} else if(response.profile) {
+					this.toastr.successToastr(response.message, 'Success!');
+					this.submitted = false;
+	                this.questionareform.reset();
+	                this.openFileDownloadModal = true;
+				}
 			},error =>{
 				this.isError = true; 
 				this.errorsArr = error.error;

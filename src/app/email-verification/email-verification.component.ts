@@ -32,7 +32,7 @@ export class EmailVerificationComponent implements OnInit {
 		}
 		this.data_service.verifyEmailAddress(input_data).subscribe((response:any) =>{  
 	        this.toastr.successToastr(response.message, 'Success!');
-	        this.router.navigate(['/login']); 
+	        this.router.navigate(['/thank-you']); 
 	        this.isError = false;          
 	     }, error =>{
 	        this.isError = true;   

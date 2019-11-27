@@ -76,10 +76,10 @@ export class RegisterComponent implements OnInit {
   }
   register(form){
 
-    console.log("working here");
+   // console.log("working here");
     this.submitted = true;
     if (this.registerForm.invalid) {
-      console.log("error");
+      
       return;
     }else{
 
@@ -93,6 +93,7 @@ export class RegisterComponent implements OnInit {
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  
+        console.log('response',response);
         this.toastr.successToastr(response.message, 'Success!');
         this.router.navigate(['/login']); 
         this.isError = false;
@@ -100,7 +101,7 @@ export class RegisterComponent implements OnInit {
       }, error =>{
         this.isError = true;   
         window.scrollTo(0, 0);
-       // console.log('errror',error);
+        console.log('errror',error);
         this.errorsArrUser = error.error.username;
         //this.toastr.errorToastr(this.errorsArr, 'Error!');
         //console.log('dffsdfsd',JSON.stringify(this.errorsArr, undefined, 2))

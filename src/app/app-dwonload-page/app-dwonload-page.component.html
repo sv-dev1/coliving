@@ -2,8 +2,8 @@
    <div class="row">
       <div class="col-md-3 register-left">
          <img src="assets/images/Logo-colive.png" alt="" />
-         <h3>Welcome</h3>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+         <h3>Welcome to the colivingApp</h3>
+         <p>The app that not only deals with issues that can appear when sharing accommodation but also solves them. The questionnaire below will be shared with the coliver from whom you received this link. Filling the data up will make you become a potential candidate to share the apartment with.</p>
          <!-- <input type="submit" name="" value="Login"/><br/> -->
       </div>
       <div class="col-md-9 register-right">
@@ -19,72 +19,70 @@
                   <form [formGroup]="questionareform" (ngSubmit)="questionareSubmit()">
                      <div class="col-md-12">
                         <div class="form-group">
-                           <h3>Partying:</h3>
-                           <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  wf.partying.errors }">Yes
-                           <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">No
-                           <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Sometimes
-                           <input type="radio" formControlName="partying" value="3" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Strictly Against
+                           <h3>1)&nbsp;Which of these answers describes you the best? Partying:</h3>
+                           <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  wf.partying.errors }">Yes&nbsp;&nbsp;
+                           <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">No&nbsp;&nbsp;
+                           <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Sometimes&nbsp;&nbsp;
+                           <input type="radio" formControlName="partying" value="3" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Strictly Against&nbsp;&nbsp;
                            <div *ngIf="submitted && wf.partying.errors" class="welErr">
-                              <div *ngIf="wf.partying.errors.required">Choose from partying</div>
+                              <div *ngIf="wf.partying.errors.required">Please select one option from partying.</div>
                            </div>
                         </div>
                         <div class="form-group">
-                           <h3>Alcohol:</h3>
-                           <input type="radio" formControlName="alcohol" value="0">Yes
-                           <input type="radio" formControlName="alcohol" value="1">No
-                           <input type="radio" formControlName="alcohol" value="2">Sometimes
-                           <input type="radio" formControlName="alcohol" value="3">Strictly Against
+                           <h3>2)&nbsp;Which of these answers describes you the best? Alcohol:</h3>
+                           <input type="radio" formControlName="alcohol" value="0">Yes&nbsp;&nbsp;
+                           <input type="radio" formControlName="alcohol" value="1">No&nbsp;&nbsp;
+                           <input type="radio" formControlName="alcohol" value="2">Sometimes&nbsp;&nbsp;
+                           <input type="radio" formControlName="alcohol" value="3">Strictly Against&nbsp;&nbsp;
                            <div *ngIf="submitted && wf.alcohol.errors" class="welErr">
-                              <div *ngIf="wf.alcohol.errors.required">Choose from Alcohol</div>
+                              <div *ngIf="wf.alcohol.errors.required">Please select one option from alcohol.</div>
                            </div>
                         </div>
                         <div class="form-group">
-                           <h3>Smoking:</h3>
-                           <input type="radio" formControlName="smoking" value="0">Yes
-                           <input type="radio" formControlName="smoking" value="1">No
-                           <input type="radio" formControlName="smoking" value="2">Sometimes
-                           <input type="radio" formControlName="smoking" value="3">Strictly Against</div>
+                           <h3>3)&nbsp;Which of these answers describes you the best? Smoking:</h3>
+                           <input type="radio" formControlName="smoking" value="0">Yes&nbsp;&nbsp;
+                           <input type="radio" formControlName="smoking" value="1">No&nbsp;&nbsp;
+                           <input type="radio" formControlName="smoking" value="2">Sometimes&nbsp;&nbsp;
+                           <input type="radio" formControlName="smoking" value="3">Strictly Against&nbsp;&nbsp;
+                           <div *ngIf="submitted && wf.smoking.errors" class="welErr">
+                              <div *ngIf="wf.smoking.errors.required">Please select one option from smoking.</div>
+                           </div>
+                        </div>
                         <div class="form-group">
-                           <h3>How important is it to you to live in a clean and tidy apartment generally?</h3>
+                           <h3>4)&nbsp;How important is it to you to live in a clean and tidy apartment generally?</h3>
                            <p>(Please choose range)</p>
                            <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_clean_importance" [ngClass]="{ 'is-invalid': submitted && wf.apartment_clean_importance.errors }" thumbLabel tickInterval="1"></mat-slider>
                            <div *ngIf="submitted && wf.apartment_clean_importance.errors" class="welErr">
-                              <div *ngIf="wf.apartment_clean_importance.errors.required">Select valid range</div>
+                              <div *ngIf="wf.apartment_clean_importance.errors.required">Please select an valid range between 1-5.</div>
                            </div>
                         </div>
                         <div class="form-group">
-                           <h3>How much do you like a music in your apartment.</h3>
+                           <h3>5)&nbsp;How much do you like a music in your apartment.</h3>
+                            <p>(Please choose range)</p>
                            <mat-slider min="1" max="5" step="1" value="1" formControlName="music" [ngClass]="{ 'is-invalid': submitted && wf.music.errors }" thumbLabel tickInterval="1"></mat-slider>
                            <div *ngIf="submitted && wf.music.errors" class="welErr">
-                              <div *ngIf="wf.music.errors.required">Select valid range</div>
+                              <div *ngIf="wf.music.errors.required">Please select an valid range between 1-5.</div>
                            </div>
                         </div>
                         <div class="form-group">
-                           <h3>Party in your apartment</h3>
+                           <h3>6)&nbsp;Party in your apartment</h3>
+                            <p>(Please choose range)</p>
                            <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_party" [ngClass]="{ 'is-invalid': submitted && wf.apartment_party.errors }" thumbLabel tickInterval="1"></mat-slider>
                            <div *ngIf="submitted && wf.apartment_party.errors" class="welErr">
-                              <div *ngIf="wf.apartment_party.errors.required">Select valid range</div>
+                              <div *ngIf="wf.apartment_party.errors.required">Please select an valid range between 1-5.</div>
                            </div>
                         </div>
                         <div class="form-group">
-                           <label>Instagram/Facebook/LinkedIn account</label>
-                           <input type="text" class="form-control" placeholder="Social account address*" formControlName="social_account" />
-                           <div *ngIf="submitted && wf.social_account.errors" class="welErr">
-                              <div *ngIf="wf.social_account.errors.required">Field is required</div>
-                           </div>
+                           <label>7)&nbsp;Instagram/Facebook/LinkedIn account.</label>
+                           <input type="text" class="form-control" placeholder="Social account address" formControlName="social_account" />
+                           
                         </div>
+                      
                         <div class="form-group">
-                           <label>Religion</label>
-                           <input type="text" class="form-control" placeholder="Religion *" formControlName="religion" />
-                           <div *ngIf="submitted && wf.religion.errors" class="welErr">
-                              <div *ngIf="wf.religion.errors.required">Field is required</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label>Email</label>
+                           <label>8)&nbsp;Enter your email address. </label>
                            <input type="text" class="form-control" placeholder="Valid email address *" formControlName="email" />
                            <div *ngIf="submitted && wf.email.errors" class="welErr">
-                              <div *ngIf="wf.email.errors.required">Field is required</div>
+                           <div *ngIf="wf.email.errors.required">Please enter an valid email address.</div>
                            </div>
                         </div>
                         <input type="hidden" formControlName="ref_code">
@@ -112,8 +110,8 @@
                      <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                            <div class="popup-content">
-                              <h2>Lorem ipsum <br>Lorem ipsum</h2>
-                              <p style="padding-top: 6px;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+                              <h2>Registered Successfully</h2>
+                              <p style="padding-top: 6px;">Your application has been received successfully. Wait for the contact from the coliver who issued this link. In the meantime, you can download the app and join the colivers community for free!</p>
                            </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">

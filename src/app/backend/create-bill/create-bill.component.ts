@@ -351,7 +351,7 @@ export class CreateBillComponent implements OnInit {
   }
   addmore(i) {
     if (this.userselectedItems.length <= this.repeatRows.length) {
-      this.toastr.infoToastr('Selected users exceeded.', 'Information!');
+          this.toastr.infoToastr('Selected users exceeded.', 'Information!');
     } else {
       this.repeatRows.push(i + 1);
       (this.createBillForm.controls['items'] as FormArray).push(this.createItem());

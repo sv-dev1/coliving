@@ -24,11 +24,15 @@ import { TeamInfoComponent } from './backend/team-info/team-info.component';
 import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issues.component';
 import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { DownloadComponent } from './download/download.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'app.download', component: AppDwonloadPageComponent },
-  { path: 'email.verify', component: EmailVerificationComponent },
+  { path: 'play.app.colive', component: DownloadComponent },
+  { path: 'email.verify', component: EmailVerificationComponent }, 
+  { path: 'thank-you', component: ThankYouComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },

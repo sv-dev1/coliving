@@ -58,6 +58,8 @@ import { FlatmateIssuesComponent } from './backend/flatmate-issues/flatmate-issu
 import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.component';
 import { NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { DownloadComponent } from './download/download.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -139,6 +141,8 @@ export function provideConfig() {
     FlatmateIssuesComponent,
     AppDwonloadPageComponent,
     EmailVerificationComponent,
+    DownloadComponent,
+    ThankYouComponent,
  
   ],
   imports: [
