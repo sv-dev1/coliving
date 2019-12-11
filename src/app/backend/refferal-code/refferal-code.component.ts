@@ -30,7 +30,11 @@ export class RefferalCodeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getUserData();
+		 this.getUserData();
+		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+		      this.router.navigate(['/dashboard']);
+		 }
+		console.log('sdssddad', sessionStorage.getItem("roleId"));
 	}
 	getUserData(){ 
 		let token; 
@@ -39,15 +43,15 @@ export class RefferalCodeComponent implements OnInit {
 		}
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
-		console.log('headers', headers);
+		//console.log('headers', headers);
 		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
 			this.userDataArr = response.users[0]; 
 			this.referralCodeForm.patchValue({
 				referralCode : location.origin+'/'+'sign-up?rc='+this.userDataArr.ref_code,
 			});	
 		},error=>{ 
-			console.log("ERROR");
-			console.log(error.error);
+			//console.log("ERROR");
+			//console.log(error.error);
 		});  
 	}
 	copyMessage(inputElement){

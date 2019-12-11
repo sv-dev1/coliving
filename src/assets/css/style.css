@@ -1618,6 +1618,15 @@ img.TOG {
     padding-left: 40px;
 }
 
+
+a.logo-link img {
+    width: 100%;
+    max-width: 100px;
+}
+.header-section a.navbar-brand img {
+    width: 80px;
+}
+
 @media screen and (min-width: 768px) { 
  #taskDel:before {
     display: inline-block;
