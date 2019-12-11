@@ -21,19 +21,19 @@
                      <div class="row">
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">First Name<span class="validate-red">*</span></label>
+                              <label for="team">First name<span class="validate-red">*</span></label>
                               <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
                               <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.firstName.errors.required">First Name is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.firstName.errors.required">First name is required.</span>
                               </div>
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Last Name<span class="validate-red">*</span></label>
+                              <label for="team">Last name<span class="validate-red">*</span></label>
                               <input type="text"  class="form-control" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
                               <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last Name is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.lastName.errors.required">Last name is required.</span>
                               </div>
                            </div>
                         </div>
@@ -57,13 +57,13 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Date Of Birth<span class="validate-red">*</span></label>
+                              <label for="team">Date of birth<span class="validate-red">*</span></label>
                               <input type="text" placeholder="Date of Birth"
                               class="form-control"
                               #dp="bsDatepicker"
                               bsDatepicker formControlName="dob"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
                               <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of Birth is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of birth is required.</span>
                               </div>
                            </div>
                         </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Weekend Wake up time.<span class="validate-red">*</span></label>
+                              <label for="team">Weekend wake up time.<span class="validate-red">*</span></label>
                               <ngb-timepicker [(ngModel)]="weekend_wakeup_time" formControlName="weekend_wakeup_time"></ngb-timepicker>
                               <div *ngIf="submitted && f.weekend_wakeup_time.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.weekend_wakeup_time.errors.required">Weekend wake-up time is required.</span>
@@ -125,31 +125,29 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Maximun Price<span class="validate-red">*</span></label>
+                              <label for="team">Maximun price<span class="validate-red">*</span></label>
                               <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
                               <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun Price is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun price is required.</span>
                               </div>
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Minimum Price<span class="validate-red">*</span></label>
+                              <label for="team">Minimum price<span class="validate-red">*</span></label>
                               <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }"  >
                               <div *ngIf="submitted && f.minimumPrice.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum Price is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum price is required.</span>
                               </div>
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">How long willing to stay<span class="validate-red">*</span></label>
+                              <label for="team">How long willing to stay (optional)</label>
                               <input type="text"
                                  placeholder="How long willing to stay"
                                  class="form-control"
-                                 bsDaterangepicker formControlName="stay_date"[minDate]="today">
-                              <div *ngIf="stayDateEmpty"  class="default-error-message"> How long willing to stay is required.
-                              </div>
+                                  formControlName="stay_date">
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
@@ -179,10 +177,10 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Phone Number<span class="validate-red">*</span></label>
+                              <label for="team">Phone number<span class="validate-red">*</span></label>
                               <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
                               <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone Number is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone number is required.</span>
                               </div>
                               <div *ngIf="this.messageDigit">
                                  <span class="customPhoneMessage">{{this.messageDigit}}</span>
@@ -203,16 +201,16 @@
                               <label for="team">Work Place<span class="validate-red">*</span></label>
                               <input  type="text"  class="form-control" placeholder="Work Place" formControlName="work_place" [ngClass]="{ 'is-invalid': submitted && f.work_place.errors }" >
                               <div *ngIf="submitted && f.work_place.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work Place is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.work_place.errors.required">Work place is required.</span>
                               </div>
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Postal Code<span class="validate-red">*</span></label>
+                              <label for="team">Postal code<span class="validate-red">*</span></label>
                               <input type="text"  class="form-control" placeholder="Postal Code" formControlName="postalCode" [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" (keypress)="keyPress1($event)">
                               <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal Code is required.</span>
+                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal code is required.</span>
                               </div>
                               <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
@@ -298,9 +296,16 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="bill">Upload Image<span class="validate-red">*</span></label>
+                              <label for="bill">Upload image<span class="validate-red">*</span></label>
                               <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
                               <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > <br/>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                           <div class="form-group">
+                              <label for="team">Social media account<span class="validate-red">*</span></label>
+                              <input type="text" class="form-control" placeholder="Ex. Facebook, Instagram etc.." formControlName="social_account">
+                             
                            </div>
                         </div>
                         <input type="hidden" formControlName="file">

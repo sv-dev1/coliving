@@ -167,6 +167,12 @@
 background-color: #ed502d; border-color: #FE1413;border-radius: 3px;padding: 10px 40px; font-size: 14px;vertical-align: middle;display: inline-block; height: auto;
     color: white;text-transform: uppercase; border-radius: 100px;margin: auto;width: auto;
 }
+
+.download-app .modal {
+    overflow: auto !important;
+}
+
+
 @media (max-width:767px){
 .register-heading {
     color: #ed5737;

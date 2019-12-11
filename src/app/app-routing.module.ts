@@ -26,6 +26,7 @@ import { AppDwonloadPageComponent } from './app-dwonload-page/app-dwonload-page.
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'email.verify', component: EmailVerificationComponent }, 
   { path: 'thank-you', component: ThankYouComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'faq', component: FaqComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },

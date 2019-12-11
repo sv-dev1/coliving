@@ -44,8 +44,6 @@ export class RegisterComponent implements OnInit {
         password: ['', [Validators.required, Validators.minLength(8)]],
         confPassword: ['', [Validators.required, Validators.minLength(8)]],
         agree: ['false', Validators.requiredTrue],
-        referralCode: [''],
-        registerAs: ['', Validators.required]
     },{
       validator: ConfirmPasswordValidator.MatchPassword
     }
@@ -88,8 +86,7 @@ export class RegisterComponent implements OnInit {
         "email" : form.email,
         "password" : form.password,
         "password2" : form.confPassword,
-        "ref_code":form.referralCode,
-        "roleId" :form.registerAs    
+        "roleId" :3    
       }
       
       this.data_service.register(input_data).subscribe((response:any) =>{  

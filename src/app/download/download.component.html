@@ -1,5 +1,5 @@
 <!---  Modal to delete TASK  -->
-<div class="container">
+<div class="container download-app">
    <!-- The Modal -->
    <div class="modal custom-download" id="taskDel" [style.display]="openFileDownloadModal ? 'block' : 'none'" *ngIf="openFileDownloadModal">
       <div class="modal-dialog modaldialog12">
@@ -7,31 +7,31 @@
             <!-- Modal Header -->
             <!-- Modal body -->
             <div class="modal-body">
-               <form method="POST" action="https://retaildv.uprx.com/product" accept-charset="UTF-8">
-                  <input name="_token" type="hidden" value="hMD63dQHhd28BsVDlfbYtiXaObgLDGwLxPdw4T5O">
                   <div class="create-account-content">
                      <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                           <div class="popup-image">
+                              <img src="assets/images/Logo-colive.png">
+                           </div>
+                        </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                            <div class="popup-content">
                               <h3>Welcome to the colivingApp</h3>
                               <p>The app that not only deals with issues that can appear when sharing accommodation but also solves them. The questionnaire below will be shared with the coliver from whom you received this link. Filling the data up will make you become a potential candidate to share the apartment with.</p>
                            </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                           <div class="popup-image">
-                              <img src="assets/images/Logo-colive.png">
-                           </div>
-                        </div>
+                        
                      </div>
                      <div class="row">
                      </div>
+                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                      <div class="create-account-btn">
                         <!-- <button type="submit" >Create Account Now</button> -->
                          <a *ngIf="message == '' "class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
-                         <a *ngIf="message != '' "class="btn btn-lg src_btn" style="">{{message}}</a>
+                         <a *ngIf="message != '' "class="btn btn-lg src_btn" style=""><i class="fa fa-check-circle" style="font-size:20px;"></i>&nbsp;{{message}}</a>
                      </div>
                   </div>
-               </form>
+                  </div>
             </div>
             <div class="modal-footer"></div>
          </div>

@@ -60,6 +60,7 @@ import { NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { FaqComponent } from './faq/faq.component';
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -89,7 +90,7 @@ const cookieConfig:NgcCookieConsentConfig = {
   },
   content:{
       message: 'By using our site, you acknowledge that you have read and understand our ',
-      privacyPolicyLink: 'Privacy Policy',
+      privacyPolicyLink: 'Privacy Policy, Terms & condtions, GDPR',
       privacyPolicyHref: 'https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066',
   }
 };
@@ -143,6 +144,7 @@ export function provideConfig() {
     EmailVerificationComponent,
     DownloadComponent,
     ThankYouComponent,
+    FaqComponent,
  
   ],
   imports: [

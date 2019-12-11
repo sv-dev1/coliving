@@ -19,7 +19,7 @@ export class DownloadComponent implements OnInit {
   }
   closeModal() {
 		setTimeout(() => {
-            this.message = 'Colive app downloaded successfully!.';
+            this.message = 'App Downloaded';
 		}, 2000);
   }
 }
