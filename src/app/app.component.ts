@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgcCookieConsentService } from 'ngx-cookieconsent';
 import { Subscription }   from 'rxjs/Subscription';
 import { NgcInitializeEvent , NgcStatusChangeEvent, NgcNoCookieLawEvent } from 'ngx-cookieconsent';
+import { Router , ActivatedRoute} from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,45 +17,49 @@ export class AppComponent  {
 	  private statusChangeSubscription: Subscription;
 	  private revokeChoiceSubscription: Subscription;
 	  private noCookieLawSubscription: Subscription;
- 
+      public href: string = "";
 
   constructor(
-           private ccService: NgcCookieConsentService
+           private ccService: NgcCookieConsentService,
+           private router: Router,
+		   private route: ActivatedRoute
   	) {
 
   }
  ngOnInit() {
-       
-		this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
-	      () => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-	 
-	    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
-	      () => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-	 
-	    this.initializeSubscription = this.ccService.initialize$.subscribe(
-	      (event: NgcInitializeEvent) => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-	 
-	    this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
-	      (event: NgcStatusChangeEvent) => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-	 
-	    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
-	      () => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-	 
-	      this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(
-	      (event: NgcNoCookieLawEvent) => {
-	        // you can use this.ccService.getConfig() to do stuff...
-	      });
-   
+ 	        console.log('this.router.url',window.location.pathname);
+         if(this.router.url != '/play.app.colive'){
+
+			this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
+		      () => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+		 
+		    this.popupCloseSubscription = this.ccService.popupClose$.subscribe(
+		      () => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+		 
+		    this.initializeSubscription = this.ccService.initialize$.subscribe(
+		      (event: NgcInitializeEvent) => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+		 
+		    this.statusChangeSubscription = this.ccService.statusChange$.subscribe(
+		      (event: NgcStatusChangeEvent) => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+		 
+		    this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(
+		      () => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+		 
+		      this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(
+		      (event: NgcNoCookieLawEvent) => {
+		        // you can use this.ccService.getConfig() to do stuff...
+		      });
+        }
     }
     ngOnDestroy() {
 		    // unsubscribe to cookieconsent observables to prevent memory leaks

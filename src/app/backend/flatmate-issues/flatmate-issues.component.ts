@@ -44,11 +44,11 @@ export class FlatmateIssuesComponent implements OnInit {
     isOpenthreadModal : boolean = false;
 
 	constructor(
-		private formBuilder:FormBuilder,	
-		private router: Router,
-		private data_service : DataService,
-		public toastr: ToastrManager,
-		private http : HttpClient,
+			private formBuilder:FormBuilder,	
+			private router: Router,
+			private data_service : DataService,
+			public toastr: ToastrManager,
+			private http : HttpClient,
 		) {
 		this.addIssueForm = this.formBuilder.group({
 			title: ['', Validators.required],
@@ -67,13 +67,14 @@ export class FlatmateIssuesComponent implements OnInit {
 			issueId: ['']
 		})
 	}
-
+    
 	ngOnInit() {
 		this.getTeam();
 		this.getIssues();
 
 	}
 
+   
 	openAddIssueModal(){
 		this.isAddIssueModal = true;
 	}
@@ -309,4 +310,5 @@ export class FlatmateIssuesComponent implements OnInit {
 	        });
 		}
     }
+
 }

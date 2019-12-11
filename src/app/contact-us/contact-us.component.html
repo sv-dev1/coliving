@@ -37,35 +37,47 @@
             </div>
         </div>
         
-        <form>
+        <form [formGroup]="contactUsForm" (ngSubmit)="contactUs(contactUsForm.value)">
             <div class="row">
                 <div class="col-12 col-sm-4">
                     <div class="form-group form-parts">
-                        <input type="email" class="form-control" placeholder="Name">
+                        <input type="text" formControlName="name" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" autocomplete="off" class="form-control" autocomplete="off">
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.name.errors.required">Name is required.</span>
+                       </div>
                     </div>
+                    
                 </div>
-                
                 <div class="col-12 col-sm-4">
                     <div class="form-group form-parts">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" formControlName="email" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="off">
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                              <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+                              <span class="for-sub-name" *ngIf="f.email.errors.email">Email must be a valid</span>
+                        </div>
                     </div>
                 </div>
-                
                 <div class="col-12 col-sm-4">
                     <div class="form-group form-parts">
-                        <input type="email" class="form-control" placeholder="Subject">
+                        <input type="text" formControlName="subject" placeholder="Subject" [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" class="form-control" autocomplete="off">
+                          <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+                             <span class="for-sub-name" *ngIf="f.subject.errors.required">Subject is required.</span>
+                       </div>
                     </div>
                 </div>
                 
                 <div class="col-12 col-sm-12">
                     <div class="form-group form-parts">
-                        <textarea placeholder="Write your message here..." class="form-control" rows="10"></textarea>
+                        <textarea placeholder="Write your message here..." class="form-control" rows="10" formControlName="message" [ngClass]="{ 'is-invalid': submitted && f.message.errors }"></textarea>
+                        <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                            <span class="for-sub-name" *ngIf="f.message.errors.required">Message is required.</span>
+                        </div>
                     </div>
-                </div>
+                  </div>
                 
                 <div class="col-12 col-sm-12">
                     <div class="submit-outer">
-                        <button type="button" class="btn btn-orange">submit</button>
+                        <button type="submit" class="btn btn-orange">submit</button>
                     </div>
                 </div>
                 

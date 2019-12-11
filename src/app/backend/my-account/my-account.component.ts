@@ -26,26 +26,26 @@ export class MyAccountComponent implements OnInit {
 	msg = ''; 
 	isError : boolean = false;
 	isSuccess : boolean = false;
-	errorsArr:any = []; 
+	errorsArr : any = []; 
 	newArray : any = [];
 	profileData : any = [];
-	updateProfileForm: FormGroup;
-	image_base_url :any;
-	image_url:any;
+	updateProfileForm : FormGroup;
+	image_base_url : any;
+	image_url : any;
 	submitted = false;
-	base_url :any;
-	fileData:any;
-	url:any;
-	userDataArr:any;
-	email:any;
-	messageDigit:string='';
-	messageDigit1:string='';
+	base_url : any;
+	fileData : any;
+	url : any;
+	userDataArr : any;
+	email : any;
+	messageDigit : string = '';
+	messageDigit1 : string = '';
 	time = {hour: 13, minute: 30};
 	weekend_time = {hour: 13, minute: 30};
-	today:any;
-	teamEmpty:boolean=false;
-	userEmpty:boolean=false;
-	allCountriesArray:any=[];
+	today : any;
+	teamEmpty : boolean=false;
+	userEmpty : boolean=false;
+	allCountriesArray : any = [];
 	allCountries:any=[];
 	allLanguagesArray:any=[];
 	allLanguages:any=[];
@@ -103,7 +103,7 @@ export class MyAccountComponent implements OnInit {
 			outing_day:['', Validators.required],
 			maximunPrice:['', Validators.required],
 			minimumPrice:['', Validators.required],
-			stay_date:['', Validators.required],
+			stay_date:[''],
 			gender:['', Validators.required],
 			phoneNo: ['', Validators.required],
 			address: ['', Validators.required],
@@ -117,6 +117,7 @@ export class MyAccountComponent implements OnInit {
 			habits:['', Validators.required],
 			image:[''],
 			file:[''],
+			social_account:[''],
 			weekend_wakeup_time:['', Validators.required],
 			previousCity:['', Validators.required],
 			rentalDescription:['', Validators.required]
@@ -216,12 +217,7 @@ export class MyAccountComponent implements OnInit {
 			this.userDataArr = response.users[0];
           
 			let finalData;	
-			if(this.userDataArr.stay_date != 'Invalid date'){
-			    
-				let str = this.userDataArr.stay_date; 
-				let splitted = str.split(" - ", 2);
-				finalData = this.datePipe.transform(splitted[0], "MM/dd/yyyy")+" - "+this.datePipe.transform(splitted[1],"MM/dd/yyyy");
-			}
+			
 			let wakeUpStr = this.userDataArr.wakeup_time; 
 			   if(wakeUpStr) {
 					let wakeSplit = wakeUpStr.split(":", 3); 
@@ -288,7 +284,7 @@ export class MyAccountComponent implements OnInit {
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
 				maximunPrice:this.maximumPrice,
 				minimumPrice:this.minimumPrice,
-				stay_date:finalData,
+				stay_date:this.userDataArr.stay_date,
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
@@ -300,7 +296,8 @@ export class MyAccountComponent implements OnInit {
 				habits:this.userDataArr.habits,
 				previousCity:this.userDataArr.previous_city,
 				rentalDescription:this.userDataArr.rental_desc,
-				image:['']
+				image:[''],
+				social_account:this.userDataArr.social_account,
 			});
 			this.email = this.userDataArr.email;
 			
@@ -379,7 +376,7 @@ export class MyAccountComponent implements OnInit {
     	
     	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(item),1);
         this.nationalityArr.splice(this.nationalityArr.indexOf(item['id']),1);
-     }
+    }
 
 	updateProfile(formValue) {
 		
@@ -442,12 +439,13 @@ export class MyAccountComponent implements OnInit {
 			formData.append('occuptation_tt', formValue.occuptation_tt); 
 			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
 			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
-			formData.append('stay_date', this.stay_date); 
+			formData.append('stay_date', formValue.stay_date); 
 			formData.append('wakeup_time', this.wakeup_time);
 			formData.append('wakeup_time', this.weekend_wakeup_time); 			
 			formData.append('work_place', formValue.work_place); 
 			formData.append('previous_city', formValue.previousCity); 
 			formData.append('rental_desc', formValue.rentalDescription); 
+			formData.append('social_account', formValue.social_account);
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){

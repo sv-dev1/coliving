@@ -162,6 +162,35 @@
 background-color: #ed502d; border-color: #FE1413;border-radius: 3px;padding: 10px 40px; font-size: 14px;vertical-align: middle;display: inline-block; height: auto;
     color: white;text-transform: uppercase; border-radius: 100px;margin: auto;width: auto;
 }
+
+.app-download-link {
+    position: relative;
+    left: -5px;
+}
+.app-download-link .form-check {
+    padding-left: 9px !important;
+}
+.invalid-feedback {
+    text-align: left;
+    position: relative;
+    left: 2px;
+}
+span.for-sub-name {
+    color: #dc3545;
+    font-weight: 400;
+    font-size: 13px;
+}
+.app-download-link label a {
+    color: #ed502e;
+}
+.app-download-link label {
+    font-size: 13px !important;
+}
+.app-download-link label.form-check-label {
+    position: relative;
+    left: -6px;
+}
+
 @media (max-width:767px){
 .register-heading {
     color: #ed5737;

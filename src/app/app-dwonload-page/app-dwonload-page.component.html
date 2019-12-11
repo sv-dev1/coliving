@@ -2,8 +2,8 @@
    <div class="row">
       <div class="col-md-3 register-left">
          <img src="assets/images/Logo-colive.png" alt="" />
-         <h3>Welcome</h3>
-         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+         <h3>Welcome to the colivingApp</h3>
+         <p>The app that not only deals with issues that can appear when sharing accommodation but also solves them. The questionnaire below will be shared with the coliver from whom you received this link. Filling the data up will make you become a potential candidate to share the apartment with.</p>
          <!-- <input type="submit" name="" value="Login"/><br/> -->
       </div>
       <div class="col-md-9 register-right">
@@ -11,85 +11,239 @@
             <li class="nav-item">
                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tenant</a>
             </li>
-         </ul> -->
+            </ul> -->
          <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                <h3 class="register-heading">Complete the Questionare</h3>
                <div class="row register-form">
-                  <form [formGroup]="questionareform" (ngSubmit)="questionareSubmit()">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                           <h3>Partying:</h3>
-                           <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  wf.partying.errors }">Yes
-                           <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">No
-                           <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Sometimes
-                           <input type="radio" formControlName="partying" value="3" [ngClass]="{ 'is-invalid': submitted && wf.partying.errors }">Strictly Against
-                           <div *ngIf="submitted && wf.partying.errors" class="welErr">
-                              <div *ngIf="wf.partying.errors.required">Choose from partying</div>
-                           </div>
+                  <form [formGroup]="questionareform" (ngSubmit)="questionareSubmit(questionareform.value)">
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <label for="team">Name<span class="validate-red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter your name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" >
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.firstName.errors.required">Name is required.</span>
                         </div>
-                        <div class="form-group">
-                           <h3>Alcohol:</h3>
-                           <input type="radio" formControlName="alcohol" value="0">Yes
-                           <input type="radio" formControlName="alcohol" value="1">No
-                           <input type="radio" formControlName="alcohol" value="2">Sometimes
-                           <input type="radio" formControlName="alcohol" value="3">Strictly Against
-                           <div *ngIf="submitted && wf.alcohol.errors" class="welErr">
-                              <div *ngIf="wf.alcohol.errors.required">Choose from Alcohol</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <h3>Smoking:</h3>
-                           <input type="radio" formControlName="smoking" value="0">Yes
-                           <input type="radio" formControlName="smoking" value="1">No
-                           <input type="radio" formControlName="smoking" value="2">Sometimes
-                           <input type="radio" formControlName="smoking" value="3">Strictly Against</div>
-                        <div class="form-group">
-                           <h3>How important is it to you to live in a clean and tidy apartment generally?</h3>
-                           <p>(Please choose range)</p>
-                           <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_clean_importance" [ngClass]="{ 'is-invalid': submitted && wf.apartment_clean_importance.errors }" thumbLabel tickInterval="1"></mat-slider>
-                           <div *ngIf="submitted && wf.apartment_clean_importance.errors" class="welErr">
-                              <div *ngIf="wf.apartment_clean_importance.errors.required">Select valid range</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <h3>How much do you like a music in your apartment.</h3>
-                           <mat-slider min="1" max="5" step="1" value="1" formControlName="music" [ngClass]="{ 'is-invalid': submitted && wf.music.errors }" thumbLabel tickInterval="1"></mat-slider>
-                           <div *ngIf="submitted && wf.music.errors" class="welErr">
-                              <div *ngIf="wf.music.errors.required">Select valid range</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <h3>Party in your apartment</h3>
-                           <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_party" [ngClass]="{ 'is-invalid': submitted && wf.apartment_party.errors }" thumbLabel tickInterval="1"></mat-slider>
-                           <div *ngIf="submitted && wf.apartment_party.errors" class="welErr">
-                              <div *ngIf="wf.apartment_party.errors.required">Select valid range</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label>Instagram/Facebook/LinkedIn account</label>
-                           <input type="text" class="form-control" placeholder="Social account address*" formControlName="social_account" />
-                           <div *ngIf="submitted && wf.social_account.errors" class="welErr">
-                              <div *ngIf="wf.social_account.errors.required">Field is required</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label>Religion</label>
-                           <input type="text" class="form-control" placeholder="Religion *" formControlName="religion" />
-                           <div *ngIf="submitted && wf.religion.errors" class="welErr">
-                              <div *ngIf="wf.religion.errors.required">Field is required</div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label>Email</label>
-                           <input type="text" class="form-control" placeholder="Valid email address *" formControlName="email" />
-                           <div *ngIf="submitted && wf.email.errors" class="welErr">
-                              <div *ngIf="wf.email.errors.required">Field is required</div>
-                           </div>
-                        </div>
-                        <input type="hidden" formControlName="ref_code">
-                        <button type="submit" class="btn btn-orange-sm pull-right">Submit</button>
                      </div>
+                   
+                     <div class="form-group">
+                        <label for="team">Favourite location<span class="validate-red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Favourite Location" formControlName="favouriteLocation" [ngClass]="{ 'is-invalid': submitted && f.favouriteLocation.errors }" >
+                        <div *ngIf="submitted && f.favouriteLocation.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.favouriteLocation.errors.required">Favourite location is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team" class="radio-inline">Nationality<span class="validate-red">*</span></label>
+                        <angular2-multiselect [data]="countrydropdownList" 
+                        [(ngModel)]="nationalitySelectedItems"
+                        [settings]="dropdownSettingsCountry"
+                        (onSelect)="onNationalitySelect($event)" 
+                        (onDeSelect)="OnNationalityDeSelect($event)" 
+                        formControlName="nationality"
+                        [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }" >
+                        </angular2-multiselect>
+                        <div *ngIf="nationalityEmpty"  class="for-sub-name default-error-message"> Nationality is required.
+                        </div>
+                        <div *ngIf="atmostTwoValNat"  class="default-error-message">You can select atmost two nationalities.
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team" class="radio-inline">Language<span class="validate-red">*</span></label>
+                        <angular2-multiselect [data]="langdropdownList"
+                        [(ngModel)]="languageSelectedItems"
+                        [settings]="dropdownSettingsLanguage" 
+                        formControlName="languages" 
+                        (onSelect)="onLanguageSelect($event)" 
+                        (onDeSelect)="OnLanguageDeSelect($event)" 
+                        [ngClass]="{ 'is-invalid': submitted && f.languages.errors }">
+                        </angular2-multiselect>
+                        <div *ngIf="languageEmpty" class="default-error-message for-sub-name">Language is required.
+                        </div>
+                        <div *ngIf="atmostTwoValLang" class="default-error-message">You can select atmost two languages.
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Phone number<span class="validate-red">*</span></label>
+                        <international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="this.current_country" [required]="true" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+                        <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone number is required.</span>
+                        </div>
+                        <div *ngIf="this.messageDigit">
+                           <span class="customPhoneMessage">{{this.messageDigit}}</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Date of birth<span class="validate-red">*</span></label>
+                        <input type="text" placeholder="Date of Birth"
+                        class="form-control"
+                        #dp="bsDatepicker"
+                        bsDatepicker formControlName="dob"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" >
+                        <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.dob.errors.required">Date of birth is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Occupation/Timetable<span class="validate-red">*</span></label>
+                        <select class="custom-select form-control" formControlName="occuptation_tt" id="occuptation_tt" [ngClass]="{ 'is-invalid': submitted && f.occuptation_tt.errors }">
+                           <option value="" disabled>Please select one option</option>
+                           <option value="1">Full time employee</option>
+                           <option value="2">Part time employee</option>
+                           <option value="3">Part time student</option>
+                           <option value="4">Full time student</option>
+                           <option value="5">Part time internship</option>
+                           <option value="6">Full time internship</option>
+                        </select>
+                        <div *ngIf="submitted && f.occuptation_tt.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.occuptation_tt.errors.required">Occupation is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Weekend wake up time.<span class="validate-red">*</span></label>
+                        <ngb-timepicker [(ngModel)]="weekend_wakeup_time" formControlName="weekend_wakeup_time"></ngb-timepicker>
+                        <div *ngIf="submitted && f.weekend_wakeup_time.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.weekend_wakeup_time.errors.required">Weekend wake-up time is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Day of moving in/out<span class="validate-red">*</span></label>
+                        <input type="text" placeholder="Day of moving in/out"
+                        class="form-control"
+                        #dp="bsDatepicker"
+                        bsDatepicker formControlName="outing_day"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [minDate]="today">
+                        <div *ngIf="submitted && f.outing_day.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.outing_day.errors.required">Day of moving in/out is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Maximun price<span class="validate-red">*</span></label>
+                        <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
+                        <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun price is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Minimum price<span class="validate-red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }"  >
+                        <div *ngIf="submitted && f.minimumPrice.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum price is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">How long willing to stay (optional)</label>
+                            <input type="text" class="form-control" placeholder="How long willing to stay" formControlName="stay_date">
+                        
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Gender<span class="validate-red">*</span></label>
+                        <select class="custom-select form-control" formControlName="gender" id="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                           <option value="" disabled>Please select one option</option>
+                           <option value="Male">Male</option>
+                           <option value="Female">Female</option>
+                           <option value="Other">Other</option>
+                           <option value="notshare">I would rather not share</option>
+                        </select>
+                        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.gender.errors.required">Gender field is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Short bio<span class="validate-red">*</span></label>
+                        <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="biography" [ngClass]="{ 'is-invalid': submitted && f.biography.errors }"></textarea>
+                        <div *ngIf="submitted && f.biography.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.biography.errors.required">Short bio is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="team">Interests<span class="validate-red">*</span></label>
+                        <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="interestes" [ngClass]="{ 'is-invalid': submitted && f.interestes.errors }"></textarea>
+                        <div *ngIf="submitted && f.interestes.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.interestes.errors.required">Interests is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label for="bill">Upload image<span class="validate-red">*</span></label>
+                        <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
+                        <img [src]="url" height="200" *ngIf="url !=''">
+                        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>Which of these answers describes you the best? Partying:<span class="validate-red">*</span></h3>
+                        <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  f.partying.errors }">Yes&nbsp;&nbsp;
+                        <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">No&nbsp;&nbsp;
+                        <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">Sometimes&nbsp;&nbsp;
+                        <input type="radio" formControlName="partying" value="3" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">Strictly Against&nbsp;&nbsp;
+                        <div *ngIf="submitted && f.partying.errors" class="welErr">
+                           <div *ngIf="f.partying.errors.required">Please select one option from partying.<span class="validate-red">*</span></div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>Which of these answers describes you the best? Drinking alcohol:<span class="validate-red">*</span></h3>
+                        <input type="radio" formControlName="alcohol" value="0" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">Yes&nbsp;&nbsp;
+                        <input type="radio" formControlName="alcohol" value="1">No&nbsp;&nbsp;
+                        <input type="radio" formControlName="alcohol" value="2">Sometimes&nbsp;&nbsp;
+                        <input type="radio" formControlName="alcohol" value="3">Strictly Against&nbsp;&nbsp;
+                        <div *ngIf="submitted && f.alcohol.errors" class="welErr">
+                           <div *ngIf="f.alcohol.errors.required">Please select one option from alcohol.</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>Which of these answers describes you the best? Smoking:<span class="validate-red">*</span></h3>
+                        <input type="radio" formControlName="smoking" value="0">Yes&nbsp;&nbsp;
+                        <input type="radio" formControlName="smoking" value="1">No&nbsp;&nbsp;
+                        <input type="radio" formControlName="smoking" value="2">Sometimes&nbsp;&nbsp;
+                        <input type="radio" formControlName="smoking" value="3">Strictly Against&nbsp;&nbsp;
+                        <div *ngIf="submitted && f.smoking.errors" class="welErr">
+                           <div *ngIf="f.smoking.errors.required">Please select one option from smoking.</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>How important is it to you to live in a clean and tidy apartment generally?<span class="validate-red">*</span></h3>
+                        <p>(Please choose range)</p>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_clean_importance" [ngClass]="{ 'is-invalid': submitted && f.apartment_clean_importance.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && f.apartment_clean_importance.errors" class="welErr">
+                           <div *ngIf="f.apartment_clean_importance.errors.required">Please select an valid range between 1-5.</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>How much do you like a music in your apartment.<span class="validate-red">*</span></h3>
+                        <p>(Please choose range)</p>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="music" [ngClass]="{ 'is-invalid': submitted && f.music.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && f.music.errors" class="welErr">
+                           <div *ngIf="f.music.errors.required">Please select an valid range between 1-5.</div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <h3>Party in your apartment<span class="validate-red">*</span></h3>
+                        <p>(Please choose range)</p>
+                        <mat-slider min="1" max="5" step="1" value="1" formControlName="apartment_party" [ngClass]="{ 'is-invalid': submitted && f.apartment_party.errors }" thumbLabel tickInterval="1"></mat-slider>
+                        <div *ngIf="submitted && f.apartment_party.errors" class="welErr">
+                           <div *ngIf="f.apartment_party.errors.required">Please select an valid range between 1-5.</div>
+                        </div>
+                     </div>
+                   
+                     <div class="form-group">
+                        <label>Enter your email address.<span class="validate-red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Valid email address *" formControlName="email" />
+                        <div *ngIf="submitted && f.email.errors" class="welErr">
+                           <div *ngIf="f.email.errors.required">Please enter an valid email address.</div>
+                        </div>
+                     </div>
+                        <div class="form-group app-download-link">
+                           <div class="form-check">
+                              <label class="form-check-label agree">
+                                 <input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> By using our site, you acknowledge that you have read and understand our <a class="" href="https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066">Privacy Policy, Terms & condtions, GDPR</a>
+                                 <div *ngIf="submitted && f.agree.errors" class="invalid-feedback">
+                                    <span class="for-sub-name app-download-link1" id="cust" *ngIf="submitted && f.agree.errors.required || f.agree == undefined" class="for-sub-name"> Please check the Privacy Policy, Terms & condtions, GDPR.</span>
+                                 </div>
+                           </label>
+                        </div>
+                     </div>
+                     <input type="hidden" formControlName="ref_code">
+                     <button type="submit" class="btn btn-orange-sm pull-right">Submit</button>
+                  </div>
                   </form>
                </div>
             </div>
@@ -101,38 +255,38 @@
 <div class="container">
    <!-- The Modal -->
    <div class="modal custom-download" id="taskDel" [style.display]="openFileDownloadModal ? 'block' : 'none'" *ngIf="openFileDownloadModal">
-      <div class="modal-dialog modaldialog12">
-         <div class="modal-content">
-            <!-- Modal Header -->
-            <!-- Modal body -->
-            <div class="modal-body">
-               <form method="POST" action="https://retaildv.uprx.com/product" accept-charset="UTF-8">
-                  <input name="_token" type="hidden" value="hMD63dQHhd28BsVDlfbYtiXaObgLDGwLxPdw4T5O">
-                  <div class="create-account-content">
-                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                           <div class="popup-content">
-                              <h2>Lorem ipsum <br>Lorem ipsum</h2>
-                              <p style="padding-top: 6px;">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
-                           </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                           <div class="popup-image">
-                              <img src="assets/images/Logo-colive.png">
-                           </div>
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <!-- Modal body -->
+         <div class="modal-body">
+            <form method="POST" action="https://retaildv.uprx.com/product" accept-charset="UTF-8">
+               <input name="_token" type="hidden" value="hMD63dQHhd28BsVDlfbYtiXaObgLDGwLxPdw4T5O">
+               <div class="create-account-content">
+                  <div class="row">
+                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="popup-content">
+                           <h2>Registered Successfully</h2>
+                           <p style="padding-top: 6px;">Your application has been received successfully. Wait for the contact from the coliver who issued this link. In the meantime, you can download the app and join the colivers community for free!</p>
                         </div>
                      </div>
-                     <div class="row">
-                     </div>
-                     <div class="create-account-btn">
-                        <!-- <button type="submit" >Create Account Now</button> -->
-                         <a class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
+                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="popup-image">
+                           <img src="assets/images/Logo-colive.png">
+                        </div>
                      </div>
                   </div>
-               </form>
-            </div>
-            <div class="modal-footer"></div>
+                  <div class="row">
+                  </div>
+                  <div class="create-account-btn">
+                     <!-- <button type="submit" >Create Account Now</button> -->
+                     <a class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
+                  </div>
+               </div>
+            </form>
          </div>
+         <div class="modal-footer"></div>
       </div>
    </div>
+</div>
 </div>
