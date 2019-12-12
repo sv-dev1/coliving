@@ -1,309 +1,307 @@
 <section class="wrapper work-panel">
-    <app-header></app-header>
-    <app-sidebar></app-sidebar>
-    <div class="work-block">
-        <div class="team-part-1" *ngIf="!showCreate">
-              <div class="create-team">
-                 <div class="container">
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="hdg-box">
-                             <h1 class="hdg-main">Create a team is just a step away</h1>
-                             <p class="sb-hdg">Here are the steps below to create a team.</p>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="progress-bar__circles">
-                             <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
-                                <span class="number">1</span>
-                                <span class="progress-bar__circle__label">Choose Team Name</span>
-                             </div>
-                             <div class="progress-bar__bar"></div>
-                             <div class="progress-bar__circle" data-toggle="modal" data-target="#MembersModal">
-                                <span class="number">2</span>
-                                <span class="progress-bar__circle__label">Add Members</span>
-                             </div>
-                             <div class="progress-bar__bar"></div>
-                             <div class="progress-bar__circle progress-bar__circle--selected">
-                                <span class="number">3</span>
-                                <span class="progress-bar__circle__label">Submit</span>
-                             </div>
-                          </div>
-                       </div>
-                       <div class="col-12">
-                          <div class="btn-center">
-                             <button type="button" class="btn btn-colored" id="create-team-btn" (click)="createTeam()">Create New Team</button>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="team-list">
-                 <div class="container dashboard-container">
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="hdg-box">
-                             <h1 class="hdg-main">Team list</h1>
-                             <p class="sb-hdg">Below are the list of top group near you.</p>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="table-responsive">
-                             <table class="table table-striped table-bordered team-table">
-                                <thead>
-                                   <tr>
-                                      <th>Group Name</th>
-                                      <th></th>
-                                   </tr>
-                                </thead>
-                                <tbody>
-                                   <tr *ngFor="let team of teamArr; let i = index">
-                                      <td>{{team?.name}}</td>
-                                      <td>Group Info <i class="far fa-plus-square add-icon" (click)="openUser(team.teamId)"></i></td>
-                                   </tr>
-                                  
-                                </tbody>
-                             </table>
-                          </div>
-                       </div>
-                       <div class="col-12">
-                          <div class="btn-center">
-                             <button type="button" class="btn btn-colored" (click)="getTeam()" *ngIf="moreTeam">Load More Teams</button>
-                          </div>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              <div class="my-team">
-                 <div class="container-fluid dashboard-container1">
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="hdg-box">
-                             <h1 class="hdg-main">My Team & Groups</h1>
-                             <p class="sb-hdg">Lorem ipsum, or lipsum as it is sometimes known</p>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="group-sec">
-                       <div class="row">
-                          <div class="col-md-3">
-                             <div class="group-block" data-toggle="modal" data-target="#group-info">
-                                <img src="assets/images/buy2-property.jpeg">
-                                <div class="group-hover">
-                                   <h6>Share Details</h6>
-                                </div>
-                             </div>
-                          </div>
-                          <div class="col-md-3">
-                             <div class="group-block" data-toggle="modal" data-target="#group-info">
-                                <img src="assets/images/article1.jpeg">
-                                <div class="group-hover">
-                                   <h6>Room Services</h6>
-                                </div>
-                             </div>
-                          </div>
-                          <div class="col-md-3">
-                             <div class="group-block" data-toggle="modal" data-target="#group-info">
-                                <img src="assets/images/homepage-friends.jpg">
-                                <div class="group-hover">
-                                   <h6>Room Pleace</h6>
-                                </div>
-                             </div>
-                          </div>
-                          <div class="col-md-3">
-                             <div class="group-block" data-toggle="modal" data-target="#group-info">
-                                <img src="assets/images/buy-property.jpeg">
-                                <div class="group-hover">
-                                   <h6>Room Contact</h6>
-                                </div>
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="btn-center">
-                             <button type="button" class="btn btn-colored">View ALL</button>
-                          </div>
-                       </div>
-                    </div>
-                 
-                 </div>
-              </div>
-              <div class="col-md-12">
-                 <div class="team-member">
-                    <div class="custom_member">
-                       <!--- Chat HTML START -------->
-                       <div class="container">
-                          <div class="messaging">
-                             <div class="inbox_msg">
-                                <div class="inbox_people">
-                                   <div class="headind_srch">
-                                      <div class="recent_heading">
-                                         <h4>Groups</h4>
-                                      </div>
-                                   </div>
-                                   <div class="inbox_chat" >
-                                      <div class="chat_list" *ngFor="let team of teamArr; let index = index" [class.active_chat]="index == this.indexCheck">
-                                         <div class="chat_people">
-                                            <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                            <div class="chat_ib" (click)="openChat(team,index)">
-                                               <h5 >
-                                                  {{team?.name}} 
-                                               </h5>
-                                               <p>
-                                               </p>
-                                            </div>
-                                         </div>
-                                      </div>
-                                   </div>
-                                </div>
-                                <div class="mesgs">
-                                   <div class="msg_history" *ngFor="let message of gruopMessages,index as i">
-                                      <div class="incoming_msg" *ngIf="message.from_id != logged_in_id">
-                                         <div class="incoming_msg_img">
-                                            <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
-                                         </div>
-                                         <div class="received_msg" >
-                                            <div class="received_withd_msg">
-                                               <p> {{ message.message}} </p>
-                                               <span class="time_date"> {{message.userName}}</span>
-                                               <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
-                                            </div>
-                                         </div>
-                                      </div>
-                                      <div class="outgoing_msg" *ngIf="message.from_id == logged_in_id">
-                                         <div class="sent_msg">
-                                            <p> {{ message.message}} </p>
-                                            <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
-                                         </div>
-                                      </div>
-                                   </div>
-                                </div>
-                                <div class="type_msg">
-                                   <div class="input_msg_write">
-                                      <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''">
-                                      <button class="msg_send_btn add_member_btn" type="button" (click)="sendMessgae()" ngbTooltip="Send Message"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                                      <button class="msg_send_btn" type="button" ngbTooltip="Add Member To Group"> <i class="fa fa-user" aria-hidden="true"></i></button>
-                                   </div>
-                                </div>
-                                <div _ngcontent-dsn-c2="" class="headind_srch testing">
-                                   <div _ngcontent-dsn-c2="" class="recent_heading">
-                                      <h4 _ngcontent-dsn-c2=""> Team </h4>
-                                   </div>
-                                   <a mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                                      <mat-icon>more_vert</mat-icon>
-                                   </a>
-                                   <mat-menu #menu="matMenu">
-                                      <button mat-menu-item (click)="addmember()">
-                                         <mat-icon>group_add</mat-icon>
-                                         <span>Add Member</span>
-                                      </button>
-                                      <button mat-menu-item (click)="viewteamCV()">
-                                         <mat-icon>group</mat-icon>
-                                         <span>View Team CV</span>
-                                      </button>
-                                   </mat-menu>
-                                </div>
-                             </div>
-                         </div>
-                       </div>
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="work-block">
+      <div class="team-part-1" *ngIf="!showCreate">
+         <div class="create-team">
+            <div class="container">
+               <div class="row">
+                  <div class="col-12">
+                     <div class="hdg-box">
+                        <h1 class="hdg-main">Create a group is just a step away</h1>
+                        <p class="sb-hdg">Here are the steps below to create a group.</p>
                      </div>
-                 </div>
-              </div>
-           
-          </div>
-        <div class="team-part-2" *ngIf="showCreate">
-              <div class="team-creation">
-                 <div class="container dashboard-container">
-                    <div class="row">
-                       <div class="col-12">
-                          <div class="hdg-box">
-                             <h1 class="hdg-main">team creation</h1>
-                             <p class="sb-hdg">Here are the steps below to create a team.</p>
-                          </div>
-                       </div>
-                    </div>
-                    <div class="progress-bar__circles">
-                       <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
-                          <span class="number">1</span>
-                          <span class="progress-bar__circle__label">Choose Team Name</span>
-                       </div>
-                       <div class="progress-bar__bar progress-bar__bar--completed"></div>
-                       <div class="progress-bar__circle progress-bar__circle--completed">
-                          <span class="number">2</span>
-                          <span class="progress-bar__circle__label">Add Members</span>
-                       </div>
-                       <div class="progress-bar__bar" [ngClass]="{'progress-bar__bar--completed': completed}"></div>
-                       <div class="progress-bar__circle" [ngClass]="{'progress-bar__circle--completed': completed}">
-                          <span class="number">3</span>
-                          <span class="progress-bar__circle__label">Submit</span>
-                       </div>
-                    </div>
-                    <form [formGroup]="createTeamForm" (ngSubmit)="TeamSubmit()">
-                        <div class="row" id="team-name" *ngIf="hide">
-                        <div class="col-12">
-                            <div class="card mb-3">
-                                <div class="card-header">Choose your Team Name</div>
-                                <div class="card-body">
-                                    <div class="row" style="justify-content: center; text-align: center;">
-                                    <div class="col-12 col-sm-6">
-                                        <div class="form-group">
-                                            <label for="name">Enter Your Team Name:</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Team Name" formControlName="name">
-                                            <div *ngIf="Isrequired" class="teamError-msg">Team name is required</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12 text-center">
-                                        <button type="button" class="btn btn-colored" id="team-name-button" (click)="back1()">Back</button>
-                                        <button type="button" class="btn btn-colored" id="team-name-button" (click)="continue()">Continue</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="progress-bar__circles">
+                        <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
+                           <span class="number">1</span>
+                           <span class="progress-bar__circle__label">Choose Group Name</span>
                         </div>
+                        <div class="progress-bar__bar"></div>
+                        <div class="progress-bar__circle" data-toggle="modal" data-target="#MembersModal">
+                           <span class="number">2</span>
+                           <span class="progress-bar__circle__label">Add Members</span>
                         </div>
-                        <div class="row" id="team-member" *ngIf="IsContinue">
-                        <div class="col-12">
-                            <div class="card mb-3">
-                                <div class="card-header">Choose Team Member
-                                </div>
-                                <div class="card-body">
-                                    <div class="row" style="justify-content: center;">
-                                    <div class="col-12 col-sm-4 size-div" *ngFor="let user of users">
-                                        <div class="team-block-top">
-                                            <figure>
-                                                <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="rounded-circle" width="45" height="45">
-                                            </figure>
-                                            <div class="team-name">
-                                                <h5 class="size">{{user.firstName}}{{user.lastName}}</h5>
-                                            </div>
-                                            <div class="admin-btn">
-                                                <a (click)="addUser(user.userId)"> {{selectedButton[user.userId] ? 'Remove' : '+ Add'}}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12 text-center mt-3">
-                                        <button type="button" class="btn btn-colored" (click)="back()">Back</button>
-                                        <button type="submit" class="btn btn-colored">Submit</button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="progress-bar__bar"></div>
+                        <div class="progress-bar__circle progress-bar__circle--selected">
+                           <span class="number">3</span>
+                           <span class="progress-bar__circle__label">Submit</span>
                         </div>
+                     </div>
+                  </div>
+                  <div class="col-12">
+                     <div class="btn-center">
+                        <button type="button" class="btn btn-colored" id="create-team-btn" (click)="createTeam()">Create New Group</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="team-list">
+            <div class="container dashboard-container">
+               <div class="row">
+                  <div class="col-12">
+                     <div class="hdg-box">
+                        <h1 class="hdg-main">Group list</h1>
+                        <p class="sb-hdg">Below are the list of top group near you.</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="table-responsive">
+                        <table class="table table-striped table-bordered team-table">
+                           <thead>
+                              <tr>
+                                 <th>Group Name</th>
+                                 <th></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let team of teamArr; let i = index">
+                                 <td>{{team?.name}}</td>
+                                 <td>Group Info <i class="far fa-plus-square add-icon" (click)="openUser(team)"></i></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="col-12">
+                     <div class="btn-center">
+                        <button type="button" class="btn btn-colored" (click)="getTeam()" *ngIf="moreTeam">Load More Group
+                        </button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="my-team">
+            <div class="container-fluid dashboard-container1">
+               <div class="row">
+                  <div class="col-12">
+                     <div class="hdg-box">
+                        <h1 class="hdg-main">My Group & Groups</h1>
+                        <p class="sb-hdg">Lorem ipsum, or lipsum as it is sometimes known</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="group-sec">
+                  <div class="row">
+                     <div class="col-md-3">
+                        <div class="group-block" data-toggle="modal" data-target="#group-info">
+                           <img src="assets/images/buy2-property.jpeg">
+                           <div class="group-hover">
+                              <h6>Share Details</h6>
+                           </div>
                         </div>
-                    </form>
-                 </div>
-              </div>
-        </div>
-    </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="group-block" data-toggle="modal" data-target="#group-info">
+                           <img src="assets/images/article1.jpeg">
+                           <div class="group-hover">
+                              <h6>Room Services</h6>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="group-block" data-toggle="modal" data-target="#group-info">
+                           <img src="assets/images/homepage-friends.jpg">
+                           <div class="group-hover">
+                              <h6>Room Pleace</h6>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-3">
+                        <div class="group-block" data-toggle="modal" data-target="#group-info">
+                           <img src="assets/images/buy-property.jpeg">
+                           <div class="group-hover">
+                              <h6>Room Contact</h6>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-12">
+                     <div class="btn-center">
+                        <button type="button" class="btn btn-colored">View ALL</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12">
+            <div class="team-member">
+               <div class="custom_member">
+                  <!--- Chat HTML START -------->
+                  <div class="container">
+                     <div class="messaging">
+                        <div class="inbox_msg">
+                           <div class="inbox_people">
+                              <div class="headind_srch">
+                                 <div class="recent_heading">
+                                    <h4>Groups</h4>
+                                 </div>
+                              </div>
+                              <div class="inbox_chat" >
+                                 <div class="chat_list" *ngFor="let team of teamArr; let index = index" [class.active_chat]="index == this.indexCheck">
+                                 <div class="chat_people">
+                                    <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div class="chat_ib" (click)="openChat(team,index)">
+                                       <h5 >
+                                          {{team?.name}} 
+                                       </h5>
+                                       <p>
+                                       </p>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="mesgs">
+                           <div class="msg_history" *ngFor="let message of gruopMessages,index as i">
+                              <div class="incoming_msg" *ngIf="message.from_id != logged_in_id">
+                                 <div class="incoming_msg_img">
+                                    <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> 
+                                 </div>
+                                 <div class="received_msg" >
+                                    <div class="received_withd_msg">
+                                       <p> {{ message.message}} </p>
+                                       <span class="time_date"> {{message.userName}}</span>
+                                       <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="outgoing_msg" *ngIf="message.from_id == logged_in_id">
+                                 <div class="sent_msg">
+                                    <p> {{ message.message}} </p>
+                                    <span class="time_date"> {{message.created_at | date: 'H:mm | MMM dd'}}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="type_msg">
+                           <div class="input_msg_write">
+                              <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''">
+                              <button class="msg_send_btn add_member_btn" type="button" (click)="sendMessgae()" ngbTooltip="Send Message"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                              <button class="msg_send_btn" type="button" ngbTooltip="Add Member To Group"> <i class="fa fa-user" aria-hidden="true"></i></button>
+                           </div>
+                        </div>
+                        <div _ngcontent-dsn-c2="" class="headind_srch testing">
+                           <div _ngcontent-dsn-c2="" class="recent_heading">
+                              <h4 _ngcontent-dsn-c2=""> Group </h4>
+                           </div>
+                           <a mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                              <mat-icon>more_vert</mat-icon>
+                           </a>
+                           <mat-menu #menu="matMenu">
+                              <button mat-menu-item (click)="addmember()">
+                                 <mat-icon>group_add</mat-icon>
+                                 <span>Add Member</span>
+                              </button>
+                              <!-- <button mat-menu-item (click)="viewteamCV()">
+                                 <mat-icon>group</mat-icon>
+                                 <span>View Group CV</span>
+                                 </button> -->
+                           </mat-menu>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="team-part-2" *ngIf="showCreate">
+      <div class="team-creation">
+         <div class="container dashboard-container">
+            <div class="row">
+               <div class="col-12">
+                  <div class="hdg-box">
+                     <h1 class="hdg-main">Group creation</h1>
+                     <p class="sb-hdg">Here are the steps below to create a Group.</p>
+                  </div>
+               </div>
+            </div>
+            <div class="progress-bar__circles">
+               <div class="progress-bar__circle progress-bar__circle--completed" data-toggle="modal" data-target="#exampleModal">
+                  <span class="number">1</span>
+                  <span class="progress-bar__circle__label">Choose Group Name</span>
+               </div>
+               <div class="progress-bar__bar progress-bar__bar--completed"></div>
+               <div class="progress-bar__circle progress-bar__circle--completed">
+                  <span class="number">2</span>
+                  <span class="progress-bar__circle__label">Add Members</span>
+               </div>
+               <div class="progress-bar__bar" [ngClass]="{'progress-bar__bar--completed': completed}"></div>
+               <div class="progress-bar__circle" [ngClass]="{'progress-bar__circle--completed': completed}">
+                  <span class="number">3</span>
+                  <span class="progress-bar__circle__label">Submit</span>
+               </div>
+            </div>
+            <form [formGroup]="createTeamForm" (ngSubmit)="TeamSubmit()">
+            <div class="row" id="team-name" *ngIf="hide">
+               <div class="col-12">
+                  <div class="card mb-3">
+                     <div class="card-header">Choose your Group Name</div>
+                     <div class="card-body">
+                        <div class="row" style="justify-content: center; text-align: center;">
+                           <div class="col-12 col-sm-6">
+                              <div class="form-group">
+                                 <label for="name">Enter Your Group Name:</label>
+                                 <input type="text" class="form-control" id="name" placeholder="Group Name" formControlName="name">
+                                 <div *ngIf="Isrequired" class="teamError-msg">Group name is required</div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-12 text-center">
+                              <button type="button" class="btn btn-colored" id="team-name-button" (click)="back1()">Back</button>
+                              <button type="button" class="btn btn-colored" id="team-name-button" (click)="continue()">Continue</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               (click)="openUser(team)"
+            </div>
+            <div class="row" id="team-member" *ngIf="IsContinue">
+               <div class="col-12">
+                  <div class="card mb-3">
+                     <div class="card-header">Choose Group Member
+                     </div>
+                     <div class="card-body">
+                        <div class="row" style="justify-content: center;">
+                           <div class="col-12 col-sm-4 size-div" *ngFor="let user of users">
+                              <div class="team-block-top">
+                                 <figure>
+                                    <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="rounded-circle" width="45" height="45">
+                                 </figure>
+                                 <div class="team-name">
+                                    <h5 class="size">{{user.firstName}}{{user.lastName}}</h5>
+                                 </div>
+                                 <div class="admin-btn">
+                                    <a (click)="addUser(user.userId)"> {{selectedButton[user.userId] ? 'Remove' : '+ Add'}}
+                                    </a>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-12 col-sm-12 text-center mt-3">
+                              <button type="button" class="btn btn-colored" (click)="back()">Back</button>
+                              <button type="submit" class="btn btn-colored">Submit</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   </div>
 </section>
-
 <!-- Model for TeamUserInfo -->
 <div class="container">
    <!-- The Modal -->
@@ -312,38 +310,307 @@
       <div class="modal-content">
          <!-- Modal Header -->
          <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Group User Info</h4>
+            <h4 class="modal-title" id="modal-title">{{teamName}} group info</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="closeInfoModal()">&times;</span>
             </button>
          </div>
          <!-- Modal body -->
          <div class="modal-body">
-         <table class="table">
-            <thead>
-               <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Email</th>
-
-               </tr>
-            </thead>
-              <tbody>
-                  <tr *ngFor="let user of teamUser;let i = index ">
-                    <td>{{i+1}}</td>
-                    <td> {{user.userProfile?.firstName}}   </td>
-                    <td>{{user.userProfile?.lastName}}</td>
-                    <td>{{user.userProfile?.email}}</td>
-                 </tr>
-               
-              </tbody>
-           </table>
-
+            <table class="table">          
+            </table>
+            <div class="row">
+               <div class="col-12">
+                  <div class="card mb-3">
+                     <div class="card-header">Social sharing</div>
+                     <div class="card-body">
+                        <form [formGroup]="referralCodeForm">
+                           <div class="row">
+                              <div class="col-12 col-sm-12">
+                                 <div class="form-group">
+                                    <label for="title">Referal code</label>
+                                    <input type="text" class="form-control" formControlName="referralCode" readonly #referralCode>                         
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-12 col-sm-12 text-center">
+                                 <button type="button" (click)="shareButton()" class="btn btn-orange-sm btnleft" > {{buttonName}}
+                                 </button> 
+                                 <button type="button" (click)="copyMessage(referralCode)" class="btn btn-orange-sm btnright" >Copy</button>
+                                 <div class="social" [style.display]="socialshare ? 'block' : 'none'" *ngIf="socialshare">
+                                 <share-buttons theme="moon" show="4" image="https://loremflickr.com/320/240" [title]="'colivingApp'" [description]="'colivingApp - Tenats and Landlords'" [url]="refferalUrl" [tags]="'Share the group along with te people'"></share-buttons>
+                                 <!-- <share-buttons [theme]="moon" [include]="['email','facebook','linkedin','twitter']" [showCount]="true" [url]="refferalUrl" [title]="'mysite'" [description]="'my description'" [size]="-4" [show]="4" [autoSetMeta]="true" [image]="https://loremflickr.com/320/240" [tags]="'tag1, tag2, tag3'" ></share-buttons>    -->                    
+                              </div>
+                           </div>
+                     </div>
+                     <div class="row">
+                     <div class="col-12 col-sm-12 text-center">
+                     <button type="button" class="btn btn-orange" (click)="downloadPDF()">View group cv</button>
+                     <table id="mytable" style="display: none;">
+                     <thead>
+                     <tr>
+                     <th>ID</th>
+                     <th>Name</th>
+                     <th>Surname</th>
+                     <th>Date Of Birth</th>
+                     <th>Email</th>
+                     <th>Nationality</th>
+                     <th>Phone Number</th>
+                     <th>Address</th>
+                     <th>Occupation</th>
+                     <th>WorkPlace</th>
+                     <th>Bio</th>
+                     <th>Previous city of residence</th>                               
+                     <th>Picture</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     <tr *ngFor="let pd of pdfUsers;  let i = index">
+                     <td align="right">2</td>
+                     <td>{{pd.userProfile.firstName}}</td>
+                     <td>{{pd.userProfile.lastName}}</td>
+                     <td>{{pd.userProfile.dob}}</td>
+                     <td>{{pd.userProfile.email}}</td>
+                     <td>{{pd.userProfile.Nationality}}</td> 
+                     <td>{{pd.userProfile.phoneNo}}</td>  
+                     <td>{{pd.userProfile.address}}</td> 
+                     <td>{{pd.userProfile.occuptation_tt}}</td>
+                     <td>{{pd.userProfile.work_place}}</td>
+                     <td>{{pd.userProfile.biography}}</td>
+                     <td>{{pd.userProfile.previous_city}}</td>                                
+                     <td><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gKgSUNDX1BST0ZJTEUAAQEAAAKQbGNtcwQwAABtbnRyUkdCIFhZWiAH3QAIAA4AFgAoAB1hY3NwQVBQTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWxjbXMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAtkZXNjAAABCAAAADhjcHJ0AAABQAAAAE53dHB0AAABkAAAABRjaGFkAAABpAAAACxyWFlaAAAB0AAAABRiWFlaAAAB5AAAABRnWFlaAAAB+AAAABRyVFJDAAACDAAAACBnVFJDAAACLAAAACBiVFJDAAACTAAAACBjaHJtAAACbAAAACRtbHVjAAAAAAAAAAEAAAAMZW5VUwAAABwAAAAcAHMAUgBHAEIAIABiAHUAaQBsAHQALQBpAG4AAG1sdWMAAAAAAAAAAQAAAAxlblVTAAAAMgAAABwATgBvACAAYwBvAHAAeQByAGkAZwBoAHQALAAgAHUAcwBlACAAZgByAGUAZQBsAHkAAAAAWFlaIAAAAAAAAPbWAAEAAAAA0y1zZjMyAAAAAAABDEoAAAXj///zKgAAB5sAAP2H///7ov///aMAAAPYAADAlFhZWiAAAAAAAABvlAAAOO4AAAOQWFlaIAAAAAAAACSdAAAPgwAAtr5YWVogAAAAAAAAYqUAALeQAAAY3nBhcmEAAAAAAAMAAAACZmYAAPKnAAANWQAAE9AAAApbcGFyYQAAAAAAAwAAAAJmZgAA8qcAAA1ZAAAT0AAACltwYXJhAAAAAAADAAAAAmZmAADypwAADVkAABPQAAAKW2Nocm0AAAAAAAMAAAAAo9cAAFR7AABMzQAAmZoAACZmAAAPXP/bAEMABQMEBAQDBQQEBAUFBQYHDAgHBwcHDwsLCQwRDxISEQ8RERMWHBcTFBoVEREYIRgaHR0fHx8TFyIkIh4kHB4fHv/bAEMBBQUFBwYHDggIDh4UERQeHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHv/AABEIABgAGAMBIgACEQEDEQH/xAAXAAEBAQEAAAAAAAAAAAAAAAAABwYI/8QAJxAAAQMEAQMDBQAAAAAAAAAAAQIDBAAFBhEhEiIxBxNBFjJRYXH/xAAZAQACAwEAAAAAAAAAAAAAAAAAAwEEBQb/xAAjEQABAwMDBQEAAAAAAAAAAAABAAIDBAUREjHBITJBUWHR/9oADAMBAAIRAxEAPwDbTM5x+0YE5lYlx7hEZ6W1JhyEOkvK8NbBICufn4BNS+7et31DZJlonW6Lbo01Pt+83KJcbTvfIOgeBo615qNYplFvhTDCessNmySnEiWw2pXU5pCkpWVkk7T1E8Ac7/NVbJIuGW7DlS4NsTCQ5BLSAqO2tEpSk9ijvvQrz3A62N6oqbjI7DCN1bp7fGdUgcOiy8eEJLYmwVbbcOkFKu0jyRz92tUpiubWGBbXrbd8MiSYpTpo2+c7HU0oAd/QSpClk8lSgfNKNZyoGMbKRpRw4jWlAbT+q6Q9EfTy85RhMJN7aadQ06JVvZkOnpcaI0UqPI6SeQn+71ulKWWhz2tPn8KZTjuPocrO5xYo87KH3I9si2dMhKBHaRFUlKhyknpA7TxsnQApSlZVRVyQENaustVvpauMulYMj6Rzhf/Z" /></td>
+                     </tr> 
+                     </tbody>
+                     </table>
+                     </div>
+                     </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Ok</button>
-         </div> 
+         <div class="row">
+            <div class="col-12">
+               <div class="card mb-3">
+                  <div class="card-header">Join group</div>
+                  <div class="card-body">
+                     <form [formGroup]="groupCodeForm">
+                        <div class="row">
+                           <div class="col-12 col-sm-12">
+                              <div class="form-group">
+                                 <label for="title">Group code</label>
+                                 <input type="text" class="form-control" formControlName="groupCode" readonly #groupCode>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-12 col-sm-12 text-center">
+                              <button type="button" (click)="shareButtonTwo()" class="btn btn-orange-sm btnleft" > {{buttonNameTwo}}</button> 
+                              <button type="button" (click)="copyMessage2(groupCode)" class="btn btn-orange-sm btnright" >Copy</button>
+                              <div class="social" [style.display]="socialshareTwo ? 'block' : 'none'" *ngIf="socialshareTwo">
+                              <share-buttons [title]="'colivingApp'" [description]="'colivingApp - Tenats and Landlords'" theme="modern-light" show="4"  [tags]="'{{refferalUrlTwo}}'" ></share-buttons>
+                           </div>
+                        </div>
+                  </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-12 col-sm-12 text-center">
+            <button type="button" class="btn btn-orange" (click)="openApp(team_ID)" >New application</button>
+         </div>
       </div>
    </div>
+   <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Ok</button>
+   </div>
+</div>
+</div>
+</div>
+<!--New Application -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openAppModel ? 'block' : 'none'" *ngIf="openAppModel" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">New Application</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeAppModal()">&times;</span>
+            </button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-12">
+                  <div class="table-responsive">
+                     <table class="table table-striped table-bordered team-table">
+                        <thead>
+                           <tr>
+                              <th>#</th>
+                              <th>Email</th>
+                              <th>Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <ng-container *ngFor="let app of teamApp; let i = index">
+                              <tr *ngIf="app?.userProfile != null">
+                                 <th>{{i + 1}}</th>
+                                 <td>{{app?.userProfile.email}}</td>
+                                 <td>
+                                    <a class="btn btn-orange-sm" href="javascript:void(0);" (click)="getUserInfo(app?.userProfile.userId)"><i class="fas fa-info-circle"></i></a>
+                                 </td>
+                              </tr>
+                           </ng-container>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeAppModal()">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+<!--Information Model  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="openInformationModel ? 'block' : 'none'" *ngIf="openInformationModel" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">information</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeInModal()">&times;</span>
+            </button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-12">
+                  <div class="table-responsive">
+                     <table class="table table-striped table-bordered team-table">
+                        <thead>
+                           <tr>
+                              <th>First Name</th>
+                              <td>{{userAppArray[0]?.userProfile.firstName}}</td>
+                           </tr>
+                           <tr>
+                              <th>Last Name</th>
+                              <td>{{userAppArray[0]?.userProfile.lastName}}</td>
+                           </tr>
+                           <tr>
+                              <th>Phone No.</th>
+                              <td>{{userAppArray[0]?.userProfile.phoneNo}}</td>
+                           </tr>
+                           <tr>
+                              <th>Gender</th>
+                              <td>{{userAppArray[0]?.userProfile.gender}}</td>
+                           </tr>
+                           <tr>
+                              <th>Email</th>
+                              <td>{{userAppArray[0]?.userProfile.email}}</td>
+                           </tr>
+                           <tr>
+                              <th>Favourite Location</th>
+                              <td>{{userAppArray[0]?.userProfile.favourite_location}}</td>
+                           </tr>
+                           <tr>
+                              <th>Short Bio</th>
+                              <td>{{userAppArray[0]?.userProfile.biography}}</td>
+                           </tr>
+                           <tr>
+                              <th>Interests</th>
+                              <td>{{userAppArray[0]?.userProfile.interestes}}</td>
+                           </tr>
+                           <tr>
+                              <th>D.O.B</th>
+                              <td>{{userAppArray[0]?.userProfile.dob}}</td>
+                           </tr>
+                           <tr>
+                              <th>Occupation</th>
+                              <td>{{userAppArray[0]?.userProfile.occuptation_tt}}</td>
+                           </tr>
+                           <tr>
+                              <th>Partying</th>
+                              <td>
+                                 <span *ngIf="userAppArray[0]?.partying == '0'">Yes</span>
+                                 <span *ngIf="userAppArray[0]?.partying != '0'">No</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Alcohol</th>
+                              <td>
+                                 <span *ngIf="userAppArray[0]?.alcohol == '0'">Yes</span>
+                                 <span *ngIf="userAppArray[0]?.alcohol != '0'">No</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Smoking</th>
+                              <td>
+                                 <span *ngIf="userAppArray[0]?.smoking == '0'">Yes</span>
+                                 <span *ngIf="userAppArray[0]?.smoking != '0'">No</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <th>Apartment Clean</th>
+                              <td>{{userAppArray[0]?.apartment_clean_importance +"/"+ totalPoints}}</td>
+                           </tr>
+                           <tr>
+                              <th>Music</th>
+                              <td>{{userAppArray[0]?.music +"/"+ totalPoints}}</td>
+                           </tr>
+                           <tr>
+                              <th>Apartment Party</th>
+                              <td>{{userAppArray[0]?.apartment_party +"/"+ totalPoints}}</td>
+                           </tr>
+                        </thead>
+                        <!-- <tbody>                                
+                           <tr> 
+                              <td>{{userAppArray[0]?.userProfile.firstName}}</td>                                    
+                              <td>{{userAppArray[0]?.userProfile.lastName}}</td> 
+                              <td>{{userAppArray[0]?.userProfile.phoneNo}}</td>  
+                              <td>{{userAppArray[0]?.userProfile.gender}}</td>
+                              <td>{{userAppArray[0]?.userProfile.email}}</td> 
+                              <td>{{userAppArray[0]?.userProfile.favourite_location}}</td>  
+                              <td>{{userAppArray[0]?.userProfile.biography}}</td>
+                              <td>{{userAppArray[0]?.userProfile.interestes}}</td>
+                              <td>{{userAppArray[0]?.userProfile.dob}}</td>                                    
+                              <td>{{userAppArray[0]?.userProfile.occuptation_tt}}</td> 
+                              <td>
+                                <span *ngIf="userAppArray[0]?.partying == '0'">Yes</span>
+                                <span *ngIf="userAppArray[0]?.partying != '0'">No</span>
+                              </td>  
+                              <td>
+                                <span *ngIf="userAppArray[0]?.alcohol == '0'">Yes</span>
+                                <span *ngIf="userAppArray[0]?.alcohol != '0'">No</span>
+                              </td>
+                              <td>
+                                <span *ngIf="userAppArray[0]?.smoking == '0'">Yes</span>
+                                <span *ngIf="userAppArray[0]?.smoking != '0'">No</span>
+                              </td> 
+                              <td>{{userAppArray[0]?.apartment_clean_importance +"/"+ totalPoints}}</td>  
+                              <td>{{userAppArray[0]?.music +"/"+ totalPoints}}</td>
+                              <td>{{userAppArray[0]?.apartment_party +"/"+ totalPoints}}</td>
+                           </tr>                                                                 
+                           </tbody> -->
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeInModal()">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
 </div>

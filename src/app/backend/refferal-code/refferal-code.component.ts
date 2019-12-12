@@ -34,7 +34,7 @@ export class RefferalCodeComponent implements OnInit {
 		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
 		      this.router.navigate(['/dashboard']);
 		 }
-		console.log('sdssddad', sessionStorage.getItem("roleId"));
+		
 	}
 	getUserData(){ 
 		let token; 

@@ -494,5 +494,47 @@ export class DataService {
 			return Observable.throw(error);});
 
 	}
+	getPdfUsers(postArr){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
+		return this.http.post(this.base_url+'team/users/pdf',postArr,httpOptions)
+		.map((response:Response)=>{return response;})
+		.catch((error:Error) => {console.log('error',error);return Observable.throw(error);})
+	}
+
+	
+	getTeamApp(teamId){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		return this.http.get(this.base_url+'team/applications/'+teamId,{ headers: headers })
+		.map((response:Response)=>{
+			//   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
+
+	getUserApp(teamId){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'user/'+ teamId +'/questionnaire',{ headers: headers })		
+		.map((response:Response)=>{return response;})
+		.catch((error:Error) => {return Observable.throw(error);});
+	}
 
 } 

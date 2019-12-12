@@ -46,6 +46,9 @@ export class SettingsComponent implements OnInit {
 
 	ngOnInit() {
 		this.getUserData();
+		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+		      this.router.navigate(['/dashboard']);
+		 }
 	}
 
 	changed(event){		

@@ -23,11 +23,7 @@ body {
   min-height: 100vh;
 }
 
-.container {
-  margin: 0 auto;
-  padding: 4rem;
-  width: 48rem;
-}
+
 
 h3 {
   font-size: 1.75rem;
@@ -119,4 +115,48 @@ h3 {
   -webkit-transition: all 0.35s ease 0.15s;
   -o-transition: all 0.35s ease 0.15s;
   transition: all 0.35s ease 0.15s;
+}
+.card-header h2 p {
+    font-size: 18px;
+    padding-left: 50px;
+    margin-top: 20px;
+}
+.card-body {
+    font-size: 14px;
+    padding-left: 70px !important;
+}
+.btn.btn-link {
+    color: #4a4a4a;
+    border: 1px solid;
+    border-radius: 50px;
+    height: 34px;
+    width: 34px;
+    font-size: 27px;
+    display: flex;
+    position: absolute;
+    align-self: center;
+    margin: 0 20px 0 0;
+    top: 13px;
+    padding: 0px 10px;
+    text-align: center;
+}
+.btn.btn-link:hover{
+  text-decoration: none !important;
+}
+.btn.btn-link{
+  text-decoration: none !important;
+}
+button.btn.btn-link.collapsed {
+    text-decoration: none !important;
+}
+button.btn.btn-link.collapsed:hover {
+    text-decoration: none !important;
+}
+button.btn.btn-link span {
+    position: relative;
+    top: 0px;
+    font-size: 20px;
+}
+.card-header {
+    padding: 0 15px;
 }
