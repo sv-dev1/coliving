@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule ,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule ,HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { DataService } from './data.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ng6-toastr-notifications';
@@ -61,6 +61,25 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
+import { LandlordProfileComponent } from './landlord-profile/landlord-profile.component';
+
+import { ShareButtonsModule } from '@ngx-share/buttons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
+import { ShareModule } from '@ngx-share/core';
+
+const icons = [
+  // ... other icons
+  faFacebookSquare
+];
+
+library.add(...icons);
+
+const shareProp = {
+  facebook: {
+    icon: ['fab', 'facebook-square']
+  }
+};
 
 
 const cookieConfig:NgcCookieConsentConfig = {
@@ -145,6 +164,7 @@ export function provideConfig() {
     DownloadComponent,
     ThankYouComponent,
     FaqComponent,
+    LandlordProfileComponent,
  
   ],
   imports: [
@@ -171,7 +191,12 @@ export function provideConfig() {
     NgxIntlTelInputModule,
     MatBadgeModule,
     MatIconModule,MatMenuModule,MatSlideToggleModule,
-    NgcCookieConsentModule.forRoot(cookieConfig)
+    NgcCookieConsentModule.forRoot(cookieConfig),
+    ShareButtonsModule.withConfig({
+      debug: true
+    }),
+    ShareButtonsModule.withConfig({ prop: shareProp }),
+    ShareModule
     
   ],
   

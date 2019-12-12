@@ -160,6 +160,9 @@ export class HouseChoresComponent implements OnInit {
 		this.getTask();
 		this.allTaskListing();
 		this.logged_in_username = sessionStorage.getItem("user_name");
+		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+		      this.router.navigate(['/dashboard']);
+		 }
 	}
     getUserData(){ 
    

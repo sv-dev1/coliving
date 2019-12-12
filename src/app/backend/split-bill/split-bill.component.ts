@@ -3,6 +3,7 @@ import { DataService } from '../../data.service';
 import { environment } from '../../../environments/environment';
 import { DatePipe } from '@angular/common';
 import { Lightbox } from 'ngx-lightbox';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-split-bill',
@@ -29,7 +30,9 @@ export class SplitBillComponent implements OnInit {
   constructor(
           private data_service : DataService,
           private datePipe: DatePipe,
-          private _lightbox: Lightbox
+          private _lightbox: Lightbox,
+          private router: Router,
+
        ) { 
      this.base_url = environment.image_base_url;
   }
@@ -37,6 +40,9 @@ export class SplitBillComponent implements OnInit {
   ngOnInit() {
   	  this.getBills();
       this.today = new Date();
+       if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/dashboard']);
+     }
 
   }
 

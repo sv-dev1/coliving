@@ -74,8 +74,11 @@
                                  <option value="" disabled>Please select one option</option>
                                  <option value="1">Full time employee</option>
                                  <option value="2">Part time employee</option>
-                                 <option value="3">Part time/Full time student</option>
-                                 <option value="4">Part time/Full time internship</option>
+                                 <option value="3">Part time student</option>
+                                 <option value="4">Full time student</option>
+                                 <option value="5">Part time internship</option>
+                                 <option value="6">Full time internship</option>
+                                
                               </select>
                               <div *ngIf="submitted && f.occuptation_tt.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.occuptation_tt.errors.required">Occupation is required.</span>
@@ -298,7 +301,11 @@
                            <div class="form-group">
                               <label for="bill">Upload image<span class="validate-red">*</span></label>
                               <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
-                              <img class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > <br/>
+                              <img *ngIf="boolUserImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
+                              <img [src]="url" height="200" *ngIf="boolUrl==true">
+
+                              <br/>
+
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">

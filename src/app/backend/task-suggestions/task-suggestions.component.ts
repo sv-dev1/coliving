@@ -50,6 +50,9 @@ export class TaskSuggestionsComponent implements OnInit {
 		this.task_id = url[1];
 		this.getTaskSuggestionByTaskId(this.task_id); 
 		//console.log('teamId',this.task_id);
+		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+		      this.router.navigate(['/dashboard']);
+		 }
 
 		
 	}

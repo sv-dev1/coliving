@@ -80,7 +80,8 @@ export class MyAccountComponent implements OnInit {
     phoneNumber : any;
     maxPriceValue : any;
     minPriceValue : any;
-
+    boolUrl : boolean = false;
+    boolUserImage : boolean = false;
 
 	constructor(
 			private formBuilder:FormBuilder,
@@ -122,7 +123,6 @@ export class MyAccountComponent implements OnInit {
 			previousCity:['', Validators.required],
 			rentalDescription:['', Validators.required]
 		});
-
 
 		this.today = new Date();
 		this.base_url = environment.base_url;
@@ -197,7 +197,6 @@ export class MyAccountComponent implements OnInit {
 				classes:"myclass custom-class",
 				limitSelection: 2,
 				enableSearchFilter: true,
-
 			};
 			this.isError = false;    
 		}, error =>{ 
@@ -272,6 +271,7 @@ export class MyAccountComponent implements OnInit {
 
               console.log('response',this.userDataArr);
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
+              this.boolUserImage = true;
 			  this.updateProfileForm.patchValue({
 				firstName: this.userDataArr.firstName,
 				lastName: this.userDataArr.lastName,
@@ -279,7 +279,7 @@ export class MyAccountComponent implements OnInit {
 				userName: sessionStorage.getItem('user_name'),
 				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				occuptation_tt:this.userDataArr.occuptation_tt,
-				wakeup_time:this.time,
+			    wakeup_time:this.time,
 				weekend_wakeup_time:this.weekend_time,
 				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
 				maximunPrice:this.maximumPrice,
@@ -320,6 +320,8 @@ export class MyAccountComponent implements OnInit {
 		reader.readAsDataURL(this.fileData); 
 		reader.onload = (_event) => { 
 			this.url = reader.result; 
+			this.boolUrl = true;
+			this.boolUserImage =false;
 		}
 	}
 	keyPress(event: any) {
@@ -393,13 +395,7 @@ export class MyAccountComponent implements OnInit {
 			this.countryEmpty = true;
 		}
 
-		if(formValue.stay_date instanceof Object ||  formValue.stay_date instanceof Array){
-            this.stay_date = this.datePipe.transform(formValue.stay_date[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(formValue.stay_date[1],"yyyy-MM-dd"); 
-        } else {
-        	let datesplit = formValue.stay_date.split("-",3);
-            this.stay_date =  this.datePipe.transform(datesplit[0],"yyyy-MM-dd")+" - "+this.datePipe.transform(datesplit[1],"yyyy-MM-dd")	
-        }
-
+	
 		if(formValue.wakeup_time){
 			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
 		}
@@ -457,6 +453,7 @@ export class MyAccountComponent implements OnInit {
 				this.toastr.successToastr(response.message,'Success');
 				this.submitted = false;
 				this.getUserData();
+				this.router.navigate(['/my-account']);
 
 			},error =>{
 				this.isError = true;
