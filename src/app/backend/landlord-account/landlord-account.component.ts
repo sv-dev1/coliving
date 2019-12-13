@@ -15,15 +15,13 @@ import {Address} from "../../objects/address";
 import {AddressComponent} from "../../objects/addressComponent";
 
 @Component({
-	selector: 'app-my-account',
-	templateUrl: './my-account.component.html',
-	styleUrls: ['./my-account.component.css']
+  selector: 'app-landlord-account',
+  templateUrl: './landlord-account.component.html',
+  styleUrls: ['./landlord-account.component.css']
 })
-export class MyAccountComponent implements OnInit {
-      
+export class LandlordAccountComponent implements OnInit {
 
-
-	msg = ''; 
+ msg = ''; 
 	isError : boolean = false;
 	isSuccess : boolean = false;
 	errorsArr : any = []; 
@@ -99,29 +97,15 @@ export class MyAccountComponent implements OnInit {
 			email: ['', Validators.required],
 			userName: ['', Validators.required],
 			dob:['', Validators.required],
-			occuptation_tt:['', Validators.required],
-			wakeup_time:['', Validators.required],
-			outing_day:['', Validators.required],
-			maximunPrice:['', Validators.required],
-			minimumPrice:['', Validators.required],
-			stay_date:[''],
 			gender:['', Validators.required],
 			phoneNo: ['', Validators.required],
 			address: ['', Validators.required],
-			work_place:['', Validators.required],
 			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
 			country: ['', Validators.required],
-			languages:['', Validators.required],
-			nationality:['', Validators.required],
-			biography:['', Validators.required],
-			interestes:['', Validators.required],
-			habits:['', Validators.required],
-			image:[''],
+			image:['',Validators.required],
 			file:[''],
-			social_account:[''],
-			weekend_wakeup_time:['', Validators.required],
-			previousCity:['', Validators.required],
-			rentalDescription:['', Validators.required]
+			social_account:['',Validators.required],
+		
 		});
 
 		this.today = new Date();
@@ -134,10 +118,6 @@ export class MyAccountComponent implements OnInit {
 		this.getAllCountries();
 		this.getAllLanguages();
         this.getCurrentIP();
-        if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
-        }
-
 		
 	}
 
@@ -220,60 +200,16 @@ export class MyAccountComponent implements OnInit {
 			this.userDataArr = response.users[0];
           
 			let finalData;	
-			
-			let wakeUpStr = this.userDataArr.wakeup_time; 
-			   if(wakeUpStr) {
-					let wakeSplit = wakeUpStr.split(":", 3); 
-					let hours = wakeSplit[0];
-					let minutes = wakeSplit[1];
-     				const sfdsfsfs = {
-						hour :parseInt(hours),
-						minute : parseInt(minutes)
-					}
-				    this.time = sfdsfsfs;
-			   } else {
-				   this.time = this.time;
-			   }
-			let WeekendWakeUpStr = this.userDataArr.wakeup_time; 
-			   if(WeekendWakeUpStr) {
-					let wakeSplit = WeekendWakeUpStr.split(":", 3); 
-					let hours = wakeSplit[0];
-					let minutes = wakeSplit[1];
-     				const sfdsfsfs = {
-						hour :parseInt(hours),
-						minute : parseInt(minutes)
-					}
-				    this.weekend_time = sfdsfsfs;
-			   } else {
-				   this.weekend_time = this.weekend_time;
-			   }
-			 
-			   let price = this.userDataArr.price_range; 
-			   if(price) {
-			   	  let splitPrice = price.split("-", 3); 
-			   	     this.maximumPrice = splitPrice[0];
-					 this.minimumPrice = splitPrice[1];
-			   }
-               if(this.userDataArr.languages_map){
-
-					var res = this.userDataArr.languages_map.replace(/&quot;/g,'"');
-					if(res) {
-						this.languageSelectedItems = JSON.parse(res);
-					}
-				}
-				if(this.userDataArr.nationality_map){
-                    var res1 = this.userDataArr.nationality_map.replace(/&quot;/g,'"');
-					if(res1) {
-						 this.nationalitySelectedItems = JSON.parse(res1);
-					}   
-				}
-               if(this.userDataArr.phoneNo) {
+		    if(this.userDataArr.phoneNo) {
                	    let splitPhone = this.userDataArr.phoneNo.split(" ",3);
                	     this.countryCode = splitPhone[0];
                	     this.phoneNumber = splitPhone[1];
-               }
-
-              console.log('response',this.userDataArr);
+             }
+             if(this.userDataArr.dob == 'Invalid date') {
+                  this.userDataArr.dob = '';
+             } else {
+                 this.userDataArr.dob = this.userDataArr.dob;
+             }
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
               this.boolUserImage = true;
 			  this.updateProfileForm.patchValue({
@@ -282,24 +218,11 @@ export class MyAccountComponent implements OnInit {
 				email: this.userDataArr.email,
 				userName: sessionStorage.getItem('user_name'),
 				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
-				occuptation_tt:this.userDataArr.occuptation_tt,
-			    wakeup_time:this.time,
-				weekend_wakeup_time:this.weekend_time,
-				outing_day:this.datePipe.transform(this.userDataArr.outing_day,"MM/dd/yyyy"),
-				maximunPrice:this.maximumPrice,
-				minimumPrice:this.minimumPrice,
-				stay_date:this.userDataArr.stay_date,
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
 				address: this.userDataArr.address,
-				work_place:this.userDataArr.work_place,
 				postalCode: this.userDataArr.postalCode,
 				country: this.userDataArr.country,
-				biography:this.userDataArr.biography,
-				interestes:this.userDataArr.interestes,
-				habits:this.userDataArr.habits,
-				previousCity:this.userDataArr.previous_city,
-				rentalDescription:this.userDataArr.rental_desc,
 				image:[''],
 				social_account:this.userDataArr.social_account,
 			});
@@ -386,70 +309,32 @@ export class MyAccountComponent implements OnInit {
 
 	updateProfile(formValue) {
 		
-		if(formValue.stay_date == ""){
-			this.stayDateEmpty = true;
-		}
-		if(formValue.languages  == ""){
-			this.languageEmpty = true;
-		}
-		if(formValue.nationality == ""){
-			this.nationalityEmpty = true;
-		}
 		if(formValue.country == ""){
 			this.countryEmpty = true;
 		}
-
-	
-		if(formValue.wakeup_time){
-			this.wakeup_time = formValue.wakeup_time.hour+":"+formValue.wakeup_time.minute;
-		}
-	    if(formValue.weekend_wakeup_time){
-			this.weekend_wakeup_time = formValue.weekend_wakeup_time.hour+":"+formValue.weekend_wakeup_time.minute;
-		}
-        
-		if(parseInt(formValue.maximunPrice) < parseInt(formValue.minimumPrice)) {
-			this.updateProfileForm.controls['minimumPrice'].reset()
-            this.toastr.errorToastr('Maximum value must be greater than minimum value.');
-		} 
-		
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
 			return;
         
 		} else {
-               
+            // console.log('file data', this.fileData);
 			const formData = new FormData();
+			
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
-			formData.append('email', formValue.email);	 	   
+			formData.append('email', formValue.email);		   
 			formData.append('photo', this.fileData);
 			formData.append('phoneNo', formValue.phoneNo);
 			formData.append('postal_code', formValue.postalCode);   
 			formData.append('country', formValue.country);
 			formData.append('address', formValue.address); 
-			formData.append('biography', formValue.biography); 
 			formData.append('dob', this.datePipe.transform(formValue.dob,"yyyy-MM-dd")); 
 			formData.append('gender', formValue.gender); 
-			formData.append('habits', formValue.habits); 
-			formData.append('interestes', formValue.interestes); 
-			formData.append('languages', this.languageArr); 
-			formData.append('nationality',this.nationalityArr); 
-            formData.append('languages_map', JSON.stringify(formValue.languages)); 
-			formData.append('nationality_map',JSON.stringify(formValue.nationality));
-			formData.append('occuptation_tt', formValue.occuptation_tt); 
-			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
-			formData.append('stay_date', formValue.stay_date); 
-			formData.append('wakeup_time', this.wakeup_time);
-			formData.append('wakeup_time', this.weekend_wakeup_time); 			
-			formData.append('work_place', formValue.work_place); 
-			formData.append('previous_city', formValue.previousCity); 
-			formData.append('rental_desc', formValue.rentalDescription); 
 			formData.append('social_account', formValue.social_account);
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
-            token = sessionStorage.getItem("auth_token"); 
+              token = sessionStorage.getItem("auth_token"); 
             }
             const httpOptions = { headers: new HttpHeaders({'authorization': token })};
             this.http.put(this.base_url+'user/profile', formData, httpOptions).subscribe((response:any) => {
@@ -457,7 +342,7 @@ export class MyAccountComponent implements OnInit {
 				this.toastr.successToastr(response.message,'Success');
 				this.submitted = false;
 				this.getUserData();
-				this.router.navigate(['/my-account']);
+				this.router.navigate(['/profile']);
 
 			},error =>{
 				this.isError = true;
@@ -468,6 +353,4 @@ export class MyAccountComponent implements OnInit {
 			});
 		}
 	}
-
-	
 }

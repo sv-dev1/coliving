@@ -61,12 +61,12 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
-import { LandlordProfileComponent } from './landlord-profile/landlord-profile.component';
 
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
 import { ShareModule } from '@ngx-share/core';
+import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 
 const icons = [
   // ... other icons
@@ -164,7 +164,8 @@ export function provideConfig() {
     DownloadComponent,
     ThankYouComponent,
     FaqComponent,
-    LandlordProfileComponent,
+    LandlordAccountComponent,
+  
  
   ],
   imports: [

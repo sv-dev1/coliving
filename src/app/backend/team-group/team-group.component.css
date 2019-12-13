@@ -47,3 +47,28 @@ a.mat-menu-trigger :hover{
     color: white;
 }
 
+div#taskDel.modal {
+    overflow-y: scroll;
+}
+.top-flex{
+    display: flex;
+}
+.common-b {
+    width: 33% !important;
+    margin: 0 3px;
+    height: 40px;
+    border-radius: 0 !important;
+    font-size: 15px !important;
+}
+button.btn.common-b.btn-orange.view-group-cv:hover {
+    background: #b83619 !important;
+}
+button.btn.btn-orange.common-b:hover {
+     background: #b83619 !important;
+}
+@media (min-width: 576px){
+    .modal-dialog.modaldialog12 {
+        max-width: 650px !important;
+        min-width: 650px;
+    }
+}

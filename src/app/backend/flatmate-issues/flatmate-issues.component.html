@@ -29,7 +29,8 @@
                                           <p><img class=" img-fluid" src="{{image_base_url}}{{issue.photo}}" onerror="this.src='assets/images/no-image-available.png'"></p>
                                           <h4 class="card-title">{{issue?.title}}</h4>
                                           <p class="card-text">{{issue?.desc}}</p>
-                                          <a href="javascript:void(0)" (click)="openIssueThread(issue)" class="btn btn-primary btn-sm"><i class="fa fa-comments"></i></a>
+                                          <a title="Start thread on issue" href="javascript:void(0)" (click)="openIssueThread(issue)" class="btn btn-primary btn-sm"><i class="fa fa-comments"></i></a>
+                                          <a title="Delete issue" href="javascript:void(0)" (click)="deleteIssueDailog(issue)" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
                                        </div>
                                     </div>
                                  </div>
@@ -65,6 +66,9 @@
                                  </div>
                               </div>
                            </div>
+                        </div>
+                        <div *ngIf="allIssues.length=='0'" class="col-xs-12 col-sm-6 col-md-4" #messageContainer>
+                           <p class="text-center">No data available at the moment.</p>
                         </div>
                      </div>
                   </div>
@@ -162,56 +166,79 @@
          <form [formGroup]="addIssueForm" (ngSubmit)="addIssue()" >   
          <!-- Modal body -->
          <div class="modal-body">
-             <div class="panel-body">
-                    <ul class="chat" *ngFor="let message of threads,index as i">
-                        <li class="left clearfix" *ngIf="message?.userId != logged_in_id">
-                           <span class="chat-img pull-left">
-                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
-
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <strong class="primary-font">{{message.login.username}}</strong> <small class="pull-right text-muted">
-                                        <span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
-                                </div>
-                                <p>
-                                   {{message?.message}}
-                                </p>
-                            </div>
-                        </li>
-                        <li class="right clearfix" *ngIf="message?.userId == logged_in_id">
-                            <span class="chat-img pull-right">
-                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
-                        </span>
-                            <div class="chat-body clearfix">
-                                <div class="header">
-                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
-                                    <strong class="pull-right primary-font">{{message.login.username}}</strong>
-                                </div>
-                                <p>
-                                    {{message?.message}}
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-               
+            <div class="panel-body">
+               <ul class="chat" *ngFor="let message of threads,index as i">
+                  <li class="left clearfix" *ngIf="message?.userId != logged_in_id">
+                     <span class="chat-img pull-left">
+                     <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+                     </span>
+                     <div class="chat-body clearfix">
+                        <div class="header">
+                           <strong class="primary-font">{{message.login.username}}</strong> <small class="pull-right text-muted">
+                           <span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
+                        </div>
+                        <p>
+                           {{message?.message}}
+                        </p>
+                     </div>
+                  </li>
+                  <li class="right clearfix" *ngIf="message?.userId == logged_in_id">
+                     <span class="chat-img pull-right">
+                     <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+                     </span>
+                     <div class="chat-body clearfix">
+                        <div class="header">
+                           <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>{{message?.createdAt | date: 'H:mm | MMM dd'}}</small>
+                           <strong class="pull-right primary-font">{{message.login.username}}</strong>
+                        </div>
+                        <p>
+                           {{message?.message}}
+                        </p>
+                     </div>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="modal-footer">
-          <form [formGroup]="addIssueReplyForm" (ngSubmit)="addIssueReply()" class="custom-form"> 
-              <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm" [ngClass]="{'is-invalid': submitted && g.message.errors}" placeholder="Type your message here..." formControlName="message"/>
-                        <div *ngIf="submitted && g.message.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="g.message.errors.required">Write something in text box.</span>
-                        </div>
-                    </div>
-                    <input type="hidden" formControlName="issueId" />
-                </div>
-             <button type="submit" class="btn btn-orange-sm reply-btn">Reply</button>
-          </form>
+            <form [formGroup]="addIssueReplyForm" (ngSubmit)="addIssueReply()" class="custom-form"> 
+            <div class="panel-footer">
+               <div class="input-group">
+                  <input id="btn-input" type="text" class="form-control input-sm" [ngClass]="{'is-invalid': submitted && g.message.errors}" placeholder="Type your message here..." formControlName="message"/>
+                  <div *ngIf="submitted && g.message.errors" class="invalid-feedback">
+                     <span class="for-sub-name" *ngIf="g.message.errors.required">Write something in text box.</span>
+                  </div>
+               </div>
+               <input type="hidden" formControlName="issueId" />
+            </div>
+            <button type="submit" class="btn btn-orange-sm reply-btn">Reply</button>
+            </form>
          </div>
          </form> 
+      </div>
+   </div>
+</div>
+</div>
+
+<div class="container">
+   <div class="modal" id="taskDel" [style.display]="deleteIssueModal ? 'block' : 'none'" *ngIf="deleteIssueModal" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Issue deletion</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeDeleteIssueModal(issueName)">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">{{issueName}}</span> issue?</strong></p>
+            <p>All information associated to this issue will be permanently deleted.
+               <span class="text-danger">This operation can not be undone.</span>
+            </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeDeleteIssueModal(issueName)">Cancel</button>
+            <button type="button" class="btn btn-orange-sm" (click)="deleteIssue(issueId)">Yes,Delete It</button>
+         </div>
       </div>
    </div>
 </div>

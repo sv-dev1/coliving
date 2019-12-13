@@ -550,7 +550,7 @@ export class HouseChoresComponent implements OnInit {
 		this.toastr.infoToastr('All information associated to the task '+taskName+' are safe.');
 	}
 	closeDeleteTaskModal1(){
-		this.deleteTaskModal=false;
+		this.deleteTaskModal = false;
 		this.renderer.removeClass(document.body, 'modal-open');
 	}
 	deleteTask(taskId){

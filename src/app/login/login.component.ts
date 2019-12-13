@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
       }
       this.data_service.login(input_data).subscribe((response:any) =>{
         this.res = JSON.stringify(response, undefined, 2); 
-     
+        console.log('response', response);
         sessionStorage.setItem("roleId", response.roleId);
         sessionStorage.setItem("auth_token", response.token);
         sessionStorage.setItem("user_name", response.username);

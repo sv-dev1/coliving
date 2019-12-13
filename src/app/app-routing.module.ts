@@ -27,7 +27,7 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
 import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
-import { LandlordProfileComponent } from './landlord-profile/landlord-profile.component';
+import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'properties', component: PropertyComponent, canActivate: [AuthGuard] },
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: LandlordProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
   {path: '**', redirectTo: '/'},
  
 ];
