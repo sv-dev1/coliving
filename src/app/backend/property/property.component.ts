@@ -37,6 +37,7 @@ export class PropertyComponent implements OnInit {
       isopenSendCVModal : boolean = false;
 	  openTeam : boolean = false;
 	  allteam : any = [];
+	  allteamLength : any 
 	  prop_id : any;
 	  roleId : any;
 	  tenant : boolean = false;
@@ -197,10 +198,11 @@ export class PropertyComponent implements OnInit {
     	this.openTeam = false;
     }
 	sendCV(property){
-	   this.prop_id=property.propertyId;
-        this.openTeam=true;
+	   this.prop_id = property.propertyId;
+        this.openTeam = true;
 	    this.data_service.getTeam().subscribe((response: any) =>{
-        this.allteam=response.teams;
+        this.allteam = response.teams;
+        this.allteamLength = this.allteam.length;
             // console.log(this.allteam);
    	  })
 	}

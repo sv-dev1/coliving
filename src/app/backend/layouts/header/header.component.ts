@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit {
     } 
     this.getUserData();  
     this.badgeNumber = 2;
+   
   }
 
   systemLogout($event){ 
@@ -144,4 +145,5 @@ export class HeaderComponent implements OnInit {
      console.log(id);
     this.router.navigate(['/team-Info/'+id]);
    }
+  
 }

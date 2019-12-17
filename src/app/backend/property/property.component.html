@@ -27,7 +27,7 @@
                               <p>Posted on:&nbsp;&nbsp;{{ property.created_at | date:'medium'}}</p>
                               <p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
                            </div>
-                              <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a>
+                              <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a> -->
                               <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a>
                               <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
                            <div class="clearfix"></div>
@@ -91,7 +91,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>No of balconies:</label>
+               <label>Balconies:</label>
                <select class="custom-select form-control" formControlName="no_of_balconies" id="no_of_balconies" [ngClass]="{ 'is-invalid': submitted && f.no_of_balconies.errors }">
                   <option value="" disabled>Please select one option</option>
                   <option value="0">0</option>
@@ -105,7 +105,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>No of bedrooms:</label>
+               <label>Bedrooms:</label>
                <select class="custom-select form-control" formControlName="no_of_bedrooms" id="no_of_bedrooms" [ngClass]="{ 'is-invalid': submitted && f.no_of_bedrooms.errors }">
                   <option value="" disabled>Please select one option</option>
                   <option value="0">0</option>
@@ -119,7 +119,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>No of bathrooms:</label>
+               <label>Bathrooms:</label>
                <select class="custom-select form-control" formControlName="no_of_bathrooms" id="no_of_bathrooms" [ngClass]="{ 'is-invalid': submitted && f.no_of_bathrooms.errors }">
                   <option value="" disabled>Please select one option</option>
                   <option value="0">0</option>
@@ -133,7 +133,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>No of garages:</label>
+               <label>Garages:</label>
                <select class="custom-select form-control" formControlName="no_of_garages" id="no_of_garages" [ngClass]="{ 'is-invalid': submitted && f.no_of_garages.errors }">
                   <option value="" disabled>Please select one option</option>
                   <option value="0">0</option>
@@ -147,7 +147,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>No of parking space:</label>
+               <label>Parking space:</label>
                <select class="custom-select form-control" formControlName="no_of_parking_space" id="no_of_parking_space" [ngClass]="{ 'is-invalid': submitted && f.no_of_parking_space.errors }">
                   <option value="" disabled>Please select one option</option>
                   <option value="0">0</option>
@@ -338,9 +338,14 @@
          <form [formGroup]="teamForm" (ngSubmit)="teamFormSubmit()">
          <div class="modal-body">
             <label>1: Please select a team to send Cv.</label>
-            <p *ngFor="let team of allteam">
-               <input type="radio" value="{{team.teamId}}" formControlName="team_id" [ngClass]="{'is-invalid': submitted && tF.team_id.errors}"> {{team.name}}
-            </p>
+               <div *ngIf="allteamLength !='0'">
+                  <p *ngFor="let team of allteam">
+                     <input type="radio" value="{{team.teamId}}" formControlName="team_id" [ngClass]="{'is-invalid': submitted && tF.team_id.errors}"> {{team.name}}
+                   </p>
+               </div>
+               <div *ngIf="allteamLength =='0'">
+                  <span style="color:red;" class="text-center">No team available.</span>
+               </div>
             <div *ngIf="submitted && tF.team_id.errors">
                <span class="for-sub-name" *ngIf="tF.team_id.errors.required">Select Your team</span>
             </div>
@@ -354,7 +359,7 @@
             <a class="prop-policy"><input type="checkbox" [checked]="false" formControlaame="agree">&nbsp;I agree to the privacy policy</a> 
          </div>
          <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-secondary">Ok</button>
+            <button *ngIf="allteamLength !='0'" type="submit" class="btn btn-outline-secondary">Ok</button>
          </div>
          </form> 
       </div>
