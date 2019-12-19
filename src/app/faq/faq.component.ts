@@ -12,8 +12,8 @@ export class FaqComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+     window.scrollTo(0,0);
   	 const items = document.querySelectorAll(".accordion a");
-	
   }
 
   toggleAccordion(){

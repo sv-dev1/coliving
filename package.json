@@ -50,6 +50,7 @@
     "intl-tel-input": "^16.0.5",
     "ng-socket-io": "^0.2.4",
     "ng6-toastr-notifications": "^1.0.4",
+    "ngx-auto-scroll": "^1.1.0",
     "ngx-bootstrap": "^5.1.2",
     "ngx-cookieconsent": "^2.2.3",
     "ngx-google-places-autocomplete": "^2.0.4",

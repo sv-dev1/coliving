@@ -1259,7 +1259,7 @@ function calculateWidths(table) {
     }
     else if (table.minWidth > table.width) {
         // Would be nice to improve the user experience of this
-        console.error("Column widths too wide and can't fit page");
+        //console.error("Column widths too wide and can't fit page");
     }
     var copy = table.columns.slice(0);
     distributeWidth(copy, table.width, table.wrappedWidth);

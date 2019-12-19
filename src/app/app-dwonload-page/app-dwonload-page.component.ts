@@ -350,6 +350,9 @@ export class AppDwonloadPageComponent implements OnInit {
             }
             const httpOptions = { headers: new HttpHeaders({'authorization': token })};
             this.http.post(this.base_url+'apiRegister', formData).subscribe((response:any) => {
+				
+                console.log('response', response);
+               
 				if(response.error ==true) {
 					this.toastr.errorToastr(response.message, 'Error');
 				} else if(response.profile) {

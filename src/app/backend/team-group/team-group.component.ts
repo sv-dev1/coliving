@@ -1,7 +1,4 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild, } from '@angular/core';
 import {
   Router,
   ActivatedRoute
@@ -113,7 +110,9 @@ export class TeamGroupComponent implements OnInit {
   dddsdasd: any = []; 
   imgUrl:any;
   teamArrLength: any;
+  referalLink: any ;
 
+  @ViewChild('scrollBottom', {static: false}) scrollBottom: ElementRef;    
   constructor(
           private formBuilder : FormBuilder,
           private router : Router,
@@ -144,8 +143,17 @@ export class TeamGroupComponent implements OnInit {
     this.getTeam();
     this.logged_in_username = sessionStorage.getItem("user_name");
     this.getUserData();
+    this.scrollToBottom();
   }
+     ngAfterViewChecked() {        
+      this.scrollToBottom();       
+    } 
 
+  scrollToBottom(){
+      try {
+      this.scrollBottom.nativeElement.scrollTop = this.scrollBottom.nativeElement.scrollHeight; 
+      } catch(err) {}
+    }
   getUserData() {
     let token;
     if (sessionStorage.getItem("auth_token") != undefined) {
@@ -171,6 +179,7 @@ export class TeamGroupComponent implements OnInit {
   }
 
   copyMessage(inputElement) {
+    
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0)
@@ -217,12 +226,14 @@ export class TeamGroupComponent implements OnInit {
   }
 */
   openUser(team) {
+    console.log('team', team);
     this.pdfUsersArray = [];
     this.team_ID = team.teamId; 
     this.user_Id = team.userId;
     this.teamUser = [];
     this.list = []
     this.openUserModel = true;
+    this.referalLink = location.origin + '/' + 'app.download?rc=' + this.userDataArr.ref_code + '/' + team.teamId,
     this.list.push(team.teamId);
     let postArr = {
       'teamId': this.list
@@ -243,10 +254,10 @@ export class TeamGroupComponent implements OnInit {
          
       this.pdfUsers.forEach(Object =>{
         let dateOfBirth;              
-        if(Object.userProfile.dob != 'Invalid date') {
+        if(Object.userProfile.dob != 'Invalid date' ) {
           dateOfBirth = this.datePipe.transform(Object.userProfile.dob,"MM/dd/yyyy");
         }else {
-          dateOfBirth = '';
+          dateOfBirth = '00/00/0000';
         }
         let occupation;
         if(Object.userProfile.occuptation_tt ==1) {
@@ -265,10 +276,13 @@ export class TeamGroupComponent implements OnInit {
          
         
         let url = "https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0"; //this.image_base_url+''+Object.userProfile.userId;
+        
         //"https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0";
         // "http://apitx.kindlebit.com/uploads/U058311bd-60dd-4a61-9d1f-be1484b93939"
         this.data_service.toDataURL(url, (dataUrl) => { 
             this.imgUrl = dataUrl;
+            console.log('image----', this.imgUrl);
+            let resds = this.imgUrl.replace('data:text/xml;base64', 'data:text/png;base64');
             this.pdfUsersArray.push({
               'firstName' : Object.userProfile.firstName,
               'lastName' : Object.userProfile.lastName,
@@ -281,7 +295,7 @@ export class TeamGroupComponent implements OnInit {
               'work_place' : Object.userProfile.work_place,
               'biography' : Object.userProfile.biography,
               'previous_city' : Object.userProfile.previous_city, 
-              'picture': this.imgUrl 
+              'picture' : resds
             });
         });
         //console.log('this.pdfUsersArray', this.pdfUsersArray);
@@ -569,7 +583,7 @@ export class TeamGroupComponent implements OnInit {
   getUserInfo(userId) {
     this.getUserApp(userId);
     this.openInformationModel = true;
-    this.openAppModel = false;
+    //this.openAppModel = false;
   }
 
   getUserApp(userId) {

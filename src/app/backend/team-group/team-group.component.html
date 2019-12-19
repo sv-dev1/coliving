@@ -3,7 +3,7 @@
    <app-sidebar></app-sidebar>
    <div class="work-block">
       <div class="team-part-1" *ngIf="!showCreate">
-         <div class="create-team">
+<!--          <div class="create-team">
             <div class="container">
                <div class="row">
                   <div class="col-12">
@@ -39,7 +39,7 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> -->
          <div class="team-list">
             <div class="container dashboard-container">
                <div class="row">
@@ -52,7 +52,7 @@
                </div>
                <div class="row">
                   <div class="col-12">
-                     <div class="table-responsive">
+                     <div class="table-responsive" *ngIf="teamArrLength !=0">
                         <table class="table table-striped table-bordered team-table">
                            <thead>
                               <tr>
@@ -67,6 +67,9 @@
                               </tr>
                            </tbody>
                         </table>
+                     </div>
+                     <div *ngIf="teamArrLength ==0">
+                         <p class="text-center">No team found.</p>
                      </div>
                   </div>
                   <div class="col-12">
@@ -164,7 +167,7 @@
                               <p>No team found</p>
                            </div>
                         </div>
-                        <div class="mesgs">
+                        <div class="mesgs" #scrollBottom>
                            <div class="msg_history" *ngFor="let message of gruopMessages,index as i">
                               <div class="incoming_msg" *ngIf="message.from_id != logged_in_id">
                                  <div class="incoming_msg_img">
@@ -331,8 +334,9 @@
                            <div class="row">
                               <div class="col-12 col-sm-12">
                                  <div class="form-group">
-                                    <label for="title">Referal code</label>
-                                    <input type="text" class="form-control" formControlName="referralCode" readonly #referralCode>                         
+                                    <label for="title">Referal code:</label>
+                                    <p>Share a link with potential candidates for your flatmates. You can copy the link and share it wherever you want. Once the link is clicked the candidate will be asked to fill-up the flatmate questionnaire and the answers will appear on the bottom of this page.</p>
+                                    <input style="opacity: 0;margin:-20px;" type="text" class="form-control" formControlName="referralCode" readonly #referralCode>                         
                                  </div>
                               </div>
                            </div>
@@ -391,9 +395,6 @@
                            </table>
                         </div>
                      </div>
-
-
-
                   </div>
                </div>
             </div>
