@@ -42,6 +42,11 @@ export class FlatmateIssuesComponent implements OnInit {
     threads : any = [];
     logged_in_id : string = "";
     isOpenthreadModal : boolean = false;
+    issueResponse : any;
+    issueName : any;
+    issueId : any;
+    deleteIssueModal : boolean = false;
+
 
 	constructor(
 			private formBuilder:FormBuilder,	
@@ -60,7 +65,7 @@ export class FlatmateIssuesComponent implements OnInit {
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 		this.logged_in_id = sessionStorage.getItem("userId");
-		this.base_url = environment.image_base_url;
+	
 
 		this.addIssueReplyForm = this.formBuilder.group({
 			message: ['', Validators.required],
@@ -71,7 +76,7 @@ export class FlatmateIssuesComponent implements OnInit {
 	ngOnInit() {
 		this.getTeam();
 		this.getIssues();
-
+      console.log('this.base_url', this.base_url);
 	}
 
    
@@ -201,7 +206,6 @@ export class FlatmateIssuesComponent implements OnInit {
 					selectAllText:'Select All',
 					unSelectAllText:'UnSelect All',
 					classes:"myclass custom-class",
-					limitSelection: 2,
 				    enableSearchFilter: true,
 				};
 			}, error =>{
@@ -309,6 +313,37 @@ export class FlatmateIssuesComponent implements OnInit {
 	          this.errorsArr = error.error;
 	        });
 		}
-    }
+    } 
+
+    deleteIssueDailog(issue){
+		   this.issueName = issue.title;
+		   this.issueId = issue.issueId;
+           this.deleteIssueModal = true;
+	}
+
+	deleteIssue(issueId)  {
+       
+        if(issueId){
+	        this.data_service.deleteIssue(issueId).subscribe((response:any) =>{
+	        this.issueResponse = JSON.stringify(response, undefined, 2); 
+	        this.closeDeleteIssueModal1();
+            this.getIssues();
+	        this.toastr.successToastr(response.message,'Success');
+	        this.router.navigate(['/house-chores']);  
+	        this.isError = false;
+	      }, error =>{ 
+	        this.isError = true; 
+	      //  this.toastr.errorToastr('Invalid Credentials','Error');
+	      })
+       }
+	}
+
+	closeDeleteIssueModal(issueName){
+		this.deleteIssueModal = false;
+		this.toastr.infoToastr('All information associated to the task '+issueName+' are safe.');
+	}
+	closeDeleteIssueModal1() {
+		this.deleteIssueModal = false;
+	}
 
 }

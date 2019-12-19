@@ -27,6 +27,8 @@ export class LoginComponent implements OnInit {
   userInfo:any =[];
   private user: SocialUser;
   private loggedIn: boolean;
+  session_key: boolean;
+
   constructor(
     private formBuilder:FormBuilder,	
     private router: Router,
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
       this.user = user;
       this.loggedIn = (user != null);
     });
-
+     
   }
   get f() { return this.loginForm.controls; }
 
@@ -65,15 +67,19 @@ export class LoginComponent implements OnInit {
         "password" : form.password, 		
       }
       this.data_service.login(input_data).subscribe((response:any) =>{
-        this.res = JSON.stringify(response, undefined, 2); 
-     
-        sessionStorage.setItem("roleId", response.roleId);
-        sessionStorage.setItem("auth_token", response.token);
-        sessionStorage.setItem("user_name", response.username);
-        sessionStorage.setItem("userId", response.userId);
-        this.toastr.successToastr('You are logged in successfully!');
-        this.router.navigate(['/dashboard']);  
-        this.isError = false;
+        if(response.roleId == '3') {
+            this.res = JSON.stringify(response, undefined, 2); 
+            console.log('response', response);
+            sessionStorage.setItem("roleId", response.roleId);
+            sessionStorage.setItem("auth_token", response.token);
+            sessionStorage.setItem("user_name", response.username);
+            sessionStorage.setItem("userId", response.userId);
+            this.toastr.successToastr('You are logged in successfully!');
+            this.router.navigate(['/dashboard']);  
+            this.isError = false;
+        } else  {
+            this.toastr.errorToastr('Invalid Access!');
+        }   
       }, error =>{ 
         this.isError = true; 
       //  this.toastr.errorToastr('Invalid Credentials','Error');
@@ -171,5 +177,4 @@ export class LoginComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
-
 }

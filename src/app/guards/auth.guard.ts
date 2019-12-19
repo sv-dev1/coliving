@@ -9,6 +9,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  session_key: boolean;
   constructor(
       private router: Router,
       private route :ActivatedRoute,
@@ -18,7 +19,8 @@ export class AuthGuard implements CanActivate {
      
   }
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
+   
+     
     if(sessionStorage.getItem("auth_token") != undefined){
       return true;
     } else {

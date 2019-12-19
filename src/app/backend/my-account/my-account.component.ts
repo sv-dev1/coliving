@@ -134,6 +134,10 @@ export class MyAccountComponent implements OnInit {
 		this.getAllCountries();
 		this.getAllLanguages();
         this.getCurrentIP();
+        if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/dashboard']);
+        }
+
 		
 	}
 

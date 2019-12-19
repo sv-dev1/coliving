@@ -1,44 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
-import { DataService } from '../data.service';
+import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
-import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 import {DatePipe} from '@angular/common';
 import { first } from 'rxjs/operators';
 
-@Component({
-	selector: 'app-app-dwonload-page',
-	templateUrl: './app-dwonload-page.component.html',
-	styleUrls: ['./app-dwonload-page.component.css']
-})
-export class AppDwonloadPageComponent implements OnInit {
+import {GooglePlaceDirective} from "../../ngx-google-places-autocomplete.directive";
+import {ComponentRestrictions} from "../../objects/options/componentRestrictions";
+import {Address} from "../../objects/address";
+import {AddressComponent} from "../../objects/addressComponent";
 
-	questionareform:FormGroup;
-	isEmailModal :boolean = false;
-	submitted : boolean = false; 
+@Component({
+  selector: 'app-landlord-account',
+  templateUrl: './landlord-account.component.html',
+  styleUrls: ['./landlord-account.component.css']
+})
+export class LandlordAccountComponent implements OnInit {
+
+ msg = ''; 
 	isError : boolean = false;
 	isSuccess : boolean = false;
-	errorsArr:any = []; 
-	referralCode : any;
-	downloadUrl : string = '';
-	openFileDownloadModal: boolean = false;
-
-    image_base_url : any;
+	errorsArr : any = []; 
+	newArray : any = [];
+	profileData : any = [];
+	updateProfileForm : FormGroup;
+	image_base_url : any;
 	image_url : any;
-	
+	submitted = false;
 	base_url : any;
 	fileData : any;
-	
+	url : any;
 	userDataArr : any;
 	email : any;
 	messageDigit : string = '';
 	messageDigit1 : string = '';
 	time = {hour: 13, minute: 30};
-	weekend_wakeup_time = {hour: 13, minute: 30};
+	weekend_time = {hour: 13, minute: 30};
 	today : any;
 	teamEmpty : boolean=false;
 	userEmpty : boolean=false;
@@ -59,8 +60,8 @@ export class AppDwonloadPageComponent implements OnInit {
 	nationalityEmpty:boolean=false;
 	stayDateEmpty:boolean=false;
 	stay_date: any;
-	weekend_time:any;
-
+	wakeup_time:any;
+	weekend_wakeup_time:any;
 	Dtime:any;
 	length:boolean=false;
 	ip_address : string = "";
@@ -77,83 +78,64 @@ export class AppDwonloadPageComponent implements OnInit {
     phoneNumber : any;
     maxPriceValue : any;
     minPriceValue : any;
-    url: any = '';
-
+    boolUrl : boolean = false;
+    boolUserImage : boolean = false;
 
 	constructor(
-		    private formBuilder:FormBuilder,
+			private formBuilder:FormBuilder,
 			private router: Router,
 			public toastr: ToastrManager,
 			private data_service : DataService,
 			private http : HttpClient,
 			calendar: NgbCalendar,
-			private datePipe: DatePipe,
-			private route: ActivatedRoute
-		) { 
-		this.questionareform = this.formBuilder.group({
+			private datePipe: DatePipe
+		) {   
 
+		this.updateProfileForm = this.formBuilder.group({
 			firstName: ['', Validators.required],
-			favouriteLocation: ['', Validators.required],
-			dob: ['', Validators.required],
-			weekend_wakeup_time: ['', Validators.required],
-			languages: ['', Validators.required],
-			nationality: ['', Validators.required],
-			gender: ['', Validators.required],
-			phoneNo: ['', Validators.required],
-			occuptation_tt: ['', Validators.required],
-			maximunPrice: ['', Validators.required],
-			minimumPrice: ['', Validators.required],
-			image: ['', Validators.required],
-			stay_date: ['', Validators.required],
-			biography: ['', Validators.required],
-			interestes: ['', Validators.required],
-            outing_day: ['', Validators.required],
-			partying: ['', Validators.required],
-			alcohol: ['', Validators.required],
-			smoking: ['', Validators.required],
-			apartment_clean_importance: ['', Validators.required],
-			apartment_party: ['', Validators.required],
-			music: ['', Validators.required],
+			lastName: ['', Validators.required],
 			email: ['', Validators.required],
-			ref_code: ['', Validators.required],
-			agree: ['false', Validators.requiredTrue],
+			userName: ['', Validators.required],
+			dob:['', Validators.required],
+			gender:['', Validators.required],
+			phoneNo: ['', Validators.required],
+			address: ['', Validators.required],
+			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
+			country: ['', Validators.required],
+			image:['',Validators.required],
+			file:[''],
+			social_account:['',Validators.required],
+		
 		});
+
 		this.today = new Date();
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
 
 	ngOnInit() {
+		this.getUserData();
 		this.getAllCountries();
 		this.getAllLanguages();
-		this.getCurrentIP();
-		const referralCode: string = this.route.snapshot.queryParamMap.get('rc');
-		console.log(referralCode);
-		if(referralCode) {
-			this.questionareform.patchValue({
-				ref_code : referralCode,
-			});  
-		}
-
+        this.getCurrentIP();
+		
 	}
 
 	getCurrentIP(){
-		this.http.get('https://jsonip.com').subscribe( data => {
-			this.ip_address = data['ip'];
-			this.getCurrentLoaction();
-		})
-	}
-
-	getCurrentLoaction(){
+	      this.http.get('https://jsonip.com').subscribe( data => {
+	      this.ip_address = data['ip'];
+	      this.getCurrentLoaction();
+	    })
+    }
+    getCurrentLoaction(){
 		this.data_service.currentLocation(this.ip_address).subscribe(response => { 
-			this.current_country = response['country'].toLowerCase();
+		this.current_country = response['country'].toLowerCase();
 
-		},error => {
-			console.log(error);
+        },error => {
+		console.log(error);
 		})
-	}
-
-	getAllCountries(){
+    }
+    getAllCountries(){
 		this.data_service.getCountries().subscribe((response:any) =>{   
 			this.allCountriesArray = response.countries;
 			this.allCountries = this.allCountriesArray;
@@ -181,7 +163,6 @@ export class AppDwonloadPageComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-
 	getAllLanguages(){
 		this.data_service.getLanguages().subscribe((response:any) =>{
 			this.allLanguagesArray = response.languages;
@@ -200,7 +181,6 @@ export class AppDwonloadPageComponent implements OnInit {
 				classes:"myclass custom-class",
 				limitSelection: 2,
 				enableSearchFilter: true,
-
 			};
 			this.isError = false;    
 		}, error =>{ 
@@ -208,12 +188,56 @@ export class AppDwonloadPageComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-
+	
+	getUserData(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		this.http.get(this.base_url+'user/profile', { headers: headers }).subscribe((response: any) => {
+			this.userDataArr = response.users[0];
+          
+			let finalData;	
+		    if(this.userDataArr.phoneNo) {
+               	    let splitPhone = this.userDataArr.phoneNo.split(" ",3);
+               	     this.countryCode = splitPhone[0];
+               	     this.phoneNumber = splitPhone[1];
+             }
+             if(this.userDataArr.dob == 'Invalid date') {
+                  this.userDataArr.dob = '';
+             } else {
+                 this.userDataArr.dob = this.userDataArr.dob;
+             }
+              this.image_url = this.image_base_url+''+this.userDataArr.userId;
+              this.boolUserImage = true;
+			  this.updateProfileForm.patchValue({
+				firstName: this.userDataArr.firstName,
+				lastName: this.userDataArr.lastName,
+				email: this.userDataArr.email,
+				userName: sessionStorage.getItem('user_name'),
+				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
+				gender:this.userDataArr.gender,
+				phoneNo: this.userDataArr.phoneNo,
+				address: this.userDataArr.address,
+				postalCode: this.userDataArr.postalCode,
+				country: this.userDataArr.country,
+				image:[''],
+				social_account:this.userDataArr.social_account,
+			});
+			this.email = this.userDataArr.email;
+			
+		},error=>{ 
+			console.log("ERROR");
+			console.log(error.error);
+		});  
+	}
+	
 	onSelectFile(event) {
 		this.fileData = event.target.files[0];
 		this.preview();
 	}
-
 	preview() {
 		var mimeType = this.fileData.type;
 		if (mimeType.match(/image\/*/) == null) {
@@ -223,9 +247,10 @@ export class AppDwonloadPageComponent implements OnInit {
 		reader.readAsDataURL(this.fileData); 
 		reader.onload = (_event) => { 
 			this.url = reader.result; 
+			this.boolUrl = true;
+			this.boolUserImage =false;
 		}
 	}
-
 	keyPress(event: any) {
 		this.messageDigit1 ='';
 		const pattern = /[0-9\+\-\ ]/;
@@ -236,11 +261,21 @@ export class AppDwonloadPageComponent implements OnInit {
 			event.preventDefault();
 		}
 	}
-
-	openEmailModal() {
-		this.isEmailModal = true;
+	keyPress1(event: any) {
+		this.messageDigit ='';
+		const pattern = /[0-9\+\-\ ]/;
+		let inputChar = String.fromCharCode(event.charCode);
+		// console.log(inputChar, e.charCode);
+		if (!pattern.test(inputChar)) {
+			this.messageDigit1 = 'Only digit allowed.';
+			event.preventDefault();
+		}
 	}
 
+	get f() {  
+		
+		return this.updateProfileForm.controls; 
+	}
     checkLength(length){
     	console.log('check length',length);
     }
@@ -253,7 +288,6 @@ export class AppDwonloadPageComponent implements OnInit {
 	        	this.toastr.infoToastr('You can select only maximum two languages.');
 	     }
     }
-
     OnLanguageDeSelect(item: any) {
     	 
     	 this.languageArrMap.splice(this.languageArrMap.indexOf(item),1);
@@ -267,100 +301,49 @@ export class AppDwonloadPageComponent implements OnInit {
 	        	this.toastr.infoToastr('You can select only maximum two nationalities.');
 	      }
     }
-
     OnNationalityDeSelect(item: any) {
     	
     	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(item),1);
         this.nationalityArr.splice(this.nationalityArr.indexOf(item['id']),1);
     }
 
-	get f() { return this.questionareform.controls; }
-	
-	questionareSubmit(formValue){
-       
-       console.log('formvalue----', this.questionareform.controls.phoneNo.status);
-		this.submitted = true;
-	    
-		if(formValue.languages  == ""){
-			this.languageEmpty = true;
-		}
-		if(formValue.nationality == ""){
-			this.nationalityEmpty = true;
-		}
+	updateProfile(formValue) {
+		
 		if(formValue.country == ""){
 			this.countryEmpty = true;
 		}
-
-	    if(formValue.weekend_wakeup_time){
-			this.weekend_time = formValue.weekend_wakeup_time.hour+":"+formValue.weekend_wakeup_time.minute;
-		}
+		this.submitted = true;
+		if(this.updateProfileForm.invalid) {
+			return;
         
-		if(parseInt(formValue.maximunPrice) < parseInt(formValue.minimumPrice)) {
-			//console.log('stuck here---price?');
-            this.toastr.errorToastr('Maximum value must be greater than minimum value.');
-            return;
-		}
-		if(this.questionareform.value['ref_code'] == undefined || this.questionareform.value['ref_code'] ==null) {
-			//console.log('stuck here---refcode?');
-			this.toastr.errorToastr('Missing referral code.', 'Error!');
-			this.router.navigate(['/login']); 
-			return;
-		}
-		if(this.questionareform.value['phoneNo'] != '' )
-            if(this.questionareform.controls.phoneNo.status == 'INVALID'){
-			  this.toastr.errorToastr('Please enter your valid phone number.');
-              return;
-		}
-		   
-		if(this.questionareform.invalid) {
-			return;
-		} else{
-		    
-		    console.log('step second-------',formValue);
-		    const formData = new FormData();
+		} else {
+            // console.log('file data', this.fileData);
+			const formData = new FormData();
+			
 			formData.append('firstName', formValue.firstName);
-			formData.append('favourite_location', formValue.favouriteLocation);
+			formData.append('lastName', formValue.lastName);
+			formData.append('email', formValue.email);		   
 			formData.append('photo', this.fileData);
 			formData.append('phoneNo', formValue.phoneNo);
-			formData.append('biography', formValue.biography); 
+			formData.append('postal_code', formValue.postalCode);   
+			formData.append('country', formValue.country);
+			formData.append('address', formValue.address); 
 			formData.append('dob', this.datePipe.transform(formValue.dob,"yyyy-MM-dd")); 
 			formData.append('gender', formValue.gender); 
-			formData.append('interestes', formValue.interestes); 
-			formData.append('languages', this.languageArr); 
-			formData.append('nationality',this.nationalityArr); 
-            formData.append('languages_map', JSON.stringify(formValue.languages)); 
-			formData.append('nationality_map',JSON.stringify(formValue.nationality));
-			formData.append('occuptation_tt', formValue.occuptation_tt); 
-			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
-			formData.append('stay_date', formValue.stay_date);
-			formData.append('wakeup_time', this.weekend_time); 
-			formData.append('email', formValue.email);
-			formData.append('alcohol', formValue.alcohol);
-			formData.append('partying', formValue.partying);			
-		    formData.append('smoking', formValue.smoking);
-			formData.append('apartment_clean_importance', formValue.apartment_clean_importance);
-			formData.append('apartment_party', formValue.apartment_party);
-			formData.append('music', formValue.music);
-			formData.append('ref_code', formValue.ref_code);
+			formData.append('social_account', formValue.social_account);
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){
-            token = sessionStorage.getItem("auth_token"); 
+              token = sessionStorage.getItem("auth_token"); 
             }
             const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-            this.http.post(this.base_url+'apiRegister', formData).subscribe((response:any) => {
-				
-                console.log('response', response);
-               
-				if(response.error ==true) {
-					this.toastr.errorToastr(response.message, 'Error');
-				} else if(response.profile) {
-					this.toastr.successToastr(response.message, 'Success!');
-					this.submitted = false;
-					this.questionareform.reset();
-					this.openFileDownloadModal = true;
-				}
+            this.http.put(this.base_url+'user/profile', formData, httpOptions).subscribe((response:any) => {
+				console.log('response', response);
+				this.toastr.successToastr(response.message,'Success');
+				this.submitted = false;
+				this.getUserData();
+				this.router.navigate(['/profile']);
+
 			},error =>{
 				this.isError = true;
 				console.log('errors',error); 
@@ -370,13 +353,4 @@ export class AppDwonloadPageComponent implements OnInit {
 			});
 		}
 	}
-	closeModal() {
-		setTimeout(() => {
-			this.openFileDownloadModal = false;
-		}, 3000);
-	} 
-
-	
 }
-
-

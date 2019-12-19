@@ -9,7 +9,7 @@
 	</div>
 	<div class="right-blk">
 			
-			<mat-icon matBadge="{{badgeNumber}}" matBadgePosition="above after" [matMenuTriggerFor]="menu">notification_important
+		<!-- 	<mat-icon matBadge="{{badgeNumber}}" matBadgePosition="above after" [matMenuTriggerFor]="menu">notification_important
 				</mat-icon>
 				<mat-menu #menu="matMenu">
 						<button mat-menu-item (click)="teamInfo('Tadd34169-2882-4cd3-9c17-0a9bc5cb92a7')">
@@ -20,15 +20,15 @@
 								<mat-icon>navigate_next</mat-icon>
 								<span>Team 2 invited you</span>
 						</button>
-				</mat-menu>
+				</mat-menu> -->
 			
 		<div class="parts">
-			<button type="submit" class="btn btn-orange-sm" routerLink="/my-account">My Account</button>
+			<button type="submit" class="btn btn-orange-sm" routerLink="/profile">My Account</button>
 		</div>
 		
 		<div class="parts">
-			<img class="money" src="assets/images/money.png">
-			<span class="balance"> 0.00 USD</span>
+			<img class="money" src="assets/images/Logo-colive.png">
+			<span class="balance">€ 0.00</span>
 		</div>
 	
 		<div class="parts profile-drop">
@@ -37,7 +37,7 @@
 				<img class="menu-arrow" src="assets/images/drop.png" />
 			</span>		
 			<div class="profile-menu">
-				<a routerLink="/my-account" class="">My Account</a>
+				<a routerLink="/profile" class="">My Account</a>
 				<a href="javascript:void(0)" (click)="changePasswordModal()">Change Password</a>
 				<a href="javascript:void(0)" class="">Help</a>
 				<a href="javascript:void(0)" (click)="systemLogout($event)" class="">Logout</a>
