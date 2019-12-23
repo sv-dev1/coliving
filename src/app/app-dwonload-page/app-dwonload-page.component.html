@@ -14,7 +14,7 @@
             </ul> -->
          <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-               <h3 class="register-heading">Complete the Questionare</h3>
+               <h3 class="register-heading">Complete the Questionnaire</h3>
                <div class="row register-form">
                   <form [formGroup]="questionareform" (ngSubmit)="questionareSubmit(questionareform.value)">
                   <div class="col-md-12">
@@ -99,7 +99,7 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="team">Weekend wake up time.<span class="validate-red">*</span></label>
+                        <label for="team">weekday wake up time.<span class="validate-red">*</span></label>
                         <ngb-timepicker [(ngModel)]="weekend_wakeup_time" formControlName="weekend_wakeup_time"></ngb-timepicker>
                         <div *ngIf="submitted && f.weekend_wakeup_time.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.weekend_wakeup_time.errors.required">Weekend wake-up time is required.</span>
@@ -115,20 +115,21 @@
                            <span class="for-sub-name" *ngIf="f.outing_day.errors.required">Day of moving in/out is required.</span>
                         </div>
                      </div>
-                     <div class="form-group">
-                        <label for="team">Maximun price<span class="validate-red">*</span></label>
-                        <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
-                        <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun price is required.</span>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label for="team">Minimum price<span class="validate-red">*</span></label>
+                      <div class="form-group">
+                        <label for="team">Minimum price willing to pay<span class="validate-red">*</span></label>
                         <input type="text" class="form-control" placeholder="Minimum Price" formControlName="minimumPrice" [ngClass]="{ 'is-invalid': submitted && f.minimumPrice.errors }"  >
                         <div *ngIf="submitted && f.minimumPrice.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.minimumPrice.errors.required">Minimum price is required.</span>
                         </div>
                      </div>
+                     <div class="form-group">
+                        <label for="team">Maximun price willing to pay<span class="validate-red">*</span></label>
+                        <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
+                        <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
+                           <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun price is required.</span>
+                        </div>
+                     </div>
+                    
                      <div class="form-group">
                         <label for="team">How long willing to stay (optional)</label>
                             <input type="text" class="form-control" placeholder="How long willing to stay" formControlName="stay_date">

@@ -37,8 +37,8 @@ export class AppDwonloadPageComponent implements OnInit {
 	email : any;
 	messageDigit : string = '';
 	messageDigit1 : string = '';
-	time = {hour: 13, minute: 30};
-	weekend_wakeup_time = {hour: 13, minute: 30};
+	time = {hour: 8, minute: 30};
+	weekend_wakeup_time = {hour: 8, minute: 30};
 	today : any;
 	teamEmpty : boolean=false;
 	userEmpty : boolean=false;

@@ -213,20 +213,17 @@ img.menu-arrow {
 }
 
 .side-logo {
-    padding: 15px 20px;
-	display: flex;
+    padding: 0px 20px;
+    display: flex;
     justify-content: center;
-	margin-bottom: 10px;
-	border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .side-logo a{
 	display: flex;
 }
 
-.side-logo a img{
-	height:50px;
-}
 
 .sidebar .nav li {
     width: 100%;
