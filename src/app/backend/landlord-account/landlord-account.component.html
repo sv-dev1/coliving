@@ -154,6 +154,19 @@
 
                            </div>
                         </div>
+
+
+                        <div class="col-12 col-sm-6">
+                           <div class="form-group">
+                              <label for="bill">Upload document<span class="validate-red">*</span></label>
+                              <input type="file" multiple class="form-control-file border"  formControlName="document" (change)="onSelectdocument($event)">
+                           
+                              <br/>
+
+                           </div>
+                        </div>
+
+
                        
                         <input type="hidden" formControlName="file">
                         <div class="col-12 col-sm-12 text-center">

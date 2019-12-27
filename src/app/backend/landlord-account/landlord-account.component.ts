@@ -80,6 +80,7 @@ export class LandlordAccountComponent implements OnInit {
     minPriceValue : any;
     boolUrl : boolean = false;
     boolUserImage : boolean = false;
+    fileDocument: any = []; 
 
 	constructor(
 			private formBuilder:FormBuilder,
@@ -105,6 +106,7 @@ export class LandlordAccountComponent implements OnInit {
 			image:['',Validators.required],
 			file:[''],
 			social_account:['',Validators.required],
+			document:[''],
 		
 		});
 
@@ -238,6 +240,17 @@ export class LandlordAccountComponent implements OnInit {
 		this.fileData = event.target.files[0];
 		this.preview();
 	}
+
+	onSelectdocument(event){
+		this.fileDocument =  [];
+		console.log('event', event);
+        for (var i = 0; i < event.target.files.length; i++) { 
+		      this.fileDocument.push(event.target.files[i]);
+		 }
+		 console.log('this.fileDocument', this.fileDocument);
+	}
+
+
 	preview() {
 		var mimeType = this.fileData.type;
 		if (mimeType.match(/image\/*/) == null) {
@@ -331,6 +344,7 @@ export class LandlordAccountComponent implements OnInit {
 			formData.append('dob', this.datePipe.transform(formValue.dob,"yyyy-MM-dd")); 
 			formData.append('gender', formValue.gender); 
 			formData.append('social_account', formValue.social_account);
+			//formData.append("document", this.fileDocument);
 
 			let token; 
             if(sessionStorage.getItem("auth_token")!=undefined){

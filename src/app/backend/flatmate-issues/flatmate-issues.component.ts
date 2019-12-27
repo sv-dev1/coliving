@@ -61,6 +61,7 @@ export class FlatmateIssuesComponent implements OnInit {
 			image: ['', Validators.required],
 			team: ['', Validators.required], 
 			assign_to:['', Validators.required],
+			category: ['', Validators.required],
 		});
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
@@ -130,6 +131,7 @@ export class FlatmateIssuesComponent implements OnInit {
 			});
 			const input_data = {
 				"title" : data.title,
+				"category" :data.category,
 				"desc" : data.description,      
 				"teamId" : this.teamName,
 				"photo" : this.fileData,
@@ -138,6 +140,7 @@ export class FlatmateIssuesComponent implements OnInit {
 			}
 			const formData = new FormData();
 			formData.append('title', input_data.title);
+			formData.append('issue_category', input_data.category);
 			formData.append('desc', input_data.desc);	   
 			formData.append('teamId', input_data.teamId);
 			formData.append('photo', input_data.photo);
@@ -329,7 +332,7 @@ export class FlatmateIssuesComponent implements OnInit {
 	        this.closeDeleteIssueModal1();
             this.getIssues();
 	        this.toastr.successToastr(response.message,'Success');
-	        this.router.navigate(['/house-chores']);  
+	        this.router.navigate(['/flatmate-issues']);  
 	        this.isError = false;
 	      }, error =>{ 
 	        this.isError = true; 

@@ -275,7 +275,7 @@ export class TeamGroupComponent implements OnInit {
         }
          
         
-        let url = "https://apitx.kindlebit.com/uploads/U058311bd-60dd-4a61-9d1f-be1484b93939"; //this.image_base_url+''+Object.userProfile.userId;
+        let url = "https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0"; //this.image_base_url+''+Object.userProfile.userId;
         
         //"https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0";
         // "http://apitx.kindlebit.com/uploads/U058311bd-60dd-4a61-9d1f-be1484b93939"

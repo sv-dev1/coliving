@@ -34,6 +34,10 @@
                                        </div>
                                     </div>
                                  </div>
+
+
+
+
                                  <div class="backside">
                                     <div class="card">
                                        <div class="card-body text-center mt-4">
@@ -67,8 +71,8 @@
                               </div>
                            </div>
                         </div>
-                        <div *ngIf="allIssues.length=='0'" class="col-xs-12 col-sm-6 col-md-4" #messageContainer>
-                           <p class="text-center">No data available at the moment.</p>
+                        <div *ngIf="allIssues.length=='0'" class="col-xs-12 col-sm-12 col-md-12" #messageContainer>
+                           <p style="font-size:20px !important;" class="text-center text-danger">No issues uploaded</p>
                         </div>
                      </div>
                   </div>
@@ -99,6 +103,23 @@
                   <span class="for-sub-name" *ngIf="f.title.errors.required">Title is required.</span>
                </div>
             </div>
+
+            <div class="form-group">
+               <label for="team">Category<span class="validate-red">*</span></label>
+               <select class="custom-select form-control" formControlName="category" id="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                  
+                  <option value="" disabled>Please select one option</option>
+                  <option value="1">Maintenance</option>
+                  <option value="2">Flatmates issues</option>
+                  <option value="3">Payment</option>
+                  <option value="4">Neighbours</option>
+                  
+               </select>
+               <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="f.category.errors.required">Category is required.</span>
+               </div>
+            </div>
+                              
             <div class="form-group">
                <label>Description:</label>
                <textarea id="property_desc" class="form-control"rows="5" cols="5" formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
