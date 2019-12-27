@@ -160,3 +160,14 @@ button.btn.btn-link span {
 .card-header {
     padding: 0 15px;
 }
+
+
+
+/*sagar-start*/
+
+.card-body ul li {
+    padding-bottom: 12px;
+}
+
+
+/*sagar-end*/
