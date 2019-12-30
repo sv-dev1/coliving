@@ -19,7 +19,7 @@ export class DownloadComponent implements OnInit {
   }
   closeModal() {
 		setTimeout(() => {
-            this.message = 'App Downloaded';
+            this.message = 'Thank you for downloading the app.';
 		}, 2000);
   }
 }

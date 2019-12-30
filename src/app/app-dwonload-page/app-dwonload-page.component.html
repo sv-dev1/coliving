@@ -1,6 +1,7 @@
 <div class="container register">
    <div class="row">
       <div class="col-md-3 register-left">
+      
          <img src="assets/images/Logo-colive.png" alt="" />
          <h3>Welcome to the colivingApp</h3>
          <p>The app that not only deals with issues that can appear when sharing accommodation but also solves them. The questionnaire below will be shared with the coliver from whom you received this link. Filling the data up will make you become a potential candidate to share the apartment with.</p>
@@ -123,7 +124,7 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="team">Maximun price willing to pay<span class="validate-red">*</span></label>
+                        <label for="team">Maximum price willing to pay<span class="validate-red">*</span></label>
                         <input type="text" id="text" class="form-control" placeholder="Maximun Price" formControlName="maximunPrice" [ngClass]="{ 'is-invalid': submitted && f.maximunPrice.errors }">
                         <div *ngIf="submitted && f.maximunPrice.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.maximunPrice.errors.required">Maximun price is required.</span>

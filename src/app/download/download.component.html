@@ -27,8 +27,10 @@
                      <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                      <div class="create-account-btn">
                         <!-- <button type="submit" >Create Account Now</button> -->
-                         <a *ngIf="message == '' "class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
-                         <a *ngIf="message != '' "class="btn btn-lg src_btn" style=""><i class="fa fa-check-circle" style="font-size:20px;"></i>&nbsp;{{message}}</a>
+                         <a *ngIf="message == '' " class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
+                          <p class="text-success" *ngIf="message != '' ">
+                             <i class="fa fa-check-circle" style="font-size:20px;"></i>&nbsp;{{message}}
+                          </p>
                      </div>
                   </div>
                   </div>
