@@ -36,7 +36,7 @@
 					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
 					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true"><a class="btn signin" routerLink="/login">Log in</a></li>
 					<li class="nav-item pr-2 pl-2">
-						<a class="btn signup" download href="assets/uploads/app-debug.apk" id="download-app">Download the App</a>
+						<a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
 					</li>
 				</ul>
 			</div>
@@ -60,10 +60,14 @@
 				      <div class="banner-data">
 							<h1 class="hdg wow fadeInUp" data-wow-duration="0.4s">WELCOME TO colive</h1>
 							<h3 class="hdg2 wow fadeInUp" data-wow-duration="0.6s" data-wow-delay="0.2s">THE NEXT GENERATION OF ADVANCED SOLUTIONS to</h3>
-							<div class="output wow fadeInUp" data-wow-duration="0.8s" data-wow-delay=".4s" id="output">
+						<!-- 	<div class="output wow fadeInUp" data-wow-duration="0.8s" data-wow-delay=".4s" id="output">
 								<h1 class="cursor"></h1>
 								<p></p>
-							</div>
+							</div> -->
+							
+							<h4 class="beside"> <span class="tw" #tw2> </span><span #tw3></span> </h4>
+
+							 <h1 class="tw" #tw></h1>
 							<div class="banner-btns wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
 								<button type="button" class="btn btn-orange">Tenant</button>
 								<button type="button" class="btn btn-orange">Sign in as host</button>
