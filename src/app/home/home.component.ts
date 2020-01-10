@@ -1,17 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
 import Typewriter from 't-writer.js';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+ animations: [
+    trigger('fade', [ 
+      transition('void => *', [
+        style({ opacity: 0 }), 
+        animate(2000, style({opacity: 1}))
+      ]) 
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
 
   subscribeForm: FormGroup;
-  session_key:boolean=false;
-
+  session_key:boolean = false;
+  @Input() currentState;
   @ViewChild('tw', null) typewriterElement;
   @ViewChild('tw2', null) typewriterElement2;
   @ViewChild('tw3', null) typewriterElement3;
@@ -74,8 +83,6 @@ export class HomeComponent implements OnInit {
       .changeTypeColor('white')
       .then(writer2.start.bind(writer2))
      }
-
-
   
   subscribe(value) {
 

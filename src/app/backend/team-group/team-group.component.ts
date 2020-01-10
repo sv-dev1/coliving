@@ -178,19 +178,18 @@ export class TeamGroupComponent implements OnInit {
     });
   }
 
-  copyMessage(inputElement) {
-    
+  copyMessage(inputElement) { 
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0)
-    this.toastr.successToastr('Referral Link copied successfully!', 'Success!');
+    this.toastr.successToastr('Referral link copied successfully!', 'Success!');
   }
 
   copyMessage2(inputElement) {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0)
-    this.toastr.successToastr('Group Link copied successfully!', 'Success!');
+    this.toastr.successToastr('Group code copied successfully!', 'Success!');
   }
 
   getTeam() {

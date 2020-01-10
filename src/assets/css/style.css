@@ -18,7 +18,7 @@ input , button {
 
 #menu-center {
     position: fixed;
-    right: -200px;
+    right: 10px;
     top: 0;
     bottom: 0;
     display: flex;

@@ -58,9 +58,14 @@
             <h4 class="modal-title">Add Property</h4>
             <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
          </div>
+        
          <form [formGroup]="addPropertyForm" (ngSubmit)="addProperty()" >   
          <!-- Modal body -->
          <div class="modal-body">
+            
+            <span style="color: red;" class="pull-right"> 
+               All Fields are mandatory.
+            </span>
             <div class="form-group">
                <label>Propetry Name:</label>
                <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
@@ -87,7 +92,7 @@
                </div>
             </div>
             <div class="form-group">
-               <label>Floor space(per/sq ft.):</label>
+               <label>Floor space(per/sq m.):</label>
                <input type="text" formControlName="floor_space" class="form-control" [ngClass]="{'is-invalid': submitted && f.floor_space.errors}" />
                <div *ngIf="submitted && f.floor_space.errors" class="invalid-feedback">
                   <span class="for-sub-name" *ngIf="f.floor_space.errors.required">Floor space field is required.</span>
@@ -200,6 +205,12 @@
                </div>
                <img [src]="url" height="200" *ngIf="url !=''"> <br/>
             </div>
+             <span style="color: red;" *ngIf="isValidationError==true">
+               *Form Validation Error.Please check the form and then submit again.
+            </span>
+         </div>
+         <div *ngIf="isValidationError =='true'" class="invalid-feedback">
+            Please check the form field again.
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
