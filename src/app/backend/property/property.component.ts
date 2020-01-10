@@ -46,6 +46,7 @@ export class PropertyComponent implements OnInit {
       validationError : string = '';
       isValidationError: boolean = false;
       
+      
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -138,7 +139,6 @@ export class PropertyComponent implements OnInit {
       this.submitted = true;
 	    if(this.addPropertyForm.invalid) {
 	    	this.isValidationError = true;
-	    	console.log('ddd',this.isValidationError);
 	        return;
 	    }else{
 	      const input_data = {  
