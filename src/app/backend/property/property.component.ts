@@ -43,6 +43,8 @@ export class PropertyComponent implements OnInit {
 	  tenant : boolean = false;
 	  landLord : boolean = false;
       propertyLength : boolean = false;
+      validationError : string = '';
+      isValidationError: boolean = false;
       
   constructor(
         private formBuilder:FormBuilder,
@@ -132,9 +134,11 @@ export class PropertyComponent implements OnInit {
     get tF() { return this.teamForm.controls; }
 
     addProperty() {
-    	
+    
       this.submitted = true;
 	    if(this.addPropertyForm.invalid) {
+	    	this.isValidationError = true;
+	    	console.log('ddd',this.isValidationError);
 	        return;
 	    }else{
 	      const input_data = {  
