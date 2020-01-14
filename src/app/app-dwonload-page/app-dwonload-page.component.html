@@ -172,7 +172,7 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <h3>Which of these answers describes you the best? Partying:<span class="validate-red">*</span></h3>
+                        <h3>Which of these answers describes you the best?<br> 1) Partying<span class="validate-red">*</span></h3>
                         <input type="radio" formControlName="partying" value="0" [ngClass]="{ 'is-invalid': submitted &&  f.partying.errors }">Yes&nbsp;&nbsp;
                         <input type="radio" formControlName="partying" value="1" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">No&nbsp;&nbsp;
                         <input type="radio" formControlName="partying" value="2" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">Sometimes&nbsp;&nbsp;
@@ -182,7 +182,7 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <h3>Which of these answers describes you the best? Drinking alcohol:<span class="validate-red">*</span></h3>
+                        <h3>2) Drinking alcohol<span class="validate-red">*</span></h3>
                         <input type="radio" formControlName="alcohol" value="0" [ngClass]="{ 'is-invalid': submitted && f.partying.errors }">Yes&nbsp;&nbsp;
                         <input type="radio" formControlName="alcohol" value="1">No&nbsp;&nbsp;
                         <input type="radio" formControlName="alcohol" value="2">Sometimes&nbsp;&nbsp;
@@ -192,7 +192,7 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <h3>Which of these answers describes you the best? Smoking:<span class="validate-red">*</span></h3>
+                        <h3>3) Smoking<span class="validate-red">*</span></h3>
                         <input type="radio" formControlName="smoking" value="0">Yes&nbsp;&nbsp;
                         <input type="radio" formControlName="smoking" value="1">No&nbsp;&nbsp;
                         <input type="radio" formControlName="smoking" value="2">Sometimes&nbsp;&nbsp;
@@ -283,7 +283,7 @@
                   <div class="create-account-btn">
                      <!-- <button type="submit" >Create Account Now</button> -->
                      <a class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
-                     <p *ngIf="isthankyouMessage =='true'">{{thankyouMessage}}</p>
+                     <p *ngIf="isthankyouMessage ==true">{{thankyouMessage}}</p>
                   </div>
                </div>
             </form>
