@@ -283,6 +283,7 @@
                   <div class="create-account-btn">
                      <!-- <button type="submit" >Create Account Now</button> -->
                      <a class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
+                     <p *ngIf="isthankyouMessage =='true'">{{thankyouMessage}}</p>
                   </div>
                </div>
             </form>
