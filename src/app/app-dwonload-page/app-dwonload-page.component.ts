@@ -78,7 +78,8 @@ export class AppDwonloadPageComponent implements OnInit {
     maxPriceValue : any;
     minPriceValue : any;
     url: any = '';
-
+    isthankyouMessage:boolean=false;
+    thankyouMessage: string = '';
 
 	constructor(
 		    private formBuilder:FormBuilder,
@@ -371,9 +372,8 @@ export class AppDwonloadPageComponent implements OnInit {
 		}
 	}
 	closeModal() {
-		setTimeout(() => {
-			this.openFileDownloadModal = false;
-		}, 3000);
+		this.isthankyouMessage = true;
+		this.thankyouMessage = 'Thank You for downloading the app.'
 	} 
 
 	

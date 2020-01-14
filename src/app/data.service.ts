@@ -335,6 +335,7 @@ export class DataService {
     		return Observable.throw(error);});
     	
     } 
+ 
 	changePassword(input_change){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }

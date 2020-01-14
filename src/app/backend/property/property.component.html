@@ -28,7 +28,8 @@
                               <p>Posted by:&nbsp;&nbsp;{{ property.userProfile.firstName}}&nbsp;{{ property.userProfile.lastName}}</p>
                            </div>
                               <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a> -->
-                              <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a>
+                              <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a> -->
+                              <a class="btn lft-b" href="javascript:void(0);" (click)="editPropertyModal(property)">Edit Property</a>
                               <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
                            <div class="clearfix"></div>
 
@@ -220,6 +221,191 @@
 </div>
 </div>   
 <!-- Model for Property  Info-->
+
+
+
+<!---------------- EDIT PROPERTY MODAL ------------>
+
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenEditPropertyModal ? 'block' : 'none'" *ngIf="isopenEditPropertyModal" >
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Edit Property</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeEditModal()">&times;</button>
+         </div>
+        
+         <form [formGroup]="updatePropertyForm" (ngSubmit)="updateProperty(updatePropertyForm.value)" >   
+         <!-- Modal body -->
+         <div class="modal-body">
+            
+            <span style="color: red;" class="pull-right"> 
+               All Fields are mandatory.
+            </span>
+            <div class="form-group">
+               <label>Property Name:</label>
+               <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && g.name.errors}" />
+               <div *ngIf="submitted && g.name.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.name.errors.required">Property name field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>City:</label>
+               <input ngx-google-places-autocomplete type="text" formControlName="city" class="form-control" [ngClass]="{'is-invalid': submitted && g.city.errors}" />
+               <div *ngIf="submitted && g.city.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.city.errors.required">City field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Property type:</label>
+               <select class="custom-select form-control" formControlName="property_type" id="property_type" [ngClass]="{ 'is-invalid': submitted && g.property_type.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="1">Flat</option>
+                  <option value="2">Room</option>
+               </select>
+               <div *ngIf="submitted && g.property_type.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.property_type.errors.required">Status field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Floor space(per/sq m.):</label>
+               <input type="text" formControlName="floor_space" class="form-control" [ngClass]="{'is-invalid': submitted && g.floor_space.errors}" />
+               <div *ngIf="submitted && g.floor_space.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.floor_space.errors.required">Floor space field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Balconies:</label>
+               <select class="custom-select form-control" formControlName="no_of_balconies" id="no_of_balconies" [ngClass]="{ 'is-invalid': submitted && g.no_of_balconies.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+               <div *ngIf="submitted && g.no_of_balconies.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.no_of_balconies.errors.required">Balconies field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Bedrooms:</label>
+               <select class="custom-select form-control" formControlName="no_of_bedrooms" id="no_of_bedrooms" [ngClass]="{ 'is-invalid': submitted && g.no_of_bedrooms.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+               <div *ngIf="submitted && g.no_of_bedrooms.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.no_of_bedrooms.errors.required">Bedrooms field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Bathrooms:</label>
+               <select class="custom-select form-control" formControlName="no_of_bathrooms" id="no_of_bathrooms" [ngClass]="{ 'is-invalid': submitted && g.no_of_bathrooms.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+               <div *ngIf="submitted && g.no_of_bathrooms.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.no_of_bathrooms.errors.required">Bathrooms field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Garages:</label>
+               <select class="custom-select form-control" formControlName="no_of_garages" id="no_of_garages" [ngClass]="{ 'is-invalid': submitted && g.no_of_garages.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+               <div *ngIf="submitted && g.no_of_garages.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.no_of_garages.errors.required">Garages field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Parking space:</label>
+               <select class="custom-select form-control" formControlName="no_of_parking_space" id="no_of_parking_space" [ngClass]="{ 'is-invalid': submitted && g.no_of_parking_space.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+               </select>
+               <div *ngIf="submitted && g.no_of_parking_space.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.no_of_parking_space.errors.required">Parking space field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Pets allowed:</label>
+               <select class="custom-select form-control" formControlName="pets_allowed" id="pets_allowed" [ngClass]="{ 'is-invalid': submitted && g.pets_allowed.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+               </select>
+               <div *ngIf="submitted && g.pets_allowed.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.pets_allowed.errors.required">Pets allowed field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Status</label>
+               <select class="custom-select form-control" formControlName="status" id="status" [ngClass]="{ 'is-invalid': submitted && g.status.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="Available">Available</option>
+                  <option value="Not Available">Not Available</option>
+               </select>
+               <div *ngIf="submitted && g.status.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.status.errors.required">Status field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Property description:</label>
+               <textarea id="property_desc" class="form-control"rows="5" cols="5" formControlName="property_desc" [ngClass]="{ 'is-invalid': submitted && g.property_desc.errors }"></textarea>
+               <div *ngIf="submitted && g.property_desc.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.property_desc.errors.required">Property description field is required.</span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label>Property Image:</label>
+               <input type="file" class="form-control" formControlName="image" [ngClass]="{ 'is-invalid': submitted && g.image.errors }"  (change)="onSelectFile($event)" accept="image/*" >
+               <div *ngIf="submitted && g.image.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.image.errors.required">Property image is required.</span>
+               </div>
+               <img [src]="url" height="200" *ngIf="url !=''"> <br/>
+
+               <img *ngIf="boolpropertyImage==true"  [src]="image_url" height="200" width="200" onError="this.src='assets/images/user.png';"  alt="user" > 
+            </div>
+             <span style="color: red;" *ngIf="isValidationError==true">
+               *Form Validation Error.Please check the form and then submit again.
+            </span>
+         </div>
+       
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeEditModal()">Cancel</button>
+            <button type="submit" class="btn btn-orange-sm">Yes, Edit Property</button>
+         </div>
+         </form> 
+      </div>
+   </div>
+</div>
+</div>
+
+
+<!---------------   END ----------------------------->
+
+
+
+
 <div class="container">
    <!-- The Modal -->
    <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="ispropertyInfo ? 'block' : 'none'" *ngIf="ispropertyInfo">

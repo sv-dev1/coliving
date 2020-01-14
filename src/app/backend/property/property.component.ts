@@ -25,6 +25,7 @@ export class PropertyComponent implements OnInit {
 	  errorsArr : string = '';
 	  isopenAddPropertyModal : boolean = false;
 	  propertyForm : FormGroup;
+	  updatePropertyForm : FormGroup;
 	  submitted : boolean=false;
 	  url : any  = []; 
 	  fileData : any;
@@ -45,8 +46,11 @@ export class PropertyComponent implements OnInit {
       propertyLength : boolean = false;
       validationError : string = '';
       isValidationError: boolean = false;
-      
-      
+      propertyEdit: any;
+      isopenEditPropertyModal: boolean = false;
+      boolpropertyImage : boolean = false;
+      image_url : any;
+     
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -69,6 +73,23 @@ export class PropertyComponent implements OnInit {
              property_desc: ['', Validators.required],
              image: ['', Validators.required],	 
 		});
+
+		 this.updatePropertyForm = this.formBuilder.group({
+			 name: ['', Validators.required],
+			 city: ['', Validators.required],
+			 property_type: ['', Validators.required],
+             floor_space: ['', Validators.required],
+             no_of_balconies: ['', Validators.required],
+             no_of_bedrooms: ['', Validators.required],
+             no_of_bathrooms: ['', Validators.required],
+             no_of_garages: ['', Validators.required],
+             no_of_parking_space: ['', Validators.required],
+             pets_allowed: ['', Validators.required],
+             status: ['', Validators.required],
+             property_desc: ['', Validators.required],
+             image: ['', Validators.required],	 
+		});
+
 		this.image_base_url = environment.image_base_url;
 		this.base_url = environment.base_url;
 		this.teamForm = this.formBuilder.group({
@@ -129,6 +150,7 @@ export class PropertyComponent implements OnInit {
 		reader.readAsDataURL(this.fileData); 
 		reader.onload = (_event) => { 
 		   this.url = reader.result; 
+		   this.boolpropertyImage = false;
 		}
 	}
     get f() { return this.addPropertyForm.controls; }
@@ -183,7 +205,7 @@ export class PropertyComponent implements OnInit {
 	                this.addPropertyForm.reset(); 
 	                this.url = '';
 	                this.getAllProperties();
-
+                    
 	              },error=>{ 
 	                console.log('error', error);
 	            });
@@ -234,7 +256,95 @@ export class PropertyComponent implements OnInit {
 	    }
 	   	this.openTeam=false;
 	   	this.teamForm.reset();
+    }
+
+    editPropertyModal(property){
+    	//console.log('property', property);
+    	this.propertyEdit = property.propertyId;
+    	this.isopenEditPropertyModal = true;
+    	this.boolpropertyImage  = true;
+    	this.image_url = this.image_base_url+''+property.propertyId;
+    	this.updatePropertyForm.patchValue({
+    	    	name: property.name,
+    	    	city: property.city,
+    	    	property_type: property.property_type,
+    	    	floor_space: property.floor_space,
+                no_of_balconies: property.no_of_bathrooms,
+                no_of_bedrooms: property.no_of_bedrooms,
+                no_of_bathrooms: property.no_of_bathrooms,
+                no_of_garages: property.no_of_garages,
+                no_of_parking_space: property.no_of_parking_space,
+                pets_allowed: property.pets_allowed,
+                status: property.status,
+                property_desc: property.property_desc,
+                image:[''],  
+    	});
+    }
+
+    closeEditModal() {
+    	this.isopenEditPropertyModal = false;
+    }
+
+    get g() { return this.updatePropertyForm.controls; }
+
+    updateProperty(formValue) {
+    	
+    	this.submitted = true;
+	    if(this.updatePropertyForm.invalid) {
+	        return;
+	    }else{
+	      const input_data = {  
+		      	"property_id": this.propertyEdit,
+		        "name": formValue.name, 
+		        "property_desc": formValue.property_desc,   
+		        "city": formValue.city,
+		        "property_type": formValue.property_type,
+		        "floor_space": formValue.floor_space,
+		        "no_of_balconies": formValue.no_of_balconies,
+		        "no_of_bedrooms": formValue.no_of_bedrooms,
+		        "no_of_kitchens": formValue.no_of_kitchens,
+		        "no_of_bathrooms": formValue.no_of_bathrooms,
+		        "no_of_garages": formValue.no_of_garages,
+		        "no_of_parking_space": formValue.no_of_parking_space,
+		        "pets_allowed": formValue.pets_allowed,
+		        "status": formValue.status
+	      }
+	      //console.log('input_data',input_data);
+
+	        const formData = new FormData();
+	            formData.append('name', input_data.name);
+	            formData.append('city', input_data.city);
+	            formData.append('floor_space', input_data.floor_space);
+	            formData.append('files', this.fileData);		  
+	            formData.append('no_of_balconies', input_data.no_of_balconies);
+	            formData.append('no_of_bathrooms', input_data.no_of_bathrooms);
+                formData.append('no_of_bedrooms', input_data.no_of_bedrooms);
+	            formData.append('no_of_garages', input_data.no_of_garages);
+                formData.append('no_of_parking_space', input_data.no_of_parking_space);
+	            formData.append('pets_allowed', input_data.pets_allowed);
+	            formData.append('property_desc', input_data.property_desc);
+                formData.append('property_type', input_data.property_type);
+	            formData.append('status', input_data.status);
+	            let token; 
+	            if(sessionStorage.getItem("auth_token")!=undefined){
+	            token = sessionStorage.getItem("auth_token"); 
+	            }
+	            const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+	            this.http.post(this.base_url+'property/edit/'+input_data.property_id, formData, httpOptions).subscribe((response:any) => {
+	                
+	                this.toastr.successToastr(response.message, 'Success!');
+	                this.isopenEditPropertyModal = false;
+	                this.submitted = false;
+	                this.updatePropertyForm.reset(); 
+	                this.url = '';
+	                //this.getAllProperties();
+                    location.reload(true);
+	              },error=>{ 
+	                console.log('error', error);
+	        });
+	    }
     }	
 }
+
 	
     
