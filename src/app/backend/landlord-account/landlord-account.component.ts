@@ -81,6 +81,7 @@ export class LandlordAccountComponent implements OnInit {
     boolUrl : boolean = false;
     boolUserImage : boolean = false;
     fileDocument: any = []; 
+    fileDataName: any;
 
 	constructor(
 			private formBuilder:FormBuilder,
@@ -237,8 +238,9 @@ export class LandlordAccountComponent implements OnInit {
 	}
 	
 	onSelectFile(event) {
-		this.fileData = event.target.files[0];
-		this.preview();
+		 this.fileData = event.target.files[0];
+		 this.fileData.photo = '1';
+		 this.preview();
 	}
 
 	onSelectdocument(event){
@@ -330,11 +332,12 @@ export class LandlordAccountComponent implements OnInit {
 			return;
         
 		} else {
-            // console.log('file data', this.fileData);
+           console.log('this.fileData', this.fileData);
 			const formData = new FormData();
 			
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
+			formData.append('username', sessionStorage.getItem("user_name"));
 			formData.append('email', formValue.email);		   
 			formData.append('photo', this.fileData);
 			formData.append('phoneNo', formValue.phoneNo);

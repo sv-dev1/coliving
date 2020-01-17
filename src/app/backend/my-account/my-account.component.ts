@@ -312,8 +312,10 @@ export class MyAccountComponent implements OnInit {
 	}
 	
 	onSelectFile(event) {
-		this.fileData = event.target.files[0];
-		this.preview();
+		
+		 let file = event.target.files[0];
+         this.fileData = file.name;
+		 this.preview();
 	}
 	preview() {
 		var mimeType = this.fileData.type;
