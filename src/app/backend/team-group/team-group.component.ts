@@ -144,6 +144,7 @@ export class TeamGroupComponent implements OnInit {
     this.logged_in_username = sessionStorage.getItem("user_name");
     this.getUserData();
     this.scrollToBottom();
+     document.body.scrollTop = 0;
   }
      ngAfterViewChecked() {        
       this.scrollToBottom();       

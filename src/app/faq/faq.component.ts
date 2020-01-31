@@ -9,10 +9,12 @@ export class FaqComponent implements OnInit {
  
  classList: any;
  nextElementSibling: any;
+ currentYear: any ;
   constructor() { }
 
   ngOnInit() {
-     
+     var d = new Date();
+     this.currentYear = d.getFullYear();
   	 const items = document.querySelectorAll(".accordion a");
      document.body.scrollTop = 0;
   }

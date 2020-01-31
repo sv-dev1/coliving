@@ -26,13 +26,10 @@ export class AppDwonloadPageComponent implements OnInit {
 	referralCode : any;
 	downloadUrl : string = '';
 	openFileDownloadModal: boolean = false;
-
     image_base_url : any;
 	image_url : any;
-	
 	base_url : any;
 	fileData : any;
-	
 	userDataArr : any;
 	email : any;
 	messageDigit : string = '';
@@ -43,26 +40,25 @@ export class AppDwonloadPageComponent implements OnInit {
 	teamEmpty : boolean=false;
 	userEmpty : boolean=false;
 	allCountriesArray : any = [];
-	allCountries:any=[];
-	allLanguagesArray:any=[];
-	allLanguages:any=[];
-	countrydropdownList:any = [];
-	langdropdownList:any  = [];
+	allCountries : any = [];
+	allLanguagesArray :  any = [];
+	allLanguages : any = [];
+	countrydropdownList : any = [];
+	langdropdownList : any  = [];
 	dropdownSettingsCountry  =  {}
 	dropdownSettingsLanguage =  {}
-	nationalityArr: any = [];
-	languageArr: any=[];
-	atmostTwoValNat:boolean=false;
-	atmostTwoValLang:boolean=false;
-	countryEmpty:boolean=false;
-	languageEmpty:boolean=false;
-	nationalityEmpty:boolean=false;
-	stayDateEmpty:boolean=false;
-	stay_date: any;
-	weekend_time:any;
-
-	Dtime:any;
-	length:boolean=false;
+	nationalityArr : any = [];
+	languageArr : any=[];
+	atmostTwoValNat : boolean = false;
+	atmostTwoValLang : boolean = false;
+	countryEmpty : boolean = false;
+	languageEmpty : boolean = false;
+	nationalityEmpty : boolean = false;
+	stayDateEmpty : boolean = false;
+	stay_date : any;
+	weekend_time : any;
+	Dtime : any;
+	length : boolean = false;
 	ip_address : string = "";
 	current_country : string = "";
 	nationalitySelectedItems = [];
@@ -77,9 +73,11 @@ export class AppDwonloadPageComponent implements OnInit {
     phoneNumber : any;
     maxPriceValue : any;
     minPriceValue : any;
-    url: any = '';
-    isthankyouMessage:boolean=false;
-    thankyouMessage: string = '';
+    url : any = '';
+    isthankyouMessage : boolean = false;
+    thankyouMessage : string = '';
+    removeValidation : boolean = false;
+    imageEmpty : boolean = false;
 
 	constructor(
 		    private formBuilder:FormBuilder,
@@ -104,7 +102,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			occuptation_tt: ['', Validators.required],
 			maximunPrice: ['', Validators.required],
 			minimumPrice: ['', Validators.required],
-			image: ['', Validators.required],
+			image: [''],
 			stay_date: ['', Validators.required],
 			biography: ['', Validators.required],
 			interestes: ['', Validators.required],
@@ -116,6 +114,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			apartment_party: ['', Validators.required],
 			music: ['', Validators.required],
 			email: ['', Validators.required],
+			social_account: [''],
 			ref_code: ['', Validators.required],
 			agree: ['false', Validators.requiredTrue],
 		});
@@ -209,10 +208,17 @@ export class AppDwonloadPageComponent implements OnInit {
 			this.errorsArr = error.error;
 		})
 	}
-
+  
 	onSelectFile(event) {
+       // console.log(event);
 		this.fileData = event.target.files[0];
+		if(this.fileData != '' || this.fileData != undefined || this.fileData != null) {
+			this.imageEmpty = false;
+		}
 		this.preview();
+		this.questionareform.patchValue({
+			'image' :  this.fileData
+		});
 	}
 
 	preview() {
@@ -248,6 +254,7 @@ export class AppDwonloadPageComponent implements OnInit {
 
     onLanguageSelect(item:any){
 
+         this.languageEmpty = false;
     	 this.languageArrMap.push(item);
          this.languageArr.push(item['id']);
 	     if(this.languageArr.length == 2){
@@ -256,12 +263,18 @@ export class AppDwonloadPageComponent implements OnInit {
     }
 
     OnLanguageDeSelect(item: any) {
+
     	 
     	 this.languageArrMap.splice(this.languageArrMap.indexOf(item),1);
          this.languageArr.splice(this.languageArr.indexOf(item['id']),1);
-     }
+         
+         if(this.languageArr.length == 0) {
+         	this.languageEmpty = true;
+         }
+     } 
 
     onNationalitySelect(item:any){
+    	this.nationalityEmpty = false;
 	    this.nationalityArrMap.push(item);
 	    this.nationalityArr.push(item['id']);
 	      if(this.nationalityArr.length == 2){
@@ -273,18 +286,25 @@ export class AppDwonloadPageComponent implements OnInit {
     	
     	this.nationalityArrMap.splice(this.nationalityArrMap.indexOf(item),1);
         this.nationalityArr.splice(this.nationalityArr.indexOf(item['id']),1);
+         if(this.nationalityArr.length == 0) {
+         	this.nationalityEmpty = true;
+         }
     }
 
 	get f() { return this.questionareform.controls; }
 	
 	questionareSubmit(formValue){
        
-       console.log('formvalue----', this.questionareform.controls.phoneNo.status);
+       console.log('formvalue----', this.questionareform.controls.status);
 		this.submitted = true;
 	    
 		if(formValue.languages  == ""){
 			this.languageEmpty = true;
 		}
+		if(formValue.image  == ""){
+			this.imageEmpty = true;
+		}
+		
 		if(formValue.nationality == ""){
 			this.nationalityEmpty = true;
 		}
@@ -317,7 +337,8 @@ export class AppDwonloadPageComponent implements OnInit {
 			return;
 		} else{
 		    
-		    console.log('step second-------',formValue);
+		   /* console.log('step second-------',formValue);
+		    return;*/
 		    const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
 			formData.append('favourite_location', formValue.favouriteLocation);
@@ -337,6 +358,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			formData.append('stay_date', formValue.stay_date);
 			formData.append('wakeup_time', this.weekend_time); 
 			formData.append('email', formValue.email);
+			formData.append('social_account', formValue.social_account);
 			formData.append('alcohol', formValue.alcohol);
 			formData.append('partying', formValue.partying);			
 		    formData.append('smoking', formValue.smoking);
@@ -373,7 +395,8 @@ export class AppDwonloadPageComponent implements OnInit {
 	}
 	closeModal() {
 		this.isthankyouMessage = true;
-		this.thankyouMessage = 'Thank You for downloading the app.'
+	    this.thankyouMessage = 'Thank you for downloading the app.';
+		
 	} 
 
 	

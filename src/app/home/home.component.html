@@ -4,7 +4,7 @@
 				 <img src="assets/images/Logo-colive.png">
 			</a>
 
-			<div id="menu-center">
+<!-- 			<div id="menu-center">
 				<ul class="navbar-nav">
 				  <li class="nav-item for-dot"><a class="nav-link mt-2" href="#about-us">What is colive?</a></li>
 				  <li class="nav-item for-dot"><a class="nav-link mt-2" href="#property">Properties</a></li>
@@ -12,11 +12,30 @@
 				  <li class="nav-item for-dot"><a class="nav-link mt-2" href="#team">Make a team</a></li>
 				  <li class="nav-item for-dot"><a class="nav-link mt-2" href="#testimonial">Testimonial</a></li>
 
-				  <!-- <li class="nav-item pr-2 pl-2"><a class="btn signin" href="login.html">Log in</a></li>
-				  <li class="nav-item pr-2 pl-2"><a class="btn signup" href="sign-up.html">Sign Up</a></li> -->
+				  <li class="nav-item pr-2 pl-2"><a class="btn signin" href="login.html">Log in</a></li>
+				  <li class="nav-item pr-2 pl-2"><a class="btn signup" href="sign-up.html">Sign Up</a></li>
 				</ul>
-			</div>
+			</div> -->
+
 			<div class="top-nav">
+				
+				
+				<ul class="navbar-nav">
+					<li class="nav-item pr-2 pl-2">
+						<a class="btn signin" routerLink="/faq" id="">FAQ</a>
+					</li>
+					<li class="nav-item pr-2 pl-2">
+						<a class="btn signin" href="#contact-us" id="">Contact us</a>
+					</li>
+					<li class="nav-item pr-2 pl-2">
+						<a class="btn signin" routerLink="/privacy-policy">Privacy Policies</a>
+					</li>
+					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
+					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true"><a class="btn signin" routerLink="/login">Log in</a></li>
+					<li class="nav-item pr-2 pl-2">
+						<a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
+					</li>
+				</ul>
 				<div class="country-flag">
 					<div class="dropdown">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -31,14 +50,6 @@
 						</div>
 					</div>
 				</div>
-				
-				<ul class="navbar-nav">
-					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
-					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true"><a class="btn signin" routerLink="/login">Log in</a></li>
-					<li class="nav-item pr-2 pl-2">
-						<a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
-					</li>
-				</ul>
 			</div>
 		</nav>
 	  </div>
@@ -120,7 +131,7 @@
 					<div class="col-12">
 						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
 							<h1 class="hdg-main">About Us</h1>
-							<p class="sb-hdg">Lorem Ipsum is simply dummy text of the printing</p>
+							<p class="sb-hdg">ColivingApp: to make your life in a community as easy as possible. Are you facing problems with finding decent and proper flatmates or managing finances and everyday house chores in your apartment? All of the above mentioned are important points we‘d like to cover. We are providing you all sorts of solutions with our ColivingApp. Download it for free and enjoy an easier life in your community. ColivingApp is coming soon.</p>
 						</div>
 					</div>
 				</div>
@@ -129,8 +140,8 @@
 				    <div class="col-12 col-sm-6 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
 						<div class="parts-inner">
 							<div class="side1">
-								<p class="des1">Make life for happy living</p>
-								<p class="des2">Ad non vivamus Elementum eget fringilla venenatis quisque, maecenas adipiscing aliquet justo. Libero. Gravida. Sapien, dolor nostra sem. Rutrum conubia inceptos egestas dolor class.</p>
+								<!-- <p class="des1">Make life for happy living</p> -->
+								<p class="des2">Are you moving to a new city to participate in an exchange, to do an internship or simply just to start a new work? Are you feeling anxious and insecure about living abroad, or being far away from home and your habitual environment and finding your place in a new and international Community?</p>
 							</div>
 							
 							<div class="side2">
@@ -189,15 +200,106 @@
 							</div>
 						</div>
 					</div>
-					
+												
 					<div class="col-12 col-sm-6 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-						<p class="des-right">Lorem Ipsum is simply dummy is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy is simply dummy text of the printing and typesetting industry.</p>
+						<p class="des-right">This is exactly our main goal from ColivingApp: to take those insecurities and fears away and make your life in a new community as easy as possible. Are you facing problems with finding decent and proper flatmates or managing finances and everyday house chores in your apartment? All of the above mentioned are important points we‘d like to cover. We are providing you all sorts of solutions with our ColivingApp. Download it for free and enjoy an easier life in your community.</p>
 					</div>
 					
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+							<h1 class="cloving-heading">What is coliving</h1>
+							<p class="text-cloving">Coliving is a modern form of housing where residents do not only share their living space but also a set of interests, values, and/or intentions. It's a new take on an old idea, elaborated by a millennial generation that values things like openness and collaboration, social networking, and the sharing economy. Meet people from all around the world and let yourself go with the flow.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		
+
+				<div class="full-banner-iphone">
+			<section class="iphoen-text-banner-main">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="helping-finednew-box">
+								<h3>Helping to findnew flatmates</h3>
+								<ul>
+									<li><p>Changing the city and therefore changing your place of residence and environment is often one of the biggest challenges and reason for doubts and insecurities. In fact, this might even be the biggest fear when you’re moving to a new city, not to mention if you’re even going abroad. </p></li>
+									<li><p>Get to know your future flatmates using the app, even before moving into the city. Details about your preferential location to live, the price range you are willing to pay, personal habits or interests, the languages being spoken, and many more details will help you to find the perfect place to live. Personalise your account by adding your individual hobbies and habits and get your new flatmates to know you before living together. Because coliving is about people.</p></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="only-iphon-image">
+								<img src="assets/images/123.jpeg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="iphoen-text-banner-main">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="helping-finednew-box">
+								<h3>Splitting the bills</h3>
+								<ul>
+									<li><p>We are aware of the potential problems that can occur in terms of keeping the financial expenses between you and your flatmates under control. For instance, someone buys detergents for 5EUR once and trying to remember mind whose turn it is to buy detergents the next time, or generally splitting the costs between you and your flatmates immediately and expecting everyone to pay the exact amount of 1.66EUR?</p></li>
+									<li><p>How about an app, that is doing all the work for you. You can easily just upload an amount of money, and the app will divide any expenses that have been made and also summarized all sorts of expenses within the apartment’s finances? No more problems with keeping track and writing down every little detail or trying to remind oblivious flatmates.</p></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="only-iphon-image">
+								<img src="assets/images/234.jpeg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="iphoen-text-banner-main">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="helping-finednew-box">
+								<h3>Communication</h3>
+								<ul>
+									<li><p>We know that communication is the key, especially in shared flats. Failed communication through several instant messengers such as such Whatsapp or Messenger or even email can be extremely annoying and nerve-racking.</p></li>
+									<li><p>How about a solution that is enabling you to communicate with your landlord and your flatmates directly?</p></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="only-iphon-image">
+								<img src="assets/images/screen5_1.png">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="iphoen-text-banner-main">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="helping-finednew-box">
+								<h3>House chores management </h3>
+								<ul>
+									<li><p>Distribution of everyday chores in a household, such as cleaning the living room, dusting or vacuuming, when living with other people, is an exemplary and recurring problem in shared flats. </p></li>
+									<li><p>Set up a house chores list with your flatmates with notifications coming directly to your phone.</p></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+							<div class="only-iphon-image">
+								<img src="assets/images/345.jpeg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 		
 	  
 	  	<div class="buy-sell" id="property">
@@ -205,7 +307,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-							<h1 class="hdg-main">properties</h1>
+							<h1 class="hdg-main">Landlords - Properties Management</h1>
 							<p class="sb-hdg">Owners are waiting for you</p>
 						</div>
 					</div>
@@ -215,7 +317,7 @@
 				    <div class="col-12 col-sm-6 parts wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
 						<a href="" class="parts-inner">
 							<div class="top-box">
-								<img class="img-fluid" src="assets/images/buy2-property.jpeg" />
+								<img class="img-fluid" src="assets/images/screen1.png" />
 							</div>
 							<div class="over-box">
 								<i class="fas fa-home"></i>
@@ -227,7 +329,7 @@
 					<div class="col-12 col-sm-6 parts wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 						<a href="" class="parts-inner">
 							<div class="top-box">
-								<img class="img-fluid" src="assets/images/buy-property.jpeg" />
+								<img class="img-fluid" src="assets/images/screen2.png" />
 							</div>
 							<div class="over-box">
 								<i class="fas fa-home"></i>
@@ -240,7 +342,7 @@
 			</div>
 		</div>
 		 
-		 <div class="coliving-work-section">
+<!-- 		 <div class="coliving-work-section">
 			<div class="coliving-inner">
 				<div class="container">
 				   <div class="row">
@@ -334,7 +436,7 @@
 				   </div>
 				</div>
 			</div>
-		 </div>
+		 </div> -->
 		 
 		 
 		<div class="top-locations" id="locations">
@@ -548,7 +650,7 @@
 			</div>
 		</div>
 		
-		<div class="start-business">
+		<div class="start-business" id="contact-us">
 			<div class="container">
 				<div class="row">
 					<div class="col-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
@@ -559,7 +661,7 @@
 			</div>
 		</div>
 		
-		<div class="subscribe">
+	<!-- 	<div class="subscribe">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
@@ -582,135 +684,80 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		
-		<footer class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 col-md-3 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-						<div class="parts-inner">
-							<h1 class="hdg-small">About Colive</h1>
-							<div class="footer-detail">
-								<p>
-								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
-								</p>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6 col-md-3 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-						<div class="parts-inner">
-							<h1 class="hdg-small">Support</h1>
-							<div class="footer-detail">
-								<ul class="footer-list">
-									<li><a href="javascript:void(0)">About</a></li>
-									<li><a routerLink="/contact-us">Contact</a></li>
-									<li><a href="javascript:void(0)">Event</a></li>
-									<li><a href="javascript:void(0)">Investments</a></li>
-									<li><a routerLink="/faq">FAQ</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6 col-md-3 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-						<div class="parts-inner">
-							<h1 class="hdg-small">Quick Links</h1>
-							<div class="footer-detail">
-								<ul class="footer-list">
-									<li><a href="javascript:void(0)">What is colive?</a></li>
-									<li><a routerLink="/contact-us">Contact</a></li>
-									<li><a href="javascript:void(0)">Event</a></li>
-									<li><a href="javascript:void(0)">Investments</a></li>
-									<li><a routerLink="/faq">FAQ</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-sm-6 col-md-3 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-						<div class="parts-inner">
-							<h1 class="hdg-small">Contact us</h1>
-							<div class="footer-detail">
-								<p>Macrew Street West,<br /> National park,<br /> India <br /> +1 246-345-0695</p>
-							</div>
-						</div>
-					</div>
-					
-					
-				</div>
-			</div>
-		</footer>
+<footer class="footer">
+    <div class="container">
+        <div class="uper-footer">
+            <div class="row">
+                <div class="col-md-4 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <div class="parts-inner">
+                        <h1 class="hdg-small">About Colive</h1>
+                        <div class="footer-detail first-details">
+                            <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <div class="parts-inner">
+                        <h1 class="hdg-small">Support</h1>
+                        <div class="footer-detail">
+                            <ul class="footer-list">
+                               <!--  <li><a href="javascript:void(0)">About</a></li> -->
+                                <li><a href="#contact-us">Contact</a></li>
+                                <!-- <li><a href="javascript:void(0)">Event</a></li>
+                                <li><a href="javascript:void(0)">Investments</a></li> -->
+                                <li><a routerLink="/faq">FAQ</a></li>
+                                <li><a routerLink="/privacy-policy">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- <div class="col-sm-6 col-md-3 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <div class="parts-inner">
+                        <h1 class="hdg-small">Quick Links</h1>
+                        <div class="footer-detail">
+                            <ul class="footer-list">
+                                <li><a href="javascript:void(0)">What is colive?</a></li>
+                                <li><a routerLink="/contact-us">Contact</a></li>
+                                <li><a href="javascript:void(0)">Event</a></li>
+                                <li><a href="javascript:void(0)">Investments</a></li>
+                                <li><a routerLink="/faq">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> -->
+                
+                <div class="col-md-4 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+                    <div class="parts-inner">
+                        <h1 class="hdg-small">Contact us</h1>
+                        <div class="footer-detail">
+                            <p>Macrew Street West,<br /> National park,<br /> India <br /> +1 246-345-0695</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
 		
 		<section class="bottom-footer">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
-						<p>Copyright 2019 . All Rights Reserved</p>					
+						<p>Copyright {{currentYear}} . All Rights Reserved</p>	
 					</div>
 				</div>
 			</div>
 		</section>
 	
-	<div id="download-app-box">
-		<div class="content">
-			<div class="top-1">
-				<h1 class="hdg">Get started with Coliving in seconds</h1>
-				<p class="des">We'll send you a message with a link to download the app.</p>
-			</div>
-			<div class="top-2">
-				<div class="top-2-inner">
-					<div class="top-2-inner2">
-						<div class="left-side">
-							<div class="dropdown">
-								<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-									+91
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">
-										<div class="flag"></div>
-										<div class="name">United Kingdom</div>
-										<div class="code">+44</div>
-									</a>
-									<a class="dropdown-item" href="#">
-										<div class="flag"></div>
-										<div class="name">United Kingdom</div>
-										<div class="code">+44</div>
-									</a>
-									<a class="dropdown-item" href="#">
-										<div class="flag"></div>
-										<div class="name">United Kingdom</div>
-										<div class="code">+44</div>
-									</a>
-									<a class="dropdown-item" href="#">
-										<div class="flag"></div>
-										<div class="name">United Kingdom</div>
-										<div class="code">+44</div>
-									</a>
-									<a class="dropdown-item" href="#">
-										<div class="flag"></div>
-										<div class="name">United Kingdom</div>
-										<div class="code">+44</div>
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="right-side">
-							<input type="email" class="form-control" placeholder="Phone Number">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="top-3">
-				<button type="button" class="btn btn-orange">Continue</button>
-			</div>
-		</div>
-		
-		<div class="icon-close">
-			<i class="far fa-times-circle"></i>
-		</div>
-		
-	</div>
+	
 	
    
    

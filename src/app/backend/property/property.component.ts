@@ -51,7 +51,8 @@ export class PropertyComponent implements OnInit {
       boolpropertyImage : boolean = false;
       image_url : any;
       postedBy:  string = '';
-     
+  
+
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -123,6 +124,7 @@ export class PropertyComponent implements OnInit {
 			if(this.allProperties.length  > 9 ) {
                   this.isArrayLength  = true;
 		    }
+		   
 		    this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -339,10 +341,8 @@ export class PropertyComponent implements OnInit {
 	                this.submitted = false;
 	                this.updatePropertyForm.reset(); 
 	                this.url = '';
-	               // this.getAllProperties();
-	                setTimeout(() => {
-					   location.reload(true);
-					  }, 500);
+	                this.getAllProperties();
+	                
                     
 	              },error=>{ 
 	                console.log('error', error);

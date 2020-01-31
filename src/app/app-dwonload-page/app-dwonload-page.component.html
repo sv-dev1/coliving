@@ -28,8 +28,8 @@
                      </div>
                    
                      <div class="form-group">
-                        <label for="team">Favourite location<span class="validate-red">*</span></label>
-                        <input type="text" class="form-control" placeholder="Favourite Location" formControlName="favouriteLocation" [ngClass]="{ 'is-invalid': submitted && f.favouriteLocation.errors }" >
+                        <label for="team">City/district to which you want to move<span class="validate-red">*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter City/district" formControlName="favouriteLocation" [ngClass]="{ 'is-invalid': submitted && f.favouriteLocation.errors }" >
                         <div *ngIf="submitted && f.favouriteLocation.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.favouriteLocation.errors.required">Favourite location is required.</span>
                         </div>
@@ -107,8 +107,8 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <label for="team">Day of moving in/out<span class="validate-red">*</span></label>
-                        <input type="text" placeholder="Day of moving in/out"
+                        <label for="team">Day of moving in<span class="validate-red">*</span></label>
+                        <input type="text" placeholder="Day of moving in"
                         class="form-control"
                         #dp="bsDatepicker"
                         bsDatepicker formControlName="outing_day"  [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [minDate]="today">
@@ -167,8 +167,8 @@
                         <label for="bill">Upload image<span class="validate-red">*</span></label>
                         <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
                         <img [src]="url" height="200" *ngIf="url !=''">
-                        <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                           <span class="for-sub-name" *ngIf="f.image.errors.required">Image is required.</span>
+         
+                         <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
                         </div>
                      </div>
                      <div class="form-group">
@@ -233,10 +233,17 @@
                            <div *ngIf="f.email.errors.required">Please enter an valid email address.</div>
                         </div>
                      </div>
+
+                      <div class="form-group">
+                        <label>Social account address</label>
+                        <input type="text" class="form-control" placeholder="Facebook/Instsagram etc.." formControlName="social_account" />
+                       
+                     </div>
+
                         <div class="form-group app-download-link">
                            <div class="form-check">
                               <label class="form-check-label agree">
-                                 <input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> By using our site, you acknowledge that you have read and understand our <a class="" href="https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066">Privacy Policy, Terms & condtions, GDPR</a>
+                                 <input class="form-check-input" type="checkbox" formControlName="agree" [ngClass]="{ 'is-invalid': submitted && f.agree.errors }" required [checked]="false"> By using our site, you acknowledge that you have read and understand our <a class="" href="https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066">Privacy Policy, Terms & conditions, GDPR</a>
                                  <div *ngIf="submitted && f.agree.errors" class="invalid-feedback">
                                     <span class="for-sub-name app-download-link1" id="cust" *ngIf="submitted && f.agree.errors.required || f.agree == undefined" class="for-sub-name"> Please check the Privacy Policy, Terms & condtions, GDPR.</span>
                                  </div>
@@ -282,8 +289,10 @@
                   </div>
                   <div class="create-account-btn">
                      <!-- <button type="submit" >Create Account Now</button> -->
-                     <a class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
-                     <p *ngIf="isthankyouMessage ==true">{{thankyouMessage}}</p>
+                     <a *ngIf="isthankyouMessage == false" class="btn btn-lg src_btn" style=" "href="assets/uploads/app-debug.apk" download (click)="closeModal()">Download App</a>
+                      <p class="text-success" *ngIf="isthankyouMessage == true">
+                             <i class="fa fa-check-circle" style="font-size:20px;"></i>&nbsp;{{thankyouMessage}}
+                     </p>
                   </div>
                </div>
             </form>
