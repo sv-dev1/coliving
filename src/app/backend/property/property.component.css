@@ -68,8 +68,10 @@ button.pull-right.btn.btn-orange-sm {
 img.img-responsive.property-image {
     width: 100%;
     height: auto;
-    max-height: 165px;
+     border: 1px solid #f1e7e4;
+    padding: 19px;
 }
+
 .cus-tital {
     border: 1px solid #f1e7e4;
     padding: 15px;
@@ -191,4 +193,7 @@ button.pull-right.btn.btn-orange-sm {
     border-radius: 0;
     margin-bottom: 15px;
     font-size: 13px;
+}
+img.img-responsive.property-image.new-property-image{
+  max-height: auto !important;
 }

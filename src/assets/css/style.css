@@ -1041,12 +1041,13 @@ ul.for-login-tabs li a:hover{
     background-position: right 25px top;
 }
 
-.about-us .parts-left {
+/*.about-us .parts-left {
     padding-right: 50px;
-}
+}*/
 
 .about-us .parts-inner .side1{
-	padding-right:40px;
+	/*padding-right:40px;*/
+    z-index: 0;
 }
 
 .about-us .parts-inner .side1 .des1 {
@@ -1079,6 +1080,7 @@ ul.for-login-tabs li a:hover{
     margin-bottom: 40px;
     color: #fff;
     font-size: 12px;
+    z-index: 0;
 }
 
 .about-us .parts-right .des-right:before {
@@ -1413,6 +1415,227 @@ button.fc-today-button.fc-button.fc-button-primary{
     color: #dc3545 !important;
 
 }*/
+
+
+
+/*-----------------sagar-start-----------------*/
+
+.text-cloving {
+    color: #818181;
+    font-size: 16px;
+    margin: 0px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.cloving-heading {
+    color: #0d1432;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 20px 0;
+    text-transform: capitalize;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.about-us .parts-inner .side1 .des2 {
+    border-radius: 5px;
+    background-image: linear-gradient(180deg,rgb(12, 19, 49) 0,rgba(54,49,169,0) 100%);
+    padding: 40px 50px 60px 10px;
+    margin-left: 0px;
+    position: relative;
+    color: #fff;
+    font-size: 13px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.des2:before {
+    content: "";
+    border-radius: 5px;
+    background-image: linear-gradient(180deg,rgba(12, 19, 49, 0.74) 0,rgba(54,49,169,0) 100%);
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    right: 30px;
+    bottom: -30px;
+    z-index: -1;
+}
+.helping-finednew-box h3 {
+    color: #0d1432;
+    font-size: 28px;
+    font-weight: 500;
+    position: relative;
+    margin: 10px 0 45px;
+    text-transform: capitalize;
+    text-align: center;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.helping-finednew-box p {
+    font-weight: 400;
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 15px;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.full-banner-iphone {
+    width: 100%;
+    padding: 50px 0px 50px 0px;
+}
+section.iphoen-text-banner-main {
+    width: 100%;
+    padding: 50px 0px;
+}
+
+
+
+
+.helping-finednew-box h3:after, .helping-finednew-box h3:before {
+    content: "";
+    width: 120px;
+    height: 2px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    background-color: #ed502d;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transition: 1s;
+}
+.helping-finednew-box h3:after {
+    width: 60px;
+    bottom: -30px;
+    transition: 1s;
+}
+
+section.iphoen-text-banner-main:hover .helping-finednew-box h3:after {
+    width: 110px;
+    transition: 1s;
+}
+section.iphoen-text-banner-main:hover .helping-finednew-box h3:before {
+    width: 170px;
+    transition: 1s;
+}
+.helping-finednew-box ul li {
+    list-style: disc;
+    margin-left: 0;
+    color: #666;
+}
+
+
+/*----------*/
+.only-iphon-image {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+.only-iphon-image:before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    background-color: rgb(243, 244, 245);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 24px 32px;
+    border-radius: 3rem;
+}
+.only-iphon-image img {
+    width: 100%;
+    max-width: 300px;
+    padding: 48px;
+}
+.only-iphon-image:after {
+    content: '';
+    background-image: url(../images/iphonn2.png);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+/*----------*/
+
+.top-heading-defintion {
+    width: 100%;
+    text-align: center;
+}
+.my-defintion-card {
+    margin: 15px 0px;
+    border: 1px dashed #ed502d;
+    padding: 20px 20px 20px 30px;
+    border-radius: 4px;
+    position: relative;
+}
+.mini-card-defintion h4 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    color: #212529;
+}
+.mini-card-defintion p {
+    font-weight: 500;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+span.top-icon-defintion i {
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    padding: 11px 9px 11px 10px;
+    border: 1px solid #ed502d;
+    border-radius: 100px;
+    text-align: center;
+    color: #fff;
+    background: #ed502d;
+}
+.data-collectted ul li {
+    list-style: disc;
+    margin-left: 20px;
+}  
+.privecy-policy-main-banner {
+    width: 100%;
+    padding: 80px 0px;
+    background: #f5f5f5;
+}
+.definnition-policy-banner {
+    width: 100%;
+    padding: 80px 0px;
+}
+.imformation-collection-banner {
+    width: 100%;
+    padding: 80px 0px;
+    background: #f5f5f5;
+}
+.use-data-heading {
+    width: 100%;
+    padding-bottom: 20px;
+}
+.use-data-heading ul li {
+    list-style: disc;
+    margin-left: 20px;
+}
+.mini-heding-type {
+    font-size: 19px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: 800;
+}
+.usedata-banner {
+    width: 100%;
+    padding: 80px 0px;
+}
+.collaction-heading {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 40px;
+}
+.uper-footer {
+    width: 75%;
+    margin: auto;
+}
+
+/*-----------------sagar-end-----------------*/
 
 li.list-group-item.active-user:hover {
     background: #f1ece6 !important;

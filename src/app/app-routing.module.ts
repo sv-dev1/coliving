@@ -28,6 +28,7 @@ import { DownloadComponent } from './download/download.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'play.app.colive', component: DownloadComponent },
   { path: 'email.verify', component: EmailVerificationComponent }, 
   { path: 'thank-you', component: ThankYouComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'home', component: HomeComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'sign-up', component: RegisterComponent },

@@ -67,6 +67,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookSquare';
 import { ShareModule } from '@ngx-share/core';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const icons = [
   // ... other icons
@@ -82,7 +83,7 @@ const shareProp = {
 };
 
 
-const cookieConfig:NgcCookieConsentConfig = {
+/*const cookieConfig:NgcCookieConsentConfig = {
   cookie: {
     domain: 'localhost'// it is recommended to set your domain, for cookies to work properly
   },
@@ -109,10 +110,10 @@ const cookieConfig:NgcCookieConsentConfig = {
   },
   content:{
       message: 'By using our site, you acknowledge that you have read and understand our ',
-      privacyPolicyLink: 'Privacy Policy, Terms & condtions, GDPR',
+      privacyPolicyLink: 'Privacy Policy, Terms & conditions, GDPR',
       privacyPolicyHref: 'https://www.freeprivacypolicy.com/privacy/view/7a10aabac9e57a1b138755a444037066',
   }
-};
+};*/
 
 const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
 
@@ -165,6 +166,7 @@ export function provideConfig() {
     ThankYouComponent,
     FaqComponent,
     LandlordAccountComponent,
+    PrivacyPolicyComponent,
   
  
   ],
@@ -192,7 +194,7 @@ export function provideConfig() {
     NgxIntlTelInputModule,
     MatBadgeModule,
     MatIconModule,MatMenuModule,MatSlideToggleModule,
-    NgcCookieConsentModule.forRoot(cookieConfig),
+   // NgcCookieConsentModule.forRoot(cookieConfig),
     ShareButtonsModule.withConfig({
       debug: true
     }),

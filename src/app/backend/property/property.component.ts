@@ -50,7 +50,9 @@ export class PropertyComponent implements OnInit {
       isopenEditPropertyModal: boolean = false;
       boolpropertyImage : boolean = false;
       image_url : any;
-     
+      postedBy:  string = '';
+  
+
   constructor(
         private formBuilder:FormBuilder,
 		private router: Router,
@@ -104,7 +106,7 @@ export class PropertyComponent implements OnInit {
 
 	ngOnInit() {
 	  	 this.getAllProperties();	 
-	  	 this.roleId=sessionStorage.getItem("roleId");
+	  	 this.roleId = sessionStorage.getItem("roleId");
          if(this.roleId == 4){
     	     // console.log(this.roleId);
     	      this.tenant=true;
@@ -122,6 +124,7 @@ export class PropertyComponent implements OnInit {
 			if(this.allProperties.length  > 9 ) {
                   this.isArrayLength  = true;
 		    }
+		   
 		    this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -133,7 +136,8 @@ export class PropertyComponent implements OnInit {
     }
     closeModal(){
     	this.isopenAddPropertyModal = false;
-    	this.submitted = false;     
+    	this.submitted = false;   
+    	this.isValidationError = false;  
         this.addPropertyForm.reset();
         
     }
@@ -337,8 +341,9 @@ export class PropertyComponent implements OnInit {
 	                this.submitted = false;
 	                this.updatePropertyForm.reset(); 
 	                this.url = '';
-	                //this.getAllProperties();
-                    location.reload(true);
+	                this.getAllProperties();
+	                
+                    
 	              },error=>{ 
 	                console.log('error', error);
 	        });

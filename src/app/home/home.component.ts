@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   subscribeForm: FormGroup;
   session_key:boolean = false;
+  currentYear: any ;
   @Input() currentState;
   @ViewChild('tw', null) typewriterElement;
   @ViewChild('tw2', null) typewriterElement2;
@@ -34,6 +35,9 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
     
+    var d = new Date();
+    this.currentYear = d.getFullYear();
+
     if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = true;
     } 

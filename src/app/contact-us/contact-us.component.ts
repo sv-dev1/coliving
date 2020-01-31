@@ -49,7 +49,8 @@ export class ContactUsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-          window.scrollTo(0,0);
+          
+          document.body.scrollTop = 0;
 	}
     get f() {  
 	    return this.contactUsForm.controls; 
