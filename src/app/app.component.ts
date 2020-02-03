@@ -12,7 +12,7 @@ export class AppComponent  {
 
   constructor(
            private router: Router,
-		   private route: ActivatedRoute
+		       private route: ActivatedRoute
   	) {
 
   }
@@ -38,5 +38,8 @@ export class AppComponent  {
            href: location.origin+ "/privacy-policy" 
          }
        });
+    }
+    onEdit(){
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 }

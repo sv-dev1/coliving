@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
 	  isHouse : boolean = false;
     isMyAccount : boolean = false;
     isBills: boolean = false;
+    status: boolean = false;
     
 	constructor(private router: Router,
 		private route: ActivatedRoute
@@ -29,4 +30,17 @@ export class SidebarComponent implements OnInit {
                this.isBills = true;
             }
     }
+    toggleClassOnImageClick(event:any) {
+ 
+      if(event == false) {
+          this.status = true;
+          const body = document.getElementsByTagName('body')[0];
+          body.classList.add('custom-body-class');
+      } else if(event ==true) {
+          this.status = false;
+          const body = document.getElementsByTagName('body')[0];
+          body.classList.remove('custom-body-class');
+      }
+       
+   }
 }
