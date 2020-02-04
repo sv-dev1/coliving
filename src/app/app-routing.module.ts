@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'email.verify', component: EmailVerificationComponent }, 
   { path: 'thank-you', component: ThankYouComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: '/', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'sign-up', component: RegisterComponent },
   { path: 'login', component: LoginComponent },

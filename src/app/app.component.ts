@@ -7,39 +7,42 @@ import { Router , ActivatedRoute} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-   title = 'colive';
+  title = 'colive';
 
 
   constructor(
-           private router: Router,
-		       private route: ActivatedRoute
-  	) {
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
 
   }
- ngOnInit() {
- 	      
-       let cc = window as any;
+  ngOnInit() {
+    if(this.router.url == '/' || this.router.url == '/home'){
+      console.log('this.router.url', this.router.url);
+      let cc = window as any;
        cc.cookieconsent.initialise({
-         palette: {
-           popup: {
+        palette: {
+          popup: {
             background: 'black',
-           },
-           button: {
-             background: "#ffe000",
-             text: "#164969"
+          },
+          button: {
+            background: "#ffe000",
+            text: "#164969"
 
-           }
-         },
-         theme: "classic",
-         content: {
-           message: 'By using our site, you acknowledge that you have read and understand our Privacy Policy, Terms & conditions, GDPR',
-           dismiss: 'Got it',
-           link: 'Learn more',
-           href: location.origin+ "/privacy-policy" 
-         }
-       });
+          }
+        },
+        theme: "classic",
+        content: {
+          message: 'By using our site, you acknowledge that you have read and understand our Privacy Policy, Terms & conditions, GDPR',
+          dismiss: 'I read and understood',
+          link: 'Learn more',
+          href: location.origin+ "/privacy-policy" 
+        }
+      });
     }
-    onEdit(){
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
+  }
+
+  onEdit(){
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
 }
