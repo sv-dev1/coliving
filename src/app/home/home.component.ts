@@ -42,11 +42,11 @@ export class HomeComponent implements OnInit {
       this.session_key = true;
     } 
 
-    const target2 = this.typewriterElement2.nativeElement;
+   /* const target2 = this.typewriterElement2.nativeElement;
     const target3 = this.typewriterElement3.nativeElement;
-    const target = this.typewriterElement.nativeElement
+    const target = this.typewriterElement.nativeElement*/
 
-    const writer = new Typewriter(target, {
+/*    const writer = new Typewriter(target, {
       loop: true,
       typeColor: 'white',
       typeSpeed: 90,
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
       .rest(500)
       .clear()
       .changeTypeColor('white')
-      .then(writer2.start.bind(writer2))
+      .then(writer2.start.bind(writer2))*/
      }
   
   subscribe(value) {
