@@ -1081,8 +1081,9 @@ ul.for-login-tabs li a:hover{
     position: relative;
     margin-bottom: 40px;
     color: #fff;
-    font-size: 12px;
+    font-size: 13px;
     z-index: 0;
+    height: 230px;
 }
 
 .about-us .parts-right .des-right:before {
@@ -1445,6 +1446,7 @@ button.fc-today-button.fc-button.fc-button-primary{
     color: #fff;
     font-size: 13px;
     font-family: Roboto,"Helvetica Neue",sans-serif;
+    height: 230px;
 }
 .des2:before {
     content: "";
@@ -2103,6 +2105,9 @@ a.logo-link img {
         width: 80px;
         margin: auto;
     }
+    .about-us .parts-inner .side1 .des2, .about-us .parts-right .des-right {
+        height: 250px;
+    }
 /*------ End-privacy-policy-page ----- */
 
 }
@@ -2160,9 +2165,9 @@ a.logo-link img {
     }
     .about-us .parts-right .des-right {
         margin-left: 0;
-        margin-bottom: 20px;
+        margin-bottom: 0;
+        padding: 40px 20px 0px 20px;
     }
-
     .about-us {
         padding: 110px 0 0 0;
         background: #f5f5f5;
@@ -2181,7 +2186,7 @@ a.logo-link img {
     }
 
     .about-us .parts-inner .side1 .des2 {
-        padding: 40px 50px 0px 10px;
+        padding: 40px 20px 0px 20px;
     }
 
     .hdg-box {
@@ -2237,7 +2242,11 @@ a.logo-link img {
         top: -10px;
     }
 }
-
+@media (max-width: 767px) and (min-width: 576px) {
+    .about-us .parts-inner .side1 .des2, .about-us .parts-right .des-right {
+        height: 310px;
+    }
+}
 
 @media (max-width:567px){ 
     .login-block .block-inner {
@@ -2263,7 +2272,20 @@ a.logo-link img {
     .main-footer-new {
         display: block;
     }
+    .about-us .parts-inner .side1 .des2 {
+        text-align: left;
+    }
 
+}
+@media (max-width: 575px) and (min-width: 421px) {
+    .about-us .parts-inner .side1 .des2, .about-us .parts-right .des-right {
+        height: 200px;
+    }
+}
+@media (max-width: 420px) {
+    .about-us .parts-inner .side1 .des2, .about-us .parts-right .des-right {
+        height: 260px;
+    }
 }
 
 

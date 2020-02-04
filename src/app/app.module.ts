@@ -68,6 +68,10 @@ import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons/faFacebookS
 import { ShareModule } from '@ngx-share/core';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { HomePageContentComponent } from './Admin/home-page-content/home-page-content.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { FaqPageContentComponent } from './Admin/faq-page-content/faq-page-content.component';
+import { WebsiteSettingsComponent } from './Admin/website-settings/website-settings.component';
 
 const icons = [
   // ... other icons
@@ -167,6 +171,9 @@ export function provideConfig() {
     FaqComponent,
     LandlordAccountComponent,
     PrivacyPolicyComponent,
+    HomePageContentComponent,
+    FaqPageContentComponent,
+    WebsiteSettingsComponent,
   
  
   ],
@@ -199,7 +206,8 @@ export function provideConfig() {
       debug: true
     }),
     ShareButtonsModule.withConfig({ prop: shareProp }),
-    ShareModule
+    ShareModule,
+    CKEditorModule
     
   ],
   
