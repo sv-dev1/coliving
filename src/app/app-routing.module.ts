@@ -29,6 +29,7 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { HomePageContentComponent } from './Admin/home-page-content/home-page-content.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
+  { path: 'admin/home-page-content', component: HomePageContentComponent, canActivate: [AuthGuard] },
   {path: '**', redirectTo: '/'},
  
 ];
