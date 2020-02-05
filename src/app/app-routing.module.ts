@@ -29,7 +29,9 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { HomePageContentComponent } from './Admin/home-page-content/home-page-content.component';
+import { HomePageContentComponent } from './backend/admin/home-page-content/home-page-content.component';
+import { FaqPageContentComponent } from './backend/admin/faq-page-content/faq-page-content.component';
+import { WebsiteSettingsPageContentComponent } from './backend/admin/website-settings-page-content/website-settings-page-content.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,11 +61,16 @@ const routes: Routes = [
   { path: 'properties', component: PropertyComponent, canActivate: [AuthGuard] },
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
+   
   { path: 'admin/home-page-content', component: HomePageContentComponent, canActivate: [AuthGuard] },
+  { path: 'admin/faq-page-content', component: FaqPageContentComponent, canActivate: [AuthGuard] },
+  { path: 'admin/site-config', component: WebsiteSettingsPageContentComponent, canActivate: [AuthGuard] },
+
+  { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
+  
   {path: '**', redirectTo: '/'},
  
-];
+]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
