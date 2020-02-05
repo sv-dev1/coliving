@@ -18,7 +18,8 @@
     padding-top: 25px;
     position: relative;
     top: 45px;
-     max-height: 500px;
+    max-height: 500px;
+    height: 100vh;
 }
 
 .headind_srch.testing {
@@ -65,6 +66,13 @@ button.btn.common-b.btn-orange.view-group-cv:hover {
 }
 button.btn.btn-orange.common-b:hover {
      background: #b83619 !important;
+}
+.ng-star-inserted p.chat_date {
+    text-align: center;
+    margin: 6px 0px;
+    font-weight: 500;
+    font-size: 15px;
+    color: #F44336;
 }
 @media (min-width: 576px){
     .modal-dialog.modaldialog12 {
