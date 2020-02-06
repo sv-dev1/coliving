@@ -611,27 +611,19 @@ export class TeamGroupComponent implements OnInit {
   }
 
   isDifferentDay(messageIndex: number): boolean {
-
     if (messageIndex === 0) return true;
-
-    const d1 = new Date(this.gruopMessages[messageIndex - 1].created_at);
-    const d2 = new Date(this.gruopMessages[messageIndex].created_at);
-
-    return d1.getFullYear() !== d2.getFullYear()
-    || d1.getMonth() !== d2.getMonth()
-    || d1.getDate() !== d2.getDate();
+        const d1 = new Date(this.gruopMessages[messageIndex - 1].created_at);
+        const d2 = new Date(this.gruopMessages[messageIndex].created_at);
+        return d1.getFullYear() !== d2.getFullYear() || d1.getMonth() !== d2.getMonth()
+        || d1.getDate() !== d2.getDate();
   }
+  getMessageDate(messageIndex: number): string {
 
-   getMessageDate(messageIndex: number): string {
-
-    const wholeDate = new Date(this.gruopMessages[messageIndex].created_at).toDateString();
-    this.messageDateString = wholeDate.slice(0, wholeDate.length - 5);
-    if(this.messageDateString !='Invalid'){ 
-      //console.log( this.messageDateString);
-      return this.messageDateString;
+        const wholeDate = new Date(this.gruopMessages[messageIndex].created_at).toDateString();
+        this.messageDateString = wholeDate.slice(0, wholeDate.length - 5);
+        if(this.messageDateString !='Invalid'){ 
+          //console.log( this.messageDateString);
+          return this.messageDateString;
     }
-
-
-
   }
 }

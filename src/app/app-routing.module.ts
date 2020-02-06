@@ -29,9 +29,11 @@ import { ThankYouComponent } from './thank-you/thank-you.component';
 import { FaqComponent } from './faq/faq.component';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { HomePageContentComponent } from './backend/admin/home-page-content/home-page-content.component';
-import { FaqPageContentComponent } from './backend/admin/faq-page-content/faq-page-content.component';
-import { WebsiteSettingsPageContentComponent } from './backend/admin/website-settings-page-content/website-settings-page-content.component';
+
+import { HomePagecomponentComponent } from './admin/home-pagecomponent/home-pagecomponent.component';
+import { FaqPagecomponentComponent } from './admin/faq-pagecomponent/faq-pagecomponent.component';
+import { SiteConfigcomponentComponent } from './admin/site-configcomponent/site-configcomponent.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -62,10 +64,10 @@ const routes: Routes = [
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
    
-  { path: 'admin/home-page-content', component: HomePageContentComponent, canActivate: [AuthGuard] },
-  { path: 'admin/faq-page-content', component: FaqPageContentComponent, canActivate: [AuthGuard] },
-  { path: 'admin/site-config', component: WebsiteSettingsPageContentComponent, canActivate: [AuthGuard] },
-
+  { path: 'admin/home-page-content', component: HomePagecomponentComponent, canActivate: [AuthGuard] },
+  { path: 'admin/faq-page-content', component: FaqPagecomponentComponent, canActivate: [AuthGuard] },
+  { path: 'admin/site-config', component: SiteConfigcomponentComponent, canActivate: [AuthGuard] },
+   
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
   
   {path: '**', redirectTo: '/'},

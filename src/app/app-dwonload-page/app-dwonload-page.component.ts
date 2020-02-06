@@ -103,7 +103,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			maximunPrice: ['', Validators.required],
 			minimumPrice: ['', Validators.required],
 			image: [''],
-			stay_date: ['', Validators.required],
+			stay_date: [''],
 			biography: ['', Validators.required],
 			interestes: ['', Validators.required],
             outing_day: ['', Validators.required],
@@ -294,7 +294,7 @@ export class AppDwonloadPageComponent implements OnInit {
 	get f() { return this.questionareform.controls; }
 	
 	questionareSubmit(formValue){
-       
+       console.log('formvalue kkk----', this.questionareform.controls);
        console.log('formvalue----', this.questionareform.controls.status);
 		this.submitted = true;
 	    
@@ -354,7 +354,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			formData.append('nationality_map',JSON.stringify(formValue.nationality));
 			formData.append('occuptation_tt', formValue.occuptation_tt); 
 			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.maximunPrice+'-'+formValue.minimumPrice); 
+			formData.append('price_range', formValue.minimumPrice+'-'+formValue.maximunPrice); 
 			formData.append('stay_date', formValue.stay_date);
 			formData.append('wakeup_time', this.weekend_time); 
 			formData.append('email', formValue.email);

@@ -69,9 +69,10 @@ import { ShareModule } from '@ngx-share/core';
 import { LandlordAccountComponent } from './backend/landlord-account/landlord-account.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { HomePageContentComponent } from './backend/admin/home-page-content/home-page-content.component';
-import { FaqPageContentComponent } from './backend/admin/faq-page-content/faq-page-content.component';
-import { WebsiteSettingsPageContentComponent } from './backend/admin/website-settings-page-content/website-settings-page-content.component';
+
+import { HomePagecomponentComponent } from './admin/home-pagecomponent/home-pagecomponent.component';
+import { FaqPagecomponentComponent } from './admin/faq-pagecomponent/faq-pagecomponent.component';
+import { SiteConfigcomponentComponent } from './admin/site-configcomponent/site-configcomponent.component';
 
 const icons = [
   // ... other icons
@@ -171,9 +172,9 @@ export function provideConfig() {
     FaqComponent,
     LandlordAccountComponent,
     PrivacyPolicyComponent,
-    HomePageContentComponent,
-    FaqPageContentComponent,
-    WebsiteSettingsPageContentComponent,
+    HomePagecomponentComponent,
+    FaqPagecomponentComponent,
+    SiteConfigcomponentComponent,
    
   
  
