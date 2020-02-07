@@ -153,7 +153,7 @@
                                  <div class="chat_list" *ngFor="let team of teamArr; let index = index" [class.active_chat]="index == this.indexCheck">
                                  <div class="chat_people">
                                     <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                    <div class="chat_ib" (click)="openChat(team,index)">
+                                    <div class="chat_ib" (click)="openChat(team,index,team.name)">
                                        <h5 >
                                           {{team?.name}} 
                                        </h5>
@@ -201,7 +201,7 @@
                         </div>
                         <div _ngcontent-dsn-c2="" class="headind_srch testing">
                            <div _ngcontent-dsn-c2="" class="recent_heading">
-                              <h4 _ngcontent-dsn-c2=""> Group</h4>
+                              <h4 _ngcontent-dsn-c2="">{{ team_name }} chat room </h4>
                            </div>
                            <!-- <a mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
                               <mat-icon>more_vert</mat-icon>

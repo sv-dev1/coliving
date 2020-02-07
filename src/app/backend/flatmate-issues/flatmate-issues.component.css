@@ -221,7 +221,11 @@ button.pull-right.btn.btn-orange-sm {
     border: none;
     background: #ffffff;
 }
-
+.img-circle.issue{
+  border-radius: 50% !important;
+  width: 50px !important;
+  padding: 8px 2px 2px 2px !important;
+}
 /*.image-flip:hover .backside,
 .image-flip.hover .backside {
     -webkit-transform: rotateY(0deg);
@@ -325,7 +329,7 @@ button.pull-right.btn.btn-orange-sm {
 }
 
 .chat li {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
     padding-bottom: 5px;
     border-bottom: 1px dotted #B3A9A9;
 }
