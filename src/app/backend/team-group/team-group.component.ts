@@ -114,6 +114,7 @@ export class TeamGroupComponent implements OnInit {
   isLoader : boolean = false;
   messageDateString : any = []; 
   messagesnewArray : any = [];
+  team_name :  string = '';
 
   @ViewChild('scrollBottom', {static: false}) scrollBottom: ElementRef;    
   constructor(
@@ -202,7 +203,7 @@ export class TeamGroupComponent implements OnInit {
     this.data_service.getTeam().subscribe((response: any) => {
       this.teamArr = response.teams;
       this.teamArrLength = this.teamArr.length;
-      this.openChat(this.teamArr[0], 0);
+      this.openChat(this.teamArr[0], 0 , this.teamArr[0].name);
       // console.log(this.teamArr[0]);
       if (this.teamArr.length > 5) {
         this.moreTeam = true;
@@ -456,8 +457,9 @@ export class TeamGroupComponent implements OnInit {
     }
   }
 
-  openChat(team, index) {
+  openChat(team, index, team_name) {
     this.team_id = team.teamId;
+    this.team_name = team_name;
     this.user_id = this.logged_in_id;
     this.nickname = team.name;
     this.status = !this.status;

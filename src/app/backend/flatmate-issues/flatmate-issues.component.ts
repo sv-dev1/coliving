@@ -269,10 +269,10 @@ export class FlatmateIssuesComponent implements OnInit {
 
     openIssueThread(element) {
     	if(element) {
-    		console.log(element);
     		this.isOpenthreadModal = true;
             this.data_service.getAllMessagesByIssueId(element.issueId).subscribe((response:any) =>{ 
 			this.threads = response.issues;
+			console.log('this.threads', this.threads);
 			this.isError = false;    
 			this.addIssueReplyForm.patchValue({
 				issueId: element.issueId
