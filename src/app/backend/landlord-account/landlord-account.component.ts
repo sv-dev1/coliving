@@ -219,7 +219,7 @@ export class LandlordAccountComponent implements OnInit {
 				firstName: this.userDataArr.firstName,
 				lastName: this.userDataArr.lastName,
 				email: this.userDataArr.email,
-				userName: sessionStorage.getItem('user_name'),
+				userName: this.userDataArr.login.username,
 				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
 				gender:this.userDataArr.gender,
 				phoneNo: this.userDataArr.phoneNo,
@@ -337,7 +337,7 @@ export class LandlordAccountComponent implements OnInit {
 			
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
-			formData.append('username', sessionStorage.getItem("user_name"));
+			formData.append('username', formValue.userName);
 			formData.append('email', formValue.email);		   
 			formData.append('photo', this.fileData);
 			formData.append('phoneNo', formValue.phoneNo);

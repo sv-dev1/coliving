@@ -29,8 +29,11 @@
                                           <p><img class=" img-fluid" src="{{image_base_url}}{{issue.photo}}" onerror="this.src='assets/images/no-image-available.png'"></p>
                                           <h4 class="card-title">{{issue?.title}}</h4>
                                           <p class="card-text">{{issue?.desc}}</p>
+                                          <p><b>Team</b>:&nbsp;&nbsp;{{issue.team.name}} </p>
+                                           <p><b>Added By</b>:&nbsp;&nbsp;{{ issue.login.username }}</p>
                                           <a title="Start thread on issue" href="javascript:void(0)" (click)="openIssueThread(issue)" class="btn btn-primary btn-sm"><i class="fa fa-comments"></i></a>
                                           <a title="Delete issue" href="javascript:void(0)" (click)="deleteIssueDailog(issue)" class="btn btn-primary btn-sm"><i class="fa fa-trash"></i></a>
+
                                        </div>
                                     </div>
                                  </div>

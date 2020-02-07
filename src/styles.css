@@ -30,9 +30,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .facing-problam-image img {
     width: 100%;
-    max-width: 300px;
-    padding: 48px;
+    max-width: 400px;
+    padding: 100px;
 }
+
 .facing-problam-image:after {
     content: '';
     background-image: url('assets/images/iphonn2.png');
@@ -45,6 +46,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 0;
+}
+.ck-editor__editable_inline {
+    min-height: 250px;
 }
 .problam-uper-face {
     width: 100%;

@@ -46,7 +46,7 @@ export class FlatmateIssuesComponent implements OnInit {
     issueName : any;
     issueId : any;
     deleteIssueModal : boolean = false;
-
+    isOpenIssueModal : boolean = false;
 
 	constructor(
 			private formBuilder:FormBuilder,	
@@ -67,7 +67,6 @@ export class FlatmateIssuesComponent implements OnInit {
 		this.image_base_url = environment.image_base_url;
 		this.logged_in_id = sessionStorage.getItem("userId");
 	
-
 		this.addIssueReplyForm = this.formBuilder.group({
 			message: ['', Validators.required],
 			issueId: ['']
@@ -255,10 +254,11 @@ export class FlatmateIssuesComponent implements OnInit {
     onUserDeSelectAll(items: any){
         this.userEmpty = true;
     }
-
+   
     getIssues() {
         this.data_service.getAllIssues().subscribe((response:any) =>{ 
 			this.allIssues = response.issues;
+			console.log('this.allIssues', this.allIssues);
 			this.issuesCount = this.allIssues.length;
 			this.isError = false;    
 		}, error =>{ 
@@ -277,13 +277,14 @@ export class FlatmateIssuesComponent implements OnInit {
 			this.addIssueReplyForm.patchValue({
 				issueId: element.issueId
 			});
-			console.log('this.thread', this.threads);
+		
 			}, error =>{ 
 				this.isError = true; 
 				this.errorsArr = error.error;
 			})
     	}
     }
+
     close(){
         this.isOpenthreadModal = false;
     }

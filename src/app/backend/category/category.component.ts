@@ -13,26 +13,26 @@ import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
 })
 export class CategoryComponent implements OnInit {
   
-	   allCategoriesArray:any =[];
-	   allCategories:any =[];
-	   isError:boolean=false;
-	   errorsArr:string ='';
-	   isopenAddCategoryModal:boolean=false;
-	   submitted:boolean=false;
+	   allCategoriesArray : any = [];
+	   allCategories : any = [];
+	   isError : boolean = false;
+	   errorsArr : string = '';
+	   isopenAddCategoryModal : boolean = false;
+	   submitted : boolean = false;
        isSuccess : boolean = false;
-       isalreadyEixst:boolean =false;
-       isalreadyEixstErr:string=''
-	   CategoryForm:FormGroup;
-	   updateCategoryForm:FormGroup;
-	   isopenEditCategoryModal:boolean=false;
-	   isDelCategory:boolean=false;
-       categoryName :string = '';
-	   categoryId: string = '';
-	   response:any;
-       isArrayLength:boolean =false;
-       categoryEdit:string = '';
-       p:any;
-       categoryCount:any;
+       isalreadyEixst : boolean = false;
+       isalreadyEixstErr : string = ''
+	   CategoryForm : FormGroup;
+	   updateCategoryForm : FormGroup;
+	   isopenEditCategoryModal : boolean = false;
+	   isDelCategory : boolean = false;
+       categoryName : string = '';
+	   categoryId : string = '';
+	   response : any;
+       isArrayLength : boolean = false;
+       categoryEdit : string = '';
+       p : any;
+       categoryCount : any;
 
 
   constructor(
@@ -53,6 +53,9 @@ export class CategoryComponent implements OnInit {
      }
 
 	ngOnInit() {
+			 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+			      this.router.navigate(['/dashboard']);
+			 }
 	  	   this.getCategories();
 	} 
  	getCategories() {

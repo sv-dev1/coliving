@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -16,11 +16,14 @@ export class TeamInfoComponent implements OnInit {
   ShowInfo:boolean=false;
   constructor(
     private data_service : DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-  
+    if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/dashboard']);
+     }
     this.route.params.subscribe(params => {
      this.teamId=params['id'].replace(/\:/g,"");
     });

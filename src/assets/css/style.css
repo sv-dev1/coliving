@@ -31,7 +31,7 @@ input , button {
 .display-menu #menu-center {right:0px;}
 #menu-center ul.navbar-nav {flex-direction: column;}
 .header-section nav.navbar ul.navbar-nav li{padding: 0 5px;margin: 10px 0px;display: flex;justify-content: flex-end;}
-.header-section nav.navbar ul.navbar-nav li a{font-size:12px; color:#000; /* font-weight:600;  letter-spacing:0.7px; */ text-transform:uppercase; padding:0; }
+.header-section nav.navbar ul.navbar-nav li a{font-size:14px; color:#000; /* font-weight:600;  letter-spacing:0.7px; */ text-transform:uppercase; padding:0; }
 .header-section nav.navbar ul.navbar-nav li a:not(.signup):not(.signin):not(.dashboard):hover, .header-section nav.navbar ul.navbar-nav li.active a{color:#000; }
 .header-section nav.navbar ul.navbar-nav li a.btn { padding: 5px 15px;  border-radius: 2px;   border: 1px solid #ed502d; color: #fff;}
 .header-section nav.navbar ul.navbar-nav li a.btn.signup {  background: #ed502d; color: #fff;}
@@ -1600,7 +1600,7 @@ span.top-icon-defintion i {
 .privecy-policy-main-banner {
     width: 100%;
     padding: 80px 0px;
-    background: #f5f5f5;
+    background: #fff;
 }
 .definnition-policy-banner {
     width: 100%;
@@ -1609,7 +1609,7 @@ span.top-icon-defintion i {
 .imformation-collection-banner {
     width: 100%;
     padding: 80px 0px;
-    background: #f5f5f5;
+    background: #fff;
 }
 .use-data-heading {
     width: 100%;
@@ -1909,6 +1909,15 @@ img.TOG {
     max-width: 25px;
     margin-right: 15px;
 }
+.facing-problam-image.new-one:after{
+    background-image: url('/assets/images/iphonn21.png') !important;
+}
+.facing-problam-image.new-one img {
+    position: relative;
+    z-index: 9;
+    padding: 125px;
+}
+
 .sidebar {
     -webkit-transition: all linear 0.5s;
     -moz-transition: all linear  0.5s;
@@ -1929,14 +1938,16 @@ img.TOG {
 .custom-body-class .work-panel {
     padding-left: 40px;
 }
-
+.facing-problam-image img {
+    padding: 130px;
+}
 
 a.logo-link img {
     width: 100%;
     max-width: 79px;
 }
 .header-section a.navbar-brand img {
-    width: 80px;
+    width: 150px;
 }
 
 @media screen and (min-width: 768px) { 
@@ -2058,7 +2069,7 @@ a.logo-link img {
         width: 60px;
     }
     .header-section button.navbar-toggler span i {
-        color: #fff;
+        color: #F44336;
     }
     .header-section button.navbar-toggler {
         border: 1px solid #fff !important;
@@ -2170,7 +2181,7 @@ a.logo-link img {
     }
     .about-us {
         padding: 110px 0 0 0;
-        background: #f5f5f5;
+        background: #fff;
     }
     .full-banner-iphone {
         padding: 0px 0px 50px 0px;
@@ -2288,18 +2299,13 @@ a.logo-link img {
     }
 }
 
-
-
-
-
-
-
 .header-section nav.navbar {
-    background: #8c8c8c;
-    /*background: #0000006e;*/
+    background: transparent;
+}
+.header-section nav.navbar ul.navbar-nav li a.btn {
+    color: black;
 }
 
-
-
-
-
+.header-section nav.navbar {
+    background: #fff;
+}
