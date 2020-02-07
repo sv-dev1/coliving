@@ -7,3 +7,66 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.facing-problam-content p {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    color: #818181;
+    font-size: 16px;
+    margin: 0px 0px 10px;
+}
+
+.facing-problam-image {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+.facing-problam-image:before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 3px;
+    background-color: rgb(243, 244, 245);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 24px 32px;
+    border-radius: 3rem;
+}
+.facing-problam-image img {
+    width: 100%;
+    max-width: 400px;
+    padding: 100px;
+}
+
+.facing-problam-image:after {
+    content: '';
+    background-image: url('assets/images/iphonn2.png');
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+.ck-editor__editable_inline {
+    min-height: 250px;
+}
+.problam-uper-face {
+    width: 100%;
+    position: relative;
+    height: 100%;
+}
+.facing-problam-content {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: fit-content;
+}
+@media (max-width: 767px) {
+	.facing-problam-content {
+		position: relative;
+		text-align: center;
+		margin: 0px 0px 60px 0px;
+	}
+}

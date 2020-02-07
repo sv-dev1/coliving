@@ -1,42 +1,42 @@
     <div class="header-section">
-		<nav class="navbar navbar-expand-lg navbar-light">
-			<a class="navbar-brand" routerLink="/home">
-				 <img src="assets/images/Logo-colive.png">
-			</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			    <span><i class="fa fa-bars" aria-hidden="true"></i></span>
-			  </button>
+    	<nav class="navbar navbar-expand-lg navbar-light">
+    		<a class="navbar-brand" routerLink="/home">
+    			<img src="assets/images/Logo-colive.png">
+    		</a>
+    		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    			<span><i class="fa fa-bars" aria-hidden="true"></i></span>
+    		</button>
 
-			<div class="top-nav">
-				<div class="collapse navbar-collapse" id="navbarNav">
-				
-				<ul class="navbar-nav">
-				    <li class="nav-item pr-2 pl-2">
-						<a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
-					</li>
-					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true">
-						<a class="btn signup" routerLink="/login">Login Landlord</a></li>
-					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
-					<li class="nav-item pr-2 pl-2">
-						<a class="btn signin" routerLink="/faq" id="">FAQ</a>
-					</li>
-					<li class="nav-item pr-2 pl-2">
-						<a class="btn signin" routerLink="/privacy-policy">Privacy Policies</a>
-					</li>
-					<li class="nav-item pr-2 pl-2">
-						<a class="btn signin" href="#contact-us" id="">Contact us</a>
-					</li>
-					
-					
-				
-				</ul>
-				<div class="country-flag">
-					<div class="dropdown">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-							<img src="assets/images/english.png" /> EN
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#"><img src="assets/images/english.png" /> EN</a>
+    		<div class="top-nav">
+    			<div class="collapse navbar-collapse" id="navbarNav">
+
+    				<ul class="navbar-nav">
+    					<li class="nav-item pr-2 pl-2">
+    						<a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
+    					</li>
+    					<li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true">
+    						<a class="btn signup" routerLink="/login">Login Landlord</a></li>
+    						<li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
+    						<li class="nav-item pr-2 pl-2">
+    							<a class="btn signin" routerLink="/faq" id="">FAQ</a>
+    						</li>
+    						<li class="nav-item pr-2 pl-2">
+    							<a class="btn signin" routerLink="/privacy-policy">Privacy Policies</a>
+    						</li>
+    						<li class="nav-item pr-2 pl-2">
+    							<a class="btn signin" href="#contact-us" id="">Contact us</a>
+    						</li>
+
+
+
+    					</ul>
+    					<div class="country-flag">
+    						<div class="dropdown">
+    							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    								<img src="assets/images/english.png" /> EN
+    							</button>
+    							<div class="dropdown-menu">
+    								<a class="dropdown-item" href="#"><img src="assets/images/english.png" /> EN</a>
 							<!-- <a class="dropdown-item" href="#"><img src="assets/images/fr.png" /> FR</a>
 							<a class="dropdown-item" href="#"><img src="assets/images/italian.png" /> IT</a>
 							<a class="dropdown-item" href="#"><img src="assets/images/spanish.png" /> SP</a> -->
@@ -45,300 +45,243 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</nav>
+</div>
+<div class="about-us" id="about-us">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+					<h1 class="hdg-main">welcome to coliving App<br>
+						<span class="text-center">To make your life in a community as easy as possible</span>
+					</h1>
+					
+					<p class="sb-hdg" style="font-size: 17px;">Are you moving to a new city to participate in an exchange, to do an internship or simply just to start a new work? Are you feeling anxious and insecure about living abroad, or being far away from home and your habitual environment and finding your place in a new and international Community?</p>
+				</div>
 			</div>
-		</nav>
-	  </div>
-	  
-<!-- 	<div class="banner-section">
- -->		<!-- <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-			<source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4" type="video/mp4">
-		</video> -->
-		
-		<!-- <iframe src="https://www.youtube.com/embed/7hiJt0RztGA?rel=0&amp;controls=0&amp;showinfo=0&amp;autoplay=1" frameborder="0" allow="autoplay; encrypted-media"></iframe> -->
-		
-		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/7hiJt0RztGA?rel=0;&autoplay=1&mute=1&loop=1" frameborder="0" allowfullscreen include></iframe> -->
-		
-		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/7hiJt0RztGA?rel=0;&autoplay=1&mute=1&loop=1&showinfo=0" frameborder="0" allowfullscreen include></iframe> -->
-		
-	      <!-- <div class="container">
-		      <div class="row">
-			      <div class="col-12">
-				      <div class="banner-data"> -->
-							<!-- <h1 class="hdg wow fadeInUp" data-wow-duration="0.4s" @fade>WELCOME TO COLIVING</h1>
-							<h3 @fade>THE NEXT GENERATION OF ADVANCED SOLUTIONS TO</h3> -->
-						<!-- 	<div class="output wow fadeInUp" data-wow-duration="0.8s" data-wow-delay=".4s" id="output">
-								<h1 class="cursor"></h1>
-								<p></p>
-							</div> -->
-							
-							<!-- <h4 class="beside"> <span class="tw" #tw2> </span><span #tw3></span> </h4>
+		</div>
 
-							 <h1 class="tw" #tw></h1> -->
-							<!-- <div class="banner-btns wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-								<button type="button" class="btn btn-orange">Tenant</button>
-								<button type="button" class="btn btn-orange">Sign in as host</button>
-							</div> -->
-							
-					<!-- 		<div class="follow-us wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-								<ul class="social-list">
-									<li>
-										<a href="" class="social-icon">
-											<i class="fab fa-facebook-f"></i>
-										</a>
-									</li>
-									
-									<li>
-										<a href="" class="social-icon">
-											<i class="fab fa-twitter"></i>
-										</a>
-									</li>
-									
-									<li>
-										<a href="" class="social-icon">
-											<i class="fab fa-linkedin-in"></i>
-										</a>
-									</li>
-									
-									<li>
-										<a href="" class="social-icon">
-											<i class="fab fa-pinterest"></i>
-										</a>
-									</li>
-									
-									<li>
-										<a href="" class="social-icon">
-											<i class="fab fa-instagram"></i>
-										</a>
-									</li>
-								</ul>
-							</div> -->
-			<!-- 		  </div>
-				  </div>
-				  
-			  </div>
-		  </div>
-	  </div> -->
-	  
-		
-		<div class="about-us" id="about-us">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-							<h1 class="hdg-main">welcome to coliving App to make your life in a community as easy as possible</h1>
-							<p class="sb-hdg">Are you moving to a new city to participate in an exchange, to do an internship or simply just to start a new work? Are you feeling anxious and insecure about living abroad, or being far away from home and your habitual environment and finding your place in a new and international Community?</p>
-						</div>
+		<!-- <div class="row">
+			<div class="col-12 col-sm-6 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+				<div class="parts-inner">
+					<div class="side1">
+						<p class="des2">Are you facing problems with finding decent and proper flatmates or managing finances and everyday house chores in your apartment? All of the above mentioned are important points we‘d like to cover. We are providing you with all sorts of solutions with our ColivingApp. Download it for free and enjoy an easier life in your community.</p>
 					</div>
-				</div>
-				
-			    <div class="row">
-				    <div class="col-12 col-sm-6 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-						<div class="parts-inner">
-							<div class="side1">
-								<!-- <p class="des1">Make life for happy living</p> -->
-								<p class="des2">Are you facing problems with finding decent and proper flatmates or managing finances and everyday house chores in your apartment? All of the above mentioned are important points we‘d like to cover. We are providing you with all sorts of solutions with our ColivingApp. Download it for free and enjoy an easier life in your community.</p>
-							</div>
-							
-							<div class="side2">
-								<!-- <?xml version="1.0" encoding="iso-8859-1"?> -->
-								<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-								<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-									 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-								<g>
-									<g>
-										<path d="M506.555,208.064L263.859,30.367c-4.68-3.426-11.038-3.426-15.716,0L5.445,208.064
-											c-5.928,4.341-7.216,12.665-2.875,18.593s12.666,7.214,18.593,2.875L256,57.588l234.837,171.943c2.368,1.735,5.12,2.57,7.848,2.57
-											c4.096,0,8.138-1.885,10.744-5.445C513.771,220.729,512.483,212.405,506.555,208.064z"/>
-									</g>
-								</g>
-								<g>
-									<g>
-										<path d="M442.246,232.543c-7.346,0-13.303,5.956-13.303,13.303v211.749H322.521V342.009c0-36.68-29.842-66.52-66.52-66.52
-											s-66.52,29.842-66.52,66.52v115.587H83.058V245.847c0-7.347-5.957-13.303-13.303-13.303s-13.303,5.956-13.303,13.303v225.053
-											c0,7.347,5.957,13.303,13.303,13.303h133.029c6.996,0,12.721-5.405,13.251-12.267c0.032-0.311,0.052-0.651,0.052-1.036v-128.89
-											c0-22.009,17.905-39.914,39.914-39.914s39.914,17.906,39.914,39.914v128.89c0,0.383,0.02,0.717,0.052,1.024
-											c0.524,6.867,6.251,12.279,13.251,12.279h133.029c7.347,0,13.303-5.956,13.303-13.303V245.847
-											C455.549,238.499,449.593,232.543,442.246,232.543z"/>
-									</g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								<g>
-								</g>
-								</svg>
-							</div>
-						</div>
-					</div>
-												
-					<div class="col-12 col-sm-6 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-						<p class="des-right">Our main goal from ColivingApp is to take those insecurities and fears away and make your life in a new community as easy as possible.</p>
-					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-							<h1 class="cloving-heading">What is coliving</h1>
-							<p class="text-cloving">Coliving is a modern form of housing where residents do not only share their living space but also a set of interests, values, and/or intentions. It's a new take on an old idea, elaborated by a millennial generation that values things like openness and collaboration, social networking, and the sharing economy. Meet people from all around the world and let yourself go with the flow.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
 
-		<div class="full-banner-iphone">
-			<section class="iphoen-text-banner-main first-box">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="helping-finednew-box">
-								<h3>Helping to findnew flatmates</h3>
-								<ul>
-									<li><p>Changing the city and therefore changing your place of residence and environment is often one of the biggest challenges and reason for doubts and insecurities. In fact, this might even be the biggest fear when you’re moving to a new city, not to mention if you’re even going abroad. </p></li>
-									<li><p>Get to know your future flatmates using the app, even before moving into the city. Details about your preferential location to live, the price range you are willing to pay, personal habits or interests, the languages being spoken, and many more details will help you to find the perfect place to live. Personalise your account by adding your individual hobbies and habits and get your new flatmates to know you before living together. Because coliving is about people.</p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="only-iphon-image">
-								<img src="assets/images/123.jpeg">
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="iphoen-text-banner-main second-box">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="helping-finednew-box">
-								<h3>Splitting the bills</h3>
-								<ul>
-									<li><p>We are aware of the potential problems that can occur in terms of keeping the financial expenses between you and your flatmates under control. For instance, someone buys detergents for 5EUR once and trying to remember mind whose turn it is to buy detergents the next time, or generally splitting the costs between you and your flatmates immediately and expecting everyone to pay the exact amount of 1.66EUR?</p></li>
-									<li><p>How about an app, that is doing all the work for you. You can easily just upload an amount of money, and the app will divide any expenses that have been made and also summarized all sorts of expenses within the apartment’s finances? No more problems with keeping track and writing down every little detail or trying to remind oblivious flatmates.</p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="only-iphon-image">
-								<img src="assets/images/234.jpeg">
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="iphoen-text-banner-main thired-box">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="helping-finednew-box">
-								<h3>Communication</h3>
-								<ul>
-									<li><p>We know that communication is the key, especially in shared flats. Failed communication through several instant messengers such as such Whatsapp or Messenger or even email can be extremely annoying and nerve-racking.</p></li>
-									<li><p>How about a solution that is enabling you to communicate with your landlord and your flatmates directly?</p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="only-iphon-image">
-								<img src="assets/images/123456.png">
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section class="iphoen-text-banner-main four-box">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="helping-finednew-box">
-								<h3>House chores management </h3>
-								<ul>
-									<li><p>Distribution of everyday chores in a household, such as cleaning the living room, dusting or vacuuming, when living with other people, is an exemplary and recurring problem in shared flats. </p></li>
-									<li><p>Set up a house chores list with your flatmates with notifications coming directly to your phone.</p></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-							<div class="only-iphon-image">
-								<img src="assets/images/345.jpeg">
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
-		
-	  
-	  	<div class="buy-sell" id="property">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-							<h1 class="hdg-main">Landlords - Properties Management</h1>
-							<p class="sb-hdg">Coliving app does not only support tenants but also landlords who rent their apartments. Connect with your tenants and be able to check their info right away. Manage the tenants moving in and moving out. Use our messenger to communicate with your tenants and also get to know about any issues that can be shared with you through the app immediately. Everything for free.</p>
-						    <br>
-							<p class="sb-hdg">The same features as on the website and in the app will help you to manage your premises even better. Spare yourself dealing with bothersome and time-consuming apartment managements in a tedious way by using our app.</p>
-						</div>
-					</div>
-				</div>
-				
-			    <div class="row">
-				    <div class="col-12 col-sm-6 parts wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
-						<a href="" class="parts-inner">
-							<div class="top-box">
-								<img class="img-fluid" src="assets/images/landlord.jpg" />
-							</div>
-							<div class="over-box">
-								<!-- <i class="fas fa-home"></i>
-								<p>sell my property</p> -->
-							</div>
-						</a>
-					</div>
-					
-					<div class="col-12 col-sm-6 parts wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
-						<a href="" class="parts-inner">
-							<div class="top-box">
-								<img class="img-fluid" src="assets/images/landlord1.jpg" />
-							</div>
-							<div class="over-box">
-								<!-- <i class="fas fa-home"></i>
-								<p>properties to buy</p> -->
-							</div>
-						</a>
-					</div>
-					
+					<div class="side2">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+						<g>
+							<g>
+								<path d="M506.555,208.064L263.859,30.367c-4.68-3.426-11.038-3.426-15.716,0L5.445,208.064
+								c-5.928,4.341-7.216,12.665-2.875,18.593s12.666,7.214,18.593,2.875L256,57.588l234.837,171.943c2.368,1.735,5.12,2.57,7.848,2.57
+								c4.096,0,8.138-1.885,10.744-5.445C513.771,220.729,512.483,212.405,506.555,208.064z"/>
+							</g>
+						</g>
+						<g>
+							<g>
+								<path d="M442.246,232.543c-7.346,0-13.303,5.956-13.303,13.303v211.749H322.521V342.009c0-36.68-29.842-66.52-66.52-66.52
+								s-66.52,29.842-66.52,66.52v115.587H83.058V245.847c0-7.347-5.957-13.303-13.303-13.303s-13.303,5.956-13.303,13.303v225.053
+								c0,7.347,5.957,13.303,13.303,13.303h133.029c6.996,0,12.721-5.405,13.251-12.267c0.032-0.311,0.052-0.651,0.052-1.036v-128.89
+								c0-22.009,17.905-39.914,39.914-39.914s39.914,17.906,39.914,39.914v128.89c0,0.383,0.02,0.717,0.052,1.024
+								c0.524,6.867,6.251,12.279,13.251,12.279h133.029c7.347,0,13.303-5.956,13.303-13.303V245.847
+								C455.549,238.499,449.593,232.543,442.246,232.543z"/>
+							</g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+					</svg>
 				</div>
 			</div>
 		</div>
-		 
+
+		<div class="col-12 col-sm-6 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+			<p class="des-right">Our main goal from ColivingApp is to take those insecurities and fears away and make your life in a new community as easy as possible.</p>
+		</div>
+
+	</div> -->
+	<div class="row">
+		<div class="col-md-6">
+			<div class="problam-uper-face">
+				<div class="facing-problam-content">
+					<p style="font-size: 19px;">Are you facing problems with finding decent and proper flatmates or managing finances and everyday house chores in your apartment? All of the above mentioned are important points we‘d like to cover. We are providing you with all sorts of solutions with our ColivingApp. Download it for free and enjoy an easier life in your community.</p>
+					<p style="font-size: 19px;">Our main goal from ColivingApp is to take those insecurities and fears away and make your life in a new community as easy as possible.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="facing-problam-image new-one">
+				<img class="" src="assets/images/Logo-colive.png">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+				<h1 class="cloving-heading">What is coliving</h1>
+				<p class="text-cloving">Coliving is a modern form of housing where residents do not only share their living space but also a set of interests, values, and/or intentions. It's a new take on an old idea, elaborated by a millennial generation that values things like openness and collaboration, social networking, and the sharing economy. Meet people from all around the world and let yourself go with the flow.</p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<div class="full-banner-iphone">
+	<section class="iphoen-text-banner-main first-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="helping-finednew-box">
+						<h3>Helping to findnew flatmates</h3>
+						<ul>
+							<li><p>Changing the city and therefore changing your place of residence and environment is often one of the biggest challenges and reason for doubts and insecurities. In fact, this might even be the biggest fear when you’re moving to a new city, not to mention if you’re even going abroad. </p></li>
+							<li><p>Get to know your future flatmates using the app, even before moving into the city. Details about your preferential location to live, the price range you are willing to pay, personal habits or interests, the languages being spoken, and many more details will help you to find the perfect place to live. Personalise your account by adding your individual hobbies and habits and get your new flatmates to know you before living together. Because coliving is about people.</p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="only-iphon-image">
+						<img src="assets/images/123.jpeg">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="iphoen-text-banner-main second-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="helping-finednew-box">
+						<h3>Splitting the bills</h3>
+						<ul>
+							<li><p>We are aware of the potential problems that can occur in terms of keeping the financial expenses between you and your flatmates under control. For instance, someone buys detergents for 5EUR once and trying to remember mind whose turn it is to buy detergents the next time, or generally splitting the costs between you and your flatmates immediately and expecting everyone to pay the exact amount of 1.66EUR?</p></li>
+							<li><p>How about an app, that is doing all the work for you. You can easily just upload an amount of money, and the app will divide any expenses that have been made and also summarized all sorts of expenses within the apartment’s finances? No more problems with keeping track and writing down every little detail or trying to remind oblivious flatmates.</p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="only-iphon-image">
+						<img src="assets/images/234.jpeg">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="iphoen-text-banner-main thired-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="helping-finednew-box">
+						<h3>Communication</h3>
+						<ul>
+							<li><p>We know that communication is the key, especially in shared flats. Failed communication through several instant messengers such as such Whatsapp or Messenger or even email can be extremely annoying and nerve-racking.</p></li>
+							<li><p>How about a solution that is enabling you to communicate with your landlord and your flatmates directly?</p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="only-iphon-image">
+						<img src="assets/images/123456.png">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="iphoen-text-banner-main four-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 parts-left wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="helping-finednew-box">
+						<h3>House chores management </h3>
+						<ul>
+							<li><p>Distribution of everyday chores in a household, such as cleaning the living room, dusting or vacuuming, when living with other people, is an exemplary and recurring problem in shared flats. </p></li>
+							<li><p>Set up a house chores list with your flatmates with notifications coming directly to your phone.</p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+					<div class="only-iphon-image">
+						<img src="assets/images/345.jpeg">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<div class="buy-sell" id="property">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
+					<h1 class="hdg-main">Landlords - Properties Management</h1>
+					<p class="sb-hdg">Coliving app does not only support tenants but also landlords who rent their apartments. Connect with your tenants and be able to check their info right away. Manage the tenants moving in and moving out. Use our messenger to communicate with your tenants and also get to know about any issues that can be shared with you through the app immediately. Everything for free.</p>
+					<br>
+					<p class="sb-hdg">The same features as on the website and in the app will help you to manage your premises even better. Spare yourself dealing with bothersome and time-consuming apartment managements in a tedious way by using our app.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12 col-sm-6 parts wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
+				<a href="" class="parts-inner">
+					<div class="top-box">
+						<img class="img-fluid" src="assets/images/landlord.jpg" />
+					</div>
+					<div class="over-box">
+								<!-- <i class="fas fa-home"></i>
+									<p>sell my property</p> -->
+								</div>
+							</a>
+						</div>
+
+						<div class="col-12 col-sm-6 parts wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
+							<a href="" class="parts-inner">
+								<div class="top-box">
+									<img class="img-fluid" src="assets/images/landlord1.jpg" />
+								</div>
+								<div class="over-box">
+								<!-- <i class="fas fa-home"></i>
+									<p>properties to buy</p> -->
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 <!-- 		 <div class="coliving-work-section">
 			<div class="coliving-inner">
 				<div class="container">
@@ -433,9 +376,9 @@
 				   </div>
 				</div>
 			</div>
-		 </div> -->
-		 
-		 
+		</div> -->
+
+
 		<div class="top-locations" id="locations">
 			<div class="container">
 				<div class="row">
@@ -501,7 +444,7 @@
 				
 			</div>
 		</div>
-		 
+
 		<div class="articles" id="team">
 			<div class="container">
 				<div class="row">
@@ -559,15 +502,15 @@
 						</div>
 					</div>
 				</div>
-					
+
 				<div class="show-all">
 					<button type="button" class="btn btn-orange">Show all</button>
 				</div>
-					
+
 			</div>
 		</div>
-		 
-		 
+
+
 		<div class="resident" id="testimonial">
 			<div class="resident-inner">
 				<div class="container">
@@ -683,9 +626,9 @@
 			</div>
 		</div> -->
 		
-<footer class="footer" id="contact-us">
-    <div class="container">
-        <div class="row">
+		<footer class="footer" id="contact-us">
+			<div class="container">
+				<div class="row">
             <!-- <div class="col-md-4 footer-parts wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                 <div class="parts-inner">
                     <h1 class="hdg-small">About Colive</h1>
@@ -743,23 +686,23 @@
             </div>
             <div class="main-footer-new">
             	<div class="footer-card">
-					<ul class="footer-social-icon">
-						<li>
-							<a class="social-icon-link" href=""><img src="assets/images/logo/fb.png"></a>
-						</li>
-						<li>
-							<a class="social-icon-link" href=""><img src="assets/images/logo/goog.png"></a>
-						</li>
-						<li>
-							<a class="social-icon-link" href=""><img src="assets/images/logo/in.png"></a>
-						</li>
-						<li>
-							<a class="social-icon-link" href=""><img src="assets/images/logo/insta.png"></a>
-						</li>
-						<li>
-							<a class="social-icon-link" href=""><img src="assets/images/logo/tweet.png"></a>
-						</li>
-					</ul>
+            		<ul class="footer-social-icon">
+            			<li>
+            				<a class="social-icon-link" href=""><img src="assets/images/logo/fb.png"></a>
+            			</li>
+            			<li>
+            				<a class="social-icon-link" href=""><img src="assets/images/logo/goog.png"></a>
+            			</li>
+            			<li>
+            				<a class="social-icon-link" href=""><img src="assets/images/logo/in.png"></a>
+            			</li>
+            			<li>
+            				<a class="social-icon-link" href=""><img src="assets/images/logo/insta.png"></a>
+            			</li>
+            			<li>
+            				<a class="social-icon-link" href=""><img src="assets/images/logo/tweet.png"></a>
+            			</li>
+            		</ul>
             	</div>
             	<div class="footer-card">
             		<p><a href="#">demo@gmail.com</a></p>
@@ -775,21 +718,20 @@
 
     </div>
 </footer>
-		
-		<section class="bottom-footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<p>Copyright {{currentYear}} . All Rights Reserved</p>	
-						
-					</div>
-				</div>
+
+<section class="bottom-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<p>Copyright {{currentYear}} . All Rights Reserved</p>	
+
 			</div>
-		</section>
-	
-	
-	
-   
-   
-   
-  
+		</div>
+	</div>
+</section>
+
+
+
+
+
+

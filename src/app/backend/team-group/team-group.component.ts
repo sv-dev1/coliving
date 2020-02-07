@@ -113,6 +113,7 @@ export class TeamGroupComponent implements OnInit {
   referalLink : any ;
   isLoader : boolean = false;
   messageDateString : any = []; 
+  messagesnewArray : any = [];
 
   @ViewChild('scrollBottom', {static: false}) scrollBottom: ElementRef;    
   constructor(
@@ -498,26 +499,30 @@ export class TeamGroupComponent implements OnInit {
           "userId": this.logged_in_id,
           "teamId": this.by_default_team.teamId,
           "username": sessionStorage.getItem("user_name"),
-          "msg": this.message
+          "msg": this.message,
+          "created_at":new Date()
         }
         this.gruopMessages.push({
           "from_id": this.logged_in_id,
           "teamId": this.by_default_team.teamId,
           "username": sessionStorage.getItem("user_name"),
-          "message": this.message
+          "message": this.message,
+          "created_at":new Date()
         });
       } else {
         this.data = {
           "userId": this.logged_in_id,
           "teamId": this.team_id,
           "username": this.logged_in_username,
-          "msg": this.message
+          "msg": this.message,
+          "created_at":new Date()
         }
         this.gruopMessages.push({
           "from_id": this.logged_in_id,
           "teamId": this.team_id,
           "username": this.logged_in_username,
-          "message": this.message
+          "message": this.message,
+          "created_at":new Date()
         });
       }
     }
@@ -535,7 +540,14 @@ export class TeamGroupComponent implements OnInit {
   loadMyMessages() {
     this.socket.on('messages', (data) => {
       this.gruopMessages = data.messages;
-      console.log('messages', this.gruopMessages);
+      
+     /* this.gruopMessages.forEach(element => {
+         let createdDate = element.created_at;
+ 
+           this.messagesnewArray.push[createdDate][] = element;
+       
+      });*/
+      console.log('ddsadsad', this.gruopMessages);
     });
   }
 
@@ -611,27 +623,20 @@ export class TeamGroupComponent implements OnInit {
   }
 
   isDifferentDay(messageIndex: number): boolean {
-
-    if (messageIndex === 0) return true;
-
-    const d1 = new Date(this.gruopMessages[messageIndex - 1].created_at);
-    const d2 = new Date(this.gruopMessages[messageIndex].created_at);
-
-    return d1.getFullYear() !== d2.getFullYear()
-    || d1.getMonth() !== d2.getMonth()
-    || d1.getDate() !== d2.getDate();
+    if (messageIndex === 0) 
+        return true;
+        const d1 = new Date(this.gruopMessages[messageIndex - 1].created_at);
+        const d2 = new Date(this.gruopMessages[messageIndex].created_at);
+        return d1.getFullYear() !== d2.getFullYear() || d1.getMonth() !== d2.getMonth()
+        || d1.getDate() !== d2.getDate();
   }
+  getMessageDate(messageIndex: number): string {
 
-   getMessageDate(messageIndex: number): string {
-
-    const wholeDate = new Date(this.gruopMessages[messageIndex].created_at).toDateString();
-    this.messageDateString = wholeDate.slice(0, wholeDate.length - 5);
-    if(this.messageDateString !='Invalid'){ 
-      //console.log( this.messageDateString);
-      return this.messageDateString;
+        const wholeDate = new Date(this.gruopMessages[messageIndex].created_at).toDateString();
+        this.messageDateString = wholeDate.slice(0, wholeDate.length - 5);
+        if(this.messageDateString !='Invalid'){ 
+         /* console.log('this.messageDateString', this.messageDateString);*/
+          return this.messageDateString;
     }
-
-
-
   }
 }
