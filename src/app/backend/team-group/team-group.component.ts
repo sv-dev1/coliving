@@ -492,7 +492,8 @@ export class TeamGroupComponent implements OnInit {
 
   sendMessgae() {
     if (this.message == '') {
-      this.valMessage = true;
+        this.valMessage = true;
+        this.toastr.errorToastr('Write something in text box.', 'Error!');
       return;
     } else {
       if (this.user_id == '') {
