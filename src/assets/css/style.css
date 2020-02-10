@@ -402,7 +402,7 @@ ul.location-list li .list-inner .over-content p{
 
 .resident {
     padding:80px 0px 120px;
-    background-image: url('../images/pattern.jpg');
+    /*background-image: url('../images/pattern.jpg');*/
     background-position: 0 0;
     background-repeat: repeat;
     position: relative;
@@ -416,7 +416,10 @@ ul.location-list li .list-inner .over-content p{
     bottom: 0;
     left: 0;
     z-index: 2;
-    background-color: rgba(237,237,237,0.95);
+    background-color: #fff;
+}
+.welcome-headd h1.hdg-main {
+    line-height: 50px;
 }
 
 .resident .resident-inner {
@@ -614,7 +617,7 @@ ul.location-list li .list-inner .over-content p{
 }
 
 .footer{
-    background:#f5f5f5;
+    background:#fff;
     padding:60px 0px;
 }
 
@@ -632,7 +635,7 @@ ul.footer-list li a {
 }
 
 .bottom-footer{
-    background:#e2e2e2;
+    background:#fff;
     text-align:center;
     padding:25px 0px;
 }
@@ -1019,7 +1022,7 @@ ul.for-login-tabs li a:hover{
 }
 .about-us {
     padding: 180px 0 80px;
-    background: #f5f5f5;
+    background: #fff;
 }
 
 .about-us .parts-inner {
@@ -1832,7 +1835,7 @@ button.msg_send_btn.add_member_btn {
 }
 
 .for-sub-name.default-error-message {
-    color: #dc3545;
+    color: red;
     font-weight: 400;
     font-size: 13px;
 }

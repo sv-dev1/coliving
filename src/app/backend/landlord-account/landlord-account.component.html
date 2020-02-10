@@ -137,7 +137,7 @@
                        
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Social media account<span class="validate-red">*</span></label>
+                              <label for="team">Social media account</label>
                               <input type="text" class="form-control" placeholder="Ex. Facebook, Instagram etc.." formControlName="social_account">
                              
                            </div>
@@ -145,8 +145,8 @@
                       
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="bill">Upload image<span class="validate-red">*</span></label>
-                              <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="onSelectFile($event)">
+                              <label for="bill">Upload image</label>
+                              <input type="file" class="form-control-file border" accept="image/*" formControlName="image"  (change)="onSelectFile($event)">
                               <img *ngIf="boolUserImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
                               <img [src]="url" height="200" *ngIf="boolUrl==true">
 

@@ -104,9 +104,9 @@ export class LandlordAccountComponent implements OnInit {
 			address: ['', Validators.required],
 			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
 			country: ['', Validators.required],
-			image:['',Validators.required],
+			image:[''],
 			file:[''],
-			social_account:['',Validators.required],
+			social_account:[''],
 			document:[''],
 		
 		});
@@ -278,11 +278,11 @@ export class LandlordAccountComponent implements OnInit {
 	}
 	keyPress1(event: any) {
 		this.messageDigit ='';
-		const pattern = /[0-9\+\-\ ]/;
+		const pattern = /[^\W_]/;
 		let inputChar = String.fromCharCode(event.charCode);
 		// console.log(inputChar, e.charCode);
 		if (!pattern.test(inputChar)) {
-			this.messageDigit1 = 'Only digit allowed.';
+			this.messageDigit1 = 'Only digits and alpha characters are allowed.';
 			event.preventDefault();
 		}
 	}

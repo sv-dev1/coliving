@@ -342,11 +342,11 @@ export class MyAccountComponent implements OnInit {
 	}
 	keyPress1(event: any) {
 		this.messageDigit ='';
-		const pattern = /[0-9\+\-\ ]/;
+		const pattern = /[^A-Za-z0-9]+/;
 		let inputChar = String.fromCharCode(event.charCode);
 		// console.log(inputChar, e.charCode);
 		if (!pattern.test(inputChar)) {
-			this.messageDigit1 = 'Only digit allowed.';
+			this.messageDigit1 = 'Only digit and alpha characters allowed.';
 			event.preventDefault();
 		}
 	}
