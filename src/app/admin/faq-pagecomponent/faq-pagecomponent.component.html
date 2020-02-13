@@ -1,0 +1,137 @@
+<section class="wrapper work-panel">
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="work-block">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <ul class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                  <li class="breadcrumb-item active">FAQ'S</li>
+               </ul>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12">
+               <button class="pull-right btn btn-orange-sm" (click)="openAddCategoryModal();"><i class="fa fa-plus"></i>Add FAQ</button>
+            </div>
+            <div class="col-12">
+               <div class="card mb-5">
+                  <div class="card-header">FAQ's Listing</div>
+                  <div class="card-body pb-0">
+                     <div class="row">
+
+                       <table class="table table-striped">
+                        <thead>
+                           <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Question</th>
+                              <th scope="col">Description</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Created At</th>
+                              <th scope="col">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <th scope="row">1</th>
+                              <td>Question</td>
+                              <td>Description</td>
+                              <td>Status</td>
+                              <td>Created At</td>
+                              <td> 
+                               <a  class="btn btn-orange-sm" href="javascript:void(0);" ><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                               <a  class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </td>
+                         </tr>
+                      </tbody>
+                   </table>
+
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+</div>
+</section>
+<!----------- ADD FAQ MODEL START ---------------->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenAddFaqModal ? 'block' : 'none'" *ngIf="isopenAddFaqModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Add FAQ</h4>
+               <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <form [formGroup]="faqForm" (ngSubmit)="addFaq(faqForm.value)" >   
+                  <div class="form-group">
+                     <label>Question:</label>
+                     <input type="text" formControlName="question" class="form-control" [ngClass]="{'is-invalid': submitted && f.question.errors}" />
+                     <div *ngIf="submitted && f.question.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.question.errors.required">Question is required.</span>
+                     </div>
+                     <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                     </div>
+                  </div>
+
+                  <ckeditor [editor]="Editor" formControlName="description" data="<p>Hello, world!</p>" [ngClass]="{'is-invalid': submitted && f.description.errors}" ></ckeditor>
+                  <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+                     <button type="submit" class="btn btn-orange-sm">Yes, Add FAQ</button>
+                  </div>
+               </form> 
+            </div>
+         </div>
+      </div>
+   </div>
+</div> 
+<!----------- ADD FAQ MODEL END ---------------->
+
+<!----------- EDIT FAQ MODEL START ---------------->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenEditFaqModal ? 'block' : 'none'" *ngIf="isopenEditFaqModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Edit Category</h4>
+               <button type="button" class="close" data-dismiss="modal" (click)="closeEditModal()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form [formGroup]="faqForm" (ngSubmit)="addFaq(faqForm.value)" >   
+               <div class="form-group">
+                  <label>Question:</label>
+                  <input type="text" formControlName="question" class="form-control" [ngClass]="{'is-invalid': submitted && f.question.errors}" />
+                  <div *ngIf="submitted && f.question.errors" class="invalid-feedback">
+                     <span class="for-sub-name" *ngIf="f.question.errors.required">Question is required.</span>
+                  </div>
+                  <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                  </div>
+               </div>
+               
+               <ckeditor [editor]="Editor" formControlName="description" data="<p>Hello, world!</p>" [ngClass]="{'is-invalid': submitted && f.description.errors}"></ckeditor>
+               <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+                  <button type="submit" class="btn btn-orange-sm">Yes, Add FAQ</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+</div> 
+<!----------- EDIT FAQ MODEL END ---------------->
+
+
+
