@@ -296,8 +296,12 @@ export class AppDwonloadPageComponent implements OnInit {
 	questionareSubmit(formValue){
        console.log('formvalue kkk----', this.questionareform.controls);
        console.log('formvalue----', this.questionareform.controls.status);
+
 		this.submitted = true;
-	    
+	    if(this.questionareform.controls.status == undefined) {
+        	this.toastr.errorToastr('We are unable to process the request.Please check the form something might be not filled properly.');
+            return;
+        }
 		if(formValue.languages  == ""){
 			this.languageEmpty = true;
 		}
@@ -336,8 +340,9 @@ export class AppDwonloadPageComponent implements OnInit {
 		if(this.questionareform.invalid) {
 			return;
 		} else{
-		    
-		   /* console.log('step second-------',formValue);
+		    let price_range=  formValue.minimumPrice+'-'+formValue.maximunPrice; 
+           /* console.log('price_range-------',price_range);
+		    console.log('step second-------',formValue);
 		    return;*/
 		    const formData = new FormData();
 			formData.append('firstName', formValue.firstName);
@@ -354,7 +359,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			formData.append('nationality_map',JSON.stringify(formValue.nationality));
 			formData.append('occuptation_tt', formValue.occuptation_tt); 
 			formData.append('outing_day', this.datePipe.transform(formValue.outing_day,"yyyy-MM-dd")); 
-			formData.append('price_range', formValue.minimumPrice+'-'+formValue.maximunPrice); 
+			formData.append('price_range', price_range); 
 			formData.append('stay_date', formValue.stay_date);
 			formData.append('wakeup_time', this.weekend_time); 
 			formData.append('email', formValue.email);

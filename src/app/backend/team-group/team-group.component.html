@@ -349,8 +349,8 @@
                               <button type="button" (click)="shareButton()" class="btn btn-orange-sm btnleft share-left common-b" > {{buttonName}}
                               </button> 
                               <button type="button" (click)="copyMessage(referralCode)" class="common-b btn btn-orange-sm btnright copy-btn" >Copy</button>
-                              <button *ngIf="isLoader==false" type="button" class="btn common-b btn-orange view-group-cv" (click)="downloadPDF()">View group cv</button>
-                              <button *ngIf="isLoader==true" type="button" class="btn common-b btn-orange view-group-cv">Downloaded</button>
+                              <button *ngIf="isLoader==false" type="button" class="btn common-b btn-orange view-group-cv" (click)="downloadPDF(teamName)">View group cv</button>
+                              <button *ngIf="isLoader==true" type="button" class="btn common-b {{btn}} view-group-cv">Downloaded</button>
                               <div class="social" [style.display]="socialshare ? 'block' : 'none'" *ngIf="socialshare">
                               <share-buttons theme="moon" show="4" image="https://loremflickr.com/320/240" [title]="'colivingApp'" [description]="'colivingApp - Tenats and Landlords'" [url]="refferalUrl" [tags]="'Share the group along with te people'"></share-buttons>
                               <!-- <share-buttons [theme]="moon" [include]="['email','facebook','linkedin','twitter']" [showCount]="true" [url]="refferalUrl" [title]="'mysite'" [description]="'my description'" [size]="-4" [show]="4" [autoSetMeta]="true" [image]="https://loremflickr.com/320/240" [tags]="'tag1, tag2, tag3'" ></share-buttons>    -->                    

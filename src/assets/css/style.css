@@ -1468,7 +1468,7 @@ button.fc-today-button.fc-button.fc-button-primary{
     font-weight: 500;
     position: relative;
     margin: 10px 0 45px;
-    text-transform: capitalize;
+    /*text-transform: capitalize;*/
     text-align: center;
     font-family: Roboto,"Helvetica Neue",sans-serif;
 }
