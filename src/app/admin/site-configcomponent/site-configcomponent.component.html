@@ -1,0 +1,71 @@
+<section class="wrapper work-panel">
+	<app-header></app-header>
+	<app-sidebar></app-sidebar>
+	<div class="work-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<ul class="breadcrumb custom-breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+						<li class="breadcrumb-item active">Site Config</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-5">
+						<div class="card-header">Site Config</div>
+						<div class="card-body pb-0">
+							<form [formGroup]="siteConfigForm" (ngSubmit)="siteConfig(siteConfigForm.value)">
+								<div class="row">
+
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label for="team">Email Address<span class="validate-red">*</span></label>
+											<input type="email" class="form-control" placeholder="Email Address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" >
+											<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-12 col-sm-6">
+										<div class="form-group">
+											<label for="team">Phone number<span class="validate-red">*</span></label>
+											<international-phone-number placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="current_country" [required]="true" formControlName="phoneNo" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }"></international-phone-number>
+											<div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+												<span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone number is required.</span>
+											</div>
+											<div *ngIf="this.messageDigit">
+												<span class="customPhoneMessage">{{this.messageDigit}}</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-12 col-sm-12">
+										<div class="form-group">
+											<label for="team">Address: <span class="validate-red">*</span></label>
+											<ckeditor [editor]="Editor" formControlName="address" data="<p>Hello, world!</p>" [ngClass]="{'is-invalid': submitted && f.address.errors}" ></ckeditor>
+											<div *ngIf="addressEmpty"  class="for-sub-name default-error-message">Address is required.
+											</div>
+										</div>
+									</div>
+
+									<div class="col-12 col-sm-12 text-center">
+										<button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
+									</div>
+
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
