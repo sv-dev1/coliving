@@ -37,7 +37,7 @@
                      <div class="form-group">
                         <label for="team" class="radio-inline">Nationality<span class="validate-red">*</span></label>
                         <angular2-multiselect [data]="countrydropdownList" 
-                        [(ngModel)]="nationalitySelectedItems"
+                       
                         [settings]="dropdownSettingsCountry"
                         (onSelect)="onNationalitySelect($event)" 
                         (onDeSelect)="OnNationalityDeSelect($event)" 
@@ -52,7 +52,7 @@
                      <div class="form-group">
                         <label for="team" class="radio-inline">Language<span class="validate-red">*</span></label>
                         <angular2-multiselect [data]="langdropdownList"
-                        [(ngModel)]="languageSelectedItems"
+                        
                         [settings]="dropdownSettingsLanguage" 
                         formControlName="languages" 
                         (onSelect)="onLanguageSelect($event)" 
@@ -101,7 +101,7 @@
                      </div>
                      <div class="form-group">
                         <label for="team">Weekday wake up time.<span class="validate-red">*</span></label>
-                        <ngb-timepicker [(ngModel)]="weekend_wakeup_time" formControlName="weekend_wakeup_time"></ngb-timepicker>
+                        <ngb-timepicker  formControlName="weekend_wakeup_time"></ngb-timepicker>
                         <div *ngIf="submitted && f.weekend_wakeup_time.errors" class="invalid-feedback">
                            <span class="for-sub-name" *ngIf="f.weekend_wakeup_time.errors.required">Weekend wake-up time is required.</span>
                         </div>

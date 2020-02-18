@@ -33,6 +33,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { HomePagecomponentComponent } from './admin/home-pagecomponent/home-pagecomponent.component';
 import { FaqPagecomponentComponent } from './admin/faq-pagecomponent/faq-pagecomponent.component';
 import { SiteConfigcomponentComponent } from './admin/site-configcomponent/site-configcomponent.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { PagesComponent } from './admin/pages/pages.component';
 
 
 const routes: Routes = [
@@ -63,11 +66,14 @@ const routes: Routes = [
   { path: 'properties', component: PropertyComponent, canActivate: [AuthGuard] },
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
-   
+  
+  { path: 'admin/login', component: AdminLoginComponent},
+  { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'admin/home-page-content', component: HomePagecomponentComponent, canActivate: [AuthGuard] },
   { path: 'admin/faq-page-content', component: FaqPagecomponentComponent, canActivate: [AuthGuard] },
   { path: 'admin/site-config', component: SiteConfigcomponentComponent, canActivate: [AuthGuard] },
-   
+  { path: 'admin/pages', component: PagesComponent, canActivate: [AuthGuard] },
+
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
   
   {path: '**', redirectTo: '/'},

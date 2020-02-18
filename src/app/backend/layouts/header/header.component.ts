@@ -21,19 +21,21 @@ export class HeaderComponent implements OnInit {
   errorsArr:any = []; 
   newArray : any = [];
   profileData : any = [];
-  userDataArr:any =[];
-  image_url: string = "";
-  image_base_url:any;
-  base_url:any;
-  images: string = "";
+  userDataArr : any =[];
+  image_url : string = "";
+  image_base_url : any;
+  base_url : any;
+  images : string = "";
   isChangePassword: boolean = false;
-  ConPass:FormGroup;
-  submitted: boolean =false;
-  firstName:string='';
-  lastName:string='';
-  status: boolean = false;
+  ConPass : FormGroup;
+  submitted : boolean =false;
+  firstName :string='';
+  lastName : string='';
+  status : boolean = false;
   badgeNumber : number;
-  response:any;
+  response : any ;
+  roleId : string = '';
+
   constructor(
         private router: Router,
         public toastr: ToastrManager,
@@ -55,6 +57,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = true;
+      this.roleId = sessionStorage.getItem('roleId');
     } 
     this.getUserData();  
     this.badgeNumber = 2;

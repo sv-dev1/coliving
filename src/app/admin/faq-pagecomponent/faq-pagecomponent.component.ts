@@ -53,12 +53,12 @@ export class FaqPagecomponentComponent implements OnInit {
 		});
 	}
 	ngOnInit() {
-	 /*   if(sessionStorage.getItem("roleId") != '1'){
+	    if(sessionStorage.getItem("roleId") != '1'){
                 this.router.navigate(['/dashboard']);
-          }*/
+          }
          this.getFaqs();
      }
-
+     
      getFaqs() {
      	this.data_service.getCategories().subscribe((response:any) =>{   
      		this.allFaqArray = response.categories;

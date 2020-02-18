@@ -73,6 +73,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { HomePagecomponentComponent } from './admin/home-pagecomponent/home-pagecomponent.component';
 import { FaqPagecomponentComponent } from './admin/faq-pagecomponent/faq-pagecomponent.component';
 import { SiteConfigcomponentComponent } from './admin/site-configcomponent/site-configcomponent.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { PagesComponent } from './admin/pages/pages.component';
 
 const icons = [
   // ... other icons
@@ -175,6 +178,9 @@ export function provideConfig() {
     HomePagecomponentComponent,
     FaqPagecomponentComponent,
     SiteConfigcomponentComponent,
+    AdminLoginComponent,
+    AdminDashboardComponent,
+    PagesComponent,
    
   
  
