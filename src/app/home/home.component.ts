@@ -18,9 +18,11 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class HomeComponent implements OnInit {
 
-  subscribeForm: FormGroup;
-  session_key:boolean = false;
-  currentYear: any ;
+  subscribeForm : FormGroup;
+  session_key : boolean = false;
+  currentYear : any ;
+  roleId : string = '';
+
   @Input() currentState;
   @ViewChild('tw', null) typewriterElement;
   @ViewChild('tw2', null) typewriterElement2;
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
 
     if(sessionStorage.getItem("auth_token") != undefined){
       this.session_key = true;
+      this.roleId = sessionStorage.getItem('roleId');
     } 
 
    /* const target2 = this.typewriterElement2.nativeElement;

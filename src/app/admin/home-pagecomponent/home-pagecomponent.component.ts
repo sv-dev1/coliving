@@ -5,7 +5,6 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
 	selector: 'app-home-pagecomponent',
@@ -14,6 +13,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class HomePagecomponentComponent implements OnInit {
 
+    descriptionEmpty : boolean = false;
 	constructor(
 			private formBuilder:FormBuilder,
 			private router: Router,
@@ -23,9 +23,8 @@ export class HomePagecomponentComponent implements OnInit {
 		) { }
 
 	ngOnInit() {
-		/*if(sessionStorage.getItem("roleId") != '1'){
+		if(sessionStorage.getItem("roleId") != '1'){
 			this.router.navigate(['/dashboard']);
-		}*/
+		}
 	}
-
 }

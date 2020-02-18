@@ -10,16 +10,18 @@ export class SidebarComponent implements OnInit {
     param1 : string = '';
 	  isHouse : boolean = false;
     isMyAccount : boolean = false;
-    isBills: boolean = false;
-    status: boolean = false;
-    
+    isBills : boolean = false;
+    status : boolean = false;
+    roleId : string = '';
+
 	constructor(private router: Router,
 		private route: ActivatedRoute
 		) { 
 		   this.param1 = this.route.snapshot.params.p1; 
 		}
     ngOnInit() {
-
+           this.roleId = sessionStorage.getItem('roleId');
+           
   	       if(this.router.url == '/task-suggestions/'+this.param1){
             this.isHouse = true;
             }

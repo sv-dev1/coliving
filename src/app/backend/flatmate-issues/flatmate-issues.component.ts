@@ -76,7 +76,7 @@ export class FlatmateIssuesComponent implements OnInit {
 	ngOnInit() {
 		this.getTeam();
 		this.getIssues();
-      console.log('this.base_url', this.base_url);
+        
 	}
 
    

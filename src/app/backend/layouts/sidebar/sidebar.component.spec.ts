@@ -2,10 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
 
-describe('SidebarComponent', () => {
+  var roleId = '';
+  describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
-
+  
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SidebarComponent ]
@@ -23,3 +25,8 @@ describe('SidebarComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
+ 
+
+

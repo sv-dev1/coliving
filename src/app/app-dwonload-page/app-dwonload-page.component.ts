@@ -94,7 +94,7 @@ export class AppDwonloadPageComponent implements OnInit {
 			firstName: ['', Validators.required],
 			favouriteLocation: ['', Validators.required],
 			dob: ['', Validators.required],
-			weekend_wakeup_time: ['', Validators.required],
+			weekend_wakeup_time: [{hour: 8, minute: 30}, Validators.required],
 			languages: ['', Validators.required],
 			nationality: ['', Validators.required],
 			gender: ['', Validators.required],
@@ -295,10 +295,10 @@ export class AppDwonloadPageComponent implements OnInit {
 	
 	questionareSubmit(formValue){
        console.log('formvalue kkk----', this.questionareform.controls);
-       console.log('formvalue----', this.questionareform.controls.status);
-
+       console.log('formvalue----', this.questionareform.status);
+      
 		this.submitted = true;
-	    if(this.questionareform.controls.status == undefined) {
+	    if(this.questionareform.status == undefined) {
         	this.toastr.errorToastr('We are unable to process the request.Please check the form something might be not filled properly.');
             return;
         }

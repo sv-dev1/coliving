@@ -39,9 +39,9 @@ export class SiteConfigcomponentComponent implements OnInit {
 	}
 
 	ngOnInit() {
-	/*	if(sessionStorage.getItem("roleId") != '1'){
+	    if(sessionStorage.getItem("roleId") != '1'){
 			this.router.navigate(['/dashboard']);
-		}*/
+		}
 		this.getCurrentIP();
 	}
     getCurrentIP(){

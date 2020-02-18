@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         sessionStorage.removeItem("userId");
                         sessionStorage.removeItem("questionaire");
                         sessionStorage.removeItem("user_name");
-                        this.router.navigate(['/login']);
+                        this.router.navigate(['/']);
                     }
                     if(event.status == 500){
                         this.toastr.errorToastr('Internal server Error');
@@ -51,7 +51,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
                     sessionStorage.removeItem("user_name");
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/']);
                  }
                 if(err.status == 401 && !this.executing){
                     this.toastr.errorToastr('Session Expired,Please Login again');
@@ -60,7 +60,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
                     sessionStorage.removeItem("user_name");                    
-                    this.router.navigate(['/login']);
+                    this.router.navigate(['/']);
                 }
                 
                 if(err.error.username) {

@@ -1716,7 +1716,9 @@ span.sidebar-close svg#Capa_1 {
     left: 10px;
     top: 0px;
 }
-
+.admin-login {
+    width: 100% !important;
+}
 
 /*-----------------sagar-end-----------------*/
 
