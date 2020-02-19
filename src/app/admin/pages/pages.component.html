@@ -1,0 +1,88 @@
+<section class="wrapper work-panel">
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="work-block">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <ul class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                  <li class="breadcrumb-item active">Pages</li>
+               </ul>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12">
+               <button class="pull-right btn btn-orange-sm" (click)="openAddPageModal();"><i class="fa fa-plus"></i>Add Page</button>
+            </div>
+            <div class="col-12">
+               <div class="card mb-5">
+                  <div class="card-header">Page's Listing</div>
+                  <div class="card-body pb-0">
+                     <div class="row">
+                        <table class="table table-striped">
+                           <thead>
+                              <tr>
+                                 <th scope="col">#</th>
+                                 <th scope="col">Name</th>
+                                 <th scope="col">Status</th>
+                                 <th scope="col">Created At</th>
+                                 <th scope="col">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let page of allpagesArray|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                 <th scope="row">{{ i + 1 }}</th>
+                                 <td>{{ page.name }} </td>
+                                 <td class="text-success" *ngIf="page.status=='0'">Active</td>
+                                 <td class="text-danger" *ngIf="page.status=='1'">In Active</td>
+                                 <td>{{ page.createdAt | date:'medium'}}</td>
+                                 <td> 
+                                    <a class="btn btn-orange-sm" href="javascript:void(0);" ><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="contentPerPage(page)" ><i class="material-icons">pageview</i></a>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!----------- ADD FAQ MODEL START ---------------->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenAddPageModal ? 'block' : 'none'" *ngIf="isopenAddPageModal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Add Page</h4>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <form [formGroup]="addPageForm" (ngSubmit)="addPage(addPageForm.value)" >
+            <div class="form-group">
+               <label>Page Name:</label>
+               <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="f.name.errors.required">Page name is required.</span>
+               </div>
+               <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+               <button type="submit" class="btn btn-orange-sm">Add</button>
+            </div>
+            </form> 
+         </div>
+      </div>
+   </div>
+</div>
+</div> 
+<!----------- ADD FAQ MODEL END ---------------->
