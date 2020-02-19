@@ -1,0 +1,19 @@
+.work-block .table td, .work-block .table th {
+    font-size: 13px;
+    vertical-align: middle;
+}
+a.btn.btn-orange-sm {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+button.pull-right.btn.btn-orange-sm {
+    border-radius: 0;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+.ck-editor__editable_inline {
+    min-height: 500px;
+}
+  

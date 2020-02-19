@@ -1,0 +1,106 @@
+<section class="wrapper work-panel">
+   <app-header></app-header>
+   <app-sidebar></app-sidebar>
+   <div class="work-block">
+      <div class="container">
+         <div class="row">
+            <div class="col-12">
+               <ul class="breadcrumb custom-breadcrumb">
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                  <li class="breadcrumb-item active">{{ pageName }} page content</li>
+               </ul>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12">
+               <div class="card mb-3">
+                  <div class="card-header">Add content to {{ pageName }}</div>
+                  <div class="card-body">
+                     <form [formGroup]="pageContentForm" (ngSubmit)="addContent(pageContentForm.value)">
+                     <div class="row">
+                        <div class="col-12 col-sm-12">
+                           <div class="form-group">
+                              <label for="team">Title<span class="validate-red">*</span></label>
+                              <input type="text" class="form-control" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" >
+                              <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                 <span class="for-sub-name" *ngIf="f.title.errors.required">Title is required.</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                           <div class="form-group">
+                              <label for="team">Sub Title<span class="validate-red">*</span></label>
+                              <input type="text"  class="form-control" placeholder="Sub Title" formControlName="subtitle" [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }">
+                              <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
+                                 <span class="for-sub-name" *ngIf="f.subtitle.errors.required">Sub Title is required.</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                           <div class="form-group">
+                              <label for="bill">Image</label>
+                              <input type="file" class="form-control-file border" accept="image/*" formControlName="image"  (change)="onSelectFile($event)">
+                              <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
+                              </div>
+                              <img *ngIf="boolUserImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
+                              <img [src]="url" height="200" *ngIf="boolUrl==true">
+                              <br/>
+                           </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                           <div class="form-group">
+                              <label for="bill">Description</label>
+                              <ckeditor [editor]="Editor" formControlName="description" data="
+                              <p>Hello, world!</p>
+                              " [ngClass]="{'is-invalid': submitted && f.description.errors}" ></ckeditor>
+                              <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
+                              </div>
+                           </div>
+                        </div>
+                        <input type="hidden" formControlName="file">
+                        <div class="col-12 col-sm-12 text-center">
+                           <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 15px 30px;">Submit</button>
+                        </div>
+                     </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12">
+               <div class="card mb-5">
+                  <div class="card-header">{{pageName}} content listing</div>
+                  <div class="card-body pb-0">
+                     <div class="row">
+                        <table class="table table-striped">
+                           <thead>
+                              <tr>
+                                 <th scope="col">S.No</th>
+                                 <th scope="col">Title</th>
+                                 <th scope="col">Sub Title</th>
+                                
+                                 <th scope="col">Status</th>
+                                 <th scope="col">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr *ngFor="let page of pageContent|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                 <td scope="col" class="text-success">#{{ i + 1 }}</td>
+                                 <td scope="col">{{ page.title }}</td>
+                                 <td scope="col">{{ page.subtitle }}</td>
+                                 
+                                 <td class="text-success" *ngIf="page.status=='0'">Active</td>
+                                 <td class="text-danger" *ngIf="page.status=='1'">In Active</td>
+                                 <td scope="col">Action</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
