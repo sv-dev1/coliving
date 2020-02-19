@@ -76,6 +76,7 @@ import { SiteConfigcomponentComponent } from './admin/site-configcomponent/site-
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { PagesComponent } from './admin/pages/pages.component';
+import { PageContentComponent } from './admin/page-content/page-content.component';
 
 const icons = [
   // ... other icons
@@ -181,6 +182,7 @@ export function provideConfig() {
     AdminLoginComponent,
     AdminDashboardComponent,
     PagesComponent,
+    PageContentComponent,
    
   
  

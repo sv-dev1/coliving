@@ -28,7 +28,7 @@ export class DataService {
 			return Observable.throw(error);
 		});
 	}
-    apiRegister(input_data){
+	apiRegister(input_data){
 		return this.http.post(this.base_url+'apiregister',input_data)
 		.map((response:Response)=>{
 			return response;
@@ -90,7 +90,7 @@ export class DataService {
 		const httpOptions = { headers: new HttpHeaders({'Content-Type': 'application/json', 'authorization': token })}; 
 		return this.http.post(this.base_url+'team/users',postArr,httpOptions)
 		.map((response:Response)=>{
-		//	console.log('TeamUser response',response);
+			//	console.log('TeamUser response',response);
 			return response;
 		})
 		.catch((error:Error) => {
@@ -147,7 +147,7 @@ export class DataService {
 	}
 
 	addCategory(formData){
-        let token; 
+		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
 		} 
@@ -175,7 +175,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
-    getAllIssues(){ 
+	getAllIssues(){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -227,19 +227,19 @@ export class DataService {
 		}
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
-	        let userId = sessionStorage.getItem('userId');
-			const input_data = {
-				'taskId': input.taskId,
-				'notes': input.notes,
-				'userId':userId
-			}
-			let url = this.base_url+'task/suggestion';
-			return this.http.post(url ,input_data,{ headers: headers })
-			.map((response:Response)=>{
-				return response;
-			})
-			.catch((error:Error) => {
-				return Observable.throw(error);});
+		let userId = sessionStorage.getItem('userId');
+		const input_data = {
+			'taskId': input.taskId,
+			'notes': input.notes,
+			'userId':userId
+		}
+		let url = this.base_url+'task/suggestion';
+		return this.http.post(url ,input_data,{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
 	}
 	forgetPassword(input_data){
 		return this.http.post(this.base_url+'forget-password',input_data)
@@ -303,7 +303,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
-    deleteCategory(inputData){
+	deleteCategory(inputData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -325,32 +325,32 @@ export class DataService {
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		let url = this.base_url+'category/'+input_change.category_id;	    
-    	return this.http.put(url,input_change, { headers: headers })
-    	.map((response:Response)=>{
-    		  const data = response;
-    		  return data;
-    		})
-    	.catch((error:Error) => {
-    		//console.log(error);
-    		return Observable.throw(error);});
-    	
-    } 
- 
+		return this.http.put(url,input_change, { headers: headers })
+		.map((response:Response)=>{
+			const data = response;
+			return data;
+		})
+		.catch((error:Error) => {
+			//console.log(error);
+			return Observable.throw(error);});
+
+	} 
+
 	changePassword(input_change){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);	    
-    	return this.http.put(this.base_url+'password',input_change, { headers: headers })
-    	.map((response:Response)=>{
-    		  const data = response;
-    		  return data;
-    		})
-    	.catch((error:Error) => {
-    		//console.log(error);
-    		return Observable.throw(error);});
-    	
-    } 
+		return this.http.put(this.base_url+'password',input_change, { headers: headers })
+		.map((response:Response)=>{
+			const data = response;
+			return data;
+		})
+		.catch((error:Error) => {
+			//console.log(error);
+			return Observable.throw(error);});
+
+	} 
 	submitQuest(formData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -412,7 +412,7 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
-    currentLocation(pvarIp){
+	currentLocation(pvarIp){
 		return this.http.get('https://ipapi.co/'+pvarIp+'/json/' ) 
 		.map((response:Response)=>{const data = response;return data;})
 		.catch((error:Error) => {console.log(error);return Observable.throw(error);});
@@ -444,9 +444,9 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			console.log('error',error);
-		  return Observable.throw(error);});
+			return Observable.throw(error);});
 	}
-    getAllMessagesByIssueId(id){
+	getAllMessagesByIssueId(id){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -464,7 +464,7 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-    addReply(formData){
+	addReply(formData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -479,7 +479,7 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-     verifyEmailAddress(data){ 
+	verifyEmailAddress(data){ 
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -537,8 +537,8 @@ export class DataService {
 		.map((response:Response)=>{return response;})
 		.catch((error:Error) => {return Observable.throw(error);});
 	}
-    deleteIssue(issueId) {
-    	let token; 
+	deleteIssue(issueId) {
+		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
 		}
@@ -552,25 +552,25 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			return Observable.throw(error);});
-    }
-    toDataURL(url, callback) {
-	    var xhr = new XMLHttpRequest();
-	    xhr.onload = function() {
-	      var reader = new FileReader();
-	      reader.onloadend = function() {
-	        callback(reader.result);
-	      }
-	      reader.readAsDataURL(xhr.response);
-	    };
-	    xhr.open('GET', url);
-	    xhr.responseType = 'blob';
-	    xhr.send();
-    }
+	}
+	toDataURL(url, callback) {
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			var reader = new FileReader();
+			reader.onloadend = function() {
+				callback(reader.result);
+			}
+			reader.readAsDataURL(xhr.response);
+		};
+		xhr.open('GET', url);
+		xhr.responseType = 'blob';
+		xhr.send();
+	}
 
 
 
-    addFaq(formData){
-        let token; 
+	addFaq(formData){
+		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
 		} 
@@ -584,8 +584,23 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
-    
-     deleteFaq(inputData){
+
+	getAllpages(){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'pagelist',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	deleteFaq(inputData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
@@ -599,6 +614,25 @@ export class DataService {
 			return response;
 		})
 		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	getPageContent(pageId) {
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		return this.http.get(this.base_url+'page/'+pageId,{ headers: headers })
+		.map((response:Response)=>{
+			//   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
 			return Observable.throw(error);});
 	}
 } 

@@ -95,7 +95,7 @@
 				<p>Pages</p>
 			</a>
 		</li>
-	<!-- 	<li routerLinkActive="active" *ngIf="roleId=='1'">
+<!-- 		<li routerLinkActive="active" *ngIf="roleId=='1'">
 			<a routerLink="/admin/home-page-content"  routerLinkActive="active-link">
 				<i class="material-icons">home</i>
 				<p>Home Page Content</p>
@@ -122,19 +122,19 @@
 		<img class="money-side" src="assets/images/Logo-colive.png">
 	</div>
 	<ul>
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" *ngIf="roleId=='3'">
 			<a routerLink="/settings" routerLinkActive="active-link">
 				<i class="fas fa-tachometer-alt"></i>
 				<span class="span-tog">Dashboard</span>
 			</a>
 		</li>
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" *ngIf="roleId=='3'"> 
 			<a routerLink="/profile" routerLinkActive="active-link">
 				<i class="fas fa-address-book"></i>
 				<span class="span-tog">My Account</span>
 			</a>
 		</li>
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" *ngIf="roleId=='3'">
 			<a routerLink="/properties" routerLinkActive="active-link">
 				<i class="fas fa-globe"></i>
 				<span class="span-tog">Property</span>
@@ -158,13 +158,13 @@
 				<span class="span-tog">Booking</span>
 			</a>
 		</li> -->
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" *ngIf="roleId=='3'">
 			<a routerLink="/team-group" routerLinkActive="active-link">
 				<i class="fas fa-users"></i>
 				<span class="span-tog">Team Group</span>
 			</a>
 		</li>
-		<li routerLinkActive="active">
+		<li routerLinkActive="active" *ngIf="roleId=='3'">
 			<a routerLink="/flatmate-issues" routerLinkActive="active-link">
 				<i class="far fa fa-flask"></i>
 				<span class="span-tog">Flatmate Issues</span>
@@ -182,5 +182,18 @@
 				<span class="span-tog">Settings</span>
 			</a>
 		</li> -->
+	    <li routerLinkActive="active" *ngIf="roleId=='1'">
+			<a routerLink="/admin/dashboard" routerLinkActive="active-link">
+				<i class="fas fa-tachometer-alt"></i>
+				<span class="span-tog">Dashboard</span>
+			</a>
+		</li>
+
+		<li routerLinkActive="active" *ngIf="roleId=='1'">
+			<a routerLink="/admin/pages" routerLinkActive="active-link">
+				<i class="material-icons">pages</i>
+				<span class="span-tog">Pages</span>
+			</a>
+		</li>
 	</ul>
 </div>
