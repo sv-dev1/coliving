@@ -26,6 +26,9 @@ export class PagesComponent implements OnInit {
 	allpagesArray : any = [];
 	pagesCount : any;
 	isArrayLength : boolean = false;
+	isopenEditPageModal : boolean = false;
+	id : string = '';
+	updatePageForm : FormGroup;
 
 	constructor(
 		private formBuilder : FormBuilder,
@@ -37,6 +40,12 @@ export class PagesComponent implements OnInit {
 		this.addPageForm = this.formBuilder.group({
 			name: ['', Validators.required],
 		});
+
+		this.updatePageForm = this.formBuilder.group({
+			name: ['', Validators.required],
+			status: ['', Validators.required],
+		});
+
 		this.image_base_url = environment.image_base_url;
 		this.base_url = environment.base_url;
 	}
@@ -107,9 +116,60 @@ export class PagesComponent implements OnInit {
 	}
 
 	contentPerPage(page) {
-        this.router.navigate(['/admin/page-content'], { queryParams: { pn : page.name, page: page.pageId } });  
+		this.router.navigate(['/admin/page-content'], { queryParams: { pn : page.name, page: page.pageId } });  
 	}
-     
+
+	editPageModal(page){
+		//console.log('formValue', page);
+		this.id = page.pageId;
+		this.isopenEditPageModal = true;
+		this.updatePageForm.patchValue({
+			name : page.name,
+			status : page.status
+		});
+
+	}
+
+	get g() { return this.updatePageForm.controls; }
+
+	updatePage(formValue) {
+		
+		this.submitted = true;
+		if(this.updatePageForm.invalid) {
+			return;
+		}else{
+			const input_data = {  
+				"name": formValue.name, 
+				"status": formValue.status, 
+			}
+			const formData = new FormData();
+			formData.append('name', input_data.name);
+			formData.append('status', input_data.status);
+			let token; 
+			if(sessionStorage.getItem("auth_token")!=undefined){
+				token = sessionStorage.getItem("auth_token"); 
+			}
+			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+			this.http.post(this.base_url+'pages/edit/'+this.id, formData, httpOptions).subscribe((response:any) => {
+				if(response.error ==true) {
+					this.toastr.errorToastr(response.message, 'Error!');
+				} else {
+					this.toastr.successToastr(response.message, 'Success!');
+				}
+				this.isopenEditPageModal = false;
+				this.submitted = false;
+				this.updatePageForm.reset(); 
+				this.getAllpages();
+
+			},error=>{ 
+				console.log('error', error);
+			});
+		}
+	}
+	closeEditModal(){
+		this.isopenEditPageModal = false;
+		this.updatePageForm.reset();
+	}
 }
 
 

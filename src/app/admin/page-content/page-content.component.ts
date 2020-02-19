@@ -33,6 +33,7 @@ export class PageContentComponent implements OnInit {
     pageContentCount :  any;
     isArrayLength : boolean = false;
     pageName : string = '';
+   
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -111,7 +112,7 @@ export class PageContentComponent implements OnInit {
 		}
 		if(this.pageContentForm.invalid) {
 			return;
-		}else{
+		} else {
 			
 			const formData = new FormData();
 			formData.append('title', formValue.title);
@@ -136,4 +137,6 @@ export class PageContentComponent implements OnInit {
 			});
 		}
 	}
+
+	
 }
