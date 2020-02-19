@@ -38,7 +38,7 @@
                                  <td class="text-danger" *ngIf="page.status=='1'">In Active</td>
                                  <td>{{ page.createdAt | date:'medium'}}</td>
                                  <td> 
-                                    <a class="btn btn-orange-sm" href="javascript:void(0);" ><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <a class="btn btn-orange-sm" href="javascript:void(0);"  (click)="editPageModal(page)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                     <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="contentPerPage(page)" ><i class="material-icons">pageview</i></a>
                                  </td>
                               </tr>
@@ -56,33 +56,80 @@
 <div class="container">
    <!-- The Modal -->
    <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenAddPageModal ? 'block' : 'none'" *ngIf="isopenAddPageModal">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <!-- Modal Header -->
-         <div class="modal-header">
-            <h4 class="modal-title">Add Page</h4>
-            <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Add Page</h4>
+               <button type="button" class="close" data-dismiss="modal" (click)="closeModal()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <form [formGroup]="addPageForm" (ngSubmit)="addPage(addPageForm.value)" >
+                  <div class="form-group">
+                     <label>Page Name<span class="validate-red">*</span></label>
+                     <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+                     <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <span class="for-sub-name" *ngIf="f.name.errors.required">Page name is required.</span>
+                     </div>
+                     <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                     </div>
+                  </div>
+
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+                     <button type="submit" class="btn btn-orange-sm">Add</button>
+                  </div>
+               </form> 
+            </div>
          </div>
-         <!-- Modal body -->
-         <div class="modal-body">
-            <form [formGroup]="addPageForm" (ngSubmit)="addPage(addPageForm.value)" >
-            <div class="form-group">
-               <label>Page Name:</label>
-               <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
-               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                  <span class="for-sub-name" *ngIf="f.name.errors.required">Page name is required.</span>
-               </div>
-               <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
-               </div>
+      </div>
+   </div>
+</div> 
+<!----------- ADD FAQ MODEL END ---------------->
+
+<!----------- EDIT FAQ MODEL START ---------------->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenEditPageModal ? 'block' : 'none'" *ngIf="isopenEditPageModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">Edit Page</h4>
+               <button type="button" class="close" data-dismiss="modal" (click)="closeEditModal()">&times;</button>
             </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
-               <button type="submit" class="btn btn-orange-sm">Add</button>
-            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <form [formGroup]="updatePageForm" (ngSubmit)="updatePage(updatePageForm.value)" >
+               <div class="form-group">
+                  <label>Page Name<span class="validate-red">*</span></label>
+                  <input type="text" formControlName="name" class="form-control" [ngClass]="{'is-invalid': submitted && f.name.errors}" />
+                  <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                     <span class="for-sub-name" *ngIf="f.name.errors.required">Page name is required.</span>
+                  </div>
+                  <div *ngIf="isalreadyEixst" class="default-error-message"> {{isalreadyEixstErr}}
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="team">Status<span class="validate-red">*</span></label>
+                  <select class="custom-select form-control" formControlName="status" id="status" [ngClass]="{ 'is-invalid': submitted && g.status.errors }">
+                     <option value="" disabled>Please select one option</option>
+                     <option value="0">Active</option>
+                     <option value="1">Inactive</option>
+                  </select>
+                  <div *ngIf="submitted && g.status.errors" class="invalid-feedback">
+                     <span class="for-sub-name" *ngIf="g.gender.status.required">Gender field is required.</span>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+                  <button type="submit" class="btn btn-orange-sm">Add</button>
+               </div>
             </form> 
          </div>
       </div>
    </div>
 </div>
 </div> 
-<!----------- ADD FAQ MODEL END ---------------->
+<!----------- EDIT FAQ MODEL END ---------------->
