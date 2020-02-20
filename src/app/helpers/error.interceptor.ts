@@ -32,7 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
                     if(event.status == 503 && !this.executing){
                         this.executing=true;
-                        this.toastr.errorToastr('Service Unavailable');                       
+                        this.toastr.errorToastr('We are sorry. Due to technical issue we are not able to serve your request at moment.');                       
                     }
 
                 }
@@ -45,7 +45,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                 if(err.status == 0 && this.executing == false){
                    
-                    this.toastr.errorToastr('Service Unavailable');
+                    this.toastr.errorToastr('We are sorry. Due to technical issue we are not able to serve your request at moment.');
                     this.executing = true;
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");

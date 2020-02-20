@@ -626,7 +626,7 @@ export class DataService {
 		headers = headers.set('Authorization', token);
 		headers.set('Content-Type', null);
 		headers.set('Accept', "multipart/form-data");
-		return this.http.get(this.base_url+'page/'+pageId,{ headers: headers })
+		return this.http.get(this.base_url+'page/listsections/'+pageId,{ headers: headers })
 		.map((response:Response)=>{
 			//   console.log('team response',response);
 			return response;
