@@ -124,7 +124,7 @@ const shareProp = {
   }
 };*/
 
-const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
+const config: SocketIoConfig = { url: 'https://chatapis.colivingapp.com', options: {} };
 
 let Loginconfig = new AuthServiceConfig([
   {
@@ -184,8 +184,6 @@ export function provideConfig() {
     PagesComponent,
     PageContentComponent,
    
-  
- 
   ],
   imports: [
     BrowserModule,

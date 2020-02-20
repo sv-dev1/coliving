@@ -28,8 +28,9 @@ export class PagesComponent implements OnInit {
 	isArrayLength : boolean = false;
 	isopenEditPageModal : boolean = false;
 	id : string = '';
+	pageName : string = '';
 	updatePageForm : FormGroup;
-
+    
 	constructor(
 		private formBuilder : FormBuilder,
 		private router : Router,
@@ -59,7 +60,6 @@ export class PagesComponent implements OnInit {
 
 	getAllpages() {
 		this.data_service.getAllpages().subscribe((response:any) =>{ 
-			this.toastr.successToastr(response.message, 'Success!');
 			this.allpagesArray = response.pagesArr;
 			this.pagesCount = this.allpagesArray.length;
 			if(this.pagesCount.length > 10 ) {
@@ -120,7 +120,7 @@ export class PagesComponent implements OnInit {
 	}
 
 	editPageModal(page){
-		//console.log('formValue', page);
+		this.pageName = page.name;
 		this.id = page.pageId;
 		this.isopenEditPageModal = true;
 		this.updatePageForm.patchValue({
@@ -150,7 +150,7 @@ export class PagesComponent implements OnInit {
 				token = sessionStorage.getItem("auth_token"); 
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-			this.http.post(this.base_url+'pages/edit/'+this.id, formData, httpOptions).subscribe((response:any) => {
+			this.http.post(this.base_url+'page/edit/'+this.id, formData, httpOptions).subscribe((response:any) => {
 				if(response.error ==true) {
 					this.toastr.errorToastr(response.message, 'Error!');
 				} else {
@@ -170,6 +170,8 @@ export class PagesComponent implements OnInit {
 		this.isopenEditPageModal = false;
 		this.updatePageForm.reset();
 	}
+
+	
 }
 
 

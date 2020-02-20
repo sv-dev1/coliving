@@ -16,6 +16,7 @@ export class PageContentComponent implements OnInit {
 
 	public Editor = ClassicEditor;
 	pageContentForm : FormGroup;
+	updateSectionContentForm : FormGroup;
 	fileData : any;
 	url : any;
 	boolUrl : boolean = false;
@@ -30,10 +31,13 @@ export class PageContentComponent implements OnInit {
 	pageId : string = '';
 	imageEmpty : boolean = false;
 	pageContent :  any = [];
-    pageContentCount :  any;
-    isArrayLength : boolean = false;
-    pageName : string = '';
-   
+	pageContentCount :  any;
+	isArrayLength : boolean = false;
+	pageName : string = '';
+	isSectionContentModal : boolean = false;
+	isImage : boolean = false;
+	urls : any = [];
+
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -43,6 +47,7 @@ export class PageContentComponent implements OnInit {
 		private data_service : DataService,
 		private http : HttpClient
 		) { 
+
 		this.pageContentForm = this.formBuilder.group({
 			title: [''],
 			subtitle: [''],
@@ -50,6 +55,15 @@ export class PageContentComponent implements OnInit {
 			description: [''],
 			file:[''],
 		});
+
+		this.updateSectionContentForm = this.formBuilder.group({
+			title: [''],
+			subtitle: [''],
+			image: [''],
+			description: [''],
+			file:[''],
+		});
+
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
@@ -62,21 +76,33 @@ export class PageContentComponent implements OnInit {
 
 	getPageContent(pageId) {
 		this.data_service.getPageContent(pageId).subscribe((response:any) =>{ 
-			//console.log('response', response);
-			//this.toastr.successToastr(response.message, 'Success!');
-			this.pageContent = response.pagesArr;
+			this.pageContent = response.pagesArr.sections;
 			this.pageContentCount = this.pageContent.length;
-			if(this.pageContentCount.length > 10 ) {
-				this.isArrayLength  = true;
-			}
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
 	}
+
+	detectFiles(event) {
+		
+		let files = event.target.files;
+		if (files) {
+			this.isImage = true;
+			for (let file of files) {
+				let reader = new FileReader();
+				reader.onload = (e: any) => {
+					this.urls.push(e.target.result);
+				}
+				reader.readAsDataURL(file);
+			}
+		}
+	}
+
 	onSelectFile(event) {
-		this.fileData = event.target.files[0];
+		console.log('event', event);
+		this.fileData = event.target.files;
 		if(this.fileData != '' || this.fileData != undefined || this.fileData != null) {
 			this.imageEmpty = false;
 		}
@@ -102,7 +128,6 @@ export class PageContentComponent implements OnInit {
 	get f() { return this.pageContentForm.controls; }
 
 	addContent(formValue) {
-		console.log('formValue', formValue);
 		this.submitted = true;
 		if(formValue.description == ""){
 			this.descriptionEmpty = true;
@@ -113,11 +138,10 @@ export class PageContentComponent implements OnInit {
 		if(this.pageContentForm.invalid) {
 			return;
 		} else {
-			
 			const formData = new FormData();
 			formData.append('title', formValue.title);
 			formData.append('subtitle', formValue.subtitle);		   
-			formData.append('image', this.fileData);
+			formData.append('image', this.urls);
 			formData.append('content', formValue.description);
 
 			let token; 
@@ -126,17 +150,73 @@ export class PageContentComponent implements OnInit {
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
 			this.http.post(this.base_url+'pages/addcontent/'+this.pageId, formData, httpOptions).subscribe((response:any) => {
-				console.log('response', response);
 				this.toastr.successToastr(response.message,'Success');
 				this.submitted = false;
+				this.getPageContent(this.pageId);
+				this.pageContentForm.reset();
+				this.url = '';
 			},error =>{
 				this.isError = true;
-				console.log('errors',error); 
 				this.toastr.errorToastr(error.error.status,'Error');
 				this.errorsArr = error.error;
 			});
 		}
 	}
 
-	
+	editPageSectionContentModal(page) {
+
+		this.isSectionContentModal = true;
+		this.image_url = this.image_base_url+''+page.contentId;
+		this.isImage = true;
+		this.updateSectionContentForm.patchValue({
+			title : page.title,
+			subtitle : page.subtitle,
+			description : page.content,
+			image:[''],
+		});
+	}
+
+	closeEditModal() {
+
+		this.isSectionContentModal = false;
+		this.updateSectionContentForm.reset(); 
+	}
+	get g() { return this.updateSectionContentForm.controls; }
+
+	updateContent(formValue) {
+		this.submitted = true;
+		if(formValue.description == ""){
+			this.descriptionEmpty = true;
+		}
+		if(formValue.image  == ""){
+			this.imageEmpty = true;
+		}
+		if(this.updateSectionContentForm.invalid) {
+			return;
+		} else {
+			const formData = new FormData();
+			formData.append('title', formValue.title);
+			formData.append('subtitle', formValue.subtitle);		   
+			formData.append('image', this.urls);
+			formData.append('content', formValue.description);
+
+			let token; 
+			if(sessionStorage.getItem("auth_token")!=undefined){
+				token = sessionStorage.getItem("auth_token"); 
+			}
+			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+			this.http.post(this.base_url+'pages/addcontent/'+this.pageId, formData, httpOptions).subscribe((response:any) => {
+				this.toastr.successToastr(response.message,'Success');
+				this.submitted = false;
+				this.getPageContent(this.pageId);
+				this.pageContentForm.reset();
+				this.url = '';
+			},error =>{
+				this.isError = true;
+				this.toastr.errorToastr(error.error.status,'Error');
+				this.errorsArr = error.error;
+			});
+		}
+	}
+
 }
