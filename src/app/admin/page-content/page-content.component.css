@@ -23,3 +23,22 @@ button.pull-right.btn.btn-orange-sm {
 .page-content.modal .modal-dialog {
     max-width: 60%;
 }
+#container-cross {
+  width: 20%;
+  /*border-radius: 25px;*/
+  border: 2px solid #ffd1d1;
+  padding: 100px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+}
+
+#x {
+    position: absolute;
+    background: red;
+    color: white;
+    top: -10px;
+    right: -10px;
+}

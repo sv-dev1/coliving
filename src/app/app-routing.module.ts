@@ -68,7 +68,7 @@ const routes: Routes = [
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
   
-  { path: 'admin/login', component: AdminLoginComponent},
+  { path: 'crm.access.admin', component: AdminLoginComponent},
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'admin/home-page-content', component: HomePagecomponentComponent, canActivate: [AuthGuard] },
   { path: 'admin/faq-page-content', component: FaqPagecomponentComponent, canActivate: [AuthGuard] },
