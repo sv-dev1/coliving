@@ -1,7 +1,11 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input,SecurityContext } from '@angular/core';
 import { FormGroup,FormBuilder,Validators,FormControl,FormArray } from '@angular/forms';
 import Typewriter from 't-writer.js';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
+import { ToastrManager } from 'ng6-toastr-notifications';
+import { environment } from '../../environments/environment';
+import { DomSanitizer,SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +26,16 @@ export class HomeComponent implements OnInit {
   session_key : boolean = false;
   currentYear : any ;
   roleId : string = '';
+	base_url : string = "";
+  infoData:any;
+  section2:any;
+  section3:any;
+  section4:any;
+  section5:any;
+  section6:any;
+  section7:any;
+  image_base_url:any;
+  htmlStr = "&lt;strong&gt;News Body&lt;/strong&gt;";
 
   @Input() currentState;
   @ViewChild('tw', null) typewriterElement;
@@ -29,12 +43,19 @@ export class HomeComponent implements OnInit {
   @ViewChild('tw3', null) typewriterElement3;
 
   constructor(
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    public toastr: ToastrManager,
+    private http : HttpClient,
+    private _sanitizer: DomSanitizer
     ) {
     this.subscribeForm = this.formBuilder.group({
            
     });
+    this.base_url = environment.base_url;
+    this.image_base_url = environment.image_base_url;
+
   }
+
   ngOnInit() {
     
     var d = new Date();
@@ -44,54 +65,31 @@ export class HomeComponent implements OnInit {
       this.session_key = true;
       this.roleId = sessionStorage.getItem('roleId');
     } 
-
-   /* const target2 = this.typewriterElement2.nativeElement;
-    const target3 = this.typewriterElement3.nativeElement;
-    const target = this.typewriterElement.nativeElement*/
-
-/*    const writer = new Typewriter(target, {
-      loop: true,
-      typeColor: 'white',
-      typeSpeed: 90,
-    });
-
-    writer
-      .type(`Without washing the brush`)
-      .rest(500)
-      .clear()
-
-    const writer2 = new Typewriter(target2, {
-      typeColor: 'white',
-      typeSpeed: 90,
-    })
-
-    const writer3 = new Typewriter(target3, {
-      typeColor: 'white',
-      typeSpeed: 90,
-    })
-
-   writer2
-  .type('')
-  .removeCursor()
-  .then(writer3.start.bind(writer3))
-  .start()
-    writer3
-      .type("FIND AND BOOK ROOMS")
-      .rest(500)
-      .clear()
-      .changeTypeColor('white')
-      .type("SAVE MONEY BY SHARING HOMES")
-      .rest(500)
-      .clear()
-      .changeTypeColor('white')
-      .type("")
-      .rest(500)
-      .clear()
-      .changeTypeColor('white')
-      .then(writer2.start.bind(writer2))*/
-     }
+    this.getContent();
+  }
   
   subscribe(value) {
-
   }
+
+  getContent(){
+   
+    this.http.get(this.base_url+'page/home').subscribe((response:any) => {
+      this.infoData=response.pagesArr['sections'][0];
+      this.section2=response.pagesArr['sections'][1];
+      this.section3=response.pagesArr['sections'][2];
+      this.section4=response.pagesArr['sections'][3];
+      this.section5=response.pagesArr['sections'][4];
+      this.section6=response.pagesArr['sections'][5];
+      this.section7=response.pagesArr['sections'][6];
+       console.log(response.pagesArr['sections']);
+    },error=>{ 
+        console.log(error);
+    });
+  }
+  getData(data){
+   // var result=data.replace(/\&lt;p\&gt;(?:\s|\&amp;nbsp;)*\&lt;\/p\&gt;/gi,"");
+    console.log(data);
+      return data;
+  }
+  
 }

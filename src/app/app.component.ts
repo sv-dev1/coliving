@@ -18,7 +18,7 @@ export class AppComponent  {
   }
   ngOnInit() {
     if(this.router.url == '/' || this.router.url == '/home'){
-      console.log('this.router.url', this.router.url);
+    //  console.log('this.router.url', this.router.url);
       let cc = window as any;
        cc.cookieconsent.initialise({
         palette: {

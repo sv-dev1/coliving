@@ -77,6 +77,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
+import { escapeHtmlPipe } from '../app/home/safe-html.pipe';
 
 const icons = [
   // ... other icons
@@ -124,7 +125,7 @@ const shareProp = {
   }
 };*/
 
-const config: SocketIoConfig = { url: 'http://13.235.246.234:2900', options: {} };
+const config: SocketIoConfig = { url: 'https://chatapis.colivingapp.com', options: {} };
 
 let Loginconfig = new AuthServiceConfig([
   {
@@ -182,11 +183,8 @@ export function provideConfig() {
     AdminLoginComponent,
     AdminDashboardComponent,
     PagesComponent,
-    PageContentComponent,
-   
-  
- 
-  ],
+    PageContentComponent,escapeHtmlPipe
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -218,7 +216,6 @@ export function provideConfig() {
     ShareButtonsModule.withConfig({ prop: shareProp }),
     ShareModule,
     CKEditorModule
-    
   ],
   
   providers: [
@@ -227,6 +224,8 @@ export function provideConfig() {
       DatePipe,ChatService,
       { provide: AuthServiceConfig,     useFactory: provideConfig   }
     ],
+    exports: [escapeHtmlPipe],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
