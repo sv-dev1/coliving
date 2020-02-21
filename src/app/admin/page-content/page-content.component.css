@@ -17,3 +17,9 @@ button.pull-right.btn.btn-orange-sm {
     min-height: 500px;
 }
   
+.page-content.modal {
+    overflow: auto;
+}
+.page-content.modal .modal-dialog {
+    max-width: 60%;
+}

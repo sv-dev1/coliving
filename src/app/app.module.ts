@@ -184,7 +184,8 @@ export function provideConfig() {
     AdminDashboardComponent,
     PagesComponent,
     PageContentComponent,escapeHtmlPipe
-   ],
+   
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

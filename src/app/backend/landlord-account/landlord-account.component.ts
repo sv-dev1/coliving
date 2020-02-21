@@ -216,18 +216,18 @@ export class LandlordAccountComponent implements OnInit {
               this.image_url = this.image_base_url+''+this.userDataArr.userId;
               this.boolUserImage = true;
 			  this.updateProfileForm.patchValue({
-				firstName: this.userDataArr.firstName,
-				lastName: this.userDataArr.lastName,
-				email: this.userDataArr.email,
-				userName: this.userDataArr.login.username,
-				dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
-				gender:this.userDataArr.gender,
-				phoneNo: this.userDataArr.phoneNo,
-				address: this.userDataArr.address,
-				postalCode: this.userDataArr.postalCode,
-				country: this.userDataArr.country,
-				image:[''],
-				social_account:this.userDataArr.social_account,
+					firstName: this.userDataArr.firstName,
+					lastName: this.userDataArr.lastName,
+					email: this.userDataArr.email,
+					userName: this.userDataArr.login.username,
+					dob: this.datePipe.transform(this.userDataArr.dob,"MM/dd/yyyy"),
+					gender:this.userDataArr.gender,
+					phoneNo: this.userDataArr.phoneNo,
+					address: this.userDataArr.address,
+					postalCode: this.userDataArr.postalCode,
+					country: this.userDataArr.country,
+					image:[''],
+					social_account:this.userDataArr.social_account,
 			});
 			this.email = this.userDataArr.email;
 			
