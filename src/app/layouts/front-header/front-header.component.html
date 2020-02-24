@@ -1,0 +1,78 @@
+   <div class="header-section">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand"  routerLink="/">
+                 <img src="assets/images/Logo-colive.png">
+            </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i class="fa fa-bars" aria-hidden="true"></i></span>
+              </button>
+
+
+            <div class="top-nav">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item pr-2 pl-2">
+                        <a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
+                    </li>
+                    <li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true">
+                        <a class="btn signup" routerLink="/login">Login Landlord</a></li>
+                    <li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
+                    <li class="nav-item pr-2 pl-2">
+                        <a class="btn signin" routerLink="/faq" id="">FAQ</a>
+                    </li>
+                    <li class="nav-item pr-2 pl-2">
+                        <a class="btn signin" routerLink="/privacy-policy">Privacy Policies</a>
+                    </li>
+                    <li class="nav-item pr-2 pl-2">
+                        <a class="btn signin" href="#contact-us" id="">Contact us</a>
+                    </li>
+                    
+                    
+                
+                </ul>
+                <div class="country-flag">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <img src="assets/images/english.png" /> EN
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><img src="assets/images/english.png" /> EN</a>
+                            <!-- <a class="dropdown-item" href="#"><img src="assets/images/fr.png" /> FR</a>
+                            <a class="dropdown-item" href="#"><img src="assets/images/italian.png" /> IT</a>
+                            <a class="dropdown-item" href="#"><img src="assets/images/spanish.png" /> SP</a> -->
+                            <a class="dropdown-item" href="#"><img src="assets/images/german.png" /> GR</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </nav>
+      </div>
+
+<section class="banner-top" *ngIf="isPrivacyPolicy">
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            <div class="hdg-bnr">
+               <h1 style="padding-top: 150px;">
+                 Privacy Policy, Terms & conditions, GDPR 
+               </h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<section class="banner-top" *ngIf="isfaq">
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            <div class="hdg-bnr">
+               <h1 style="padding-top: 150px;">
+                  FREQUENTLY ASKED QUESTIONS
+               </h1>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
