@@ -37,7 +37,13 @@ export class PageContentComponent implements OnInit {
 	isSectionContentModal : boolean = false;
 	isImage : boolean = false;
 	urls : any = [];
+	contentId : string = '';
+	images : any = [];
+	imagesArray : any = [];
+	isPreviousimage : boolean = false;
 
+	isShowRelatedimages : boolean = false;
+	imagesCount: any;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -77,7 +83,11 @@ export class PageContentComponent implements OnInit {
 	getPageContent(pageId) {
 		this.data_service.getPageContent(pageId).subscribe((response:any) =>{ 
 			this.pageContent = response.pagesArr.sections;
+			console.log('this.pageContent', this.pageContent);
 			this.pageContentCount = this.pageContent.length;
+			if(this.pageContentCount > 10) {
+				this.isArrayLength = true;
+			}
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -90,127 +100,115 @@ export class PageContentComponent implements OnInit {
 		let files = event.target.files;
 		if (files) {
 			this.isImage = true;
+			let i = 0;
 			for (let file of files) {
+				this.images.push(file);
 				let reader = new FileReader();
 				reader.onload = (e: any) => {
 					this.urls.push(e.target.result);
 				}
 				reader.readAsDataURL(file);
-			}
+				i++;
+			} 
 		}
 	}
 
-	onSelectFile(event) {
-		console.log('event', event);
-		this.fileData = event.target.files;
-		if(this.fileData != '' || this.fileData != undefined || this.fileData != null) {
-			this.imageEmpty = false;
-		}
-		this.preview();
-		this.pageContentForm.patchValue({
-			'image' :  this.fileData
-		});
-	}
-
-	preview() {
-		var mimeType = this.fileData.type;
-		if (mimeType.match(/image\/*/) == null) {
-			return;
-		}
-		var reader = new FileReader();      
-		reader.readAsDataURL(this.fileData); 
-		reader.onload = (_event) => { 
-			this.url = reader.result; 
-			this.boolUrl = true;
-			this.boolUserImage =false;
-		}
-	}
 	get f() { return this.pageContentForm.controls; }
 
 	addContent(formValue) {
 		this.submitted = true;
-		if(formValue.description == ""){
-			this.descriptionEmpty = true;
-		}
-		if(formValue.image  == ""){
-			this.imageEmpty = true;
-		}
-		if(this.pageContentForm.invalid) {
-			return;
-		} else {
-			const formData = new FormData();
-			formData.append('title', formValue.title);
-			formData.append('subtitle', formValue.subtitle);		   
-			formData.append('image', this.urls);
-			formData.append('content', formValue.description);
-
-			let token; 
-			if(sessionStorage.getItem("auth_token")!=undefined){
-				token = sessionStorage.getItem("auth_token"); 
+		/*if(formValue.description == ""){
+				this.descriptionEmpty = true;
 			}
-			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-			this.http.post(this.base_url+'pages/addcontent/'+this.pageId, formData, httpOptions).subscribe((response:any) => {
-				this.toastr.successToastr(response.message,'Success');
-				this.submitted = false;
-				this.getPageContent(this.pageId);
-				this.pageContentForm.reset();
-				this.url = '';
-			},error =>{
-				this.isError = true;
-				this.toastr.errorToastr(error.error.status,'Error');
-				this.errorsArr = error.error;
+			if(formValue.image  == ""){
+				this.imageEmpty = true;
+			}*/
+
+			if(this.pageContentForm.invalid) {
+				return;
+			} else {
+				const formData = new FormData();
+				formData.append('title', formValue.title);
+				formData.append('subtitle', formValue.subtitle);
+				if(this.images){
+					this.images.forEach(obj =>{
+						formData.append('image',obj );
+					})
+				}			
+				formData.append('content', formValue.description);
+				let token; 
+				if(sessionStorage.getItem("auth_token")!=undefined){
+					token = sessionStorage.getItem("auth_token"); 
+				}
+				const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+				this.http.post(this.base_url+'pages/addcontent/'+this.pageId, formData, httpOptions).subscribe((response:any) => {
+					this.toastr.successToastr(response.message,'Success');
+					this.submitted = false;
+					this.getPageContent(this.pageId);
+					this.pageContentForm.reset();
+					this.isImage = false;
+					this.urls = '';
+				},error =>{
+					this.isError = true;
+					this.toastr.errorToastr(error.error.status,'Error');
+					this.errorsArr = error.error;
+				});
+			}
+		}
+
+		editPageSectionContentModal(page) {
+			
+			this.contentId = page.contentId;
+			this.pageId = page.pageId;
+			this.isSectionContentModal = true;
+			this.image_url = this.image_base_url+''+page.contentId;
+			this.isImage = true;
+			this.updateSectionContentForm.patchValue({
+				title : page.title,
+				subtitle : page.subtitle,
+				description : page.content,
+				image:[''],
 			});
 		}
-	}
 
-	editPageSectionContentModal(page) {
+		closeEditModal() {
+			this.isSectionContentModal = false;
+			this.updateSectionContentForm.reset(); 
+		}
+		get g() { return this.updateSectionContentForm.controls; }
 
-		this.isSectionContentModal = true;
-		this.image_url = this.image_base_url+''+page.contentId;
-		this.isImage = true;
-		this.updateSectionContentForm.patchValue({
-			title : page.title,
-			subtitle : page.subtitle,
-			description : page.content,
-			image:[''],
-		});
-	}
-
-	closeEditModal() {
-
-		this.isSectionContentModal = false;
-		this.updateSectionContentForm.reset(); 
-	}
-	get g() { return this.updateSectionContentForm.controls; }
-
-	updateContent(formValue) {
-		this.submitted = true;
-		if(formValue.description == ""){
+		updateContent(formValue) {
+			this.submitted = true;
+		/*if(formValue.description == ""){
 			this.descriptionEmpty = true;
-		}
-		if(formValue.image  == ""){
-			this.imageEmpty = true;
-		}
+		}*/
 		if(this.updateSectionContentForm.invalid) {
 			return;
 		} else {
 			const formData = new FormData();
 			formData.append('title', formValue.title);
 			formData.append('subtitle', formValue.subtitle);		   
-			formData.append('image', this.urls);
+			if(this.images){
+				this.images.forEach(obj =>{
+					formData.append('image',obj );
+				})
+			}
 			formData.append('content', formValue.description);
-
+			formData.append('pageId', this.pageId);
 			let token; 
 			if(sessionStorage.getItem("auth_token")!=undefined){
 				token = sessionStorage.getItem("auth_token"); 
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
-			this.http.post(this.base_url+'pages/addcontent/'+this.pageId, formData, httpOptions).subscribe((response:any) => {
+			this.http.post(this.base_url+'pages/content/'+this.contentId, formData, httpOptions).subscribe((response:any) => {
 				this.toastr.successToastr(response.message,'Success');
 				this.submitted = false;
+				this.updateSectionContentForm.reset();
+				this.isSectionContentModal = false;
+				this.image_url = '';
+				this.isImage = false;
+				this.urls = '';
 				this.getPageContent(this.pageId);
-				this.pageContentForm.reset();
-				this.url = '';
 			},error =>{
 				this.isError = true;
 				this.toastr.errorToastr(error.error.status,'Error');
@@ -219,4 +217,27 @@ export class PageContentComponent implements OnInit {
 		}
 	}
 
+	showRelatedImages(page) {
+		this.isShowRelatedimages = true;
+		this.imagesArray = page.images;
+		if(this.imagesArray.length > 0 ) {
+			this.isPreviousimage = true; 
+		} 
+	}
+
+	closeImageModal() {
+		this.isShowRelatedimages = false;
+	}
+
+	deleteImage(image) {
+		this.data_service.deleteImage(image.id).subscribe((response:any)=> { 
+			this.toastr.successToastr(response.message,'Success');
+			this.isShowRelatedimages = true;
+		},error =>{
+			this.isError = true; 
+			this.errorsArr = error.error;
+		});
+	}
 }
+
+

@@ -20,7 +20,7 @@
                         <div class="row">
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Title<span class="validate-red">*</span></label>
+                                 <label for="team">Title<!-- <span class="validate-red">*</span> --></label>
                                  <input type="text" class="form-control" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" >
                                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.title.errors.required">Title is required.</span>
@@ -29,7 +29,7 @@
                            </div>
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Sub Title<span class="validate-red">*</span></label>
+                                 <label for="team">Sub Title<!-- <span class="validate-red">*</span> --></label>
                                  <input type="text"  class="form-control" placeholder="Sub Title" formControlName="subtitle" [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }">
                                  <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.subtitle.errors.required">Sub Title is required.</span>
@@ -40,61 +40,69 @@
                               <div class="form-group">
                                  <label for="bill">Image</label>
                                  <input type="file" class="form-control-file border" accept="image/*" formControlName="image" (change)="detectFiles($event)" multiple>
-                                 <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
-                                 </div>
-                                  <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
-                                 <br/>
+                                <!--  <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
+                                </div> -->
+                                <div *ngIf="isImage">
+                                   <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+                                </div>
+                                <br/>
+                             </div>
+                          </div>
+                          <div class="col-12 col-sm-12">
+                           <div class="form-group">
+                              <label for="bill">Description</label>
+                              <ckeditor [editor]="Editor" formControlName="description" data="
+                              <p>Hello, world!</p>
+                              " [ngClass]="{'is-invalid': submitted && f.description.errors}" ></ckeditor>
+                              <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
                               </div>
-                           </div>
-                           <div class="col-12 col-sm-12">
-                              <div class="form-group">
-                                 <label for="bill">Description</label>
-                                 <ckeditor [editor]="Editor" formControlName="description" data="
-                                 <p>Hello, world!</p>
-                                 " [ngClass]="{'is-invalid': submitted && f.description.errors}" ></ckeditor>
-                                 <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
-                                 </div>
-                              </div>
-                           </div>
-                           <input type="hidden" formControlName="file">
-                           <div class="col-12 col-sm-12 text-center">
-                              <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">Submit</button>
                            </div>
                         </div>
-                     </form>
-                  </div>
+                        <input type="hidden" formControlName="file">
+                        <div class="col-12 col-sm-12 text-center">
+                           <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">Submit</button>
+                        </div>
+                     </div>
+                  </form>
                </div>
             </div>
          </div>
-         <div class="row">
-            <div class="col-12">
-               <div class="card mb-5">
-                  <div class="card-header">{{ pageName }} content listing</div>
-                  <div class="card-body pb-0">
-                     <div class="row">
-                        <table class="table table-striped">
-                           <thead>
-                              <tr>
-                                 <th scope="col">S.No</th>
-                                 <th scope="col">Title</th>
-                                 <th scope="col">Sub Title</th>
-                                 <th scope="col">Status</th>
-                                 <th scope="col">Action</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <tr *ngFor="let page of pageContent|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
-                                 <td scope="col" class="text-success">#{{ i + 1 }}</td>
-                                 <td scope="col">{{ page.title }}</td>
-                                 <td scope="col">{{ page.subtitle }}</td>
-                                 <td class="text-success" *ngIf="page.status=='1'">Active</td>
-                                 <td class="text-danger" *ngIf="page.status=='0'">In Active</td>
-                                 <td scope="col">
-                                    <a class="btn btn-orange-sm" href="javascript:void(0);"  (click)="editPageSectionContentModal(page)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
+      </div>
+      <div class="row">
+         <div class="col-12">
+            <div class="card mb-5">
+               <div class="card-header">{{ pageName }} content listing</div>
+               <div class="card-body pb-0">
+                  <div class="row">
+                     <table class="table table-striped">
+                        <thead>
+                           <tr>
+                              <th scope="col">S.No</th>
+                              <th scope="col">Title</th>
+                              <th scope="col">Sub Title</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Action</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr *ngFor="let page of pageContent|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                              <td scope="col" class="text-success">#{{ i + 1 }}</td>
+                              <td scope="col">{{ page.title }}</td>
+                              <td scope="col">{{ page.subtitle }}</td>
+                              <td class="text-success" *ngIf="page.status=='1'">Active</td>
+                              <td class="text-danger" *ngIf="page.status=='0'">In Active</td>
+                              <td scope="col">
+                                 <a class="btn btn-orange-sm" href="javascript:void(0);"  (click)="editPageSectionContentModal(page)"><i class="fa fa-pencil" aria-hidden="true" title="Edit page section content"></i></a>&nbsp;|&nbsp;<a class="btn btn-orange-sm" href="javascript:void(0);"  (click)="showRelatedImages(page)"><i title="Show section related images" class="fa fa-image" aria-hidden="true"></i></a>
+
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <div *ngIf="pageContentCount =='0'">
+                        <p>No Content Available for {{ pageName }} page.</p>
+                     </div>
+                     <div *ngIf="isArrayLength">
+                        <pagination-controls (pageChange)="p= $event"></pagination-controls>
                      </div>
                   </div>
                </div>
@@ -102,6 +110,7 @@
          </div>
       </div>
    </div>
+</div>
 </section>
 
 <div class="container">
@@ -139,19 +148,19 @@
                      <div class="col-12 col-sm-12">
                         <div class="form-group">
                            <label for="bill">Image</label>
-                           <input type="file" class="form-control-file border" accept="image/*" formControlName="image"  (change)="detectFiles($event)" multiple>
+                           <input type="file" class="form-control-file border" accept="image/*" formControlName="image" (change)="detectFiles($event)" multiple>
                            <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
                            </div>
-                           <img *ngIf="isImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
                            <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
                         </div>
                      </div>
+
+
+
                      <div class="col-12 col-sm-12">
                         <div class="form-group">
                            <label for="bill">Description</label>
-                           <ckeditor [editor]="Editor" formControlName="description" data="
-                           <p>Hello, world!</p>
-                           " [ngClass]="{'is-invalid': submitted && g.description.errors}" ></ckeditor>
+                           <ckeditor [editor]="Editor" formControlName="description" data=" <p>Hello, world!</p>" [ngClass]="{'is-invalid': submitted && g.description.errors}" ></ckeditor>
                            <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
                            </div>
                         </div>
@@ -162,6 +171,33 @@
                      </div>
                   </div>
                </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div> 
+
+<div class="container">
+   <!-- The Modal -->
+   <div class="page-content modal" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isShowRelatedimages ? 'block' : 'none'" *ngIf="isShowRelatedimages">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title">{{ pageName }} Section Images</h4>
+               <button type="button" class="close" data-dismiss="modal" (click)="closeImageModal()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <div class="col-12 col-sm-12" >
+                  <div class="form-group">
+                     <div id="container-cross" *ngFor='let urls of imagesArray'>
+                        <button id="x" (click)="deleteImage(urls)">X</button>
+                        <img src="{{urls.imageurl}}" alt="content-image">
+                     </div>
+                  </div>
+               </div>
+               
             </div>
          </div>
       </div>

@@ -383,7 +383,6 @@
                   <span class="for-sub-name" *ngIf="g.image.errors.required">Property image is required.</span>
                </div>
                <img [src]="url" height="200" *ngIf="url !=''"> <br/>
-
                <img *ngIf="boolpropertyImage==true"  [src]="image_url" height="200" width="200" onError="this.src='assets/images/user.png';"  alt="user" > 
             </div>
              <span style="color: red;" *ngIf="isValidationError==true">

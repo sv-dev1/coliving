@@ -635,4 +635,23 @@ export class DataService {
 			console.log('error',error);
 			return Observable.throw(error);});
 	}
+
+	deleteImage(id) {
+	    let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token); 		
+		return this.http.delete(this.base_url+'image/remove/'+id,{ headers: headers })
+		.map((response:Response)=>{
+			console.log(response);
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
 } 
+
+
+
