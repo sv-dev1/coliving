@@ -567,15 +567,13 @@ export class DataService {
 		xhr.send();
 	}
 
-
-
 	addFaq(formData){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
 		} 
 		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
-		return this.http.post(this.base_url+'faq',formData,httpOptions)
+		return this.http.post(this.base_url+'faq/add',formData,httpOptions)
 		.map((response:Response)=>{
 			
 			return response;
@@ -583,7 +581,24 @@ export class DataService {
 		.catch((error:Error) => {
 			console.log('error',error);
 			return Observable.throw(error);});
-	}
+	} 
+
+	editFaq(input){
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){token = sessionStorage.getItem("auth_token"); }
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		let url = this.base_url+'faq/edit/'+input.id;	    
+		return this.http.post(url,input, { headers: headers })
+		.map((response:Response)=>{
+			const data = response;
+			return data;
+		})
+		.catch((error:Error) => {
+			//console.log(error);
+			return Observable.throw(error);});
+
+	}  
 
 	getAllpages(){ 
 		let token; 
@@ -651,7 +666,54 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
-} 
 
+	getFaqs() {
+	   let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'faq/list',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	getFaqList() {
+		return this.http.get(this.base_url+'web/faq/list')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	getSettings() {
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'websetting/adminlist',{ headers: headers })
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	websiteSettings () {
+	return this.http.get(this.base_url+'websetting/weblist')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+} 
 
 

@@ -77,6 +77,10 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
+import { escapeHtmlPipe } from '../app/admin/safe-html.pipe';
+import { escapeHtmlPipe1 } from './safe-html1.pipe';
+import { FrontHeaderComponent } from './layouts/front-header/front-header.component';
+import { FrontFooterComponent } from './layouts/front-footer/front-footer.component';
 
 const icons = [
   // ... other icons
@@ -183,6 +187,10 @@ export function provideConfig() {
     AdminDashboardComponent,
     PagesComponent,
     PageContentComponent,
+    escapeHtmlPipe,
+    escapeHtmlPipe1,
+    FrontHeaderComponent,
+    FrontFooterComponent
    
   ],
   imports: [
@@ -225,6 +233,7 @@ export function provideConfig() {
       DatePipe,ChatService,
       { provide: AuthServiceConfig,     useFactory: provideConfig   }
     ],
+    exports: [escapeHtmlPipe, escapeHtmlPipe1],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

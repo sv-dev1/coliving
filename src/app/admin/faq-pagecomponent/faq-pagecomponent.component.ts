@@ -6,6 +6,7 @@ import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http'; 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { TruncateModule } from '@yellowspot/ng-truncate';
 
 @Component({
 	selector: 'app-faq-pagecomponent',
@@ -34,6 +35,7 @@ export class FaqPagecomponentComponent implements OnInit {
 	faqId : string = ''; 
 	isDelFaq : boolean = false;
 	response :  any = [];
+     description : any = [];
 
 	descriptionEmpty : boolean = false;
 	constructor( 
@@ -49,7 +51,8 @@ export class FaqPagecomponentComponent implements OnInit {
 		});
 		this.updateFaqForm = this.formBuilder.group({
 			question: ['', Validators.required],
-			description: ['', Validators.required]
+			description: ['', Validators.required],
+               status :['', Validators.required]
 		});
 	}
 	ngOnInit() {
@@ -60,8 +63,8 @@ export class FaqPagecomponentComponent implements OnInit {
      }
      
      getFaqs() {
-     	this.data_service.getCategories().subscribe((response:any) =>{   
-     		this.allFaqArray = response.categories;
+     	this.data_service.getFaqs().subscribe((response:any) =>{   
+     		this.allFaqArray = response.faqDetails;
      		this.faqCount = this.allFaqArray.length;
      		if(this.allFaqArray.length > 10 ) {
      			this.isArrayLength  = true;
@@ -86,6 +89,7 @@ export class FaqPagecomponentComponent implements OnInit {
      get f() { return this.faqForm.controls; }
 
      addFaq(formValue){
+
      	this.submitted = true;
      	if(formValue.description == ""){
      		this.descriptionEmpty = true;
@@ -94,7 +98,7 @@ export class FaqPagecomponentComponent implements OnInit {
      		return;
      	}else{
      		const input = {  
-     			"question": formValue.category, 
+     			"question": formValue.question, 
      			"description": formValue.description,   
      		}
      		this.data_service.addFaq(input).subscribe((response:any)=> { 
@@ -102,6 +106,7 @@ export class FaqPagecomponentComponent implements OnInit {
      			this.submitted = false;
      			this.isopenAddFaqModal = false;           
      			this.faqForm.reset();
+                    this.getFaqs();
      		},error =>{
      			this.isError = true; 
      			this.errorsArr = error.error;
@@ -113,11 +118,14 @@ export class FaqPagecomponentComponent implements OnInit {
      	}
      }
      editFaqModal(faq){
+
      	this.faqEdit = faq.id;
+          this.description = faq.description;
      	this.isopenEditFaqModal = true;
      	this.updateFaqForm.patchValue({
-     		category : faq.question,
-     		description : faq.description
+     		question : faq.question,
+     		description : faq.description,
+               status : faq.status
      	});
      }
      closeEditModal(){
@@ -131,12 +139,13 @@ export class FaqPagecomponentComponent implements OnInit {
      	if(this.updateFaqForm.invalid) {
      		return;
      	}else{
-     		const input = {  
-     			"category_id": this.faqEdit,
-     			"question": formValue.category, 
-     			"description": formValue.description,   
+     		const input = {
+                    "id" :  this.faqEdit,
+     			"question": formValue.question, 
+     			"description": formValue.description,
+                    "status": formValue.status   
      		}
-     		this.data_service.editCategory(input).subscribe((response:any)=> { 
+     		this.data_service.editFaq(input).subscribe((response:any)=> { 
      			this.toastr.successToastr(response.message,'Success');
      			this.submitted = false;
      			this.isopenEditFaqModal = false;           
