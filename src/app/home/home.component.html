@@ -64,7 +64,7 @@
 		  </div>
 		  <div class="col-md-6">
 			 <div class="facing-problam-image new-one">
-				<img class="" [src]=image_base_url+section2?.image>
+				<img class="" [src]=section2?.images[0].imageurl>
 			 </div>
 		  </div>
 	   </div>
@@ -90,7 +90,7 @@
 			 </div>
 			 <div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 				<div class="only-iphon-image">
-				   <img [src]=image_base_url+section4?.image>
+				   <img [src]=section4?.images[0].imageurl>
 				</div>
 			 </div>
 		  </div>
@@ -107,7 +107,7 @@
 			 </div>
 			 <div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 				<div class="only-iphon-image">
-				   <img [src]=image_base_url+section5?.image>
+				   <img [src]=section5?.images[0].imageurl>
 				</div>
 			 </div>
 		  </div>
@@ -124,7 +124,7 @@
 			 </div>
 			 <div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 				<div class="only-iphon-image">
-				   <img [src]=image_base_url+section6?.image>
+				   <img [src]=section6?.images[0].imageurl>
 				</div>
 			 </div>
 		  </div>
@@ -141,7 +141,7 @@
 			 </div>
 			 <div class="col-md-5 parts-right wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 				<div class="only-iphon-image">
-				   <img [src]=image_base_url+section7?.image>
+				   <img [src]=section7?.images[0].imageurl>
 				</div>
 			 </div>
 		  </div>
@@ -153,10 +153,9 @@
 	   <div class="row">
 		  <div class="col-12">
 			 <div class="hdg-box wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
-				<h1 class="hdg-main">Landlords - Properties Management</h1>
-				<p class="sb-hdg">Coliving app does not only support tenants but also landlords who rent their apartments. Connect with your tenants and be able to check their info right away. Manage the tenants moving in and moving out. Use our messenger to communicate with your tenants and also get to know about any issues that can be shared with you through the app immediately. Everything for free.</p>
-				<br>
-				<p class="sb-hdg">The same features as on the website and in the app will help you to manage your premises even better. Spare yourself dealing with bothersome and time-consuming apartment managements in a tedious way by using our app.</p>
+				<h1 class="hdg-main">{{section8?.title}}</h1>
+				<p class="sb-hdg" [innerHTML]="section8?.content| safeHtml"></p>
+			
 			 </div>
 		  </div>
 	   </div>
@@ -164,7 +163,7 @@
 		  <div class="col-12 col-sm-6 parts wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".6s">
 			 <a href="" class="parts-inner">
 				<div class="top-box">
-				   <img class="img-fluid" src="assets/images/landlord.jpg" />
+				   <img class="img-fluid" [src]=section8?.images[0].imageurl />
 				</div>
 				<div class="over-box">
 				</div>
@@ -173,7 +172,7 @@
 		  <div class="col-12 col-sm-6 parts wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">
 			 <a href="" class="parts-inner">
 				<div class="top-box">
-				   <img class="img-fluid" src="assets/images/landlord1.jpg" />
+				   <img class="img-fluid" [src]=section8?.images[1].imageurl />
 				</div>
 				<div class="over-box">
 				</div>

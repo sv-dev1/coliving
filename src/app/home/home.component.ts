@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   section5:any;
   section6:any;
   section7:any;
+  section8:any;
   image_base_url:any;
   htmlStr = "&lt;strong&gt;News Body&lt;/strong&gt;";
 
@@ -81,6 +82,7 @@ export class HomeComponent implements OnInit {
       this.section5=response.pagesArr['sections'][4];
       this.section6=response.pagesArr['sections'][5];
       this.section7=response.pagesArr['sections'][6];
+      this.section8=response.pagesArr['sections'][7];
        console.log(response.pagesArr['sections']);
     },error=>{ 
         console.log(error);

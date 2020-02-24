@@ -78,6 +78,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
 import { escapeHtmlPipe } from '../app/home/safe-html.pipe';
+import { RichTextEditorModule } from '@syncfusion/ej2-angular-richtexteditor';
+
 
 const icons = [
   // ... other icons
@@ -216,7 +218,8 @@ export function provideConfig() {
     }),
     ShareButtonsModule.withConfig({ prop: shareProp }),
     ShareModule,
-    CKEditorModule
+    CKEditorModule,    RichTextEditorModule
+
   ],
   
   providers: [
