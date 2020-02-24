@@ -38,6 +38,7 @@ export class FaqPagecomponentComponent implements OnInit {
      description : any = [];
 
 	descriptionEmpty : boolean = false;
+     p : any;
 	constructor( 
 		private formBuilder:FormBuilder,
 		private router: Router,

@@ -46,8 +46,8 @@
                          </tr>
                       </tbody>
                    </table>
-                      <div *ngIf="pageContentCount =='0'">
-                        <p>No Content Available for {{ pageName }} page.</p>
+                      <div *ngIf="faqCount =='0'">
+                        <p>No Content Available for  page.</p>
                      </div>
                      <div *ngIf="isArrayLength">
                         <pagination-controls (pageChange)="p= $event"></pagination-controls>
@@ -134,8 +134,8 @@
                      <option value="1">Active</option>
                      <option value="0">Inactive</option>
                   </select>
-                  <div *ngIf="submitted && g.status.errors" class="invalid-feedback">
-                     <span class="for-sub-name" *ngIf="g.gender.status.required">Status field is required.</span>
+                  <div *ngIf="submitted && g.status.errors.required" class="invalid-feedback">
+                     <span class="for-sub-name" *ngIf="g.status.errors.required">Status field is required.</span>
                   </div>
                </div>
                <div class="modal-footer">

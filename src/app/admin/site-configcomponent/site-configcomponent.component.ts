@@ -30,6 +30,7 @@ export class SiteConfigcomponentComponent implements OnInit {
 	isImage : boolean = false;
     images: any = [];
     urls: any = [];
+    
 
 	constructor(
 		private formBuilder:FormBuilder,

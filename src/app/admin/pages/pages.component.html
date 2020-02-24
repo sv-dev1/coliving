@@ -114,13 +114,13 @@
                </div>
                <div class="form-group">
                   <label for="team">Status<span class="validate-red">*</span></label>
-                  <select class="custom-select form-control" formControlName="status" id="status" [ngClass]="{ 'is-invalid': submitted && g.status.errors }">
+                  <select class="custom-select form-control" formControlName="status" [ngClass]="{ 'is-invalid': submitted && g.status.errors }">
                      <option value="" disabled>Please select one option</option>
                      <option value="1">Active</option>
                      <option value="0">Inactive</option>
                   </select>
                   <div *ngIf="submitted && g.status.errors" class="invalid-feedback">
-                     <span class="for-sub-name" *ngIf="g.gender.status.required">Status field is required.</span>
+                     <span class="for-sub-name" *ngIf="g.status.errors.required">Status field is required.</span>
                   </div>
                </div>
                <div class="modal-footer">
