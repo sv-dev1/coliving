@@ -222,7 +222,7 @@ export class PageContentComponent implements OnInit {
 		this.imagesArray = page.images;
 		if(this.imagesArray.length > 0 ) {
 			this.isPreviousimage = true; 
-		}
+		} 
 	}
 
 	closeImageModal() {
@@ -238,7 +238,6 @@ export class PageContentComponent implements OnInit {
 			this.errorsArr = error.error;
 		});
 	}
-
 }
 
 

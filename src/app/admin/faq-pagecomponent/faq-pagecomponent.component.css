@@ -16,4 +16,8 @@ button.pull-right.btn.btn-orange-sm {
 .ck-editor__editable_inline {
     min-height: 500px;
 }
-  
+  .modal.faqmodal {
+    overflow: auto !important;
+}
+
+
