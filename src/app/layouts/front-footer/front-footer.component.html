@@ -1,0 +1,47 @@
+<footer class="footer">
+    <div class="container">
+        <div class="uper-footer">
+            <div class="row">
+                    <div class="footer-contect-heading">
+              <h3 class="hdg-main">Contact us</h3>
+            </div>
+            <div class="main-footer-new">
+              <div class="footer-card">
+          <ul class="footer-social-icon">
+                <li *ngIf="settingArray.fbsociallink !='null'">
+                    <a class="social-icon-link" href="{{settingArray?.fbsociallink}}"><img src="assets/images/logo/fb.png"></a>
+                  </li>
+                  <li *ngIf="settingArray.linksociallink !='null'">
+                    <a class="social-icon-link" href=""><img src="assets/images/logo/in.png"></a>
+                  </li>
+                  <li *ngIf="settingArray.fbsociallink !='null'">
+                    <a class="social-icon-link" href="{{settingArray?.instasociallink}}"><img src="assets/images/logo/insta.png"></a>
+                  </li>
+                 
+                  <li *ngIf="settingArray.twittersociallink !='null'">
+                    <a class="social-icon-link" href=""><img src="assets/images/logo/tweet.png"></a>
+                  </li>
+          </ul>
+              </div>
+              <div class="footer-card">
+                <p><a href="#">{{settingArray?.contactemail}}</a></p>
+              </div>
+              <div class="footer-card">
+                 <p>{{settingArray?.address}}</p>
+              </div>
+            </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</footer>
+<section class="bottom-footer">
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            <p>{{settingArray?.copyright}}</p>
+         </div>
+      </div>
+   </div>
+</section>
