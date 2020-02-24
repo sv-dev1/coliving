@@ -13,7 +13,7 @@
          </div>
          <div class="row">
             <div class="col-12">
-               <button class="pull-right btn btn-orange-sm" (click)="openAddPageModal();"><i class="fa fa-plus"></i>Add Page</button>
+            <!--    <button class="pull-right btn btn-orange-sm" (click)="openAddPageModal();"><i class="fa fa-plus"></i>Add Page</button> -->
             </div>
             <div class="col-12">
                <div class="card mb-5">
@@ -39,6 +39,7 @@
                                  <td>{{ page.createdAt | date:'medium'}}</td>
                                  <td> 
                                     <a class="btn btn-orange-sm" href="javascript:void(0);"  (click)="editPageModal(page)"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                  
                                     <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="contentPerPage(page)" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                                  </td>
                               </tr>
