@@ -56,7 +56,7 @@
                               <label for="bill">Upload image<span class="validate-red">*</span></label>
                               <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="detectFiles($event)">
                               <img *ngIf="isImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
-                              <img [src]="url" height="200" *ngIf="boolUrl==true">
+                              
 
                               <br/>
 

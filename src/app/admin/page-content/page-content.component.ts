@@ -44,6 +44,7 @@ export class PageContentComponent implements OnInit {
 
 	isShowRelatedimages : boolean = false;
 	imagesCount: any;
+	p: any;
 
 	constructor(
 		private formBuilder:FormBuilder,
