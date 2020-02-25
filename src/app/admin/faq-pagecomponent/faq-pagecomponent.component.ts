@@ -39,6 +39,8 @@ export class FaqPagecomponentComponent implements OnInit {
 
 	descriptionEmpty : boolean = false;
      p : any;
+   
+
 	constructor( 
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -162,18 +164,20 @@ export class FaqPagecomponentComponent implements OnInit {
      		});
      	}
      }
-     deleteCategoryModal(faq) {
-     	this.faqName = faq.name;
-     	this.faqId = faq.id;
-     	this.isDelFaq = true;
+     deleteFaqModal(faq) {
+
+          this.faqId = faq.id;
+          this.isDelFaq = true;
      }
-     closeDelModal(faqName){
-     	this.toastr.infoToastr('All information associated to the faq '+faqName+' are safe.');
+
+     closeDelModal(){
+     	this.toastr.infoToastr('All information associated to the faq are safe.');
      	this.isDelFaq=false;
      }
 
      deleteFaq(faqId){
      	if(faqId){
+               
      		this.data_service.deleteFaq(faqId).subscribe((response:any) =>{
      			this.response = JSON.stringify(response, undefined, 2); 
      			this.isDelFaq = false;
@@ -186,4 +190,7 @@ export class FaqPagecomponentComponent implements OnInit {
      		})
      	}
      }
+
+   
+    
  }

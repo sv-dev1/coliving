@@ -623,7 +623,7 @@ export class DataService {
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
 		console.log(this.base_url+'tasks/'+inputData);
-		return this.http.delete(this.base_url+'category/'+inputData,{ headers: headers })
+		return this.http.delete(this.base_url+'faq/remove/'+inputData,{ headers: headers })
 		.map((response:Response)=>{
 			console.log(response);
 			return response;

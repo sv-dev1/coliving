@@ -120,10 +120,7 @@ export class SiteConfigcomponentComponent implements OnInit {
 
 	siteConfig(formValue) {
 		this.submitted = true;
-		/*if(formValue.address == ""){
-			this.addressEmpty = true;
-		}*/
-		console.log('this.images', this.images);
+		
 		if(this.siteConfigForm.invalid) {
 			return;
 		}else{
