@@ -41,7 +41,6 @@ export class PageContentComponent implements OnInit {
 	images : any = [];
 	imagesArray : any = [];
 	isPreviousimage : boolean = false;
-
 	isShowRelatedimages : boolean = false;
 	imagesCount: any;
 	p: any;
@@ -54,23 +53,22 @@ export class PageContentComponent implements OnInit {
 		private data_service : DataService,
 		private http : HttpClient
 		) { 
-
 		this.pageContentForm = this.formBuilder.group({
 			title: [''],
 			subtitle: [''],
 			image: [''],
 			description: [''],
+			sectionIndex:[''],
 			file:[''],
 		});
-
 		this.updateSectionContentForm = this.formBuilder.group({
 			title: [''],
 			subtitle: [''],
 			image: [''],
 			description: [''],
+			sectionIndex:[''],
 			file:[''],
 		});
-
 		this.base_url = environment.base_url;
 		this.image_base_url = environment.image_base_url;
 	}
@@ -137,6 +135,8 @@ export class PageContentComponent implements OnInit {
 					})
 				}			
 				formData.append('content', formValue.description);
+				formData.append('sectionIndex', formValue.sectionIndex);
+
 				let token; 
 				if(sessionStorage.getItem("auth_token")!=undefined){
 					token = sessionStorage.getItem("auth_token"); 
@@ -168,6 +168,7 @@ export class PageContentComponent implements OnInit {
 				title : page.title,
 				subtitle : page.subtitle,
 				description : page.content,
+				sectionIndex:page.sectionIndex,
 				image:[''],
 			});
 		}
@@ -186,6 +187,7 @@ export class PageContentComponent implements OnInit {
 		if(this.updateSectionContentForm.invalid) {
 			return;
 		} else {
+			console.log(formValue);
 			const formData = new FormData();
 			formData.append('title', formValue.title);
 			formData.append('subtitle', formValue.subtitle);		   

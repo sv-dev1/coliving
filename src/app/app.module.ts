@@ -223,8 +223,8 @@ export function provideConfig() {
     }),
     ShareButtonsModule.withConfig({ prop: shareProp }),
     ShareModule,
-    CKEditorModule
-    
+    CKEditorModule,    
+
   ],
   
   providers: [
