@@ -37,6 +37,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
+import { FeedbackComponent } from './admin/feedback/feedback.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
   
   { path: 'crm.access.admin', component: AdminLoginComponent},
+  { path: 'admin/customer-feedback', component: FeedbackComponent, canActivate: [AuthGuard] },
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'admin/home-page-content', component: HomePagecomponentComponent, canActivate: [AuthGuard] },
   { path: 'admin/faq-page-content', component: FaqPagecomponentComponent, canActivate: [AuthGuard] },

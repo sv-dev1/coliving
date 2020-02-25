@@ -11,6 +11,8 @@ export class FrontHeaderComponent implements OnInit {
   isfaq : boolean = false;
   isPrivacyPolicy : boolean = false;
   isHome : boolean = false;
+  session_key : boolean = false;
+  
   constructor(private router: Router,
   	private route: ActivatedRoute) { }
 
