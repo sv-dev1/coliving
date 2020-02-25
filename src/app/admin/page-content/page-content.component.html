@@ -20,7 +20,7 @@
                         <div class="row">
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Title<!-- <span class="validate-red">*</span> --></label>
+                                 <label for="team">Title</label>
                                  <input type="text" class="form-control" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" >
                                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.title.errors.required">Title is required.</span>
@@ -29,7 +29,7 @@
                            </div>
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Sub Title<!-- <span class="validate-red">*</span> --></label>
+                                 <label for="team">Sub Title</label>
                                  <input type="text"  class="form-control" placeholder="Sub Title" formControlName="subtitle" [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }">
                                  <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.subtitle.errors.required">Sub Title is required.</span>
@@ -40,9 +40,7 @@
                               <div class="form-group">
                                  <label for="bill">Image</label>
                                  <input type="file" class="form-control-file border" accept="image/*" formControlName="image" (change)="detectFiles($event)" multiple>
-                                <!--  <div *ngIf="imageEmpty"  class="for-sub-name default-error-message"> Image is required.
-                                </div> -->
-                                <div *ngIf="isImage">
+                                 <div *ngIf="isImage">
                                    <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
                                 </div>
                                 <br/>
@@ -62,31 +60,11 @@
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
                               <label for="team">Select Index</label>
-                              <select class="form-control" formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
-                                 <option value="1">1</option>
-                                 <option value="2">2</option>
-                                 <option value="3">3</option>
-                                 <option value="4">4</option>
-                                 <option value="5">5</option>
-                                 <option value="6">6</option>
-                                 <option value="7">7</option>
-                                 <option value="8">8</option>
-                                 <option value="9">9</option>
-                                 <option value="10">10</option>
-                                 <option value="11">11</option>
-                                 <option value="12">12</option>
-                                 <option value="13">13</option>
-                                 <option value="14">14</option>
-                                 <option value="15">15</option>
-                                 <option value="16">16</option>
-                                 <option value="17">17</option>
-                                 <option value="18">18</option>
-                                 <option value="19">19</option>
-                                 <option value="20">20</option>
-                                 <option value="21">21</option>
-                                 <option value="22">22</option>
 
-                              </select>
+                              <select formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
+                                 <option *ngFor="let num of indexNumber" value=num>{{num}}</option>
+
+                             </select>
                                
                            
                               <div *ngIf="submitted && f.sectionIndex.errors" class="invalid-feedback">

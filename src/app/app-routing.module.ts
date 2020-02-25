@@ -37,7 +37,9 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
+
 
 
 const routes: Routes = [
@@ -78,7 +80,8 @@ const routes: Routes = [
   { path: 'admin/pages', component: PagesComponent, canActivate: [AuthGuard] },
   { path: 'admin/page-content', component: PageContentComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
-  
+  { path: 'not-found', component: NotFoundComponent },
+
   {path: '**', redirectTo: '/'},
  
 ]; 

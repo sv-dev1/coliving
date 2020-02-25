@@ -44,14 +44,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 console.log(this.executing);
 
                 if(err.status == 0 && this.executing == false){
-                   
-                    this.toastr.errorToastr('We are sorry. Due to technical issue we are not able to serve your request at moment.');
                     this.executing = true;
                     sessionStorage.removeItem("auth_token");
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
                     sessionStorage.removeItem("user_name");
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/not-found']);
                  }
                 if(err.status == 401 && !this.executing){
                     this.toastr.errorToastr('Session Expired,Please Login again');

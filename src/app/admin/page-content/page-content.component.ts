@@ -44,7 +44,7 @@ export class PageContentComponent implements OnInit {
 	isShowRelatedimages : boolean = false;
 	imagesCount: any;
 	p: any;
-
+	indexNumber:any=[];
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -77,6 +77,9 @@ export class PageContentComponent implements OnInit {
 		this.pageId = this.route.snapshot.queryParamMap.get('page');
 		this.pageName = this.route.snapshot.queryParamMap.get('pn');
 		this.getPageContent(this.pageId);
+		for (var i=1;i<=22;i++){
+            this.indexNumber.push(i);
+		}
 	}
 
 	getPageContent(pageId) {
@@ -116,16 +119,10 @@ export class PageContentComponent implements OnInit {
 
 	addContent(formValue) {
 		this.submitted = true;
-		/*if(formValue.description == ""){
-				this.descriptionEmpty = true;
-			}
-			if(formValue.image  == ""){
-				this.imageEmpty = true;
-			}*/
-
 			if(this.pageContentForm.invalid) {
 				return;
-			} else {
+			}
+			else {
 				const formData = new FormData();
 				formData.append('title', formValue.title);
 				formData.append('subtitle', formValue.subtitle);
@@ -235,7 +232,7 @@ export class PageContentComponent implements OnInit {
 	deleteImage(image) {
 		this.data_service.deleteImage(image.id).subscribe((response:any)=> { 
 			this.toastr.successToastr(response.message,'Success');
-			this.isShowRelatedimages = true;
+			this.isShowRelatedimages = false;
 		},error =>{
 			this.isError = true; 
 			this.errorsArr = error.error;
