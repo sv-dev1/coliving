@@ -57,11 +57,11 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-12 col-sm-12">
+                        <div class="col-12 col-sm-6">
                            <div class="form-group">
                               <label for="team">Select Index</label>
 
-                              <select formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
+                              <select class="form-control" formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
                                  <option *ngFor="let num of indexNumber" value=num>{{num}}</option>
 
                              </select>
@@ -74,7 +74,7 @@
                         </div>
                         <input type="hidden" formControlName="file">
                         <div class="col-12 col-sm-12 text-center">
-                           <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">Submit</button>
+                           <button type="submit" [disabled]="isDisabled" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">Submit</button>
                         </div>
                      </div>
                   </form>
@@ -169,8 +169,6 @@
                         </div>
                      </div>
 
-
-
                      <div class="col-12 col-sm-12">
                         <div class="form-group">
                            <label for="bill">Description</label>
@@ -181,7 +179,7 @@
                      </div>
                      <input type="hidden" formControlName="file">
                      <div class="col-12 col-sm-12 text-center">
-                        <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">update</button>
+                        <button type="submit" [disabled]="isDisabled" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">update</button>
                      </div>
                   </div>
                </form>
@@ -203,13 +201,18 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body">
-               <div class="col-12 col-sm-12" >
+               <div class="row">
+               <div class="col-12 col-sm-12" *ngIf="isPreviousimage">
                   <div class="form-group">
                      <div id="container-cross" *ngFor='let urls of imagesArray'>
                         <button id="x" (click)="deleteImage(urls)">X</button>
                         <img src="{{urls.imageurl}}" alt="content-image">
                      </div>
                   </div>
+               </div>
+            </div>
+               <div class="col-12 col-sm-12" *ngIf="isNullPreviousimage">
+                 <p class="text-danger text-center">No Image available for this content section.</p>
                </div>
                
             </div>

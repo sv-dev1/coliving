@@ -49,7 +49,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     sessionStorage.removeItem("userId");
                     sessionStorage.removeItem("questionaire");
                     sessionStorage.removeItem("user_name");
-                    this.router.navigate(['/not-found']);
+                    this.router.navigate(['/temporary-down']);
                  }
                 if(err.status == 401 && !this.executing){
                     this.toastr.errorToastr('Session Expired,Please Login again');

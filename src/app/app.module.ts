@@ -193,7 +193,7 @@ export function provideConfig() {
     escapeHtmlPipe1,
     FrontHeaderComponent,
     FrontFooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
     FeedbackComponent
   ],
   imports: [

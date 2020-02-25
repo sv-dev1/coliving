@@ -80,7 +80,7 @@ const routes: Routes = [
   { path: 'admin/pages', component: PagesComponent, canActivate: [AuthGuard] },
   { path: 'admin/page-content', component: PageContentComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
-  { path: 'not-found', component: NotFoundComponent },
+  { path: 'temporary-down', component: NotFoundComponent },
 
   {path: '**', redirectTo: '/'},
  
