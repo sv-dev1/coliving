@@ -95,22 +95,28 @@
 				<p>Pages</p>
 			</a>
 		</li>
-		<li routerLinkActive="active" *ngIf="roleId=='1'">
+<!-- 		<li routerLinkActive="active" *ngIf="roleId=='1'">
 			<a routerLink="/admin/home-page-content"  routerLinkActive="active-link">
 				<i class="material-icons">home</i>
 				<p>Home Page Content</p>
 			</a>
-		</li>
-	   <li routerLinkActive="active" *ngIf="roleId=='1'">
+		</li> -->
+	<!--    <li routerLinkActive="active" *ngIf="roleId=='1'">
 			<a routerLink="/admin/faq-page-content"  routerLinkActive="active-link">
 				<i class="material-icons">question_answer</i>
 				<p>FAQ Content</p>
 			</a>
-		</li>
+		</li> -->
 		<li routerLinkActive="active" *ngIf="roleId=='1'">
 			<a routerLink="/admin/site-config"  routerLinkActive="active-link">
 				<i class="material-icons">settings</i>
 				<p>Site Config</p>
+			</a>
+		</li>  
+		<li routerLinkActive="active" *ngIf="roleId=='1'">
+			<a routerLink="/admin/customer-feedback"  routerLinkActive="active-link">
+				<i class="material-icons">feedback</i>
+				<p>Customer Feedback</p>
 			</a>
 		</li>
 	</ul>
@@ -195,5 +201,22 @@
 				<span class="span-tog">Pages</span>
 			</a>
 		</li>
+
+		 <li routerLinkActive="active" *ngIf="roleId=='1'">
+			<a routerLink="/admin/site-config" routerLinkActive="active-link">
+				<i class="material-icons">settings</i>
+				<span class="span-tog">Site Config</span>
+			</a>
+		</li>
+
+		<li routerLinkActive="active" *ngIf="roleId=='1'">
+			<a routerLink="/admin/customer-feedback" routerLinkActive="active-link">
+				<i class="material-icons">feedback</i>
+				<span class="span-tog">Customer Feedback</span>
+			</a>
+		</li>
+
 	</ul>
 </div>
+
+	

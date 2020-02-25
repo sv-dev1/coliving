@@ -40,8 +40,8 @@
                               <td *ngIf="faq.status=='1'" class="text-success">Active</td>
                               <td *ngIf="faq.status=='0'" class="text-danger">In-active</td>
                               <td> 
-                               <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="editFaqModal(faq)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                             <!--   <a  class="btn btn-orange-sm" href="javascript:void(0);"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                               <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="editFaqModal(faq)"><i title="QuickEdit" class="fa fa-pencil" aria-hidden="true"></i></a> | 
+                               <a  class="btn btn-orange-sm" href="javascript:void(0);" (click)="deleteFaqModal(faq)"><i title="Delete" class="fa fa-trash" aria-hidden="true"></i></a>
                             </td>
                          </tr>
                       </tbody>
@@ -150,5 +150,31 @@
 </div> 
 <!----------- EDIT FAQ MODEL END ---------------->
 
-
-
+<!---  Modal to delete TASK  -->
+<div class="container">
+   <!-- The Modal -->
+   <div class="modal" id="taskDel" [style.display]="isDelFaq ? 'block' : 'none'" *ngIf="isDelFaq" >
+   <div class="modal-dialog modaldialog12">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Faq deletion</h4>
+            <button type="button" class="close" aria-describedby="modal-title">
+            <span aria-hidden="true" (click)="closeDelModal(categoryName)">&times;</span>
+            </button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">{{categoryName}}</span> category?</strong></p>
+            <p>All information associated to this category will be permanently deleted.
+               <span class="text-danger">This operation can not be undone.</span>
+            </p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeDelModal()">Cancel</button>
+            <button type="button" class="btn btn-orange-sm" (click)="deleteFaq(faqId)">Yes,Delete It</button>
+         </div>
+      </div>
+   </div>
+</div>
+</div>

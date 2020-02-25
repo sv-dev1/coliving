@@ -172,6 +172,10 @@ export class PagesComponent implements OnInit {
 		this.updatePageForm.reset();
 	}
 
+	goToFaqPage() {
+		this.router.navigate(['admin/faq-page-content']);
+	}
+
 	
 }
 

@@ -60,9 +60,11 @@
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
                               <label for="team">Select Index</label>
+
                               <select formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
                                  <option *ngFor="let num of indexNumber" value=num>{{num}}</option>
-                              </select>
+
+                             </select>
                                
                            
                               <div *ngIf="submitted && f.sectionIndex.errors" class="invalid-feedback">
