@@ -43,6 +43,7 @@ export class PageContentComponent implements OnInit {
 	isPreviousimage : boolean = false;
 	isShowRelatedimages : boolean = false;
 	imagesCount: any;
+	p: any;
 
 	constructor(
 		private formBuilder:FormBuilder,

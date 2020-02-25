@@ -30,6 +30,7 @@ export class PagesComponent implements OnInit {
 	id : string = '';
 	pageName : string = '';
 	updatePageForm : FormGroup;
+	p: any;
     
 	constructor(
 		private formBuilder : FormBuilder,

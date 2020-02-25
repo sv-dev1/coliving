@@ -23,6 +23,14 @@ export class SiteConfigcomponentComponent implements OnInit {
     messageDigit : boolean = false;
     current_country : string = "";
     ip_address : string = "";
+    settingsArray : any = [];
+    base_url : any;
+    image_base_url : any;
+	image_url : any;
+	isImage : boolean = false;
+    images: any = [];
+    urls: any = [];
+    
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -33,9 +41,16 @@ export class SiteConfigcomponentComponent implements OnInit {
 		) { 
 		this.siteConfigForm = this.formBuilder.group({
 			email: ['', Validators.required],
-			phoneNo: ['', Validators.required],
-			address: ['', Validators.required]
+			address: ['', Validators.required],
+			copyright: ['', Validators.required],
+			fbsociallink : [''],
+			instasociallink : [''],
+			linksociallink: [''],
+			twittersociallink: [''],
+			image: [''],
 		});
+		this.base_url = environment.base_url;
+		this.image_base_url = environment.image_base_url;
 	}
 
 	ngOnInit() {
@@ -43,6 +58,7 @@ export class SiteConfigcomponentComponent implements OnInit {
 			this.router.navigate(['/dashboard']);
 		}
 		this.getCurrentIP();
+		this.getSettings();
 	}
     getCurrentIP(){
 	      this.http.get('https://jsonip.com').subscribe( data => {
@@ -59,28 +75,82 @@ export class SiteConfigcomponentComponent implements OnInit {
 		})
     }
 
+    getSettings() {
+		this.data_service.getSettings().subscribe((response:any) =>{   
+ 		this.settingsArray = response.settings[0];
+ 		this.image_url = this.settingsArray.logo;
+ 	
+		this.isImage = true;
+ 		this.siteConfigForm.patchValue({
+	     		email : this.settingsArray.contactemail,
+	            address : this.settingsArray.address,
+	            copyright : this.settingsArray.copyright,
+	            fbsociallink : this.settingsArray.fbsociallink,
+	     		instasociallink : this.settingsArray.instasociallink,
+	            linksociallink : this.settingsArray.linksociallink,
+	            twittersociallink : this.settingsArray.twittersociallink,
+     	});
+ 		this.isError = false;    
+     	}, error =>{ 
+     		this.isError = true; 
+     		this.errorsArr = error.error;
+     	})
+    }
+
+   
+	detectFiles(event) {
+		
+		let files = event.target.files;
+		if (files) {
+			this.isImage = true;
+			let i = 0;
+			for (let file of files) {
+				this.images.push(file);
+				let reader = new FileReader();
+				reader.onload = (e: any) => {
+					this.urls.push(e.target.result);
+				}
+				reader.readAsDataURL(file);
+				i++;
+			} 
+		}
+	}
+
 	get f() { return this.siteConfigForm.controls; }
 
 	siteConfig(formValue) {
 		this.submitted = true;
-		if(formValue.address == ""){
+		/*if(formValue.address == ""){
 			this.addressEmpty = true;
-		}
+		}*/
+		console.log('this.images', this.images);
 		if(this.siteConfigForm.invalid) {
 			return;
 		}else{
-			const input = {  
-				"question": formValue.category, 
-				"description": formValue.description,   
+			const formData = new FormData();
+			formData.append('contactemail', formValue.email);
+			formData.append('address', formValue.address);		
+			formData.append('copyright', formValue.copyright);
+			formData.append('fbsociallink', formValue.fbsociallink);		   
+			formData.append('instasociallink', formValue.instasociallink);
+			formData.append('linksociallink', formValue.linksociallink);		   
+			formData.append('twittersociallink', formValue.twittersociallink);
+			formData.append('logo', this.images);
+			let token; 
+			if(sessionStorage.getItem("auth_token")!=undefined){
+				token = sessionStorage.getItem("auth_token"); 
 			}
-			this.data_service.addFaq(input).subscribe((response:any)=> { 
+			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
+			this.http.post(this.base_url+'websetting/update/'+this.settingsArray.webSID, formData, httpOptions).subscribe((response:any) => {
 				this.toastr.successToastr(response.message,'Success');
-				this.submitted = false;         
-				this.siteConfigForm.reset();
+				this.submitted = false;
+				this.getSettings();
 			},error =>{
-				this.isError = true; 
+				this.isError = true;
+				this.toastr.errorToastr(error.error.status,'Error');
 				this.errorsArr = error.error;
 			});
 		}
 	}
 }
+	  
