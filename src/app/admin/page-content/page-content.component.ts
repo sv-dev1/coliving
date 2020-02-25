@@ -44,7 +44,11 @@ export class PageContentComponent implements OnInit {
 	isShowRelatedimages : boolean = false;
 	imagesCount: any;
 	p: any;
-	indexNumber:any=[];
+	indexNumber : any=  [];
+	isDisabled : boolean = false;
+	isNullPreviousimage : boolean = false;
+
+
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -119,6 +123,7 @@ export class PageContentComponent implements OnInit {
 
 	addContent(formValue) {
 		this.submitted = true;
+		this.isDisabled = true;
 			if(this.pageContentForm.invalid) {
 				return;
 			}
@@ -146,16 +151,18 @@ export class PageContentComponent implements OnInit {
 					this.pageContentForm.reset();
 					this.isImage = false;
 					this.urls = '';
+					this.isDisabled = false;
 				},error =>{
 					this.isError = true;
 					this.toastr.errorToastr(error.error.status,'Error');
 					this.errorsArr = error.error;
+					this.isDisabled = false;
 				});
 			}
 		}
 
 		editPageSectionContentModal(page) {
-			
+
 			this.contentId = page.contentId;
 			this.pageId = page.pageId;
 			this.isSectionContentModal = true;
@@ -178,9 +185,8 @@ export class PageContentComponent implements OnInit {
 
 		updateContent(formValue) {
 			this.submitted = true;
-		/*if(formValue.description == ""){
-			this.descriptionEmpty = true;
-		}*/
+			this.isDisabled = true;
+	
 		if(this.updateSectionContentForm.invalid) {
 			return;
 		} else {
@@ -208,11 +214,13 @@ export class PageContentComponent implements OnInit {
 				this.image_url = '';
 				this.isImage = false;
 				this.urls = '';
+				this.isDisabled = false;
 				this.getPageContent(this.pageId);
 			},error =>{
 				this.isError = true;
 				this.toastr.errorToastr(error.error.status,'Error');
 				this.errorsArr = error.error;
+				this.isDisabled = false;
 			});
 		}
 	}
@@ -220,9 +228,14 @@ export class PageContentComponent implements OnInit {
 	showRelatedImages(page) {
 		this.isShowRelatedimages = true;
 		this.imagesArray = page.images;
+         console.log('this.imagesArray.length', this.imagesArray.length);
 		if(this.imagesArray.length > 0 ) {
+			this.isNullPreviousimage = false; 
 			this.isPreviousimage = true; 
-		} 
+		} else {
+			this.isPreviousimage = false; 
+			this.isNullPreviousimage = true; 
+		}
 	}
 
 	closeImageModal() {
@@ -230,9 +243,12 @@ export class PageContentComponent implements OnInit {
 	}
 
 	deleteImage(image) {
-		this.data_service.deleteImage(image.id).subscribe((response:any)=> { 
+
+		this.data_service.deleteImage(image).subscribe((response:any)=> { 
 			this.toastr.successToastr(response.message,'Success');
 			this.isShowRelatedimages = false;
+			this.imagesArray.splice(image.keyId, 1);
+			this.getPageContent(this.pageId);
 		},error =>{
 			this.isError = true; 
 			this.errorsArr = error.error;

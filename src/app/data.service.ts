@@ -651,14 +651,17 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-	deleteImage(id) {
+	deleteImage(image) {
 	    let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
 			token = sessionStorage.getItem("auth_token"); 
 		}
 		let headers = new HttpHeaders();
-		headers = headers.set('Authorization', token); 		
-		return this.http.delete(this.base_url+'image/remove/'+id,{ headers: headers })
+		headers = headers.set('Authorization', token); 	
+		const fff= {
+			'path' : image.imageurl,
+		};	
+		return this.http.post(this.base_url+'image/remove/'+image.id, fff,{ headers: headers })
 		.map((response:Response)=>{
 			console.log(response);
 			return response;
