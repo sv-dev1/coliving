@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
        console.log(response.pagesArr['sections']);
     },error=>{ 
         console.log(error);
-    });
+        });
   }
   getData(data){
    // var result=data.replace(/\&lt;p\&gt;(?:\s|\&amp;nbsp;)*\&lt;\/p\&gt;/gi,"");
