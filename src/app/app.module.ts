@@ -82,6 +82,7 @@ import { escapeHtmlPipe1 } from './safe-html1.pipe';
 import { FrontHeaderComponent } from './layouts/front-header/front-header.component';
 import { FrontFooterComponent } from './layouts/front-footer/front-footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { FeedbackComponent } from './admin/feedback/feedback.component';
 
 const icons = [
   // ... other icons
@@ -193,7 +194,7 @@ export function provideConfig() {
     FrontHeaderComponent,
     FrontFooterComponent,
     NotFoundComponent
-   
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,
