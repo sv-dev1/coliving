@@ -30,6 +30,7 @@ export class SiteConfigcomponentComponent implements OnInit {
 	isImage : boolean = false;
     images: any = [];
     urls: any = [];
+    descriptionEmpty : boolean = false;
     
 
 	constructor(
@@ -120,7 +121,9 @@ export class SiteConfigcomponentComponent implements OnInit {
 
 	siteConfig(formValue) {
 		this.submitted = true;
-		
+		if(formValue.address) {
+			this.descriptionEmpty = true;
+		}
 		if(this.siteConfigForm.invalid) {
 			return;
 		}else{
