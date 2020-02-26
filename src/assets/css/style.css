@@ -2337,3 +2337,7 @@ a.logo-link img {
     line-height: 98px;
     text-shadow: rgba(61, 61, 61, 0.3) 1px 1px, rgba(61, 61, 61, 0.2) 2px 2px, rgba(61, 61, 61, 0.3) 3px 3px;
 }
+.modal-content.fedback {
+    height: 550px;
+    overflow: scroll;
+}
