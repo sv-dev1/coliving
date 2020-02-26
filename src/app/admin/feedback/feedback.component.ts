@@ -174,6 +174,7 @@ export class FeedbackComponent implements OnInit {
 	get g() { return this.updatefeedbackForm.controls; }
 
 	updateFeedback (formValue) {
+		console.log('formValue', formValue);
         this.submitted = true;
 		if(formValue.address) {
 			this.descriptionEmpty = true;

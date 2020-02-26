@@ -26,8 +26,8 @@
               <div class="footer-card">
                 <p><a href="#">{{settingArray?.contactemail}}</a></p>
               </div>
-              <div class="footer-card">
-                 <p>{{settingArray?.address}}</p>
+              <div class="footer-card" [innerHTML]="settingArray?.address">
+                 
               </div>
             </div>
                 
