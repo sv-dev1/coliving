@@ -38,6 +38,7 @@ export class FeedbackComponent implements OnInit {
 	isDelfeedback : boolean = false;
 	response :  any = [];
 	feedbackId : string = '';
+	p : any;
 
 	constructor(private formBuilder:FormBuilder,
 		private router: Router,
@@ -59,7 +60,8 @@ export class FeedbackComponent implements OnInit {
 			authorAddress: ['', Validators.required],
 			rating: ['', Validators.required],
 			description: ['', Validators.required],
-			image:['']
+			image:[''],
+			status: ['', Validators.required]
 		});
 
 		this.base_url = environment.base_url;
@@ -161,6 +163,7 @@ export class FeedbackComponent implements OnInit {
 			rating : feedback.rating,
 			description : feedback.description,
 			image:[''],
+			status: feedback.status
 		});
 	}
 
@@ -190,6 +193,7 @@ export class FeedbackComponent implements OnInit {
 			formData.append('autheraddress', formValue.authorAddress);
 			formData.append('rating', formValue.rating);
 			formData.append('description', formValue.description);
+			formData.append('status', formValue.status);
 
 			let token; 
 			if(sessionStorage.getItem("auth_token")!=undefined){
