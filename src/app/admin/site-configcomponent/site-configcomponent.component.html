@@ -65,10 +65,12 @@
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
                               <label for="team">Address<span class="validate-red">*</span></label>
-                              <textarea id="notes" class="form-control"rows="5" cols="5" formControlName="address" [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
-                              <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.address.errors.required">Address field is required.</span>
-                              </div>
+                                <ckeditor [editor]="Editor" formControlName="address" data="
+                                 <p>Hello, world!</p>
+                                 " [ngClass]="{'is-invalid': submitted && f.address.errors}" ></ckeditor>
+                                 <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Address is required.
+                                 </div>
+                            
                            </div>
                         </div>
                         <div class="col-12 col-sm-12">

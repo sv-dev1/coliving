@@ -28,6 +28,9 @@ input , button {
     overflow: auto;
     transition:all 0.3s linear;
 }
+.carousel-indicators li {
+    background-color: #F44336 !important;
+}
 .display-menu #menu-center {right:0px;}
 #menu-center ul.navbar-nav {flex-direction: column;}
 .header-section nav.navbar ul.navbar-nav li{padding: 0 5px;margin: 10px 0px;display: flex;justify-content: flex-end;}

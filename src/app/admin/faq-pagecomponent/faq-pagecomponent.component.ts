@@ -33,7 +33,7 @@ export class FaqPagecomponentComponent implements OnInit {
 	faqId : string = ''; 
 	isDelFaq : boolean = false;
 	response :  any = [];
-    description : any = [];
+     description : any = [];
 	descriptionEmpty : boolean = false;
      p : any;
    
