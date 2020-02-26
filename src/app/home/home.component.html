@@ -263,57 +263,52 @@
 			 <div class="col-12">
 				<div id="demo" class="carousel slide" data-ride="carousel">
 				   <ul class="carousel-indicators">
-					  <li data-target="#demo" data-slide-to="0" class="active"></li>
-					  <li data-target="#demo" data-slide-to="1"></li>
-					  <li data-target="#demo" data-slide-to="2"></li>
+					  <li data-target="#demo" [attr.data-slide-to]="i" class="{{feedback?.isActive}}" *ngFor="let feedback of feedbacksNew, let i = index"></li>
 				   </ul>
 				   <div class="carousel-inner">
-					  <div class="carousel-item active">
+					  <div class="carousel-item {{feedback?.isActive}}" *ngFor="let feedback of feedbacksNew, let i = index">
 						 <div class="main-data">
-							<img class="user-image" src="assets/images/avatar.png" />
-							<p class="des">Awesome place!!! Love the location, how new everything is (furniture, flooring, kitchen items, etc.), how quick Janeen and Sean are to respond to things and how much they seem to genuinely care about us loving where we live! Highly recommend!</p>
-							<p class="name">Chris Z</p>
-							<p class="location">Santa Monica Beach colive - Pacific & 6th</p>
+							
+
+							<img class="user-image" [src]=feedback?.logo  onerror="this.src='assets/images/avatar.png'"/>
+							<p class="des"[innerHTML]="feedback?.description | safeHtml1"></p>
+							<p class="name">{{feedback?.authername}}</p>
+							<p class="location">{{feedback?.autheraddress}}</p>
 							<p class="star-value">
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
+							<span *ngIf="feedback.rating =='1'">
+								<i class="fas fa-star"></i>
+							</span>
+							<span *ngIf="feedback.rating =='2'">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</span>
+							<span *ngIf="feedback.rating =='3'">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</span>
+
+							<span *ngIf="feedback.rating =='4'">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							</span>
+							<span *ngIf="feedback.rating =='5'">
+								<i class="fas fa-star"></i>
+								<i class="fas fa-star"></i>
+							    <i class="fas fa-star"></i>
+							    <i class="fas fa-star"></i>
+							    <i class="fas fa-star"></i>
+							</span>
+							   
+							  
 							</p>
 						 </div>
 					  </div>
-					  <div class="carousel-item">
-						 <div class="main-data">
-							<img class="user-image" src="assets/images/avatar.png" />
-							<p class="des">Awesome place!!! Love the location, how new everything is (furniture, flooring, kitchen items, etc.), how quick Janeen and Sean are to respond to things and how much they seem to genuinely care about us loving where we live! Highly recommend!</p>
-							<p class="name">Chris Z</p>
-							<p class="location">Santa Monica Beach colive - Pacific & 6th</p>
-							<p class="star-value">
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							</p>
-						 </div>
-					  </div>
-					  <div class="carousel-item">
-						 <div class="main-data">
-							<img class="user-image" src="assets/images/avatar.png" />
-							<p class="des">Awesome place!!! Love the location, how new everything is (furniture, flooring, kitchen items, etc.), how quick Janeen and Sean are to respond to things and how much they seem to genuinely care about us loving where we live! Highly recommend!</p>
-							<p class="name">Chris Z</p>
-							<p class="location">Santa Monica Beach colive - Pacific & 6th</p>
-							<p class="star-value">
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							   <i class="fas fa-star"></i>
-							</p>
-						 </div>
-					  </div>
-				   </div>
+					</div>
+					 
+				   
 				</div>
 			</div>
 		  </div> 

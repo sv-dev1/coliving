@@ -718,7 +718,6 @@ export class DataService {
 			return Observable.throw(error);});
 	}
 
-
 	getFeedbacks () {
         let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -726,8 +725,55 @@ export class DataService {
 		}
 		let headers = new HttpHeaders();
 		headers = headers.set('Authorization', token);
-		return this.http.get(this.base_url+'websetting/adminlist',{ headers: headers })
+		return this.http.get(this.base_url+'hr/list',{ headers: headers })
+	    .map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
 	}
+
+	getFeedback () {
+        let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		return this.http.get(this.base_url+'websetting/adminlist',{ headers: headers })
+	    .map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	deletefeedback(feedbackId) {
+	    let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		
+		return this.http.delete(this.base_url+'hr/remove/'+feedbackId,{ headers: headers })
+		.map((response:Response)=>{
+			console.log(response);
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+    getWebFeedback () {
+	return this.http.get(this.base_url+'hr/weblist')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	
 } 
 
 
