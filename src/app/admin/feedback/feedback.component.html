@@ -44,6 +44,12 @@
                               </tr>
                            </tbody>
                         </table>
+                        <div *ngIf="feedbacksCount =='0'">
+                            <p>No Content Available for  page.</p>
+                       </div>
+                     <div *ngIf="isArrayLength">
+                        <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                     </div>
                      </div>
                   </div>
                </div>
@@ -194,6 +200,19 @@
                <div *ngIf="descriptionEmpty"  class="for-sub-name default-error-message">Description is required.
                </div>
             </div>
+            <div class="form-group">
+               <label for="team">Status<span class="validate-red">*</span></label>
+               <select class="custom-select form-control" formControlName="status" id="rating" [ngClass]="{ 'is-invalid': submitted && g.status.errors }">
+                  <option value="" disabled>Please select one option</option>
+                  <option value="1">Active</option>
+                  <option value="0">InActive</option>
+            
+                 
+               </select>
+               <div *ngIf="submitted && g.status.errors" class="invalid-feedback">
+                  <span class="for-sub-name" *ngIf="g.status.errors.required">Rating is required.</span>
+               </div>
+            </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
                <button type="submit" class="btn btn-orange-sm">Yes, Update</button>
@@ -214,7 +233,7 @@
       <div class="modal-content">
          <!-- Modal Header -->
          <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Faq deletion</h4>
+            <h4 class="modal-title" id="modal-title">Feedback deletion</h4>
             <button type="button" class="close" aria-describedby="modal-title">
             <span aria-hidden="true" (click)="closeDelModal()">&times;</span>
             </button>

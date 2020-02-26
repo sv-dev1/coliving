@@ -83,7 +83,6 @@ import { FrontHeaderComponent } from './layouts/front-header/front-header.compon
 import { FrontFooterComponent } from './layouts/front-footer/front-footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
-import { FeedbackpageComponent } from './admin/feedbackpage/feedbackpage.component';
 
 const icons = [
   // ... other icons
@@ -196,7 +195,7 @@ export function provideConfig() {
     FrontFooterComponent,
     NotFoundComponent,
     FeedbackComponent,
-    FeedbackpageComponent
+    
   ],
   imports: [
     BrowserModule,
