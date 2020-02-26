@@ -175,6 +175,24 @@ export class PagesComponent implements OnInit {
 	goToFaqPage() {
 		this.router.navigate(['admin/faq-page-content']);
 	}
+	goToFeedback(){
+		this.router.navigate(['admin/feedback-page-content']);
+
+	}
+	linkNext(page){
+		console.log(page);
+		if(page.slug == 'feedback'){
+			 this.router.navigate(['admin/feedback-page-content']);
+
+		}
+		else if(page.slug == 'faq'){
+			this.router.navigate(['admin/faq-page-content']);
+
+	   }
+	   else{
+		this.router.navigate(['/admin/page-content'], { queryParams: { pn : page.name, page: page.pageId } });  
+	   }
+	}
 
 	
 }

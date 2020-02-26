@@ -39,6 +39,7 @@ import { PagesComponent } from './admin/pages/pages.component';
 import { PageContentComponent } from './admin/page-content/page-content.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
+import { FeedbackpageComponent } from './admin/feedbackpage/feedbackpage.component';
 
 
 
@@ -73,6 +74,8 @@ const routes: Routes = [
   
   { path: 'crm.access.admin', component: AdminLoginComponent},
   { path: 'admin/customer-feedback', component: FeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'admin/feedback-page-content', component: FeedbackpageComponent, canActivate: [AuthGuard] },
+
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
   { path: 'admin/home-page-content', component: HomePagecomponentComponent, canActivate: [AuthGuard] },
   { path: 'admin/faq-page-content', component: FaqPagecomponentComponent, canActivate: [AuthGuard] },

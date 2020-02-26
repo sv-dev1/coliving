@@ -693,7 +693,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
-
+    
 	getSettings() {
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -711,6 +711,14 @@ export class DataService {
 
 	websiteSettings () {
 	return this.http.get(this.base_url+'websetting/weblist')
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+	getFeedback() {
+		return this.http.get(this.base_url+'hr/weblist')
 		.map((response:Response)=>{
 			return response;
 		})

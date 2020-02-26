@@ -21,13 +21,11 @@ export class FaqPagecomponentComponent implements OnInit {
 	isopenAddFaqModal : boolean = false;
 	isError : boolean = false;
 	errorsArr : string = '';
-
 	updateFaqForm : FormGroup;
 	isalreadyEixst : boolean = false;
 	isalreadyEixstErr : string = '';
 	faqEdit : string = ''; 
 	isopenEditFaqModal : boolean = false;
-	
 	allFaqArray : any = [];
 	faqCount : any ;
 	isArrayLength : boolean = false;
@@ -35,8 +33,7 @@ export class FaqPagecomponentComponent implements OnInit {
 	faqId : string = ''; 
 	isDelFaq : boolean = false;
 	response :  any = [];
-     description : any = [];
-
+    description : any = [];
 	descriptionEmpty : boolean = false;
      p : any;
    
