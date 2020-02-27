@@ -29,7 +29,7 @@
                               <p *ngIf="property.userProfile.firstName == '' && property.userProfile.lastName == ''">Posted by:&nbsp;&nbsp;<span class="text-danger">NA</span></p>
                            </div>
                               <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a> -->
-                              <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="landLord">Request Property</a> -->
+                              <a class="btn lft-b" (click)="sendInvitation(property)" *ngIf="landLord">Send Invitation</a>
                               <a class="btn lft-b" href="javascript:void(0);" (click)="editPropertyModal(property)">Edit Property</a>
                               <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
                            <div class="clearfix"></div>
@@ -497,20 +497,25 @@
 </div>   
 <div class="container">
    <!-- The Modal -->
-   <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isopenSendCVModal ? 'block' : 'none'" *ngIf="isopenSendCVModal">
+   <div class="modal cus-property" style="display: block; background-color: rgba(0, 0, 0, 0.32); z-index: 111111;" [style.display]="isInvite ? 'block' : 'none'" *ngIf="isInvite">
    <div class="modal-dialog">
       <div class="modal-content">
          <!-- Modal Header -->
          <div class="modal-header">
-            <h6 class="modal-title">Invite Tenant to {{propertyInfo?.name}}</h6>
+            <h6 class="modal-title">Invite Tenant to {{propertyName}}</h6>
             <button type="button" class="close" data-dismiss="modal" (click)="closeCvModal()">&times;</button>
          </div>
          <!-- Modal body -->
          <div class="modal-body">
-            <table class="table">
-               <tbody>
-               </tbody>
-            </table>
+          <ul>
+
+             <li *ngFor="let team of allTeams, let i = index">
+                 <label for="first_checkbox_btn">{{ team.name }}</label>
+                 <input type="checkbox" id="first_checkbox_btn" name="choice1" value="" />
+             </li>
+           
+           
+         </ul>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>

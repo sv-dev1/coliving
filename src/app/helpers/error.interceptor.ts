@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if (event instanceof HttpResponse) {
                     // /console.log('event--->>>', event);
                      if(event.status == 401 && !this.executing){
-                        this.executing=true;
+                        this.executing = true;
                         this.toastr.errorToastr('Session Expired,Please Login again');
                         sessionStorage.removeItem("auth_token");
                         sessionStorage.removeItem("userId");
@@ -31,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.toastr.errorToastr('Internal server Error');
                     }
                     if(event.status == 503 && !this.executing){
-                        this.executing=true;
+                        this.executing = true;
                         this.toastr.errorToastr('We are sorry. Due to technical issue we are not able to serve your request at moment.');                       
                     }
 
