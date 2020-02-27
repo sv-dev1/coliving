@@ -1,3 +1,7 @@
+.checkbox {
+    float: right;
+    margin: 0;
+}
 a.prop-policy {
     color: #007bff;
 }

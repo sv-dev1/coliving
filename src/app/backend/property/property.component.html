@@ -503,22 +503,26 @@
          <!-- Modal Header -->
          <div class="modal-header">
             <h6 class="modal-title">Invite Tenant to {{propertyName}}</h6>
-            <button type="button" class="close" data-dismiss="modal" (click)="closeCvModal()">&times;</button>
+            <button type="button" class="close" data-dismiss="modal" (click)="closeInviteModal()">&times;</button>
          </div>
          <!-- Modal body -->
          <div class="modal-body">
-          <ul>
-
+            <div class="alert alert-success alert-dismissible" *ngIf="isSuccess">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             {{ success }}
+            </div>
+           <ul>
+         
              <li *ngFor="let team of allTeams, let i = index">
                  <label for="first_checkbox_btn">{{ team.name }}</label>
-                 <input type="checkbox" id="first_checkbox_btn" name="choice1" value="" />
+                 <input type="checkbox" id="" name="choice1" value="" (change)="changed(team.teamId)" class="checkbox" />
              </li>
            
            
          </ul>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="closeInfoModal()">Cancel</button>
+            <button type="button" class="btn btn-outline-secondary" (click)="closeInviteModal()">Cancel</button>
          </div>
       </div>
    </div>

@@ -58,6 +58,9 @@ export class PropertyComponent implements OnInit {
 	allTeamsLength :  any = [];
 	isTeamLength :  boolean = false;
 	propertyName : string = '';
+	propertyId : string = '';
+	isSuccess : boolean = false;
+	success : string = '';
 
 
 	constructor(
@@ -357,16 +360,16 @@ export class PropertyComponent implements OnInit {
 		}
 	}	
 	sendInvitation (property) {
+		this.propertyId = property.propertyId;
 		this.propertyName = property.name
-		this.isInvite = true;
 		this.data_service.getTeam().subscribe((response:any) =>{   
 		this.allTeams = response.teams;
-		console.log('this.allTeams', this.allTeams);
 		this.allTeamsLength = this.allTeams.length;
 	        if(this.allTeamsLength.length  > 9 ) {
 				this.isTeamLength  = true;
 			}
 			this.isError = false;    
+			this.isInvite = true;
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
@@ -375,6 +378,23 @@ export class PropertyComponent implements OnInit {
 	}
 	closeInviteModal() {
 		this.isInvite = false;
+	}
+	changed(event){		
+	if(event){
+		const formData = {
+			"property_id": this.propertyId,
+			"team_id": event,
+			"userId": sessionStorage.getItem("userId")
+		}
+		this.data_service.sendInvite(formData).subscribe((response:any)=> { 
+		     
+			this.isSuccess =  true; 
+			this.success = response.message;
+		},error =>{
+			this.isError = true; 
+			this.errorsArr = error.error;
+		});
+	}
 	}
 }
 
