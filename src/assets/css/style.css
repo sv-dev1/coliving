@@ -404,7 +404,7 @@ ul.location-list li .list-inner .over-content p{
 }
 
 .resident {
-    padding:80px 0px 120px;
+    padding:80px 0px 0px;
     /*background-image: url('../images/pattern.jpg');*/
     background-position: 0 0;
     background-repeat: repeat;
@@ -1298,7 +1298,10 @@ ul.for-login-tabs li a:hover{
 }
 
 /* sagar 20-sep-2019*/
-
+.header-section nav.navbar ul.navbar-nav li:nth-child(2) a.btn.signup {
+    background: #fff;
+    color: #000;
+}
 .card-body button.btn.btn-orange-sm {
     font-size: 11px;
     border-radius: 0;

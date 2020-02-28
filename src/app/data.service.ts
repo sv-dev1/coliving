@@ -773,6 +773,37 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+
+	sendInvite (formData) {
+	    let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'property/requestforlandlord',formData,httpOptions)
+		.map((response:Response)=>{
+			
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
+
+	getPropertyInvites(property) {
+		    let token; 
+			if(sessionStorage.getItem("auth_token")!=undefined){
+				token = sessionStorage.getItem("auth_token"); 
+			}
+			let headers = new HttpHeaders();
+			headers = headers.set('Authorization', token);
+			return this.http.get(this.base_url+'property/invitationsent/'+property ,{ headers: headers })
+		    .map((response:Response)=>{
+				return response;
+			})
+			.catch((error:Error) => {
+				return Observable.throw(error);});
+	}
 	
 } 
 

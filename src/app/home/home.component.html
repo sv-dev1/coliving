@@ -269,7 +269,7 @@
 					  <div class="carousel-item {{feedback?.isActive}}" *ngFor="let feedback of feedbacksNew, let i = index">
 						 <div class="main-data">
 							<img class="user-image" [src]=feedback?.logo  onerror="this.src='assets/images/avatar.png'"/>
-							<p class="des"[innerHTML]="feedback?.description | safeHtml1"></p>
+							<p class="des" [innerHTML]="feedback?.description | safeHtml1"></p>
 							<p class="name">{{feedback?.authername}}</p>
 							<p class="location">{{feedback?.autheraddress}}</p>
 							<p class="star-value">

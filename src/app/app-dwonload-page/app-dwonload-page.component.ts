@@ -294,9 +294,7 @@ export class AppDwonloadPageComponent implements OnInit {
 	get f() { return this.questionareform.controls; }
 	
 	questionareSubmit(formValue){
-       console.log('formvalue kkk----', this.questionareform.controls);
-       console.log('formvalue----', this.questionareform.status);
-      
+       
 		this.submitted = true;
 	    if(this.questionareform.status == undefined) {
         	this.toastr.errorToastr('We are unable to process the request.Please check the form something might be not filled properly.');
