@@ -29,9 +29,11 @@
                               <p *ngIf="property.userProfile.firstName == '' && property.userProfile.lastName == ''">Posted by:&nbsp;&nbsp;<span class="text-danger">NA</span></p>
                            </div>
                               <!-- <a class="btn lft-b" (click)="sendCV(property)" *ngIf="tenant">Send Team CV</a> -->
-                              <a class="btn lft-b" (click)="sendInvitation(property)" *ngIf="landLord">Send Invitation</a>
-                              <a class="btn lft-b" href="javascript:void(0);" (click)="editPropertyModal(property)">Edit Property</a>
-                              <a class="btn rgt-b" (click)="viewFullDetail(property)">View full detail</a>
+                              <div class="sagar">
+                                 <a class="btn lft-b " (click)="sendInvitation(property)" *ngIf="landLord"><i title="Send Invitation" class="material-icons">insert_link</i></a>
+                                 <a class="btn lft-b" href="javascript:void(0);" (click)="editPropertyModal(property)"><i title="Edit Property" class="material-icons">edit</i></a>
+                                 <a class="btn rgt-b" (click)="viewFullDetail(property)"><i title="View full detail" class="material-icons">remove_red_eye</i></a>
+                              </div>
                            <div class="clearfix"></div>
 
                         </div>
@@ -512,13 +514,10 @@
              {{ success }}
             </div>
            <ul>
-         
              <li *ngFor="let team of allTeams, let i = index">
                  <label for="first_checkbox_btn">{{ team.name }}</label>
                  <input type="checkbox" id="" name="choice1" value="" (change)="changed(team.teamId)" class="checkbox" />
              </li>
-           
-           
          </ul>
          </div>
          <div class="modal-footer">

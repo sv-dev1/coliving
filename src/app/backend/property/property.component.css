@@ -96,7 +96,20 @@ button.pull-right.btn.btn-orange-sm[_ngcontent-uin-c2] {
     width: 50% !important;
 }
 
-
+.sagar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sagar a {
+    margin: 8px 4px;
+    padding: 2px 0px 0px !important;
+    width: 50px;
+}
+.sagar a i {
+    font-size: 15px;
+} 
 
 .hovereffect {
   width: 100%;

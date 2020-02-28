@@ -61,6 +61,7 @@ export class PropertyComponent implements OnInit {
 	propertyId : string = '';
 	isSuccess : boolean = false;
 	success : string = '';
+	inviteStatus :  any = [];
 
 
 	constructor(
@@ -227,10 +228,7 @@ export class PropertyComponent implements OnInit {
 	}
 
 	viewFullDetail(property){
-
-		//console.log('property',property);
-
-		this.ispropertyInfo =true;
+		this.ispropertyInfo = true;
 		this.propertyInfo = property;
 	}
 	closeInfoModal() {
@@ -250,13 +248,10 @@ export class PropertyComponent implements OnInit {
 	sendCVModal(property) {
 		this.isopenSendCVModal = true;
 		this.propertyInfo = property;
-
 		this.submitted=true;
 		if(this.teamForm.invalid){
 			return;
 		}
-		console.log(this.teamForm.value);
-		console.log(this.prop_id);
 		this.openTeam = false;
 		this.teamForm.reset();
 	}
@@ -359,12 +354,15 @@ export class PropertyComponent implements OnInit {
 			});
 		}
 	}	
+
 	sendInvitation (property) {
-		this.propertyId = property.propertyId;
-		this.propertyName = property.name
-		this.data_service.getTeam().subscribe((response:any) =>{   
-		this.allTeams = response.teams;
-		this.allTeamsLength = this.allTeams.length;
+			this.propertyId = property.propertyId;
+			this.propertyName = property.name
+			this.data_service.getTeam().subscribe((response:any) =>{   
+			this.allTeams = response.teams;
+	        if(this.allTeams.length  > 0 ) {
+				this.getPropertyInvites(this.propertyId);
+			}
 	        if(this.allTeamsLength.length  > 9 ) {
 				this.isTeamLength  = true;
 			}
@@ -376,26 +374,41 @@ export class PropertyComponent implements OnInit {
 		})
 
 	}
-	closeInviteModal() {
-		this.isInvite = false;
-	}
-	changed(event){		
-	if(event){
-		const formData = {
-			"property_id": this.propertyId,
-			"team_id": event,
-			"userId": sessionStorage.getItem("userId")
-		}
-		this.data_service.sendInvite(formData).subscribe((response:any)=> { 
-		     
-			this.isSuccess =  true; 
-			this.success = response.message;
-		},error =>{
+	getPropertyInvites (property) {
+			this.data_service.getPropertyInvites(property).subscribe((response:any) =>{   
+			this.isError = false;    
+			this.isInvite = true;
+		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
-		});
+		})
 	}
+
+	closeInviteModal() {
+		this.isInvite = false;
+		this.isSuccess =  false; 
+	    this.success = '';
+	}
+
+	changed(event){		
+		if(event) {
+			const formData = {
+				"property_id": this.propertyId,
+				"team_id": event,
+				"userId": sessionStorage.getItem("userId")
+			}
+			this.data_service.sendInvite(formData).subscribe((response:any)=> { 
+			    this.inviteStatus =  response.requestData
+				this.isSuccess =  true; 
+				this.success = response.message;
+			},error =>{
+				this.isError = true; 
+				this.errorsArr = error.error;
+			});
+		}
 	}
 }
 
+
+ 
 
