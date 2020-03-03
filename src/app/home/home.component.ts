@@ -108,12 +108,12 @@ export class HomeComponent implements OnInit {
         this.data_service.getWebFeedback().subscribe((response:any) =>{ 
         this.feedbacks = response.HappyResidentsDetails;
         
-         let i = 1 ;
+          let i = 1 ;
           this.feedbacks.forEach(element => {
             if(i == 1 ){
               this.isActive = 'active';
            } else {
-             this.isActive = '';
+              this.isActive = '';
            }
 
            this.feedbacksNew.push({ 
@@ -133,6 +133,9 @@ export class HomeComponent implements OnInit {
         this.isError = true; 
         this.errorsArr = error.error;
       })
+  }
+  counter(i: number) {
+    return new Array(i);
   }
   
 }

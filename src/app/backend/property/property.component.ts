@@ -52,7 +52,6 @@ export class PropertyComponent implements OnInit {
 	image_url : any;
 	postedBy:  string = '';
 	isInvite : boolean = false;
-
 	allTeams: any = [];
 	teamArrLength :  any = [];
 	allTeamsLength :  any = [];
@@ -62,7 +61,6 @@ export class PropertyComponent implements OnInit {
 	isSuccess : boolean = false;
 	success : string = '';
 	inviteStatus :  any = [];
-
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -111,7 +109,6 @@ export class PropertyComponent implements OnInit {
 			landlord_id: ['', Validators.required],
 			property_id: ['', Validators.required],
 			agree: ['', Validators.required],
-
 		}); 
 	}
 
@@ -119,11 +116,9 @@ export class PropertyComponent implements OnInit {
 		this.getAllProperties();	 
 		this.roleId = sessionStorage.getItem("roleId");
 		if(this.roleId == 4){
-			// console.log(this.roleId);
 			this.tenant=true;
 		}
 		if(this.roleId == 3){
-			// console.log(this.roleId);
 			this.landLord=true;
 		}
 	}
@@ -135,7 +130,6 @@ export class PropertyComponent implements OnInit {
 			if(this.allProperties.length  > 9 ) {
 				this.isArrayLength  = true;
 			}
-
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -192,7 +186,6 @@ export class PropertyComponent implements OnInit {
 				"property_type": this.addPropertyForm.value.property_type, 
 				"status": this.addPropertyForm.value.status         
 			}
-
 			const formData = new FormData();
 			formData.append('name', input_data.name);
 			formData.append('city', input_data.city);
@@ -222,7 +215,7 @@ export class PropertyComponent implements OnInit {
 				this.getAllProperties();
 
 			},error=>{ 
-				console.log('error', error);
+				//console.log('error', error);
 			});
 		}
 	}
@@ -350,7 +343,7 @@ export class PropertyComponent implements OnInit {
 
 
 			},error=>{ 
-				console.log('error', error);
+				//console.log('error', error);
 			});
 		}
 	}	
