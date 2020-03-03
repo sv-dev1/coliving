@@ -5,7 +5,7 @@ import { DataService } from '../../data.service';
 import { ToastrManager } from 'ng6-toastr-notifications';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
-
+import { ViewportScroller } from '@angular/common';
 @Component({
   selector: 'app-front-footer',
   templateUrl: './front-footer.component.html',
@@ -21,10 +21,13 @@ export class FrontFooterComponent implements OnInit {
 		private router: Router,
 		public toastr: ToastrManager,
 		private data_service : DataService,
-		private http : HttpClient) { }
+		private http : HttpClient,
+    private vps: ViewportScroller,
+    ) { }
 
   ngOnInit() {
   	this.websiteSettings();
+    this.getTarget();
   }
 
    websiteSettings() {
@@ -38,4 +41,17 @@ export class FrontFooterComponent implements OnInit {
      	})
   }
 
+  getTarget(){
+    this.data_service.currentTarget.subscribe(response =>{
+      if(response){
+        console.log(response);
+        if(response == 'contact'){
+          this.vps.scrollToAnchor('contact');
+        }
+      }
+    },error =>{
+      console.log(error);
+    })
+  }  
+  
 }

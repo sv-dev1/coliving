@@ -8,17 +8,26 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class DataService {
 	base_url : string = "";
+	
+	private contact = new BehaviorSubject('');
+  	currentTarget = this.contact.asObservable();
+
 	constructor( private http : HttpClient,
 		) {
 		this.base_url = environment.base_url;
 	}
+
+	changeMessage(message: string) {
+	    this.contact.next(message)
+	}
+
 	register(input_data){
 		return this.http.post(this.base_url+'register',input_data)
 		.map((response:Response)=>{
@@ -273,6 +282,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+	
 	getTaskById(id){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){

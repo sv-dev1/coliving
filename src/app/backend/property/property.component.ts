@@ -61,7 +61,8 @@ export class PropertyComponent implements OnInit {
 	isSuccess : boolean = false;
 	success : string = '';
 	inviteStatus :  any = [];
-
+	teamCount : boolean = false;
+    
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -354,6 +355,7 @@ export class PropertyComponent implements OnInit {
 			this.data_service.getTeam().subscribe((response:any) =>{   
 			this.allTeams = response.teams;
 	        if(this.allTeams.length  > 0 ) {
+	        	this.teamCount = true;
 				this.getPropertyInvites(this.propertyId);
 			}
 	        if(this.allTeamsLength.length  > 9 ) {

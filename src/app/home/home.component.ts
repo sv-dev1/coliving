@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
     private http : HttpClient,
     private _sanitizer: DomSanitizer,
     private data_service : DataService,
+    
     ) {
     this.subscribeForm = this.formBuilder.group({
            
@@ -77,22 +78,25 @@ export class HomeComponent implements OnInit {
     } 
     this.getContent();
     this.getFeedback();
+    
   }
   
+  
+
   subscribe(value) {
   }
 
   getContent(){
    
     this.http.get(this.base_url+'page/home').subscribe((response:any) => {
-        this.infoData=response.pagesArr['sections'][0];
-        this.section2=response.pagesArr['sections'][1];
-        this.section3=response.pagesArr['sections'][2];
-        this.section4=response.pagesArr['sections'][3];
-        this.section5=response.pagesArr['sections'][4];
-        this.section6=response.pagesArr['sections'][5];
-        this.section7=response.pagesArr['sections'][6];
-        this.section8=response.pagesArr['sections'][7];
+        this.infoData = response.pagesArr['sections'][0];
+        this.section2 = response.pagesArr['sections'][1];
+        this.section3 = response.pagesArr['sections'][2];
+        this.section4 = response.pagesArr['sections'][3];
+        this.section5 = response.pagesArr['sections'][4];
+        this.section6 = response.pagesArr['sections'][5];
+        this.section7 = response.pagesArr['sections'][6];
+        this.section8 = response.pagesArr['sections'][7];
        
     },error=>{ 
         console.log(error);
