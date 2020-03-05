@@ -74,6 +74,25 @@ button.btn.btn-orange.common-b:hover {
     font-size: 15px;
     color: #F44336;
 }
+.sent_msg p {
+    word-break: break-all;
+}
+.type_msg{
+    padding-left: 0;
+}
+.work-block textarea {
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+.msg_send_btn {
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+}
+.mesgs{
+    height: auto;
+    padding-bottom: 100px;
+}
 @media (min-width: 576px){
     .modal-dialog.modaldialog12 {
         max-width: 650px !important;

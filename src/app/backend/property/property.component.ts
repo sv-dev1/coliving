@@ -61,7 +61,7 @@ export class PropertyComponent implements OnInit {
 	isSuccess : boolean = false;
 	success : string = '';
 	inviteStatus :  any = [];
-	teamCount : boolean = false;
+	teamCount : any ;
     
 	constructor(
 		private formBuilder:FormBuilder,
@@ -128,6 +128,7 @@ export class PropertyComponent implements OnInit {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
 			this.propertyLength = this.allProperties.length;
+			console.log('this.propertyLength', this.allProperties);
 			if(this.allProperties.length  > 9 ) {
 				this.isArrayLength  = true;
 			}
@@ -352,10 +353,11 @@ export class PropertyComponent implements OnInit {
 	sendInvitation (property) {
 			this.propertyId = property.propertyId;
 			this.propertyName = property.name
-			this.data_service.getTeam().subscribe((response:any) =>{   
+			this.data_service.getTeamForLandlord(this.propertyId).subscribe((response:any) =>{   
 			this.allTeams = response.teams;
-	        if(this.allTeams.length  > 0 ) {
-	        	this.teamCount = true;
+			console.log('this.allTeams', this.allTeams);
+			this.teamCount = this.allTeams.length;
+	        if(this.teamCount  > 0 ) {
 				this.getPropertyInvites(this.propertyId);
 			}
 	        if(this.allTeamsLength.length  > 9 ) {
@@ -367,7 +369,6 @@ export class PropertyComponent implements OnInit {
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
-
 	}
 	getPropertyInvites (property) {
 			this.data_service.getPropertyInvites(property).subscribe((response:any) =>{   
@@ -387,21 +388,26 @@ export class PropertyComponent implements OnInit {
 
 	changed(event){		
 		if(event) {
+			this.isSuccess =  false; 
 			const formData = {
 				"property_id": this.propertyId,
 				"team_id": event,
 				"userId": sessionStorage.getItem("userId")
 			}
+			let property = {'propertyId': this.propertyId};
 			this.data_service.sendInvite(formData).subscribe((response:any)=> { 
 			    this.inviteStatus =  response.requestData
 				this.isSuccess =  true; 
 				this.success = response.message;
+				this.sendInvitation(property);
 			},error =>{
 				this.isError = true; 
 				this.errorsArr = error.error;
 			});
 		}
 	}
+
+
 }
 
 

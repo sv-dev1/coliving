@@ -814,7 +814,25 @@ export class DataService {
 			.catch((error:Error) => {
 				return Observable.throw(error);});
 	}
-	
+
+	getTeamForLandlord(propertyId){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		return this.http.get(this.base_url+'getTeamForLandlord/'+propertyId, { headers: headers })
+		.map((response:Response)=>{
+			//   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
 } 
 
 
