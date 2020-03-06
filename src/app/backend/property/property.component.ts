@@ -52,7 +52,6 @@ export class PropertyComponent implements OnInit {
 	image_url : any;
 	postedBy:  string = '';
 	isInvite : boolean = false;
-
 	allTeams: any = [];
 	teamArrLength :  any = [];
 	allTeamsLength :  any = [];
@@ -62,8 +61,8 @@ export class PropertyComponent implements OnInit {
 	isSuccess : boolean = false;
 	success : string = '';
 	inviteStatus :  any = [];
-
-
+	teamCount : any ;
+    
 	constructor(
 		private formBuilder:FormBuilder,
 		private router: Router,
@@ -111,7 +110,6 @@ export class PropertyComponent implements OnInit {
 			landlord_id: ['', Validators.required],
 			property_id: ['', Validators.required],
 			agree: ['', Validators.required],
-
 		}); 
 	}
 
@@ -119,11 +117,9 @@ export class PropertyComponent implements OnInit {
 		this.getAllProperties();	 
 		this.roleId = sessionStorage.getItem("roleId");
 		if(this.roleId == 4){
-			// console.log(this.roleId);
 			this.tenant=true;
 		}
 		if(this.roleId == 3){
-			// console.log(this.roleId);
 			this.landLord=true;
 		}
 	}
@@ -132,10 +128,10 @@ export class PropertyComponent implements OnInit {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
 			this.propertyLength = this.allProperties.length;
+			console.log('this.propertyLength', this.allProperties);
 			if(this.allProperties.length  > 9 ) {
 				this.isArrayLength  = true;
 			}
-
 			this.isError = false;    
 		}, error =>{ 
 			this.isError = true; 
@@ -192,7 +188,6 @@ export class PropertyComponent implements OnInit {
 				"property_type": this.addPropertyForm.value.property_type, 
 				"status": this.addPropertyForm.value.status         
 			}
-
 			const formData = new FormData();
 			formData.append('name', input_data.name);
 			formData.append('city', input_data.city);
@@ -222,7 +217,7 @@ export class PropertyComponent implements OnInit {
 				this.getAllProperties();
 
 			},error=>{ 
-				console.log('error', error);
+				//console.log('error', error);
 			});
 		}
 	}
@@ -350,7 +345,7 @@ export class PropertyComponent implements OnInit {
 
 
 			},error=>{ 
-				console.log('error', error);
+				//console.log('error', error);
 			});
 		}
 	}	
@@ -358,9 +353,11 @@ export class PropertyComponent implements OnInit {
 	sendInvitation (property) {
 			this.propertyId = property.propertyId;
 			this.propertyName = property.name
-			this.data_service.getTeam().subscribe((response:any) =>{   
+			this.data_service.getTeamForLandlord(this.propertyId).subscribe((response:any) =>{   
 			this.allTeams = response.teams;
-	        if(this.allTeams.length  > 0 ) {
+			console.log('this.allTeams', this.allTeams);
+			this.teamCount = this.allTeams.length;
+	        if(this.teamCount  > 0 ) {
 				this.getPropertyInvites(this.propertyId);
 			}
 	        if(this.allTeamsLength.length  > 9 ) {
@@ -372,7 +369,6 @@ export class PropertyComponent implements OnInit {
 			this.isError = true; 
 			this.errorsArr = error.error;
 		})
-
 	}
 	getPropertyInvites (property) {
 			this.data_service.getPropertyInvites(property).subscribe((response:any) =>{   
@@ -392,21 +388,26 @@ export class PropertyComponent implements OnInit {
 
 	changed(event){		
 		if(event) {
+			this.isSuccess =  false; 
 			const formData = {
 				"property_id": this.propertyId,
 				"team_id": event,
 				"userId": sessionStorage.getItem("userId")
 			}
+			let property = {'propertyId': this.propertyId};
 			this.data_service.sendInvite(formData).subscribe((response:any)=> { 
 			    this.inviteStatus =  response.requestData
 				this.isSuccess =  true; 
 				this.success = response.message;
+				this.sendInvitation(property);
 			},error =>{
 				this.isError = true; 
 				this.errorsArr = error.error;
 			});
 		}
 	}
+
+
 }
 
 

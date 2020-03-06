@@ -194,7 +194,8 @@
                         </div>
                         <div class="type_msg">
                            <div class="input_msg_write">
-                              <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''">
+                              <!-- <input type="text" class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''"> -->
+                              <textarea class="write_msg" placeholder="Type a message" [(ngModel)]="message" [style.border]="valMessage ? '1px solid red' : ''" rows="3" cols="3"></textarea>
                               <button class="msg_send_btn" type="button" (click)="sendMessgae()" ngbTooltip="Send Message"> <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                               <!-- <button class="msg_send_btn" type="button" ngbTooltip="Add Member To Group"> <i class="fa fa-user" aria-hidden="true"></i></button> -->
                            </div>

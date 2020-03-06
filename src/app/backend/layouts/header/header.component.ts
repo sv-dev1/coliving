@@ -35,6 +35,8 @@ export class HeaderComponent implements OnInit {
   badgeNumber : number;
   response : any ;
   roleId : string = '';
+  public innerWidth: any;
+
 
   constructor(
         private router: Router,
@@ -52,6 +54,14 @@ export class HeaderComponent implements OnInit {
         },{
               validator: MustMatch('pwd', 'confirmPassword')
         });
+         this.innerWidth = window.innerWidth;
+          if(this.innerWidth <=  1024) {
+              const body = document.getElementsByTagName('body')[0];
+              body.classList.add('custom-sidebar-hide-show');
+          } else {
+              const body = document.getElementsByTagName('body')[0];
+              body.classList.remove('custom-sidebar-hide-show');
+          }
      }
 
   ngOnInit() {

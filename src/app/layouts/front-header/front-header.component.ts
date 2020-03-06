@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute} from '@angular/router';
+import { DataService } from '../../data.service';
 
 @Component({
   selector: 'app-front-header',
@@ -13,8 +14,11 @@ export class FrontHeaderComponent implements OnInit {
   isHome : boolean = false;
   session_key : boolean = false;
   
-  constructor(private router: Router,
-  	private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+  	private route: ActivatedRoute,
+    private service : DataService
+    ) { }
 
   ngOnInit() {
   	     if(this.router.url == '/faq'){
@@ -26,6 +30,11 @@ export class FrontHeaderComponent implements OnInit {
         if(this.router.url == '/'){
            this.isHome = true;
         }
+  }
+
+  triggerScrollTo (pvarId) {
+    this.service.changeMessage(pvarId);
+    // window.scrollTo(0,document.body.scrollHeight);
   }
 
 }

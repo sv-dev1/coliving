@@ -273,33 +273,10 @@
 							<p class="name">{{feedback?.authername}}</p>
 							<p class="location">{{feedback?.autheraddress}}</p>
 							<p class="star-value">
-							<span *ngIf="feedback.rating =='1'">
-								<i class="fas fa-star"></i>
-							</span>
-							<span *ngIf="feedback.rating =='2'">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-							<span *ngIf="feedback.rating =='3'">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-
-							<span *ngIf="feedback.rating =='4'">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
-							<span *ngIf="feedback.rating =='5'">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							    <i class="fas fa-star"></i>
-							    <i class="fas fa-star"></i>
-							    <i class="fas fa-star"></i>
-							</span>
-							  
+						
+							<i class="fas fa-star" *ngFor='let in of counter(feedback.rating) ;let i = index'></i>
+							<i class="fas fa-star star1" *ngFor='let in of counter(5-feedback.rating) ;let i = index'></i>
+						
 							</p>
 						 </div>
 					  </div>

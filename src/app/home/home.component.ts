@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
     private http : HttpClient,
     private _sanitizer: DomSanitizer,
     private data_service : DataService,
+    
     ) {
     this.subscribeForm = this.formBuilder.group({
            
@@ -77,22 +78,25 @@ export class HomeComponent implements OnInit {
     } 
     this.getContent();
     this.getFeedback();
+    
   }
   
+  
+
   subscribe(value) {
   }
 
   getContent(){
    
     this.http.get(this.base_url+'page/home').subscribe((response:any) => {
-        this.infoData=response.pagesArr['sections'][0];
-        this.section2=response.pagesArr['sections'][1];
-        this.section3=response.pagesArr['sections'][2];
-        this.section4=response.pagesArr['sections'][3];
-        this.section5=response.pagesArr['sections'][4];
-        this.section6=response.pagesArr['sections'][5];
-        this.section7=response.pagesArr['sections'][6];
-        this.section8=response.pagesArr['sections'][7];
+        this.infoData = response.pagesArr['sections'][0];
+        this.section2 = response.pagesArr['sections'][1];
+        this.section3 = response.pagesArr['sections'][2];
+        this.section4 = response.pagesArr['sections'][3];
+        this.section5 = response.pagesArr['sections'][4];
+        this.section6 = response.pagesArr['sections'][5];
+        this.section7 = response.pagesArr['sections'][6];
+        this.section8 = response.pagesArr['sections'][7];
        
     },error=>{ 
         console.log(error);
@@ -108,12 +112,12 @@ export class HomeComponent implements OnInit {
         this.data_service.getWebFeedback().subscribe((response:any) =>{ 
         this.feedbacks = response.HappyResidentsDetails;
         
-         let i = 1 ;
+          let i = 1 ;
           this.feedbacks.forEach(element => {
             if(i == 1 ){
               this.isActive = 'active';
            } else {
-             this.isActive = '';
+              this.isActive = '';
            }
 
            this.feedbacksNew.push({ 
@@ -133,6 +137,9 @@ export class HomeComponent implements OnInit {
         this.isError = true; 
         this.errorsArr = error.error;
       })
+  }
+  counter(i: number) {
+    return new Array(i);
   }
   
 }

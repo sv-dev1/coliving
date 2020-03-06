@@ -214,3 +214,32 @@ button.pull-right.btn.btn-orange-sm {
 img.img-responsive.property-image.new-property-image{
   max-height: auto !important;
 }
+
+.modal-body-colive i.material-icons {
+    font-size: 17px;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+.modal-body-colive .checkbox{
+        float: right;
+    position: relative;
+    top: 5px;
+}
+.modal-body-colive label {
+    margin: 0;
+}
+.modal-body-colive ul.round li {
+        border: 1px solid #f1e7e4;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+

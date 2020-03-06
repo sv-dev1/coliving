@@ -8,17 +8,26 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class DataService {
 	base_url : string = "";
+	
+	private contact = new BehaviorSubject('');
+  	currentTarget = this.contact.asObservable();
+
 	constructor( private http : HttpClient,
 		) {
 		this.base_url = environment.base_url;
 	}
+
+	changeMessage(message: string) {
+	    this.contact.next(message)
+	}
+
 	register(input_data){
 		return this.http.post(this.base_url+'register',input_data)
 		.map((response:Response)=>{
@@ -273,6 +282,7 @@ export class DataService {
 		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
+	
 	getTaskById(id){
 		let token; 
 		if(sessionStorage.getItem("auth_token")!=undefined){
@@ -804,7 +814,25 @@ export class DataService {
 			.catch((error:Error) => {
 				return Observable.throw(error);});
 	}
-	
+
+	getTeamForLandlord(propertyId){ 
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		headers.set('Content-Type', null);
+		headers.set('Accept', "multipart/form-data");
+		return this.http.get(this.base_url+'getTeamForLandlord/'+propertyId, { headers: headers })
+		.map((response:Response)=>{
+			//   console.log('team response',response);
+			return response;
+		})
+		.catch((error:Error) => {
+			console.log('error',error);
+			return Observable.throw(error);});
+	}
 } 
 
 
