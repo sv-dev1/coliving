@@ -2705,6 +2705,18 @@ span.for-sub-name {
     color: red;
 }
 
+
+@media (max-width: 991px)
+{
+    .sidebar {
+        left: -260px;
+    }
+    .work-panel {
+        padding-left: 0;
+    }
+}
+
+
 @media (min-width: 576px)
 {
 .modal-dialog.modaldialog12 {
