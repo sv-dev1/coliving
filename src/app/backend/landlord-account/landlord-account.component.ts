@@ -82,6 +82,7 @@ export class LandlordAccountComponent implements OnInit {
     boolUserImage : boolean = false;
     fileDocument: any = []; 
     fileDataName: any;
+    phoneRequired  : boolean = false;
 
 	constructor(
 			private formBuilder:FormBuilder,
@@ -102,7 +103,7 @@ export class LandlordAccountComponent implements OnInit {
 			gender:['', Validators.required],
 			phoneNo: ['', Validators.required],
 			address: ['', Validators.required],
-			postalCode: ['', [Validators.required, Validators.maxLength(6)]],
+			postalCode: ['', [Validators.required, Validators.maxLength(10)]],
 			country: ['', Validators.required],
 			image:[''],
 			file:[''],
@@ -121,6 +122,9 @@ export class LandlordAccountComponent implements OnInit {
 		this.getAllCountries();
 		this.getAllLanguages();
         this.getCurrentIP();
+        if(sessionStorage.getItem("roleId") != '3'){
+  		        this.router.navigate(['/']);
+        }
 		
 	}
 
@@ -324,17 +328,17 @@ export class LandlordAccountComponent implements OnInit {
 
 	updateProfile(formValue) {
 		
+        if(formValue.phoneNo == ""){
+			this.phoneRequired = true;
+		}
 		if(formValue.country == ""){
 			this.countryEmpty = true;
 		}
 		this.submitted = true;
 		if(this.updateProfileForm.invalid) {
 			return;
-        
 		} else {
-           console.log('this.fileData', this.fileData);
 			const formData = new FormData();
-			
 			formData.append('firstName', formValue.firstName);
 			formData.append('lastName', formValue.lastName);
 			formData.append('username', formValue.userName);
@@ -359,14 +363,14 @@ export class LandlordAccountComponent implements OnInit {
 				this.toastr.successToastr(response.message,'Success');
 				this.submitted = false;
 				this.getUserData();
+				this.phoneRequired = false;
 				this.router.navigate(['/profile']);
-
 			},error =>{
 				this.isError = true;
+				this.phoneRequired = false;
 				console.log('errors',error); 
 				this.toastr.errorToastr(error.error.status,'Error');
 				this.errorsArr = error.error;
-
 			});
 		}
 	}

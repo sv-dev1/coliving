@@ -127,6 +127,9 @@ export class PropertyComponent implements OnInit {
 		if(this.roleId == 3){
 			this.landLord=true;
 		}
+		if(sessionStorage.getItem("roleId") != '3'){
+  		        this.router.navigate(['/']);
+        }
 	}
 
 	getAllProperties() {

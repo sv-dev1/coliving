@@ -16,8 +16,14 @@
                         <a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
                     </li>
                     <li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true">
-                        <a class="btn signup" routerLink="/login">Login Landlord</a></li>
-                    <li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true"><a class="btn signin" routerLink="/dashboard">Dashboard</a></li>
+                        <a class="btn signup" routerLink="/login">Login Landlord</a>
+                    </li>
+                    <li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true && this.roleId =='3'">
+                      <a class="btn signin" routerLink="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true && this.roleId =='1'">
+                      <a class="btn signin" routerLink="/admin/dashboard">Dashboard</a>
+                    </li>
                     <li class="nav-item pr-2 pl-2">
                         <a class="btn signin" routerLink="/faq" id="">FAQ</a>
                     </li>
@@ -27,8 +33,6 @@
                     <li class="nav-item pr-2 pl-2">
                         <a class="btn signin" href="#contact">Contact us</a>
                     </li>
-                    
-                    
                 
                 </ul>
                 <div class="country-flag">

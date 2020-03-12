@@ -21,11 +21,11 @@ export class TeamInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
+    if(sessionStorage.getItem("roleId") == '1' || sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/']);
      }
     this.route.params.subscribe(params => {
-     this.teamId=params['id'].replace(/\:/g,"");
+     this.teamId = params['id'].replace(/\:/g,"");
     });
    this.openUser();
    this.image_base_url = environment.image_base_url;

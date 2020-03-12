@@ -76,10 +76,11 @@ export class FlatmateIssuesComponent implements OnInit {
 	ngOnInit() {
 		this.getTeam();
 		this.getIssues();
-        
+		if(sessionStorage.getItem("roleId") != '3'){
+  		        this.router.navigate(['/']);
+        } 
 	}
-
-   
+	
 	openAddIssueModal(){
 		this.isAddIssueModal = true;
 	}

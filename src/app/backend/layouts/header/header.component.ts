@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   response : any ;
   roleId : string = '';
   public innerWidth: any;
-
+  isLandlord : boolean = false;
 
   constructor(
         private router: Router,

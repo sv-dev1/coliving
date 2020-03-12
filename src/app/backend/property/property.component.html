@@ -574,28 +574,28 @@
 <!---  Modal to delete TASK  -->
 <div class="container">
    <!-- The Modal -->
-   <div class="modal" id="taskDel" [style.display]="isDelproperty ? 'block' : 'none'" *ngIf="isDelproperty" >
-   <div class="modal-dialog modaldialog12">
-      <div class="modal-content">
-         <!-- Modal Header -->
-         <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Property deletion</h4>
-            <button type="button" class="close" aria-describedby="modal-title">
-            <span aria-hidden="true" (click)="closeDelModal()">&times;</span>
-            </button>
-         </div>
-         <!-- Modal body -->
-         <div class="modal-body">
-            <p><strong>Are you sure you want to delete <span class="text-primary">{{propertyName}}</span> property?</strong></p>
-            <p>All information associated to this property will be permanently deleted.
-               <span class="text-danger">This operation can not be undone.</span>
-            </p>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="closeDelModal()">Cancel</button>
-            <button type="button" class="btn btn-orange-sm" (click)="deleteProperty(propertyId)">Yes,Delete It</button>
+      <div class="modal" id="taskDel" [style.display]="isDelproperty ? 'block' : 'none'" *ngIf="isDelproperty" >
+      <div class="modal-dialog modaldialog12">
+         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+               <h4 class="modal-title" id="modal-title">Property deletion</h4>
+               <button type="button" class="close" aria-describedby="modal-title">
+               <span aria-hidden="true" (click)="closeDelModal()">&times;</span>
+               </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+               <p><strong>Are you sure you want to delete <span class="text-primary">{{propertyName}}</span> property?</strong></p>
+               <p>All information associated to this property will be permanently deleted.
+                  <span class="text-danger">This operation can not be undone.</span>
+               </p>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-outline-secondary" (click)="closeDelModal()">Cancel</button>
+               <button type="button" class="btn btn-orange-sm" (click)="deleteProperty(propertyId)">Yes,Delete It</button>
+            </div>
          </div>
       </div>
    </div>
-</div>
 </div>

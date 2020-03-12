@@ -86,6 +86,9 @@ export class PageContentComponent implements OnInit {
 		for (var i = 1; i <= 22; i++){
             this.indexNumber.push(i);
 		}
+		  if(sessionStorage.getItem("roleId") != '1' ){
+			       this.router.navigate(['/']);
+		    }
 	}
 
 	getPageContent(pageId) {

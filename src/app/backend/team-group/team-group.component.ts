@@ -158,6 +158,9 @@ export class TeamGroupComponent implements OnInit {
     this.getUserData();
     this.scrollToBottom();
     document.body.scrollTop = 0;
+     if(sessionStorage.getItem("roleId") != '3'){
+          this.router.navigate(['/']);
+     }
   }
   ngAfterViewChecked() {        
     this.scrollToBottom();       

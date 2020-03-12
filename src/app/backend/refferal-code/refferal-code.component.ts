@@ -31,8 +31,8 @@ export class RefferalCodeComponent implements OnInit {
 
 	ngOnInit() {
 		 this.getUserData();
-		 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-		      this.router.navigate(['/dashboard']);
+		 if(sessionStorage.getItem("roleId") == '1' || sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+		      this.router.navigate(['/']);
 		 }
 		
 	}

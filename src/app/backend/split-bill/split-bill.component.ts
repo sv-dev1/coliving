@@ -40,8 +40,8 @@ export class SplitBillComponent implements OnInit {
   ngOnInit() {
   	  this.getBills();
       this.today = new Date();
-       if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
+       if(sessionStorage.getItem("roleId") == '1' || sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/']);
      }
 
   }

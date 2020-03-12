@@ -176,28 +176,42 @@ button.btn.btn-orange.common-b:hover {
 
 @media (max-width: 767px){
 
-.form-group.one-line-box {
-    flex-direction: column;
-    text-align: center;
-}
-.join-btn-box {
-    width: 100%;
-    flex-direction: column;
-}
-.join-btn-box input {
-    width: 100%;
-}
-.join-btn-box {
-    width: 100% !important;
-    margin: 5px 0;
-}
-.join-btn-box button {
-    justify-content: center;
-    margin: 10px auto 0 auto !important;
-}
-.invalid-feedback.ng-star-inserted{
-    position: relative;
-    bottom: 0;
-}
-
+    .form-group.one-line-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    .join-btn-box {
+        width: 100%;
+        flex-direction: column;
+    }
+    .join-btn-box input {
+        width: 100%;
+    }
+    .join-btn-box {
+        width: 100% !important;
+        margin: 5px 0;
+    }
+    .join-btn-box button {
+        justify-content: center;
+        margin: 10px auto 0 auto !important;
+    }
+    .invalid-feedback.ng-star-inserted{
+        position: relative;
+        bottom: 0;
+    }
+    .top-flex{
+          display: block !important;
+      }
+      .card-body button.btn.btn-orange-sm {
+          margin-bottom: 6px;
+          display: block;
+          width: 100% !important;
+      }
+      .common-b{
+        width: 100% !important;
+     }
+    .new-application .table-responsive {
+        width: 300px;
+        overflow: scroll;
+    }
 }
