@@ -12,20 +12,20 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SplitBillComponent implements OnInit {
   
-    bills:any=[];
+    bills : any = [];
     billsCount : any;
-    isError:boolean=false;
-	  errorsArr:string ='';
-    base_url:string = '';
-    today:any;
-    currentDate:any;
-    allBills:any;
-    backgroundColor:string='';
-    dueDatemessage:string='';
-    status: boolean = false;
-    isImageModal:boolean=false;
-    popImage:any;
-    private _albums:any  = [];
+    isError : boolean = false;
+	  errorsArr : string = '';
+    base_url : string = '';
+    today : any;
+    currentDate : any;
+    allBills : any;
+    backgroundColor : string = '';
+    dueDatemessage : string = '';
+    status : boolean = false;
+    isImageModal : boolean=false;
+    popImage : any;
+    private _albums : any  = [];
 
   constructor(
           private data_service : DataService,
@@ -40,8 +40,8 @@ export class SplitBillComponent implements OnInit {
   ngOnInit() {
   	  this.getBills();
       this.today = new Date();
-       if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
+       if(sessionStorage.getItem("roleId") == '1' || sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/']);
      }
 
   }

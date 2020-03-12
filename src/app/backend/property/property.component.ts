@@ -62,6 +62,11 @@ export class PropertyComponent implements OnInit {
 	success : string = '';
 	inviteStatus :  any = [];
 	teamCount : any ;
+	error : any;
+	disabled : boolean = false;
+	isDisabled : boolean = false;
+	response : any;
+	isDelproperty : boolean = false;
     
 	constructor(
 		private formBuilder:FormBuilder,
@@ -122,13 +127,16 @@ export class PropertyComponent implements OnInit {
 		if(this.roleId == 3){
 			this.landLord=true;
 		}
+		if(sessionStorage.getItem("roleId") != '3'){
+  		        this.router.navigate(['/']);
+        }
 	}
 
 	getAllProperties() {
 		this.data_service.getProperties().subscribe((response:any) =>{   
 			this.allProperties = response.flats;
 			this.propertyLength = this.allProperties.length;
-			console.log('this.propertyLength', this.allProperties);
+			/*console.log('this.propertyLength', this.allProperties);*/
 			if(this.allProperties.length  > 9 ) {
 				this.isArrayLength  = true;
 			}
@@ -168,9 +176,11 @@ export class PropertyComponent implements OnInit {
 	get tF() { return this.teamForm.controls; }
 
 	addProperty() {
-
+		this.disabled = true;
+        this.isError =  false; 
 		this.submitted = true;
 		if(this.addPropertyForm.invalid) {
+			this.disabled = false;
 			this.isValidationError = true;
 			return;
 		}else{
@@ -208,16 +218,19 @@ export class PropertyComponent implements OnInit {
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
 			this.http.post(this.base_url+'propertynew', formData, httpOptions).subscribe((response:any) => {
-
 				this.toastr.successToastr(response.message, 'Success!');
 				this.isopenAddPropertyModal = false;
 				this.submitted = false;
 				this.addPropertyForm.reset(); 
 				this.url = '';
 				this.getAllProperties();
-
 			},error=>{ 
-				//console.log('error', error);
+				this.disabled = false;
+				if(error.error.name) {
+					this.isError =  true; 
+				    this.error = error.error.name;
+					//this.toastr.errorToastr(error.error.name, 'Error!');
+				}
 			});
 		}
 	}
@@ -263,7 +276,7 @@ export class PropertyComponent implements OnInit {
 	}
 
 	editPropertyModal(property){
-		//console.log('property', property);
+		
 		this.propertyEdit = property.propertyId;
 		this.isopenEditPropertyModal = true;
 		this.boolpropertyImage  = true;
@@ -287,14 +300,16 @@ export class PropertyComponent implements OnInit {
 
 	closeEditModal() {
 		this.isopenEditPropertyModal = false;
+		this.updatePropertyForm.reset();
 	}
 
 	get g() { return this.updatePropertyForm.controls; }
 
 	updateProperty(formValue) {
-
+        this.isDisabled  = true;
 		this.submitted = true;
 		if(this.updatePropertyForm.invalid) {
+			this.isDisabled  = false;
 			return;
 		}else{
 			const input_data = {  
@@ -313,8 +328,7 @@ export class PropertyComponent implements OnInit {
 				"pets_allowed": formValue.pets_allowed,
 				"status": formValue.status
 			}
-			//console.log('input_data',input_data);
-
+			
 			const formData = new FormData();
 			formData.append('name', input_data.name);
 			formData.append('city', input_data.city);
@@ -335,18 +349,20 @@ export class PropertyComponent implements OnInit {
 			}
 			const httpOptions = { headers: new HttpHeaders({'authorization': token })};
 			this.http.post(this.base_url+'property/edit/'+input_data.property_id, formData, httpOptions).subscribe((response:any) => {
-
 				this.toastr.successToastr(response.message, 'Success!');
 				this.isopenEditPropertyModal = false;
 				this.submitted = false;
 				this.updatePropertyForm.reset(); 
 				this.url = '';
 				this.getAllProperties();
-
-
 			},error=>{ 
-				//console.log('error', error);
-			});
+				 this.isDisabled  = false;
+				 if(error.error.name) {
+					this.isError =  true; 
+				    this.error = error.error.name;
+					//this.toastr.errorToastr(error.error.name, 'Error!');
+				  }
+			  });
 		}
 	}	
 
@@ -355,7 +371,7 @@ export class PropertyComponent implements OnInit {
 			this.propertyName = property.name
 			this.data_service.getTeamForLandlord(this.propertyId).subscribe((response:any) =>{   
 			this.allTeams = response.teams;
-			console.log('this.allTeams', this.allTeams);
+			/*console.log('this.allTeams', this.allTeams);*/
 			this.teamCount = this.allTeams.length;
 	        if(this.teamCount  > 0 ) {
 				this.getPropertyInvites(this.propertyId);
@@ -406,8 +422,35 @@ export class PropertyComponent implements OnInit {
 			});
 		}
 	}
+    
+    deleteCategoryModal(property) {
+    	
+    	this.propertyName = property.name;
+		this.propertyId = property.propertyId;
+    	this.isDelproperty = true;
+    }
+    closeDelModal(){
+		this.toastr.infoToastr('All information associated to the property '+this.propertyName+' are safe.');
+		this.isDelproperty = false;
+	}
 
-
+	deleteProperty(propertyId) {
+        if(propertyId) {
+	           	this.data_service.deleteProperty(propertyId).subscribe((response:any) =>{
+		        this.response = JSON.stringify(response, undefined, 2); 
+		        this.isDelproperty = false;
+	            this.getAllProperties();
+		        this.toastr.successToastr(response.message,'Success');
+		        this.router.navigate(['/properties']);  
+		        this.isError = false;
+		      }, error =>{ 
+		        this.isError = true; 
+		      //this.toastr.errorToastr('Invalid Credentials','Error');
+		      })
+        } else {
+           this.toastr.errorToastr('Technical issue occured','warning');
+        }
+	}
 }
 
 

@@ -108,14 +108,10 @@ export class CreateBillComponent implements OnInit {
 
 
   ngOnInit() {
-     if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
+     if(sessionStorage.getItem("roleId") == '1' || sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
+          this.router.navigate(['/']);
      }
     this.getTeam();
-     if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-          this.router.navigate(['/dashboard']);
-     }
-
   }
 
   createItem() {

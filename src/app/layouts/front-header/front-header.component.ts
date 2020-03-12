@@ -13,7 +13,7 @@ export class FrontHeaderComponent implements OnInit {
   isPrivacyPolicy : boolean = false;
   isHome : boolean = false;
   session_key : boolean = false;
-  
+  roleId : any ;
   constructor(
     private router: Router,
   	private route: ActivatedRoute,
@@ -21,7 +21,11 @@ export class FrontHeaderComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-  	     if(this.router.url == '/faq'){
+         if(sessionStorage.getItem("auth_token") != undefined){
+            this.session_key = true;
+            this.roleId = sessionStorage.getItem('roleId');
+        } 
+  	    if(this.router.url == '/faq'){
 	        this.isfaq = true;
 	      }
         if(this.router.url == '/privacy-policy'){

@@ -673,7 +673,7 @@ export class DataService {
 		};	
 		return this.http.post(this.base_url+'image/remove/'+image.id, fff,{ headers: headers })
 		.map((response:Response)=>{
-			console.log(response);
+			
 			return response;
 		})
 		.catch((error:Error) => {
@@ -831,6 +831,37 @@ export class DataService {
 		})
 		.catch((error:Error) => {
 			console.log('error',error);
+			return Observable.throw(error);});
+	}
+
+	joinGroup(input_data) {
+		let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		} 
+		const httpOptions = { headers: new HttpHeaders({'authorization': token })}; 
+		return this.http.post(this.base_url+'team/user',input_data,httpOptions)
+		.map((response:Response)=>{
+			return response;
+		})
+		.catch((error:Error) => {
+			return Observable.throw(error);});
+	}
+
+	deleteProperty(propertyId) {
+        let token; 
+		if(sessionStorage.getItem("auth_token")!=undefined){
+			token = sessionStorage.getItem("auth_token"); 
+		}
+		let headers = new HttpHeaders();
+		headers = headers.set('Authorization', token);
+		
+		return this.http.delete(this.base_url+'property/'+propertyId,{ headers: headers })
+		.map((response:Response)=>{
+			console.log(response);
+			return response;
+		})
+		.catch((error:Error) => {
 			return Observable.throw(error);});
 	}
 } 

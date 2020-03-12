@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, interval, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor() { }
+   private goToHomePage: Subscription;
+
+  constructor( 
+  	         private router: Router
+  	         ) {
+  	      }
 
   ngOnInit() {
+  	/* this.goToHomePage = interval(30000).subscribe(
+        (val) => { 
+        	this.router.navigate(['/']);
+      });*/
   }
-
 }

@@ -93,7 +93,44 @@ button.btn.btn-orange.common-b:hover {
     height: auto;
     padding-bottom: 100px;
 }
-
+.one-line-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.one-line-box span ,.join-btn-box{
+    width: 50%;
+}
+.one-line-box input {
+    width: 100%;
+    height: 38px;
+}
+.join-btn-box {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+.join-btn-box button {
+    height: 38px;
+    padding: 0!important;
+    margin-left: 15px;
+    border-radius: 2px;
+    font-size: 14px;
+    max-width: 125px;
+    width: 100%;
+}
+.one-line-box label {
+    margin-bottom: 0;
+}
+.join-team {
+    padding: 0;
+}
+.invalid-feedback.ng-star-inserted{
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    left: auto;
+}
 /*@media (max-width: 767px){
 
 }
@@ -134,5 +171,47 @@ button.btn.btn-orange.common-b:hover {
     .modal-dialog.modaldialog12 {
         max-width: 650px !important;
         min-width: 650px;
+    }
+}
+
+@media (max-width: 767px){
+
+    .form-group.one-line-box {
+        flex-direction: column;
+        text-align: center;
+    }
+    .join-btn-box {
+        width: 100%;
+        flex-direction: column;
+    }
+    .join-btn-box input {
+        width: 100%;
+    }
+    .join-btn-box {
+        width: 100% !important;
+        margin: 5px 0;
+    }
+    .join-btn-box button {
+        justify-content: center;
+        margin: 10px auto 0 auto !important;
+    }
+    .invalid-feedback.ng-star-inserted{
+        position: relative;
+        bottom: 0;
+    }
+    .top-flex{
+          display: block !important;
+      }
+      .card-body button.btn.btn-orange-sm {
+          margin-bottom: 6px;
+          display: block;
+          width: 100% !important;
+      }
+      .common-b{
+        width: 100% !important;
+     }
+    .new-application .table-responsive {
+        width: 300px;
+        overflow: scroll;
     }
 }

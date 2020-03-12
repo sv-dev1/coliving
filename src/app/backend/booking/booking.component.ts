@@ -13,8 +13,8 @@ export class BookingComponent implements OnInit {
   	) { }
 
   ngOnInit() {
-  	 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4'){
-		      this.router.navigate(['/dashboard']);
+  	 if(sessionStorage.getItem("roleId") == '3' || sessionStorage.getItem("roleId") == '4' || sessionStorage.getItem("roleId") == '1'){
+		      this.router.navigate(['/']);
 		 }
   }
 

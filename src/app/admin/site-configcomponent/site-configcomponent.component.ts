@@ -80,16 +80,16 @@ export class SiteConfigcomponentComponent implements OnInit {
 		this.data_service.getSettings().subscribe((response:any) =>{   
  		this.settingsArray = response.settings[0];
  		this.image_url = this.settingsArray.logo;
- 	
+ 	   
 		this.isImage = true;
  		this.siteConfigForm.patchValue({
-	     		email : this.settingsArray.contactemail,
-	            address : this.settingsArray.address,
-	            copyright : this.settingsArray.copyright,
-	            fbsociallink : this.settingsArray.fbsociallink,
-	     		instasociallink : this.settingsArray.instasociallink,
-	            linksociallink : this.settingsArray.linksociallink,
-	            twittersociallink : this.settingsArray.twittersociallink,
+	     		email : this.settingsArray.contactemail != "null" ? this.settingsArray.contactemail: "",
+	            address : this.settingsArray.address != "null" ? this.settingsArray.address : "",
+	            copyright : this.settingsArray.copyright != "null" ? this.settingsArray.copyright: "",
+	            fbsociallink : this.settingsArray.fbsociallink != "null" ? this.settingsArray.fbsociallink: "",
+	     		instasociallink : this.settingsArray.instasociallink != "null" ? this.settingsArray.instasociallink: "",
+	            linksociallink : this.settingsArray.linksociallink != "null" ? this.settingsArray.linksociallink: "",
+	            twittersociallink : this.settingsArray.twittersociallink != "null" ? this.settingsArray.twittersociallink: "",
      	});
  		this.isError = false;    
      	}, error =>{ 
@@ -121,7 +121,7 @@ export class SiteConfigcomponentComponent implements OnInit {
 
 	siteConfig(formValue) {
 		this.submitted = true;
-		if(formValue.address) {
+		if(formValue.address == null || formValue.address == '') {
 			this.descriptionEmpty = true;
 		}
 		if(this.siteConfigForm.invalid) {

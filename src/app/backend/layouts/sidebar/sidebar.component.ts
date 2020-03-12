@@ -28,8 +28,8 @@ export class SidebarComponent implements OnInit {
             if(this.router.url == '/my-account'){
                this.isMyAccount = true;
             }
-             if(this.router.url == '/create-bill'){
-               this.isBills = true;
+            if(this.router.url == '/create-bill'){
+              this.isBills = true;
             }
     }
     toggleClassOnImageClick(event:any) {

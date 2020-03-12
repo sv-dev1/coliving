@@ -91,8 +91,8 @@
                               <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.phoneNo.errors.required">Phone number is required.</span>
                               </div>
-                              <div *ngIf="this.messageDigit">
-                                 <span class="customPhoneMessage">{{this.messageDigit}}</span>
+                              <div *ngIf="this.phoneRequired">
+                                 <span class="customPhoneMessage">Phone number is required.</span>
                               </div>
                            </div>
                         </div>
@@ -114,7 +114,7 @@
                                  <span class="for-sub-name" *ngIf="f.postalCode.errors.required">Postal code is required.</span>
                               </div>
                               <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
-                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 6 characters.</span>
+                                 <span class="for-sub-name" *ngIf="f.postalCode.errors.maxlength">Postal code must be atmost 10 characters.</span>
                               </div>
                               <div *ngIf="this.messageDigit1">
                                  <span class="customPhoneMessage">{{this.messageDigit1}}</span>

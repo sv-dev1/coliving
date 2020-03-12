@@ -14,7 +14,7 @@ import { HttpClient, HttpHeaders,HttpClientModule } from '@angular/common/http';
 export class AdminDashboardComponent implements OnInit {
 
   constructor(
-            private formBuilder:FormBuilder,
+      private formBuilder:FormBuilder,
 			private router: Router,
 			public toastr: ToastrManager,
 			private data_service : DataService,
@@ -22,9 +22,10 @@ export class AdminDashboardComponent implements OnInit {
   	) { }
 
   ngOnInit() {
-  	    if(sessionStorage.getItem("roleId") != '1'){
-			this.router.navigate(['/dashboard']);
-		}
+   
+  	    if(sessionStorage.getItem("roleId") != '1' ){
+			       this.router.navigate(['/']);
+		    }
   }
 
 }
