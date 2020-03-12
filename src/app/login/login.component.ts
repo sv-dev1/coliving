@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         "password" : form.password, 		
       }
       this.data_service.login(input_data).subscribe((response:any) =>{
-        console.log('response',response);
+        console.log('response',response.token);
         if(response.roleId == '3') {
             this.res = JSON.stringify(response, undefined, 2); 
             console.log('response', response);

@@ -20,7 +20,7 @@
                      <div class="row">
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Email Address<span class="validate-red">*</span></label>
+                              <label for="team">Email Address:<span class="validate-red">*</span></label>
                               <input type="email" class="form-control" placeholder="Email Address" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" >
                               <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.email.errors.required">Email is required.</span>
@@ -29,42 +29,39 @@
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Facebook Link</label>
+                              <label for="team">Facebook Link:</label>
                               <input type="text" class="form-control" placeholder="Facebook Link" formControlName="fbsociallink" [ngClass]="{ 'is-invalid': submitted && f.fbsociallink.errors }" >
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Instagram Link</label>
+                              <label for="team">Instagram Link:</label>
                               <input type="text" class="form-control" placeholder="Instagram Link" formControlName="instasociallink" [ngClass]="{ 'is-invalid': submitted && f.instasociallink.errors }" >
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">Twitter Link</label>
+                              <label for="team">Twitter Link:</label>
                               <input type="text" class="form-control" placeholder="Twitter Link" formControlName="twittersociallink" [ngClass]="{ 'is-invalid': submitted && f.twittersociallink.errors }" >
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="team">LinkedIn Link</label>
+                              <label for="team">LinkedIn Link:</label>
                               <input type="text" class="form-control" placeholder="LinkedIn Link" formControlName="linksociallink" [ngClass]="{ 'is-invalid': submitted && f.linksociallink.errors }" >
                            </div>
                         </div>
                         <div class="col-12 col-sm-6">
                            <div class="form-group">
-                              <label for="bill">Upload image<span class="validate-red">*</span></label>
+                              <label for="bill">Upload image:<span class="validate-red">*</span></label>
                               <input type="file" class="form-control-file border" accept="image/*" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" (change)="detectFiles($event)">
                               <img *ngIf="isImage==true" class="pull-right" [src]="image_url" height="50" width="50" onError="this.src='assets/images/user.png';"  alt="user" > 
-                              
-
-                              <br/>
-
+                            <br/>
                            </div>
                         </div>
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
-                              <label for="team">Address<span class="validate-red">*</span></label>
+                              <label for="team">Address:<span class="validate-red">*</span></label>
                                 <ckeditor [editor]="Editor" formControlName="address" data="
                                  <p>Hello, world!</p>
                                  " [ngClass]="{'is-invalid': submitted && f.address.errors}" ></ckeditor>
@@ -75,7 +72,7 @@
                         </div>
                         <div class="col-12 col-sm-12">
                            <div class="form-group">
-                              <label for="team">Footer Content</label>
+                              <label for="team">Footer Content:</label>
                               <input type="text" class="form-control" placeholder="Twitter Link" formControlName="copyright" [ngClass]="{ 'is-invalid': submitted && f.copyright.errors }" >
                                <div *ngIf="submitted && f.copyright.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.copyright.errors.required">Footer content is required.</span>

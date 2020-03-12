@@ -86,6 +86,7 @@ export class TeamGroupComponent implements OnInit {
   base_url : any;
   referralCodeForm : FormGroup;
   groupCodeForm : FormGroup;
+  joinGroupForm : FormGroup;
   temid : any = [];
   teamName : any;
   socialshare : boolean = false;
@@ -116,6 +117,9 @@ export class TeamGroupComponent implements OnInit {
   messagesnewArray : any = [];
   team_name :  string = '';
   btn = 'btn-orange';
+  nationalityId : any = [];
+  countriesArr : any = [];
+  isClose : boolean = false;
 
   @ViewChild('scrollBottom', {static: false}) scrollBottom: ElementRef;    
   constructor(
@@ -134,6 +138,9 @@ export class TeamGroupComponent implements OnInit {
     this.groupCodeForm = this.formBuilder.group({
       groupCode: [''],
     });
+    this.joinGroupForm = this.formBuilder.group({
+        referralCode: ['', Validators.required],
+    });
     this.createTeamForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/^\S*$/)]],
     });
@@ -145,6 +152,7 @@ export class TeamGroupComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getCountries();
     this.getTeam();
     this.logged_in_username = sessionStorage.getItem("user_name");
     this.getUserData();
@@ -231,7 +239,7 @@ export class TeamGroupComponent implements OnInit {
   }
   */
   openUser(team) {
-    console.log('team', team);
+    
     this.pdfUsersArray = [];
     this.team_ID = team.teamId; 
     this.user_Id = team.userId;
@@ -279,31 +287,24 @@ export class TeamGroupComponent implements OnInit {
           occupation = 'Full time internship';
         }
 
-        
-        let url = "https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0"; //this.image_base_url+''+Object.userProfile.userId;
+        let url = this.image_base_url+''+Object.userProfile.userId; //this.image_base_url+''+Object.userProfile.userId;
         
         //"https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0";
         // "http://apitx.kindlebit.com/uploads/U058311bd-60dd-4a61-9d1f-be1484b93939"
-        this.data_service.toDataURL(url, (dataUrl) => { 
-          this.imgUrl = dataUrl;
-          console.log('image----', this.imgUrl);
-          let resds = this.imgUrl.replace('data:text/xml;base64', 'data:text/png;base64');
           this.pdfUsersArray.push({
-            'firstName' : Object.userProfile.firstName,
-            'lastName' : Object.userProfile.lastName,
-            'email' : Object.userProfile.email,
-            'dob' : dateOfBirth,
-            'Nationality' : Object.userProfile.Nationality,
-            'phoneNo' : Object.userProfile.phoneNo,
-            'address' : Object.userProfile.address,
-            'occuptation_tt' : occupation,
-            'work_place' : Object.userProfile.work_place,
-            'biography' : Object.userProfile.biography,
-            'previous_city' : Object.userProfile.previous_city, 
-            'picture' : resds
+              'firstName' : Object.userProfile.firstName,
+              'lastName' : Object.userProfile.lastName,
+              'email' : Object.userProfile.email,
+              'dob' : dateOfBirth,
+              'Nationality' : this.getNationality(Object.userProfile.Nationality),
+              'phoneNo' : Object.userProfile.phoneNo,
+              'address' : Object.userProfile.address,
+              'occuptation_tt' : occupation,
+              'work_place' : Object.userProfile.work_place,
+              'biography' : Object.userProfile.biography,
+              'previous_city' : Object.userProfile.previous_city, 
+           
           });
-        });
-        //console.log('this.pdfUsersArray', this.pdfUsersArray);
       });
     });
 
@@ -315,6 +316,39 @@ export class TeamGroupComponent implements OnInit {
     });
     this.refferalUrlTwo = team.teamId;
   }
+
+  getCountries(){
+        let token;
+        if (sessionStorage.getItem("auth_token") != undefined) {
+            token = sessionStorage.getItem("auth_token");
+        }
+        let headers = new HttpHeaders();
+        headers = headers.set('Authorization', token);
+        this.http.get(this.base_url + 'countries', {
+            headers: headers
+        }).subscribe((response: any) => {
+            this.countriesArr = response.countries;
+        });
+  }
+   getNationality(nationId){
+            
+          let temp=[];
+          let nationName=[];
+          this.nationalityId=[];
+          temp = nationId.split(",");
+          this.nationalityId.push(temp);
+          this.nationalityId.forEach(element => {
+            nationName = [];
+            element.forEach(item => { 
+              for (let order of this.countriesArr) {
+                  if(order.id == item){
+                      nationName.push(order.name);
+                  }
+              }
+            });
+          });
+          return nationName;
+   }
   
  
   downloadPDF(teamName) {
@@ -341,9 +375,9 @@ export class TeamGroupComponent implements OnInit {
         7: {columnWidth: 80},
         8: {columnWidth: 80},
         9: {columnWidth: 60},
-        10: {columnWidth: 30},
+        10: {columnWidth: 90},
         11: {columnWidth: 90},
-        12: {columnWidth: 90},
+      
       },
       margin: {
         top: 80,
@@ -550,7 +584,7 @@ export class TeamGroupComponent implements OnInit {
            this.messagesnewArray.push[createdDate][] = element;
        
       });*/
-      console.log('ddsadsad', this.gruopMessages);
+     /* console.log('ddsadsad', this.gruopMessages);*/
     });
   }
 
@@ -581,7 +615,8 @@ export class TeamGroupComponent implements OnInit {
   }
 
   shareButtonTwo() {
-    this.socialshareTwo = !this.socialshareTwo;
+    
+     this.socialshareTwo = !this.socialshareTwo;
   }
 
 
@@ -641,5 +676,33 @@ export class TeamGroupComponent implements OnInit {
          /* console.log('this.messageDateString', this.messageDateString);*/
           return this.messageDateString;
     }
+  }
+ 
+  get f() { return this.joinGroupForm.controls; }
+
+  joinGroup(formValue) {
+     this.submitted = true;
+      if(this.joinGroupForm.invalid) {
+          return;
+      }else{
+         const input_data = {  
+             "teamId": formValue.referralCode, 
+             "userId" : this.user_id  
+        }
+        this.data_service.joinGroup(input_data).subscribe((response:any)=> { 
+            this.toastr.successToastr(response.message,'Success');
+            this.submitted = false;          
+            this.joinGroupForm.reset();
+            this.getTeam();
+            this.getUserData();
+          },error =>{
+            console.log('error.checkAlreadyExist', error);
+            this.isError = true; 
+            this.errorsArr = error.error;
+            if(error.error.checkAlreadyExist) {
+                this.toastr.errorToastr(error.error.checkAlreadyExist,'Error');
+            }
+        });
+      }
   }
 }

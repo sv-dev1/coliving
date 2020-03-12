@@ -221,7 +221,7 @@ export class FeedbackComponent implements OnInit {
      }
 
      closeDelModal(){
-     	this.toastr.infoToastr('All information associated to the faq are safe.');
+     	this.toastr.infoToastr('All information associated to the feedback are safe.');
      	this.isDelfeedback = false;
      }
 

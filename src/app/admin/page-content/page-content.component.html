@@ -20,7 +20,7 @@
                         <div class="row">
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Title</label>
+                                 <label for="team">Title:</label>
                                  <input type="text" class="form-control" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" >
                                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.title.errors.required">Title is required.</span>
@@ -29,7 +29,7 @@
                            </div>
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="team">Sub Title</label>
+                                 <label for="team">Sub Title:</label>
                                  <input type="text"  class="form-control" placeholder="Sub Title" formControlName="subtitle" [ngClass]="{ 'is-invalid': submitted && f.subtitle.errors }">
                                  <div *ngIf="submitted && f.subtitle.errors" class="invalid-feedback">
                                     <span class="for-sub-name" *ngIf="f.subtitle.errors.required">Sub Title is required.</span>
@@ -38,18 +38,17 @@
                            </div>
                            <div class="col-12 col-sm-12">
                               <div class="form-group">
-                                 <label for="bill">Image</label>
+                                 <label for="bill">Image:</label>
                                  <input type="file" class="form-control-file border" accept="image/*" formControlName="image" (change)="detectFiles($event)" multiple>
                                  <div *ngIf="isImage">
-                                   <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
-                                </div>
-                                <br/>
-                             </div>
-                          </div>
-                          <div class="col-12 col-sm-12">
+                                  <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+                               </div>
+                               <br/>
+                            </div>
+                         </div>
+                         <div class="col-12 col-sm-12">
                            <div class="form-group">
-                              <label for="bill">Description</label>
-                            
+                              <label for="bill">Description:</label>
                               <ckeditor [editor]="Editor" formControlName="description" data="
                               <p>Hello, world!</p>
                               " [ngClass]="{'is-invalid': submitted && f.description.errors}" ></ckeditor>
@@ -57,16 +56,12 @@
                               </div>
                            </div>
                         </div>
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-">
                            <div class="form-group">
-                              <label for="team">Select Index</label>
-
+                              <label for="team">Select Index:</label>
                               <select class="form-control" formControlName="sectionIndex" [ngClass]="{ 'is-invalid': submitted && f.sectionIndex.errors }">
                                  <option *ngFor="let num of indexNumber" value=num>{{num}}</option>
-
-                             </select>
-                               
-                           
+                              </select>
                               <div *ngIf="submitted && f.sectionIndex.errors" class="invalid-feedback">
                                  <span class="for-sub-name" *ngIf="f.sectionIndex.errors.required">Index is required.</span>
                               </div>
@@ -101,8 +96,8 @@
                         <tbody>
                            <tr *ngFor="let page of pageContent|paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
                               <td scope="col" class="text-success">#{{ i + 1 }}</td>
-                              <td scope="col">{{ page.title }}</td>
-                              <td scope="col">{{ page.subtitle }}</td>
+                              <td scope="col">{{ page.title != "null" ? page.title :"" }}</td>
+                              <td scope="col">{{ page.subtitle != "null" ? page.subtitle :"---" }}</td>
                               <td class="text-success" *ngIf="page.status=='1'">Active</td>
                               <td class="text-danger" *ngIf="page.status=='0'">In Active</td>
                               <td scope="col">
@@ -179,7 +174,7 @@
                      </div>
                      <input type="hidden" formControlName="file">
                      <div class="col-12 col-sm-12 text-center">
-                        <button type="submit" [disabled]="isDisabled" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;">update</button>
+                        <button type="submit" class="btn btn-orange-sm my-btn-sube" style="padding: 5px 10px;" [disabled]="isDisabled">Update</button>
                      </div>
                   </div>
                </form>
@@ -202,21 +197,31 @@
             <!-- Modal body -->
             <div class="modal-body">
                <div class="row">
-               <div class="col-12 col-sm-12" *ngIf="isPreviousimage">
-                  <div class="form-group">
-                     <div id="container-cross" *ngFor='let urls of imagesArray'>
-                        <button id="x" (click)="deleteImage(urls)">X</button>
-                        <img src="{{urls.imageurl}}" alt="content-image">
+                  <div class="col-12 col-sm-12"  *ngIf="isSuccess">
+                     <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ deleteMessage }}
                      </div>
                   </div>
-               </div>
-            </div>
-               <div class="col-12 col-sm-12" *ngIf="isNullPreviousimage">
-                 <p class="text-danger text-center">No Image available for this content section.</p>
-               </div>
-               
-            </div>
-         </div>
-      </div>
-   </div>
+                  <div class="col-12 col-sm-12" *ngIf="isPreviousimage">
+                     <h6 style="padding-left: 20px;">{{title}} section images.</h6>
+                     <div class="form-group">
+                        <div id="container-cross" *ngFor='let urls of imagesArray'>
+                           <button id="x" [disabled]="isDisabled" (click)="deleteImage(urls)">X</button>
+                           <img src="{{urls.imageurl}}" alt="content-image">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-12 col-sm-12" *ngIf="isNullPreviousimage">
+                    <h6 style="padding-left: 20px;">{{title}} section images.</h6>
+                     <div class="alert alert-danger alert-dismissible text-center">
+                         No Image available for this content section.
+                     </div>
+
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
 </div> 

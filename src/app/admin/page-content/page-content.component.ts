@@ -47,7 +47,9 @@ export class PageContentComponent implements OnInit {
 	indexNumber : any=  [];
 	isDisabled : boolean = false;
 	isNullPreviousimage : boolean = false;
-
+    title : string = '';
+    deleteMessage : string = '';
+    isSuccess : boolean = false;
 
 	constructor(
 		private formBuilder:FormBuilder,
@@ -81,7 +83,7 @@ export class PageContentComponent implements OnInit {
 		this.pageId = this.route.snapshot.queryParamMap.get('page');
 		this.pageName = this.route.snapshot.queryParamMap.get('pn');
 		this.getPageContent(this.pageId);
-		for (var i=1;i<=22;i++){
+		for (var i = 1; i <= 22; i++){
             this.indexNumber.push(i);
 		}
 	}
@@ -89,7 +91,6 @@ export class PageContentComponent implements OnInit {
 	getPageContent(pageId) {
 		this.data_service.getPageContent(pageId).subscribe((response:any) =>{ 
 			this.pageContent = response.pagesArr.sections;
-			console.log('this.pageContent', this.pageContent);
 			this.pageContentCount = this.pageContent.length;
 			if(this.pageContentCount > 10) {
 				this.isArrayLength = true;
@@ -134,7 +135,7 @@ export class PageContentComponent implements OnInit {
 				if(this.images){
 					this.images.forEach(obj =>{
 						formData.append('image',obj );
-					})
+					});
 				}			
 				formData.append('content', formValue.description);
 				formData.append('sectionIndex', formValue.sectionIndex);
@@ -186,11 +187,10 @@ export class PageContentComponent implements OnInit {
 		updateContent(formValue) {
 			this.submitted = true;
 			this.isDisabled = true;
-	
 		if(this.updateSectionContentForm.invalid) {
+			this.isDisabled = false;
 			return;
 		} else {
-			console.log(formValue);
 			const formData = new FormData();
 			formData.append('title', formValue.title);
 			formData.append('subtitle', formValue.subtitle);		   
@@ -226,9 +226,9 @@ export class PageContentComponent implements OnInit {
 	}
 
 	showRelatedImages(page) {
+		this.title = page.title;
 		this.isShowRelatedimages = true;
 		this.imagesArray = page.images;
-         console.log('this.imagesArray.length', this.imagesArray.length);
 		if(this.imagesArray.length > 0 ) {
 			this.isNullPreviousimage = false; 
 			this.isPreviousimage = true; 
@@ -239,17 +239,30 @@ export class PageContentComponent implements OnInit {
 	}
 
 	closeImageModal() {
+		this.isDisabled = false;
 		this.isShowRelatedimages = false;
+		this.isSuccess  = false;
 	}
 
 	deleteImage(image) {
-
+		this.isSuccess  = false;
+	    this.deleteMessage = '';
+		this.isDisabled = true;
 		this.data_service.deleteImage(image).subscribe((response:any)=> { 
-			this.toastr.successToastr(response.message,'Success');
-			this.isShowRelatedimages = false;
+			this.isSuccess  = true;
+			this.deleteMessage = response.message;
+			this.isShowRelatedimages = true;
 			this.imagesArray.splice(image.keyId, 1);
-			this.getPageContent(this.pageId);
-		},error =>{
+			if(this.imagesArray.length > 0 ) {
+			this.isNullPreviousimage = false; 
+				this.isPreviousimage = true; 
+			} else {
+				this.isPreviousimage = false; 
+				this.isNullPreviousimage = true; 
+			}
+			this.isDisabled = false;
+		},error => {
+			this.isDisabled = false;
 			this.isError = true; 
 			this.errorsArr = error.error;
 		});

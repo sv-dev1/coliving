@@ -84,6 +84,8 @@ import { FrontFooterComponent } from './layouts/front-footer/front-footer.compon
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
 
+import { CountdownModule } from 'ngx-countdown';
+
 const icons = [
   // ... other icons
   faFacebookSquare
@@ -228,6 +230,7 @@ export function provideConfig() {
     ShareButtonsModule.withConfig({ prop: shareProp }),
     ShareModule,
     CKEditorModule,    
+    CountdownModule
 
   ],
   

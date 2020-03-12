@@ -71,7 +71,7 @@ const routes: Routes = [
   { path: 'team-Info/:id', component: TeamInfoComponent, canActivate: [AuthGuard] },
   { path: 'flatmate-issues', component: FlatmateIssuesComponent, canActivate: [AuthGuard] },
   
-  { path: 'crm.access.admin', component: AdminLoginComponent},
+  { path: 'admin/login', component: AdminLoginComponent},
   { path: 'admin/customer-feedback', component: FeedbackComponent, canActivate: [AuthGuard] },
 
   { path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard] },
@@ -81,7 +81,7 @@ const routes: Routes = [
   { path: 'admin/pages', component: PagesComponent, canActivate: [AuthGuard] },
   { path: 'admin/page-content', component: PageContentComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: LandlordAccountComponent, canActivate: [AuthGuard] },
-  { path: 'temporary-down', component: NotFoundComponent },
+  { path: 'maintenance', component: NotFoundComponent },
 
   {path: '**', redirectTo: '/'},
  
