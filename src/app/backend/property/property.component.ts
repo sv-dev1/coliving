@@ -229,9 +229,9 @@ export class PropertyComponent implements OnInit {
 				this.disabled = false;
 			},error=>{ 
 				this.disabled = false;
-				if(error.error.name) {
+				if(error.error.name=='SequelizeUniqueConstraintError') {
 					this.isError =  true; 
-				    this.error = error.error.name;
+				    this.error = 'Property already exist.';
 					//this.toastr.errorToastr(error.error.name, 'Error!');
 				}
 			});
@@ -361,7 +361,7 @@ export class PropertyComponent implements OnInit {
 				this.disabled = false;
 			},error=>{ 
 				 this.isDisabled  = false;
-				 if(error.error.name) {
+				 if(error.error.name=='SequelizeUniqueConstraintError') {
 					this.isError =  true; 
 				    this.error = error.error.name;
 					//this.toastr.errorToastr(error.error.name, 'Error!');

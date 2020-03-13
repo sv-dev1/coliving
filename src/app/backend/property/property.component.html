@@ -216,7 +216,7 @@
            </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
+            <button *ngIf="disabled==false" type="button" class="btn btn-outline-secondary" (click)="closeModal()">Cancel</button>
             <button *ngIf="disabled==false" type="submit" class="btn btn-orange-sm"  >Yes, Add Property</button>
             <button *ngIf="disabled==true" class="btn btn-orange-sm" type="button" disabled>
                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -395,7 +395,7 @@
                </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" (click)="closeEditModal()">Cancel</button>
+            <button *ngIf="disabled==false" type="button" class="btn btn-outline-secondary" (click)="closeEditModal()">Cancel</button>
             <button *ngIf="disabled==false" type="submit" class="btn btn-orange-sm" >Yes, Edit Property</button>
              <button *ngIf="disabled==true" class="btn btn-orange-sm" type="button" disabled>
                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
