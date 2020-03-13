@@ -116,6 +116,8 @@ export class PropertyComponent implements OnInit {
 			property_id: ['', Validators.required],
 			agree: ['', Validators.required],
 		}); 
+        this.getAllProperties();
+
 	}
 
 	ngOnInit() {
@@ -144,7 +146,7 @@ export class PropertyComponent implements OnInit {
 		}, error =>{ 
 			this.isError = true; 
 			this.errorsArr = error.error;
-		})
+		});
 	}
 	openAddPropertyModal(){
 		this.isopenAddPropertyModal = true;
@@ -224,6 +226,7 @@ export class PropertyComponent implements OnInit {
 				this.addPropertyForm.reset(); 
 				this.url = '';
 				this.getAllProperties();
+				this.disabled = false;
 			},error=>{ 
 				this.disabled = false;
 				if(error.error.name) {
@@ -306,10 +309,10 @@ export class PropertyComponent implements OnInit {
 	get g() { return this.updatePropertyForm.controls; }
 
 	updateProperty(formValue) {
-        this.isDisabled  = true;
+        this.disabled = true;
 		this.submitted = true;
 		if(this.updatePropertyForm.invalid) {
-			this.isDisabled  = false;
+			this.disabled = false;
 			return;
 		}else{
 			const input_data = {  
@@ -355,6 +358,7 @@ export class PropertyComponent implements OnInit {
 				this.updatePropertyForm.reset(); 
 				this.url = '';
 				this.getAllProperties();
+				this.disabled = false;
 			},error=>{ 
 				 this.isDisabled  = false;
 				 if(error.error.name) {
