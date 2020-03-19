@@ -16,7 +16,7 @@ export const environment = {
   socket_url : "https://chatapis.colivingapp.com",
 
 
-  google_CLIENTID:"207278328612-m5ipv57qo9riuu6lbkrkats2b436uvip.apps.googleusercontent.com"
+  google_CLIENTID:"215704000060-g5hlhj345pkie053trlpksn0cbabomrl.apps.googleusercontent.com"
 };
 
 

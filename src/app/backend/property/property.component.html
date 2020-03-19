@@ -522,7 +522,8 @@
                   <label for="first_checkbox_btn">{{team?.name}}</label>
                   
                   <input *ngIf="team?.requests==''" type="checkbox" id="" name="choice1" value="" (change)="changed(team.teamId)" class="checkbox" />
-                  <span *ngIf="team?.requests !=''" class="pull-right text-danger">{{team?.requests[0].status}}</span>
+                  <span *ngIf="team?.requests !=''" class="pull-right text-success">{{team?.requests[0].status}}</span>
+
                </li>
             </ul>
             <p *ngIf="teamCount =='0'" class="text-danger text-center">No team or tenant available for invitation.</p>

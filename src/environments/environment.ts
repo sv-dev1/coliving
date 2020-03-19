@@ -14,7 +14,7 @@ export const environment = {
 
 
 
-  google_CLIENTID:"207278328612-kfodgse4lg0hj62ncca22n5c524h8k6b.apps.googleusercontent.com"
+  google_CLIENTID:"215704000060-g5hlhj345pkie053trlpksn0cbabomrl.apps.googleusercontent.com"
 };
 //For port 9000:  google_CLIENTID:"207278328612-oe8sr6fa75vlh8h7hn6lbb3rtme1kfpa.apps.googleusercontent.com"
 
