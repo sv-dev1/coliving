@@ -85,6 +85,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
 
 
+import { CountdownModule } from 'ngx-countdown';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
 const icons = [
   // ... other icons
   faFacebookSquare
@@ -140,7 +145,7 @@ let Loginconfig = new AuthServiceConfig([
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider("401629237208445")
+    provider: new FacebookLoginProvider("204221357350343")
   }
 ]);
  
@@ -229,7 +234,9 @@ export function provideConfig() {
     ShareButtonsModule.withConfig({ prop: shareProp }),
     ShareModule,
     CKEditorModule,    
-    
+    CountdownModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
 
   ],
   
