@@ -10,6 +10,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { BehaviorSubject } from 'rxjs';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+
 @Injectable({
 	providedIn: 'root'
 })
@@ -19,8 +22,10 @@ export class DataService {
 	private contact = new BehaviorSubject('');
   	currentTarget = this.contact.asObservable();
 
-	constructor( private http : HttpClient,
-		) {
+	constructor( 
+		public afAuth: AngularFireAuth,
+		private http : HttpClient,
+	) {
 		this.base_url = environment.base_url;
 	}
 
