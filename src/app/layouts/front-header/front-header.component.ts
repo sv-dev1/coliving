@@ -8,12 +8,15 @@ import { DataService } from '../../data.service';
   styleUrls: ['./front-header.component.css']
 })
 export class FrontHeaderComponent implements OnInit {
+  
   content : string = '';
   isfaq : boolean = false;
   isPrivacyPolicy : boolean = false;
   isHome : boolean = false;
   session_key : boolean = false;
   roleId : any ;
+  isComingSoon : boolean = false;
+
   constructor(
     private router: Router,
   	private route: ActivatedRoute,
@@ -40,5 +43,4 @@ export class FrontHeaderComponent implements OnInit {
     this.service.changeMessage(pvarId);
     // window.scrollTo(0,document.body.scrollHeight);
   }
-
 }

@@ -13,10 +13,10 @@
                 
                 <ul class="navbar-nav">
                     <li class="nav-item pr-2 pl-2">
-                        <a class="btn signup" download href="javascript:void();" id="download-app">Download the App</a>
+                        <a class="btn signup" download href="javascript:void();" id="download-app" placement="right" ngbTooltip="Coming soon">Download the App</a>
                     </li>
                     <li class="nav-item pr-2 pl-2" *ngIf="this.session_key != true">
-                        <a class="btn signup" routerLink="/login">Login Landlord</a>
+                        <a class="btn signup"  placement="right" ngbTooltip="Coming soon">Login Landlord</a>
                     </li>
                     <li class="nav-item pr-2 pl-2" *ngIf="this.session_key == true && this.roleId =='3'">
                       <a class="btn signin" routerLink="/dashboard">Dashboard</a>
@@ -80,3 +80,4 @@
       </div>
    </div>
 </section>
+
