@@ -24,8 +24,11 @@ export const environment = {
   //base_url : "https://txweb.kindlebit.com/",
   image_base_url : "https://apitxs.colivingapp.com/uploads/",
   socket_url : "https://chatapis.colivingapp.com",
+
+
+
   google_CLIENTID:"215704000060-g5hlhj345pkie053trlpksn0cbabomrl.apps.googleusercontent.com"
-  
+
 };
 
 

@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
 
     private authService: AuthService) 
   { 
+    
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -76,7 +77,7 @@ export class LoginComponent implements OnInit {
         //console.log('response',response.token);
         if(response.roleId == '3') {
             this.res = JSON.stringify(response, undefined, 2); 
-            console.log('response', response);
+            
             sessionStorage.setItem("roleId", response.roleId);
             sessionStorage.setItem("auth_token", response.token);
             sessionStorage.setItem("user_name", response.username);

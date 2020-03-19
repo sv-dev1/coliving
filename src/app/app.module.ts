@@ -84,9 +84,11 @@ import { FrontFooterComponent } from './layouts/front-footer/front-footer.compon
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FeedbackComponent } from './admin/feedback/feedback.component';
 
+
 import { CountdownModule } from 'ngx-countdown';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 const icons = [
   // ... other icons
@@ -235,6 +237,7 @@ export function provideConfig() {
     CountdownModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
+
   ],
   
   providers: [
